@@ -1,0 +1,60 @@
+body 
+{ 
+    font-family:  'Courier New', Courier, monospace; 
+    text-align: center; 
+    color: #fff; 
+    padding: 0px;
+    margin: 0px;
+}
+img 
+{ 
+    max-width: 80%; 
+    margin: 20px 0; 
+}
+button 
+{ 
+    margin: 10px; 
+    padding: 10px 20px; 
+    font-size: 16px; 
+    cursor: pointer; 
+}
+#scene {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url('Images/Connextion.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    padding: 20px;
+}
+.Enter
+{
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.Enter > #enter 
+{
+    width: 30%;
+    height: 60px;
+    font-size: 24px;
+    border: none;
+    border-radius: 118px;
+    opacity: 70%;
+    padding-left: 40px;
+}
+.Enter > #enter:focus 
+{
+    border: none;
+}
+#scene-text 
+{
+    font-size: 28px;
+    margin-bottom: 20px;
+}

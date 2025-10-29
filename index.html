@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Mini Visual Novel</title>
+   <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="scene">
+        <img src="./Images/Logo.svg" alt="Save friend online">
+
+        <div class="Enter">
+            <input type="text" name="enter" id="enter">
+        </div>
+        <p id="scene-text">
+            Tapez ‘404’ pour START
+        </p>
+        <div id="choices"></div>
+    </div>
+
+    <script>
+        const scenes = {
+            scene1: {
+                text: "Tu te réveilles dans une pièce sombre. Une voix mystérieuse t'appelle.",
+                img: "images/piece.png",
+                choices: { "Allumer la lampe": "scene2", "Rester dans le noir": "scene3" }
+            },
+            scene2: {
+                text: "Tu allumes la lampe et vois une porte entrouverte.",
+                img: "images/lampe.png",
+                choices: { "Ouvrir la porte": "scene4", "Ignorer la porte": "fin" }
+            },
+            scene3: {
+                text: "Tu restes dans le noir. Le silence est pesant.",
+                img: "images/piece.png",
+                choices: { "Chercher une sortie": "fin" }
+            },
+            scene4: {
+                text: "La porte mène à un couloir mystérieux. La suite de ton aventure commence ici !",
+                img: "images/piece.png",
+                choices: { "Continuer": "fin" }
+            },
+            fin: {
+                text: "Fin du test. Merci d'avoir joué !",
+                img: "",
+                choices: {}
+            }
+        };
+
+        function showScene(id) {
+            const scene = scenes[id];
+            const img = document.getElementById('scene-img');
+            const text = document.getElementById('scene-text');
+            const choicesDiv = document.getElementById('choices');
+
+            img.src = scene.img || "";
+            img.style.display = scene.img ? 'block' : 'none';
+            text.innerText = scene.text;
+
+            choicesDiv.innerHTML = '';
+            for(const c in scene.choices) {
+                const btn = document.createElement('button');
+                btn.innerText = c;
+                btn.onclick = () => showScene(scene.choices[c]);
+                choicesDiv.appendChild(btn);
+            }
+        }
+
+        // Démarrer le jeu
+        showScene('scene1');
+    </script>
+</body>
+</html>
