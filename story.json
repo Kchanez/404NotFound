@@ -1,0 +1,267 @@
+{
+  "metadata": {
+    "title": "Save Friend Online",
+    "author": "Votre Nom",
+    "version": "1.0",
+    "description": "Un visual novel sur le thème de l'amitié en ligne"
+  },
+  "characters": {
+    "protagonist": {
+      "name": "Joueur",
+      "description": "Le personnage principal contrôlé par le joueur",
+      "avatars": {
+        "default": "Images/Avatar.svg",
+        "happy": "Images/Logo1.svg",
+        "sad": "Images/Notif.svg"
+      }
+    },
+    "ami": {
+      "name": "Ami",
+      "description": "L'ami en ligne que le joueur essaie de sauver",
+      "avatars": {
+        "default": "Images/Avatar.svg",
+        "happy": "Images/Icons.svg",
+        "sad": "Images/down.svg"
+      }
+    },
+    "antagoniste": {
+      "name": "Hacker",
+      "description": "Le hacker qui menace l'ami en ligne",
+      "avatars": {
+        "default": "Images/Avatar.svg",
+        "evil": "Images/Notif.svg"
+      }
+    }
+  },
+  "backgrounds": {
+    "room": "Images/Connexion.svg"
+  },
+  "audio": {
+    "bgm": {
+      "main": "",
+      "tense": "",
+      "victory": ""
+    },
+    "sfx": {
+      "notification": "",
+      "typing": "",
+      "error": ""
+    }
+  },
+  "scenes": {
+    "start": {
+      "background": "room",
+      "bgm": "main",
+      "dialogue": [
+        {
+          "character": null,
+          "text": "Un jour ordinaire dans ta chambre, tu reçois un message étrange..."
+        },
+        {
+          "character": null,
+          "sfx": "notification",
+          "text": "*Ding* - Ton ordinateur affiche une notification"
+        },
+        {
+          "character": "protagonist",
+          "avatar": "default",
+          "text": "Tiens, un message de mon ami en ligne. Ça fait un moment qu'on n'a pas discuté."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Ouvrir le message",
+          "nextScene": "message_1"
+        },
+        {
+          "text": "Ignorer pour l'instant",
+          "nextScene": "ignore_message"
+        }
+      ]
+    },
+    "message_1": {
+      "background": "room",
+      "dialogue": [
+        {
+          "character": "ami",
+          "avatar": "sad",
+          "text": "À l'aide ! Je crois que mon compte a été piraté. Quelqu'un menace de publier mes données personnelles si je ne paie pas une rançon !"
+        },
+        {
+          "character": "protagonist",
+          "avatar": "default",
+          "text": "Quoi ? C'est terrible ! Est-ce que tu as des détails ?"
+        },
+        {
+          "character": "ami",
+          "avatar": "sad",
+          "text": "Le hacker m'a envoyé un message codé. Il dit que je dois résoudre une série d'énigmes pour récupérer mes données."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Proposer ton aide pour résoudre les énigmes",
+          "nextScene": "offer_help"
+        },
+        {
+          "text": "Suggérer de contacter les autorités",
+          "nextScene": "contact_authorities"
+        }
+      ]
+    },
+    "offer_help": {
+      "background": "room",
+      "dialogue": [
+        {
+          "character": "protagonist",
+          "avatar": "default",
+          "text": "Je vais t'aider à résoudre ces énigmes. Ensemble, on va récupérer tes données."
+        },
+        {
+          "character": "ami",
+          "avatar": "happy",
+          "text": "Merci ! Je savais que je pouvais compter sur toi. Voici la première énigme..."
+        },
+        {
+          "character": "antagoniste",
+          "avatar": "default",
+          "text": "Alors comme ça, vous pensez pouvoir me battre ? Voyons voir si vous êtes assez intelligents..."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Commencer la première énigme",
+          "nextScene": "enigme_1"
+        }
+      ]
+    },
+    "enigme_1": {
+      "background": "room",
+      "bgm": "tense",
+      "dialogue": [
+        {
+          "character": "antagoniste",
+          "avatar": "evil",
+          "text": "Première énigme : 'Je suis invisible mais essentiel. Sans moi, aucune connexion n'est possible. Qui suis-je ?'"
+        },
+        {
+          "character": "protagonist",
+          "avatar": "default",
+          "text": "Hmm, réfléchissons..."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Le mot de passe",
+          "nextScene": "enigme_1_wrong"
+        },
+        {
+          "text": "Internet",
+          "nextScene": "enigme_1_wrong"
+        },
+        {
+          "text": "Le réseau",
+          "nextScene": "enigme_1_correct"
+        }
+      ]
+    },
+    "enigme_1_correct": {
+      "background": "room",
+      "dialogue": [
+        {
+          "character": "antagoniste",
+          "avatar": "default",
+          "text": "Pas mal... mais ce n'était que le début. Préparez-vous pour la suite."
+        },
+        {
+          "character": "ami",
+          "avatar": "happy",
+          "text": "Bravo ! On a réussi la première étape !"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continuer vers la prochaine énigme",
+          "nextScene": "enigme_2"
+        }
+      ]
+    },
+    "enigme_1_wrong": {
+      "background": "room",
+      "sfx": "error",
+      "dialogue": [
+        {
+          "character": "antagoniste",
+          "avatar": "evil",
+          "text": "Mauvaise réponse ! Vous perdez du temps précieux..."
+        },
+        {
+          "character": "ami",
+          "avatar": "sad",
+          "text": "Oh non ! Essayons encore..."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Réessayer",
+          "nextScene": "enigme_1"
+        }
+      ]
+    },
+    "ignore_message": {
+      "background": "room",
+      "dialogue": [
+        {
+          "character": "protagonist",
+          "avatar": "default",
+          "text": "Je regarderai ça plus tard, j'ai d'autres choses à faire pour le moment."
+        },
+        {
+          "character": null,
+          "text": "Quelques heures plus tard..."
+        },
+        {
+          "character": "protagonist",
+          "avatar": "sad",
+          "text": "J'ai un mauvais pressentiment. Je devrais vérifier ce message."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Ouvrir le message maintenant",
+          "nextScene": "message_1"
+        }
+      ]
+    },
+    "contact_authorities": {
+      "background": "room",
+      "dialogue": [
+        {
+          "character": "protagonist",
+          "avatar": "default",
+          "text": "Tu devrais contacter les autorités. Ce genre de chantage est illégal."
+        },
+        {
+          "character": "ami",
+          "avatar": "sad",
+          "text": "J'ai peur que mes données soient divulguées avant que les autorités ne puissent agir..."
+        },
+        {
+          "character": "antagoniste",
+          "avatar": "evil",
+          "text": "Toute intervention extérieure et je publie immédiatement les données. Vous avez 24 heures pour résoudre mes énigmes."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Décider d'aider ton ami toi-même",
+          "nextScene": "offer_help"
+        },
+        {
+          "text": "Contacter un expert en cybersécurité",
+          "nextScene": "expert_help"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>404 Game</title>
+    <style>
+        body { 
+            font-family: 'Courier New', Courier, monospace; 
+            text-align: center; 
+            background-color: #111; 
+            color: #fff; 
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+        .scene-container {
+            margin: 30px 0;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #333;
+            color: #fff;
+            border: 1px solid #555;
+        }
+        button:hover {
+            background-color: #444;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Bienvenue dans le jeu</h1>
+        
+        <div class="scene-container">
+            <p id="scene-text">Tu te réveilles dans une pièce sombre. Une voix mystérieuse t'appelle.</p>
+            <div id="choices">
+                <button onclick="showScene('scene2')">Allumer la lampe</button>
+                <button onclick="showScene('scene3')">Rester dans le noir</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const scenes = {
+            scene1: {
+                text: "Laila... Ah oui, c'était son anniversaire à peu près à cette période... Déjà un an que tu m'as abandonné dans ce trou paumé.J'espère au moins que tu vas bien. Toute la ville invente ces folles rumeurs sur toi, mais je sais qu'ils disent n'importe quoi comme d'habitude. Et ça justifie bien ton départ de cette ville pourrie. Joyeux anniversaire ma vieille, tu me manques. "
+            }
+        };
+
+        function showScene(id) {
+            const scene = scenes[id];
+            const text = document.getElementById('scene-text');
+            const choicesDiv = document.getElementById('choices');
+
+            text.innerText = scene.text;
+
+            choicesDiv.innerHTML = '';
+            for(const c in scene.choices) {
+                const btn = document.createElement('button');
+                btn.innerText = c;
+                btn.onclick = () => showScene(scene.choices[c]);
+                choicesDiv.appendChild(btn);
+            }
+        }
+    </script>
+</body>
+</html>
