@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Save Friend Online",
-    "author": "Votre Nom",
+    "author": "404 Not Found",
     "version": "1.0",
     "description": "Un visual novel sur le thème de l'amitié en ligne"
   },
@@ -11,8 +11,9 @@
       "description": "Le personnage principal contrôlé par le joueur",
       "avatars": {
         "default": "Images/Avatar.svg",
-        "happy": "Images/Logo1.svg",
-        "sad": "Images/Notif.svg"
+        "happy": "Images/Content.svg",
+        "sad": "Images/Deçu.svg",
+        "Choc": "Images/Choquee.svg"
       }
     },
     "ami": {
@@ -20,21 +21,22 @@
       "description": "L'ami en ligne que le joueur essaie de sauver",
       "avatars": {
         "default": "Images/Avatar.svg",
-        "happy": "Images/Icons.svg",
-        "sad": "Images/down.svg"
+        "happy": "Images/Content.svg",
+        "sad": "Images/Deçu.svg",
+        "Choc": "Images/Choquee.svg"
       }
     },
     "antagoniste": {
       "name": "Hacker",
       "description": "Le hacker qui menace l'ami en ligne",
       "avatars": {
-        "default": "Images/Avatar.svg",
-        "evil": "Images/Notif.svg"
+        "default": "Images/Hacker.png",
+        "evil": "Images/Hacker.png"
       }
     }
   },
   "backgrounds": {
-    "room": "Images/Connexion.svg"
+    "room": "Images/Bureau.svg"
   },
   "audio": {
     "bgm": {
