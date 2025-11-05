@@ -106,6 +106,9 @@ function showDialogue(dialogues, index, choices) {
         playAudio(storyData.audio.sfx[dialogue.sfx], false);
     }
     
+    // Le son de notification est maintenant géré uniquement par le sfx dans story.json
+    // pour le message "*Ding* - Ton ordinateur affiche une notification"
+    
     // Afficher le nom du personnage
     if (dialogue.character && storyData.characters[dialogue.character]) {
         characterName.textContent = storyData.characters[dialogue.character].name;
@@ -123,19 +126,39 @@ function showDialogue(dialogues, index, choices) {
         characterImage.style.display = 'none';
     }
     
+    // Déterminer si le son typing doit être activé
+    // Uniquement pour le message "Un jour ordinaire dans ta chambre, tu reçois un message étrange..."
+    let enableTypingSound = false;
+    if (dialogue.text && dialogue.text.includes("Un jour ordinaire dans ta chambre, tu reçois un message étrange...")) {
+        enableTypingSound = true;
+    }
+    
+    // Jouer le son de notification spécial pour le message "Ding" (déjà implémenté au-dessus)
+    
     // Afficher le texte avec effet de machine à écrire
     typewriterEffect(dialogueText, dialogue.text, () => {
         // Attendre que l'utilisateur clique pour continuer
         document.getElementById('dialogue-box').onclick = () => {
             showDialogue(dialogues, index + 1, choices);
         };
-    });
+    }, 30, enableTypingSound);
 }
 
 // Effet de machine à écrire pour le texte
-function typewriterEffect(element, text, callback, speed = 30) {
+function typewriterEffect(element, text, callback, speed = 30, isTypingSoundEnabled = true) {
     element.textContent = '';
     let i = 0;
+    
+    // Jouer le son de typing seulement si activé
+    if (isTypingSoundEnabled) {
+        const typingSound = document.getElementById('typing-sound');
+        if (typingSound) {
+            typingSound.currentTime = 0;
+            typingSound.play().catch(error => {
+                console.error('Erreur lors de la lecture du son typing:', error);
+            });
+        }
+    }
     
     function type() {
         if (i < text.length) {
@@ -143,6 +166,14 @@ function typewriterEffect(element, text, callback, speed = 30) {
             i++;
             setTimeout(type, speed);
         } else {
+            // Arrêter le son de typing quand le texte est fini
+            if (isTypingSoundEnabled) {
+                const typingSound = document.getElementById('typing-sound');
+                if (typingSound) {
+                    typingSound.pause();
+                    typingSound.currentTime = 0;
+                }
+            }
             if (callback) callback();
         }
     }

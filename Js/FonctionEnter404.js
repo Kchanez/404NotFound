@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (code === '404') {
             // Redirection vers la page de jeu
-            window.location.href = 'visual-novel.html';
+            window.location.href = 'visualNovel.html';
         } else {
             // Afficher le message d'erreur
             errorMessage.style.display = 'flex';

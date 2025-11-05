@@ -18,20 +18,13 @@
     },
     "ami": {
       "name": "Ami",
-      "description": "L'ami en ligne que le joueur essaie de sauver",
+      "description": "L'ami en ligne que le joueur essaie de sauver - en réalité le hacker en secret",
       "avatars": {
         "default": "Images/Avatar.svg",
         "happy": "Images/Content.svg",
         "sad": "Images/Deçu.svg",
-        "Choc": "Images/Choquee.svg"
-      }
-    },
-    "antagoniste": {
-      "name": "Hacker",
-      "description": "Le hacker qui menace l'ami en ligne",
-      "avatars": {
-        "default": "Images/Hacker.png",
-        "evil": "Images/Hacker.png"
+        "Choc": "Images/Choquee.svg",
+        "hacker": "Images/Hacker.png"
       }
     }
   },
@@ -45,9 +38,9 @@
       "victory": ""
     },
     "sfx": {
-      "notification": "",
-      "typing": "",
-      "error": ""
+      "notification": "./Audios/notification.mp3",
+      "typing": "./Audios/typing.mp3",
+      "mouse": "./Audios/mouse.mp3"
     }
   },
   "scenes": {
@@ -64,6 +57,7 @@
           "sfx": "notification",
           "text": "*Ding* - Ton ordinateur affiche une notification"
         },
+
         {
           "character": "protagonist",
           "avatar": "default",
@@ -125,9 +119,9 @@
           "text": "Merci ! Je savais que je pouvais compter sur toi. Voici la première énigme..."
         },
         {
-          "character": "antagoniste",
-          "avatar": "default",
-          "text": "Alors comme ça, vous pensez pouvoir me battre ? Voyons voir si vous êtes assez intelligents..."
+          "character": null,
+          "avatar": "hacker",
+          "text": "[Message anonyme] Alors comme ça, vous pensez pouvoir me battre ? Voyons voir si vous êtes assez intelligents..."
         }
       ],
       "choices": [
@@ -142,28 +136,28 @@
       "bgm": "tense",
       "dialogue": [
         {
-          "character": "antagoniste",
-          "avatar": "evil",
-          "text": "Première énigme : 'Je suis invisible mais essentiel. Sans moi, aucune connexion n'est possible. Qui suis-je ?'"
+          "character": null,
+          "avatar": "hacker",
+          "text": "[Message anonyme] Premier défi : Je suis partout et nulle part à la fois. Qui suis-je ?"
         },
         {
-          "character": "protagonist",
+          "character": "ami",
           "avatar": "default",
-          "text": "Hmm, réfléchissons..."
+          "text": "Oh non, il commence déjà ! Je pense que c'est quelque chose lié à l'internet..."
         }
       ],
       "choices": [
         {
-          "text": "Le mot de passe",
-          "nextScene": "enigme_1_wrong"
-        },
-        {
-          "text": "Internet",
-          "nextScene": "enigme_1_wrong"
-        },
-        {
-          "text": "Le réseau",
+          "text": "Une adresse IP",
           "nextScene": "enigme_1_correct"
+        },
+        {
+          "text": "Un virus",
+          "nextScene": "enigme_1_wrong"
+        },
+        {
+          "text": "Un hacker",
+          "nextScene": "enigme_1_wrong"
         }
       ]
     },
@@ -171,19 +165,19 @@
       "background": "room",
       "dialogue": [
         {
-          "character": "antagoniste",
-          "avatar": "default",
-          "text": "Pas mal... mais ce n'était que le début. Préparez-vous pour la suite."
+          "character": null,
+          "avatar": "hacker",
+          "text": "[Message anonyme] Impressionnant ! Mais ne vous réjouissez pas trop tôt..."
         },
         {
           "character": "ami",
           "avatar": "happy",
-          "text": "Bravo ! On a réussi la première étape !"
+          "text": "Excellent ! Tu es vraiment doué. Passons à la suivante."
         }
       ],
       "choices": [
         {
-          "text": "Continuer vers la prochaine énigme",
+          "text": "Continuer",
           "nextScene": "enigme_2"
         }
       ]
@@ -207,6 +201,36 @@
         {
           "text": "Réessayer",
           "nextScene": "enigme_1"
+        }
+      ]
+    },
+    "enigme_2": {
+      "background": "room",
+      "bgm": "tense",
+      "dialogue": [
+        {
+          "character": null,
+          "avatar": "hacker",
+          "text": "[Message anonyme] Deuxième défi : Je suis plus rapide que la lumière et pourtant invisible. Qui suis-je ?"
+        },
+        {
+          "character": "ami",
+          "avatar": "default",
+          "text": "Cette énigme semble plus complexe..."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Une pensée",
+          "nextScene": "enigme_2_correct"
+        },
+        {
+          "text": "Un virus informatique",
+          "nextScene": "enigme_2_wrong"
+        },
+        {
+          "text": "Un signal radio",
+          "nextScene": "enigme_2_wrong"
         }
       ]
     },
