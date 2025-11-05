@@ -135,12 +135,31 @@ function showDialogue(dialogues, index, choices) {
     
     // Jouer le son de notification spécial pour le message "Ding" (déjà implémenté au-dessus)
     
+        // Gérer le clic pendant la frappe: premier clic termine le texte, clic suivant avance
+    const dialogueBoxEl = document.getElementById('dialogue-box');
+    let isTyping = true;
+    let advanced = false;
+    dialogueBoxEl.onclick = () => {
+        if (isTyping) {
+            if (dialogueText.__typewriterCancel) {
+                dialogueText.__typewriterCancel();
+            } else {
+                // Fallback: afficher instantanément le texte
+                dialogueText.textContent = dialogue.text;
+            }
+            isTyping = false;
+            return;
+        }
+        if (!advanced) {
+            advanced = true;
+            showDialogue(dialogues, index + 1, choices);
+        }
+    };
+
     // Afficher le texte avec effet de machine à écrire
     typewriterEffect(dialogueText, dialogue.text, () => {
-        // Attendre que l'utilisateur clique pour continuer
-        document.getElementById('dialogue-box').onclick = () => {
-            showDialogue(dialogues, index + 1, choices);
-        };
+        // Une fois fini, le clic avancera (handler déjà en place)
+        isTyping = false;
     }, 30, enableTypingSound);
 }
 
@@ -148,7 +167,9 @@ function showDialogue(dialogues, index, choices) {
 function typewriterEffect(element, text, callback, speed = 30, isTypingSoundEnabled = true) {
     element.textContent = '';
     let i = 0;
-    
+    let finished = false;
+    let timeoutId = null;
+
     // Jouer le son de typing seulement si activé
     if (isTypingSoundEnabled) {
         const typingSound = document.getElementById('typing-sound');
@@ -159,25 +180,49 @@ function typewriterEffect(element, text, callback, speed = 30, isTypingSoundEnab
             });
         }
     }
-    
+
+    // Permettre d'annuler la frappe et d'afficher instantanément le texte
+    element.__typewriterCancel = () => {
+        if (finished) return;
+        finished = true;
+        if (timeoutId) {
+            clearTimeout(timeoutId);
+            timeoutId = null;
+        }
+        element.textContent = text;
+        if (isTypingSoundEnabled) {
+            const typingSound = document.getElementById('typing-sound');
+            if (typingSound) {
+                typingSound.pause();
+                typingSound.currentTime = 0;
+            }
+        }
+        // Ne pas appeler le callback ici: le prochain clic avancera
+    };
+
+    function completeAndCallback() {
+        finished = true;
+        if (isTypingSoundEnabled) {
+            const typingSound = document.getElementById('typing-sound');
+            if (typingSound) {
+                typingSound.pause();
+                typingSound.currentTime = 0;
+            }
+        }
+        if (callback) callback();
+    }
+
     function type() {
+        if (finished) return;
         if (i < text.length) {
             element.textContent += text.charAt(i);
             i++;
-            setTimeout(type, speed);
+            timeoutId = setTimeout(type, speed);
         } else {
-            // Arrêter le son de typing quand le texte est fini
-            if (isTypingSoundEnabled) {
-                const typingSound = document.getElementById('typing-sound');
-                if (typingSound) {
-                    typingSound.pause();
-                    typingSound.currentTime = 0;
-                }
-            }
-            if (callback) callback();
+            completeAndCallback();
         }
     }
-    
+
     type();
 }
 
