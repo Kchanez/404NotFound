@@ -406,7 +406,10 @@
         // Gestion du clic sur dialogue-box pour afficher l'icône Rappel
         document.getElementById('dialogue-box').addEventListener('click', function() {
             const rappelIcon = document.getElementById('rappel-icon');
-            rappelIcon.classList.remove('hidden');
+            // Afficher l'icône seulement si elle n'a pas été consommée
+            if (!rappelIcon.dataset.consumed) {
+                rappelIcon.classList.remove('hidden');
+            }
         });
         
         // Gestion du clic sur l'icône Rappel pour activer Mail et afficher le popup
@@ -423,6 +426,8 @@
             popup.classList.remove('hidden');
             // Faire disparaître l'icône de notification après le clic
             this.classList.add('hidden');
+            // Marquer comme consommé pour ne plus réapparaître
+            this.dataset.consumed = 'true';
         });
         
         // Gestion de la fermeture du popup
