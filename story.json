@@ -288,6 +288,37 @@
           "nextScene": "expert_help"
         }
       ]
+    },
+    "mail": {
+      "background": "room",
+      "dialogue": [
+        {
+          "character": "ami",
+          "avatar": "sad",
+          "text": "Salut... J'ai vraiment besoin de toi. Mon compte est en danger."
+        },
+        {
+          "character": "ami",
+          "avatar": "default",
+          "text": "Le hacker m'observe. On doit rester discrets ici."
+        },
+        {
+          "character": "ami",
+          "avatar": "sad",
+          "text": "Je t'envoie les infos par petits messages. Réponds juste 'ok' pour avancer."
+        },
+        {
+          "character": "ami",
+          "avatar": "happy",
+          "text": "Merci d'être là. Tu es mon seul espoir."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Revenir à la conversation principale",
+          "nextScene": "message_1"
+        }
+      ]
     }
   }
 }
