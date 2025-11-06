@@ -61,7 +61,17 @@
         {
           "character": "protagonist",
           "avatar": "default",
-          "text": "Tiens, un message de mon ami en ligne. Ça fait un moment qu'on n'a pas discuté."
+          "text": "Hein un rappel..."
+        },
+        {
+          "character": "protagonist",
+          "avatar": "Choc",
+          "text": "QUOI ! EXAMEN DE MATHS, COMMENT J’AI PU OUBLIER !"
+        },
+        {
+          "character": "protagonist",
+          "avatar": "default",
+          "text": "Bon, pas de panique il me reste encore du temps pour réviser."
         }
       ],
       "choices": [
