@@ -7,7 +7,7 @@
   let hasClicked = false;
   
   function showIcon() {
-    const icon = document.getElementById('rappel-icon');
+    const icon = document.getElementById('notification-icon');
     if (!icon) return null;
     icon.classList.remove('hidden');
     icon.classList.add('attention-shake');
