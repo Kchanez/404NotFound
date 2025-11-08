@@ -2,6 +2,13 @@
 let storyData = null;
 let currentScene = "start";
 
+// État global pour bloquer la progression en attendant le clic sur le rappel
+let isWaitingForNotificationClick = false;
+let hasNotificationBeenClicked = false;
+let blockedChoices = null;
+let blockedDialogues = null;
+let blockedIndex = -1;
+
 // Charger l'histoire depuis le fichier JSON
 function loadStory() {
   console.log("Chargement du scénario...");
@@ -53,6 +60,7 @@ function displayScene(sceneId) {
         <div id="character-name"></div>
         <div id="dialogue-text"></div>
         <div id="choices-container"></div>
+        <img id="dialogue-hint" src="Images/down.svg" alt="Cliquez pour continuer" title="Cliquez pour continuer" />
     `;
 
   // Récupérer à nouveau les références après reconstruction
@@ -84,7 +92,14 @@ function displayScene(sceneId) {
 // Afficher un dialogue
 function showDialogue(dialogues, index, choices) {
   if (index >= dialogues.length) {
-    // Fin des dialogues, afficher les choix
+    // Fin des dialogues: si on attend le clic sur le rappel, ne pas afficher les choix
+    if (isWaitingForNotificationClick && !hasNotificationBeenClicked) {
+      blockedChoices = choices;
+      blockedDialogues = dialogues;
+      blockedIndex = index;
+      return;
+    }
+    // Sinon, afficher les choix
     showChoices(choices);
     return;
   }
@@ -92,6 +107,7 @@ function showDialogue(dialogues, index, choices) {
   const dialogue = dialogues[index];
   const characterName = document.getElementById("character-name");
   const dialogueText = document.getElementById("dialogue-text");
+  const dialogueHint = document.getElementById("dialogue-hint");
 
   // S'assurer que le texte est visible
   dialogueText.style.display = "block";
@@ -107,6 +123,55 @@ function showDialogue(dialogues, index, choices) {
   // Jouer un effet sonore si spécifié
   if (dialogue.sfx && storyData.audio.sfx[dialogue.sfx]) {
     playAudio(storyData.audio.sfx[dialogue.sfx], false);
+  }
+
+  // Déléguer le rappel au module séparé (Rappel.js)
+  // Déléguer aux modules de rappel
+  const onBlock = () => {
+    blockedChoices = choices;
+    blockedDialogues = dialogues;
+    blockedIndex = index;
+    isWaitingForNotificationClick = true;
+    hasNotificationBeenClicked = false;
+    // Cacher l'indication de clic pendant le blocage
+    if (dialogueHint) dialogueHint.style.display = "none";
+  };
+  const onUnblock = () => {
+    hasNotificationBeenClicked = true;
+    isWaitingForNotificationClick = false;
+    if (blockedChoices) {
+      showChoices(blockedChoices);
+      blockedChoices = null;
+      blockedDialogues = null;
+      blockedIndex = -1;
+    }
+    // Ne pas ré-afficher immédiatement; réafficher après clic sur l'icône Calendrier
+  };
+
+  // 1) Rappel Anniversaire (bloque sur la phrase cible)
+  if (window.RappelAnnivAPI) {
+    window.RappelAnnivAPI.handleDialogue(dialogue.text, onBlock, onUnblock);
+  }
+  // 2) Rappel examen / Ding (module existant)
+  if (window.RappelAPI) {
+    window.RappelAPI.handleDialogue(dialogue.text, onBlock, onUnblock);
+  }
+
+  // Si la phrase courante est exactement l'examen, s'assurer que l'icône down est cachée
+  const examTriggerExact = "QUOI ! EXAMEN DE MATHS, COMMENT J’AI PU OUBLIER !";
+  if (typeof dialogue.text === "string" && dialogue.text.trim() === examTriggerExact) {
+    if (dialogueHint) dialogueHint.style.display = "none";
+  }
+
+  // Après clic sur l'icône calendrier, ré-afficher l'indication down
+  const calendarIcon = document.getElementById("calendar-icon");
+  if (calendarIcon && !calendarIcon.dataset.hintRestoreSetup) {
+    calendarIcon.addEventListener("click", () => {
+      console.log(dialogueHint);
+      if (dialogueHint) dialogueHint.style.display = "block";
+    });
+    calendarIcon.dataset.hintRestoreSetup = "true";
+    console.log(dialogueHint);
   }
 
   // Le son de notification est maintenant géré uniquement par le sfx dans story.json
@@ -146,12 +211,15 @@ function showDialogue(dialogues, index, choices) {
   }
 
   // Jouer le son de notification spécial pour le message "Ding" (déjà implémenté au-dessus)
-
   // Gérer le clic pendant la frappe: premier clic termine le texte, clic suivant avance
   const dialogueBoxEl = document.getElementById("dialogue-box");
   let isTyping = true;
   let advanced = false;
   dialogueBoxEl.onclick = () => {
+    // Bloquer l'avance tant que la notification n'a pas été cliquée
+    if (isWaitingForNotificationClick && !hasNotificationBeenClicked) {
+      return;
+    }
     if (isTyping) {
       if (dialogueText.__typewriterCancel) {
         dialogueText.__typewriterCancel();
