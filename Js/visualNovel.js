@@ -185,30 +185,6 @@ function showDialogue(dialogues, index, choices) {
     }
   }
 
-  // Déclencher la notif de message pour le dialogue vide du protagoniste heureux
-  if (
-    dialogue &&
-    dialogue.character === 'protagonist' &&
-    dialogue.avatar === 'happy' &&
-    typeof dialogue.text === 'string' && dialogue.text.trim() === ''
-  ) {
-    const messageNotifIcon = document.getElementById('message-notif-icon');
-    if (messageNotifIcon) {
-      messageNotifIcon.classList.remove('hidden');
-      messageNotifIcon.classList.add('attention-shake');
-      // Son de notification
-      const notifAudio = document.getElementById('notification-sound');
-      if (notifAudio) { try { notifAudio.currentTime = 0; notifAudio.play(); } catch (_) {} }
-      // Ne pas bloquer la progression: laisser l'icône visible et continuer
-      isWaitingForNotificationClick = false;
-      hasNotificationBeenClicked = true;
-      const dialogueHint = document.getElementById('dialogue-hint');
-      if (dialogueHint) dialogueHint.style.display = 'block';
-    }
-    // Avancer immédiatement au prochain dialogue tout en gardant la notif affichée
-    showDialogue(dialogues, index + 1, choices);
-    return;
-  }
 
 
   // Le son de notification est maintenant géré uniquement par le sfx dans story.json
