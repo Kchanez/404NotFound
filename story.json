@@ -14,7 +14,9 @@
         "sad": "Images/Deçu.svg",
         "Choc": "Images/Choquee.svg",
         "angry": "Images/Angry.svg",
-        "rigolo": "Images/Rigolo.svg"
+        "rigolo": "Images/Rigolo.svg",
+        "Enlarme": "Images/pleur.svg"
+
       }
     },
     "ami": {
@@ -82,7 +84,7 @@
         {
           "character": "protagonist",
           "avatar": "sad",
-          "text": "Oh... Laila..."
+          "text": "Oh... Layla..."
         },
         {
           "character": "protagonist",
@@ -102,12 +104,47 @@
         {
           "character": "protagonist",
           "avatar": "rigolo",
-          "text": "Imagine-nous : Laila et prenomProtagoniste de campagnarde à Parisiennes” tu disais."
+          "text": "Imagine-nous : Layla et prenomProtagoniste de campagnarde à Parisiennes” tu disais."
         },
         {
           "character": "protagonist",
           "avatar": "sad",
           "text": "J’espère au moins que tu t’es fait de nouveaux amis à Paris, avec qui fêter ton anniversaire."
+        },
+        {
+          "character": "protagonist",
+          "avatar": "happy",
+          "text": "Joyeux anniversaire ma veille, tu me manques."
+        },
+        {
+          "character": "protagonist",
+          "avatar": "Enlarme",
+          "text": "Joyeux anniversaire ma veille, tu me manques."
+        },
+        {
+          "character": "protagonist",
+          "avatar": "happy",
+          "text": " "
+        },
+        {
+          "character": "protagonist",
+          "avatar": "happy",
+          "text": " "
+        },
+        {
+          "character": "protagonist",
+          "avatar": "happy",
+          "text": "Ah tiens un nouveau message."
+        },
+        {
+          "character": "protagonist",
+          "avatar": "happy",
+          "text": "Ah tiens un nouveau message. Surement une erreur ce numéro n’est pas dans mes contacts"
+        },
+        {
+          "character": "protagonist",
+          "avatar": "happy",
+          "text": ""
         }
       ]
     }

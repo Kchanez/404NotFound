@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./Css/visualNovel.css">
+    <link rel="stylesheet" href="./Css/privateChat.css">
     <title>SAVE FRIEND ONLINE</title>
    
 </head>
 <body>
     <!-- Bande colorée en haut -->
     <div id="header-bar">
-        <div id="header-title">SAVE FRIEND ONLINE</div>
+        <div id="header-title">404: Save a friend</div>
         <div id="header-clock"></div>
     </div>
     
@@ -29,6 +30,8 @@
         <img id="rappel-icon" src="Images/Rappel.svg" alt="Rappel" class="rappel-icon hidden">
         <!-- Icône Notification (2e rappel) cachée par défaut -->
         <img id="notification-icon" src="Images/Notif.svg" alt="Rappel (anniversaire)" class="rappel-icon hidden">
+        <!-- Icône Notification de message cachée par défaut -->
+        <img id="message-notif-icon" src="Images/NotifMess.svg" alt="Notification message" class="rappel-icon hidden">
         
         <!-- Popup Rappel -->
         <div id="rappel-popup" class="rappel-popup hidden">
@@ -51,7 +54,27 @@
                 <button id="chat-send">Envoyer</button>
             </div>
         </div>
-        
+
+        <!-- Affichage direct du chat privé comme élément de page -->
+        <!-- <div id="private-chat-app" class="hidden" aria-hidden="true">
+          <div class="pc-header">
+            <span class="pc-title">message</span>
+          </div>
+          <div class="pc-body">
+            <div id="pc-messages" class="pc-messages"></div>
+            <div id="pc-cta" class="pc-cta">
+              <button id="pc-cta-btn" class="pc-cta-btn">
+                Cliquer pour répondre
+                <img class="pc-cta-icon" src="Images/Envoyer.svg" alt="Envoyer" />
+              </button>
+            </div>
+            <div id="pc-composer" class="pc-composer hidden">
+              <input id="pc-input" type="text" placeholder="Écrire un message..." />
+              <button id="pc-send" class="pc-send">Envoyer</button>
+            </div>
+          </div>
+        </div> -->
+
         <div id="dialogue-box">
             <!-- Indication visuelle pour cliquer et continuer -->
             <img id="dialogue-hint" class="dialogue-hint" src="Images/down.svg" alt="Cliquez pour continuer" title="Cliquez pour continuer"/>
@@ -64,6 +87,8 @@
     <script src="./Js/Calendrier.js"></script>
     <script src="./Js/Rappel.js"></script>
     <script src="./Js/RappelAnniversaire.js"></script>
+    <script src="./Js/privateChatData.js"></script>
+    <script src="./Js/privateChat.js"></script>
     
     <!-- Audio elements -->
     <audio id="typing-sound" src="Audios/typing.mp3" preload="auto"></audio>

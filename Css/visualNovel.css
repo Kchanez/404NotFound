@@ -1,5 +1,5 @@
 
-    body, html {
+body, html {
             margin: 0;
             padding: 0;
             font-family: 'Courier Prime', monospace;
@@ -102,13 +102,15 @@
             left: 0;
             right: 0;
             height: 40px;
-            background-color: #EDE1B3;
+            /* background-color: #EDE1B3; */
+            background-color: #fff;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0 20px;
             z-index: 1000;
             border: 5px solid #000000;
+            border-radius: 0px 0px 0px 25px;
         }
         
         #header-left {
@@ -127,10 +129,9 @@
         }
         
         #header-title {
-            font-size: 1em;
-            font-weight: bold;
+            font-size: 1.3em;
             color: #000;
-            font-family: 'Courier Prime', monospace;
+            font-family: "VT323";
         }
         
         #header-clock {
@@ -144,7 +145,7 @@
         /* Styles pour les icônes d'applications dans le novel-container */
         #app-icons-container {
             position: absolute;
-            top: 4%;
+            top: 14%;
             left: 3%;
             display: flex;
             flex-direction: column;
@@ -331,9 +332,10 @@
         }
         
         /* Ajuster le conteneur pour ne pas être caché par la bande */
-        #novel-container {
-            margin-top: 50px;
-            height: calc(100vh - 50px);
+#novel-container {
+            /*margin-top: 50px;
+            height: calc(100vh - 50px); */
+            height: 100vh;
         }
 /* Animation shake pour attirer fortement l'attention */
 .rappel-icon.attention-shake {
@@ -347,6 +349,60 @@
   
   75%  { transform: translateY(-2px); }
   100% { transform: translateY(0); }
+}
+
+/* Modal pour le chat privé */
+.pc-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+}
+.pc-modal.hidden { display: none; }
+
+.pc-modal-content {
+  width: 80vw;
+  max-width: 960px;
+  height: 70vh;
+  background: #fff;
+  border: 4px solid #000;
+  border-radius: 12px;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.35);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pc-modal-content #private-chat-app {
+  width: 60%;
+  min-height: 60vh;
+  margin: 0;
+}
+
+.pc-frame {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #fff;
+}
+
+.pc-modal-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 2px solid #000;
+  background: #fff;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 28px;
 }
 
 

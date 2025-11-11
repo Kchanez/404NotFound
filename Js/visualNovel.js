@@ -108,6 +108,7 @@ function showDialogue(dialogues, index, choices) {
   const characterName = document.getElementById("character-name");
   const dialogueText = document.getElementById("dialogue-text");
   const dialogueHint = document.getElementById("dialogue-hint");
+  const messageNotifIcon = document.getElementById('message-notif-icon');
 
   // S'assurer que le texte est visible
   dialogueText.style.display = "block";
@@ -155,6 +156,68 @@ function showDialogue(dialogues, index, choices) {
   // 2) Rappel examen / Ding (module existant)
   if (window.RappelAPI) {
     window.RappelAPI.handleDialogue(dialogue.text, onBlock, onUnblock);
+  }
+
+  // Ouvrir le panneau inline private-chat-app au message exact demandé
+  if (
+    typeof dialogue.text === 'string' &&
+    dialogue.text.trim() === 'Joyeux anniversaire ma veille, tu me manques.'
+  ) {
+    const panel = document.getElementById('private-chat-panel');
+    if (panel) {
+      panel.classList.remove('hidden');
+      panel.setAttribute('aria-hidden', 'false');
+      const hint = document.getElementById('dialogue-hint');
+      if (hint) hint.style.display = 'none';
+
+      const closeBtn = document.getElementById('pc-panel-close');
+      if (closeBtn) {
+        closeBtn.onclick = () => {
+          panel.classList.add('hidden');
+          panel.setAttribute('aria-hidden', 'true');
+          const hint2 = document.getElementById('dialogue-hint');
+          if (hint2) hint2.style.display = '';
+        };
+      }
+    }
+  }
+
+  // Déclencher la notif de message pour le dialogue vide du protagoniste heureux
+  if (
+    dialogue &&
+    dialogue.character === 'protagonist' &&
+    dialogue.avatar === 'happy' &&
+    typeof dialogue.text === 'string' && dialogue.text.trim() === ''
+  ) {
+    const messageNotifIcon = document.getElementById('message-notif-icon');
+    if (messageNotifIcon) {
+      messageNotifIcon.classList.remove('hidden');
+      messageNotifIcon.classList.add('attention-shake');
+      // Son de notification
+      const notifAudio = document.getElementById('notification-sound');
+      if (notifAudio) { try { notifAudio.currentTime = 0; notifAudio.play(); } catch (_) {} }
+      // Bloquer l'avance tant que l'utilisateur n'a pas cliqué la notif
+      blockedChoices = choices;
+      blockedDialogues = dialogues;
+      blockedIndex = index;
+      isWaitingForNotificationClick = true;
+      hasNotificationBeenClicked = false;
+      const dialogueHint = document.getElementById('dialogue-hint');
+      if (dialogueHint) dialogueHint.style.display = 'none';
+
+      // clic: masque l'icône et débloque l'histoire
+      messageNotifIcon.onclick = () => {
+        messageNotifIcon.classList.add('hidden');
+        messageNotifIcon.classList.remove('attention-shake');
+        hasNotificationBeenClicked = true;
+        isWaitingForNotificationClick = false;
+        const dh = document.getElementById('dialogue-hint');
+        if (dh) dh.style.display = 'block';
+        showDialogue(dialogues, index + 1, choices);
+      };
+    }
+    // Ne pas continuer le rendu de ce dialogue (pas de typewriter sur texte vide)
+    return;
   }
 
   // Si la phrase courante est exactement l'examen, s'assurer que l'icône down est cachée

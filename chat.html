@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Messagerie</title>
+  <link rel="stylesheet" href="Css/chat.css" />
+</head>
+<body>
+  <div id="chat-app">
+    <div class="window-header">
+      <span class="title">Messagerie</span>
+      <button id="close-window" class="close">×</button>
+    </div>
+
+    <div class="window-body">
+      <section id="thread">
+        <div class="thread-header">
+          <div class="contact-info">
+            <img id="current-avatar" class="avatar" alt="avatar" />
+            <div class="contact-meta">
+              <div id="current-name" class="name">Inconnu</div>
+              <div id="current-status" class="status">Ce compte ne fait pas partie de votre liste de contacts</div>
+            </div>
+          </div>
+          <button id="toggle-contact" class="add-btn" title="Ajouter / Retirer des contacts">+</button>
+        </div>
+        <div id="messages" class="messages"></div>
+        <div class="composer">
+          <input id="composer-input" type="text" placeholder="Écrire un message..." />
+          <button id="composer-send">Envoyer</button>
+        </div>
+      </section>
+
+      <aside id="contacts">
+        <ul id="contact-list" class="contact-list"></ul>
+      </aside>
+    </div>
+  </div>
+
+  <audio id="typing-sound" src="Audios/typing.mp3" preload="auto"></audio>
+  <audio id="notification-sound" src="Audios/notification.mp3" preload="auto"></audio>
+
+  <script src="Js/chatData.js"></script>
+  <script src="Js/chat.js"></script>
+</body>
+</html>
