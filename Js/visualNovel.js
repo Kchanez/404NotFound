@@ -48,12 +48,9 @@ function displayScene(sceneId) {
   const scene = storyData.scenes[sceneId];
   currentScene = sceneId;
 
-  // Récupérer les éléments du DOM
+  // Récupérer les éléments du DOM nécessaires
   const container = document.getElementById("novel-container");
   const dialogueBox = document.getElementById("dialogue-box");
-  const characterName = document.getElementById("character-name");
-  const dialogueText = document.getElementById("dialogue-text");
-  const choicesContainer = document.getElementById("choices-container");
 
   // Recréer les éléments pour éviter les problèmes
   dialogueBox.innerHTML = `
@@ -63,10 +60,7 @@ function displayScene(sceneId) {
         <img id="dialogue-hint" src="Images/down.svg" alt="Cliquez pour continuer" title="Cliquez pour continuer" />
     `;
 
-  // Récupérer à nouveau les références après reconstruction
-  const characterNameElement = document.getElementById("character-name");
-  const dialogueTextElement = document.getElementById("dialogue-text");
-  const choicesContainerElement = document.getElementById("choices-container");
+  // Les références seront récupérées à la volée dans showDialogue
 
   // Changer l'arrière-plan si spécifié
   if (scene.background && storyData.backgrounds[scene.background]) {
@@ -108,7 +102,7 @@ function showDialogue(dialogues, index, choices) {
   const characterName = document.getElementById("character-name");
   const dialogueText = document.getElementById("dialogue-text");
   const dialogueHint = document.getElementById("dialogue-hint");
-  const messageNotifIcon = document.getElementById('message-notif-icon');
+  // L'icône de notification message sera récupérée uniquement au moment requis
 
   // S'assurer que le texte est visible
   dialogueText.style.display = "block";
@@ -163,18 +157,26 @@ function showDialogue(dialogues, index, choices) {
     typeof dialogue.text === 'string' &&
     dialogue.text.trim() === 'Joyeux anniversaire ma veille, tu me manques.'
   ) {
-    const panel = document.getElementById('private-chat-panel');
+    const panel = document.getElementById('private-chat-app');
     if (panel) {
+      console.log('[VN] Déclencheur chat privé – ouverture.');
+      // Retirer le masquage et forcer l’affichage
       panel.classList.remove('hidden');
       panel.setAttribute('aria-hidden', 'false');
+      panel.style.display = 'flex';
+      // Laisser les tailles contrôlées par privateChat.css (variables CSS par défaut)
+
       const hint = document.getElementById('dialogue-hint');
       if (hint) hint.style.display = 'none';
 
-      const closeBtn = document.getElementById('pc-panel-close');
+      // Gérer le bouton de fermeture intégré au header
+      const closeBtn = document.getElementById('close-window');
       if (closeBtn) {
         closeBtn.onclick = () => {
+          console.log('[VN] Chat privé – fermeture.');
           panel.classList.add('hidden');
           panel.setAttribute('aria-hidden', 'true');
+          panel.style.display = 'none';
           const hint2 = document.getElementById('dialogue-hint');
           if (hint2) hint2.style.display = '';
         };
@@ -230,11 +232,9 @@ function showDialogue(dialogues, index, choices) {
   const calendarIcon = document.getElementById("calendar-icon");
   if (calendarIcon && !calendarIcon.dataset.hintRestoreSetup) {
     calendarIcon.addEventListener("click", () => {
-      console.log(dialogueHint);
       if (dialogueHint) dialogueHint.style.display = "block";
     });
     calendarIcon.dataset.hintRestoreSetup = "true";
-    console.log(dialogueHint);
   }
 
   // Le son de notification est maintenant géré uniquement par le sfx dans story.json

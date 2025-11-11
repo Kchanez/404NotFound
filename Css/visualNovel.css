@@ -101,7 +101,7 @@ body, html {
             top: 0;
             left: 0;
             right: 0;
-            height: 40px;
+            height: 35px;
             /* background-color: #EDE1B3; */
             background-color: #fff;
             display: flex;
@@ -200,7 +200,7 @@ body, html {
             z-index: 2000;
         }
 
-        .chat-widget.hidden { display: none; }
+        #private-chat-app .hidden { display: none; }
 
         .chat-header {
             padding: 10px 12px;

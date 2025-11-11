@@ -6,15 +6,31 @@ body, html {
 
 #private-chat-app 
 { 
-  /* Tailles adaptables via variables CSS, valeurs par défaut = style original */
-  width: var(--pc-width, 27%);
-  min-height: var(--pc-min-height, 71vh); 
+  /* Tailles adaptables via variables CSS (réduites par défaut pour VN) */
+  width: var(--pc-width, 20%);
+  height: 67vh; 
   display: flex; 
   flex-direction: column; 
   border: 5px solid #000;
-  margin: 2%;
+  margin: 0 auto; /* centrage horizontal par défaut */
   box-shadow: -5px 5px;
   border-radius: 24px 0px 0px 0px;
+  background-color: #fff;
+}
+
+/* Centrage plein écran optionnel pour intégration au milieu de la page */
+#private-chat-app.pc-centered {
+  position: fixed;
+  left: 50%;
+  top: 42%;
+  transform: translate(-50%, -50%);
+  margin: 0; /* annule le margin auto */
+  z-index: 2500;
+}
+
+/* Forcer le masquage initial de l'app intégrée dans visualNovel */
+#private-chat-app.hidden { 
+  display: none !important; 
 }
 
 .pc-header {
@@ -22,14 +38,31 @@ body, html {
   background: linear-gradient(#4d6aa3, #1c2460);
   color: #fff;
   display: flex; 
+  justify-content: space-between;
   align-items: center;
   padding: 0 12px; 
   border-bottom: 4px solid #000;
   border-radius: 18px 0px 0px 0px;
 }
+
+.close { 
+  border: 2px solid #fff; 
+  background: transparent; 
+  color: #fff; 
+  width: 28px; 
+  height: 28px; 
+  border-radius: 6px; 
+  cursor: pointer; 
+}
+
 .pc-title { font-weight: bold; text-transform: lowercase; }
 
-.pc-body { flex: 1; display: flex; flex-direction: column;  }
+.pc-body { 
+  flex: 1; 
+  display: flex; 
+  flex-direction: column;  
+  height: 90%;
+}
 
 .pc-messages { 
   display: flex; 
@@ -41,7 +74,7 @@ body, html {
   overflow-y: auto; 
   overscroll-behavior: contain; 
   scroll-behavior: smooth; 
-  padding: 5px 18px 18px 18px;
+  padding: 5px 17px 10px 17px;
 }
 
 /* Bubbles style proche de l’image (vert pour vous, gris pour ami) */
@@ -79,7 +112,11 @@ body, html {
   vertical-align: middle; 
 }
 
-.pc-composer { display: flex; gap: 8px; margin-top: 12px; }
+.pc-composer { 
+  display: flex; 
+  gap: 8px; 
+  margin: 12px 5px; 
+}
 .pc-composer input { 
   flex: 1; 
   padding: 10px; 
@@ -94,4 +131,3 @@ body, html {
   cursor: pointer; 
 }
 
-.hidden { display: none; }

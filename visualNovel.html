@@ -42,23 +42,11 @@
             </div>
         </div>
 
-        <!-- Chat/Messagerie -->
-        <div id="chat-widget" class="chat-widget hidden" aria-hidden="true">
-            <div class="chat-header">
-                <span>Messagerie</span>
-                <span id="close-chat" style="cursor:pointer">&times;</span>
-            </div>
-            <div id="chat-messages" class="chat-messages"></div>
-            <div class="chat-input-area">
-                <input id="chat-input" type="text" placeholder="Écrire un message..." />
-                <button id="chat-send">Envoyer</button>
-            </div>
-        </div>
-
         <!-- Affichage direct du chat privé comme élément de page -->
-        <!-- <div id="private-chat-app" class="hidden" aria-hidden="true">
+        <div id="private-chat-app" class="private-chat-app hidden pc-centered" aria-hidden="true">
           <div class="pc-header">
             <span class="pc-title">message</span>
+            <button id="close-window" class="close">×</button>
           </div>
           <div class="pc-body">
             <div id="pc-messages" class="pc-messages"></div>
@@ -73,7 +61,8 @@
               <button id="pc-send" class="pc-send">Envoyer</button>
             </div>
           </div>
-        </div> -->
+        </div>
+        
 
         <div id="dialogue-box">
             <!-- Indication visuelle pour cliquer et continuer -->
