@@ -86,14 +86,7 @@ function displayScene(sceneId) {
 // Afficher un dialogue
 function showDialogue(dialogues, index, choices) {
   if (index >= dialogues.length) {
-    // Fin des dialogues: si on attend le clic sur le rappel, ne pas afficher les choix
-    if (isWaitingForNotificationClick && !hasNotificationBeenClicked) {
-      blockedChoices = choices;
-      blockedDialogues = dialogues;
-      blockedIndex = index;
-      return;
-    }
-    // Sinon, afficher les choix
+    // Fin des dialogues: afficher les choix
     showChoices(choices);
     return;
   }
@@ -124,14 +117,10 @@ function showDialogue(dialogues, index, choices) {
   // Déléguer aux modules de rappel
   const onBlock = () => {
     // Ne pas bloquer l'histoire: laisser les notifications visibles et continuer
-    isWaitingForNotificationClick = false;
-    hasNotificationBeenClicked = true;
     if (dialogueHint) dialogueHint.style.display = "block";
   };
   const onUnblock = () => {
     // Plus de logique de déblocage: on ne bloque plus la progression
-    hasNotificationBeenClicked = true;
-    isWaitingForNotificationClick = false;
   };
 
   // 1) Rappel Anniversaire (bloque sur la phrase cible)
@@ -142,6 +131,11 @@ function showDialogue(dialogues, index, choices) {
   if (window.RappelAPI) {
     window.RappelAPI.handleDialogue(dialogue.text, onBlock, onUnblock);
   }
+  // 3) Rappel message vide (ne bloque pas)
+  // La logique est désormais gérée dans le gestionnaire de clic pour respecter l'ordre
+  // if (window.RappelMessageVideAPI) {
+  //   window.RappelMessageVideAPI.handleDialogue(dialogue.text);
+  // }
 
   // Ouvrir le panneau inline private-chat-app au message exact demandé
   if (
@@ -229,10 +223,6 @@ function showDialogue(dialogues, index, choices) {
   let isTyping = true;
   let advanced = false;
   dialogueBoxEl.onclick = () => {
-    // Bloquer l'avance tant que la notification n'a pas été cliquée
-    if (isWaitingForNotificationClick && !hasNotificationBeenClicked) {
-      return;
-    }
     if (isTyping) {
       if (dialogueText.__typewriterCancel) {
         dialogueText.__typewriterCancel();
@@ -245,7 +235,24 @@ function showDialogue(dialogues, index, choices) {
     }
     if (!advanced) {
       advanced = true;
-      showDialogue(dialogues, index + 1, choices);
+      const nextIndex = index + 1;
+      // Vérifier si le prochain message est vide
+      if (nextIndex < dialogues.length && typeof dialogues[nextIndex].text === 'string' && dialogues[nextIndex].text.trim() === '') {
+        // Étape 1: Masquer l'application de chat privé
+        const privateChatApp = document.getElementById('private-chat-app');
+        if (privateChatApp) {
+          privateChatApp.classList.add('hidden');
+          privateChatApp.setAttribute('aria-hidden', 'true');
+          privateChatApp.style.display = 'none';
+        }
+        // Étape 2: Afficher le rappel après un délai pour s'assurer que le chat est bien masqué
+        setTimeout(() => {
+          if (window.RappelMessageVideAPI) {
+            window.RappelMessageVideAPI.handleDialogue(dialogues[nextIndex].text);
+          }
+        }, 100); // Délai minimal pour que le DOM mette à jour le masquage
+      }
+      showDialogue(dialogues, nextIndex, choices);
     }
   };
 
