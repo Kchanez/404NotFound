@@ -123,24 +123,15 @@ function showDialogue(dialogues, index, choices) {
   // Déléguer le rappel au module séparé (Rappel.js)
   // Déléguer aux modules de rappel
   const onBlock = () => {
-    blockedChoices = choices;
-    blockedDialogues = dialogues;
-    blockedIndex = index;
-    isWaitingForNotificationClick = true;
-    hasNotificationBeenClicked = false;
-    // Cacher l'indication de clic pendant le blocage
-    if (dialogueHint) dialogueHint.style.display = "none";
+    // Ne pas bloquer l'histoire: laisser les notifications visibles et continuer
+    isWaitingForNotificationClick = false;
+    hasNotificationBeenClicked = true;
+    if (dialogueHint) dialogueHint.style.display = "block";
   };
   const onUnblock = () => {
+    // Plus de logique de déblocage: on ne bloque plus la progression
     hasNotificationBeenClicked = true;
     isWaitingForNotificationClick = false;
-    if (blockedChoices) {
-      showChoices(blockedChoices);
-      blockedChoices = null;
-      blockedDialogues = null;
-      blockedIndex = -1;
-    }
-    // Ne pas ré-afficher immédiatement; réafficher après clic sur l'icône Calendrier
   };
 
   // 1) Rappel Anniversaire (bloque sur la phrase cible)
@@ -157,6 +148,16 @@ function showDialogue(dialogues, index, choices) {
     typeof dialogue.text === 'string' &&
     dialogue.text.trim() === 'Joyeux anniversaire ma veille, tu me manques.'
   ) {
+    const notificationIcon = document.getElementById('notification-icon');
+    if (notificationIcon) {
+      notificationIcon.classList.add('hidden');
+      notificationIcon.classList.remove('attention-shake');
+    }
+    const messageNotifIcon = document.getElementById('rappel-icon');
+    if (messageNotifIcon) {
+      messageNotifIcon.classList.add('hidden');
+      messageNotifIcon.classList.remove('attention-shake');
+    }
     const panel = document.getElementById('private-chat-app');
     if (panel) {
       console.log('[VN] Déclencheur chat privé – ouverture.');
@@ -198,44 +199,17 @@ function showDialogue(dialogues, index, choices) {
       // Son de notification
       const notifAudio = document.getElementById('notification-sound');
       if (notifAudio) { try { notifAudio.currentTime = 0; notifAudio.play(); } catch (_) {} }
-      // Bloquer l'avance tant que l'utilisateur n'a pas cliqué la notif
-      blockedChoices = choices;
-      blockedDialogues = dialogues;
-      blockedIndex = index;
-      isWaitingForNotificationClick = true;
-      hasNotificationBeenClicked = false;
+      // Ne pas bloquer la progression: laisser l'icône visible et continuer
+      isWaitingForNotificationClick = false;
+      hasNotificationBeenClicked = true;
       const dialogueHint = document.getElementById('dialogue-hint');
-      if (dialogueHint) dialogueHint.style.display = 'none';
-
-      // clic: masque l'icône et débloque l'histoire
-      messageNotifIcon.onclick = () => {
-        messageNotifIcon.classList.add('hidden');
-        messageNotifIcon.classList.remove('attention-shake');
-        hasNotificationBeenClicked = true;
-        isWaitingForNotificationClick = false;
-        const dh = document.getElementById('dialogue-hint');
-        if (dh) dh.style.display = 'block';
-        showDialogue(dialogues, index + 1, choices);
-      };
+      if (dialogueHint) dialogueHint.style.display = 'block';
     }
-    // Ne pas continuer le rendu de ce dialogue (pas de typewriter sur texte vide)
+    // Avancer immédiatement au prochain dialogue tout en gardant la notif affichée
+    showDialogue(dialogues, index + 1, choices);
     return;
   }
 
-  // Si la phrase courante est exactement l'examen, s'assurer que l'icône down est cachée
-  const examTriggerExact = "QUOI ! EXAMEN DE MATHS, COMMENT J’AI PU OUBLIER !";
-  if (typeof dialogue.text === "string" && dialogue.text.trim() === examTriggerExact) {
-    if (dialogueHint) dialogueHint.style.display = "none";
-  }
-
-  // Après clic sur l'icône calendrier, ré-afficher l'indication down
-  const calendarIcon = document.getElementById("calendar-icon");
-  if (calendarIcon && !calendarIcon.dataset.hintRestoreSetup) {
-    calendarIcon.addEventListener("click", () => {
-      if (dialogueHint) dialogueHint.style.display = "block";
-    });
-    calendarIcon.dataset.hintRestoreSetup = "true";
-  }
 
   // Le son de notification est maintenant géré uniquement par le sfx dans story.json
   // pour le message "*Ding* - Ton ordinateur affiche une notification"

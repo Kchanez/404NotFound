@@ -1,10 +1,9 @@
-// RappelAnniversaire.js — gestion du rappel Anniversaire Laila avec blocage
-// Affiche l’icône de rappel sur la phrase cible, bloque la story
+// RappelAnniversaire.js — gestion du rappel Anniversaire Laila SANS blocage
+// Affiche l’icône de rappel sur la phrase cible, laisse la story continuer
 // et active le calendrier avec un événement (Anniversaire Laila, 30 Novembre).
 
 (function () {
-  let isBlocking = false;
-  let hasClicked = false;
+  // Plus de blocage: l’histoire continue, l’icône reste visible
   
   function showIcon() {
     const icon = document.getElementById('notification-icon');
@@ -14,11 +13,7 @@
     return icon;
   }
 
-  function hideIcon(icon) {
-    if (!icon) return;
-    icon.classList.add('hidden');
-    icon.classList.remove('attention-shake');
-  }
+  // On ne masque plus l’icône; elle reste présente à l’écran
 
   function activateCalendarWithAnniversary() {
     const now = new Date();
@@ -37,31 +32,23 @@
   }
 
   window.RappelAnnivAPI = {
-    isBlocking: () => isBlocking && !hasClicked,
-    reset: () => {
-      isBlocking = false;
-      hasClicked = false;
-    },
+    // Compat: toujours non-bloquant
+    isBlocking: () => false,
+    reset: () => {},
     // À appeler lorsque la ligne actuelle de dialogue doit déclencher ce rappel
     // onBlock: fonction appelée pour stocker les choix et index bloqués
     // onUnblock: fonction appelée après clic sur rappel pour reprendre
     handleDialogue: (text, onBlock, onUnblock) => {
       const triggerPrefix = 'Bon, pas de panique il me reste encore du temps pour réviser. Je vais commencer par le chapitre sur';
-      if (typeof text === 'string' && text.includes(triggerPrefix) && !hasClicked) {
+      if (typeof text === 'string' && text.includes(triggerPrefix)) {
         const icon = showIcon();
         if (!icon) return false;
-        isBlocking = true;
-        if (typeof onBlock === 'function') onBlock();
-
+        // Ne pas bloquer: laisser l’icône visible et continuer l’histoire.
+        // Un clic ouvre/active le calendrier, l’icône reste affichée.
         icon.onclick = () => {
-          if (hasClicked) return;
-          hasClicked = true;
-          isBlocking = false;
-          hideIcon(icon);
           activateCalendarWithAnniversary();
-          if (typeof onUnblock === 'function') onUnblock();
         };
-        return true; // blocage actif
+        return false; // non-bloquant
       }
       return false; // pas de blocage pour ce texte
     },

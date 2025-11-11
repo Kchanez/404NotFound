@@ -260,7 +260,7 @@ body, html {
         .message-avatar { width: 28px; height: 28px; border-radius: 50%; border: 2px solid #000; background: #fff; }
         
         /* Styles pour l'icône Rappel */
-        .rappel-icon {
+        .rappel-icon, .rappel-icon2 {
             position: absolute;
             bottom: 80%;
             right: 1%;
@@ -271,74 +271,20 @@ body, html {
             border-radius: 10px;
             max-width: 20%;
         }
-        
-        
+        .rappel-icon2 {
+            bottom: 67%;
+        }
         .rappel-icon.hidden {
             display: none;
         }
-        
-        /* Styles pour le popup Rappel */
-        .rappel-popup {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        
-        .rappel-popup.hidden {
-            display: none;
-        }
-        
-        .popup-content {
-            background-color: #EDE1B3;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-            max-width: 400px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .popup-content h3 {
-            margin-top: 0;
-            color: #333;
-            font-size: 1.5em;
-        }
-        
-        .popup-content p {
-            color: #555;
-            font-size: 1.1em;
-            margin-bottom: 0;
-        }
-        
-        .close-popup {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 24px;
-            cursor: pointer;
-            color: #666;
-            font-weight: bold;
-        }
-        
-        .close-popup:hover {
-            color: #000;
-        }
-        
         /* Ajuster le conteneur pour ne pas être caché par la bande */
-#novel-container {
+        #novel-container {
             /*margin-top: 50px;
             height: calc(100vh - 50px); */
             height: 100vh;
         }
 /* Animation shake pour attirer fortement l'attention */
-.rappel-icon.attention-shake {
+.rappel-icon.attention-shake , .rappel-icon2.attention-shake {
   animation: rappelShake 0.8s  ease-in-out infinite;
   transform-origin: center;
 }
