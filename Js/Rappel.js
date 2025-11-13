@@ -51,13 +51,8 @@
         const icon = showRappelIcon();
         if (icon) {
           hasShownIcon = true;
-          // Lier le clic si pas encore lié
-          icon.onclick = () => {
-            if (hasClicked) return;
-            hasClicked = true;
-            activateCalendarWithExam();
-            // Ne pas masquer l’icône; ne pas appeler onUnblock (pas de blocage)
-          };
+          activateCalendarWithExam();
+          window.CalendarAPI.openCalendar();
         }
         return false; // non-bloquant
       }

@@ -81,7 +81,7 @@ function createCalendarWidget() {
   Object.assign(container.style, {
     position: "fixed",
     top: "20%",
-    right: "8%",
+    right: "40%",
     width: "330px",
     background: "#EDE1B3",
     border: "3px solid #000",
@@ -132,7 +132,10 @@ function createCalendarWidget() {
   close.textContent = "×";
   close.title = "Fermer";
   close.style.cursor = "pointer";
-  close.addEventListener("click", () => toggleCalendar(container, false));
+  close.addEventListener("click", () => {
+    toggleCalendar(container, false);
+    window.CalendarAPI.disableCalendar();
+  });
   header.appendChild(close);
 
   const body = document.createElement("div");

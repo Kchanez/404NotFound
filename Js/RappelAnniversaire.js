@@ -47,11 +47,8 @@
       if (typeof text === 'string' && text.includes(triggerPrefix)) {
         const icon = showIcon();
         if (!icon) return false;
-        // Ne pas bloquer: laisser l’icône visible et continuer l’histoire.
-        // Un clic ouvre/active le calendrier, l’icône reste affichée.
-        icon.onclick = () => {
-          activateCalendarWithAnniversary();
-        };
+        activateCalendarWithAnniversary();
+        window.CalendarAPI.openCalendar();
         return false; // non-bloquant
       }
       return false; // pas de blocage pour ce texte
