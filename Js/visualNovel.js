@@ -191,6 +191,12 @@ function showDialogue(dialogues, index, choices) {
     }
   }
 
+  // Afficher l'écran piraté si le texte est "...."
+  if (typeof dialogue.text === 'string' && dialogue.text.trim() === '....') {
+    if (window.showHackedScreen) {
+      window.showHackedScreen();
+    }
+  }
 
   // Le son de notification est maintenant géré uniquement par le sfx dans story.json
   // pour le message "*Ding* - Ton ordinateur affiche une notification"

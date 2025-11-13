@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="./Css/visualNovel.css">
     <link rel="stylesheet" href="./Css/privateChat.css">
     <link rel="stylesheet" href="./Css/chat.css" />
+    <link rel="stylesheet" href="./Css/ErrorMessage.css">
     <title>SAVE FRIEND ONLINE</title>
    
 </head>
@@ -91,6 +92,27 @@
       </div>
 
     </div>
+
+
+    <!-- Écran d'erreur/piratage -->
+    <div id="hacked-screen" class="hacked-screen hidden">
+        <div class="error-window">
+            <div class="error-header">
+                <span class="error-title">error 404</span>
+                <button class="close-error-window">×</button>
+            </div>
+            <div class="error-body">
+                <img src="Images/error.svg" alt="Error Icon" class="error-icon"/>
+                <p  class="p1">Une erreur fatale [ERREUR_Σ#404] est survenue ! Nécessite l'intervention d'un utilisateur Admin de l'ordinateur
+                </p>
+                <p>Ignorer ou répondre à la notification de l'inconnu ?</p>
+                <div class="error-actions">
+                    <button id="ignore-error">Ignorer</button>
+                    <button id="respond-error">Répondre</button>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <script src="./Js/visualNovel.js"></script>
     <script src="./Js/Horloge.js"></script>
@@ -104,12 +126,13 @@
     <script src="Js/chatData.js"></script>
     <script src="Js/chat.js"></script>
     <script src="./Js/AffichageChatApp.js"></script>
+    <script src="./Js/hackedEffect.js"></script>
 
     
     <!-- Audio elements -->
     <audio id="typing-sound" src="Audios/typing.mp3" preload="auto"></audio>
     <audio id="notification-sound" src="Audios/notification.mp3" preload="auto"></audio>
-    
+  
 </body>
 </html>
 
