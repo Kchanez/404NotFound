@@ -1,19 +1,21 @@
 const { app, BrowserWindow } = require('electron');
 
-function createWindow() {
-    const win = new BrowserWindow({
-        width: 800,
-        height: 600,
-        webPreferences: {
-            nodeIntegration: true
-        }
-    });
+function createWindow () {
+  const win = new BrowserWindow({
+    width: 800,
+    height: 600
+  });
 
-    win.loadFile('index.html');
+  win.loadFile('index.html');
 }
 
-app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+  console.log('Electron app is ready. Creating window...');
+  createWindow();
+});
 
 app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') app.quit();
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
 });

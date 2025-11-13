@@ -132,10 +132,10 @@ function showDialogue(dialogues, index, choices) {
     window.RappelAPI.handleDialogue(dialogue.text, onBlock, onUnblock);
   }
   // 3) Rappel message vide (ne bloque pas)
-  // La logique est désormais gérée dans le gestionnaire de clic pour respecter l'ordre
-  // if (window.RappelMessageVideAPI) {
-  //   window.RappelMessageVideAPI.handleDialogue(dialogue.text);
-  // }
+  let isEmptyMessage = false;
+  if (window.RappelMessageVideAPI) {
+    isEmptyMessage = window.RappelMessageVideAPI.handleDialogue(dialogue.text);
+  }
 
   // Ouvrir le panneau inline private-chat-app au message exact demandé
   if (
@@ -157,7 +157,7 @@ function showDialogue(dialogues, index, choices) {
       console.log('[VN] Déclencheur chat privé – ouverture.');
       // Retirer le masquage et forcer l’affichage
       panel.classList.remove('hidden');
-      panel.setAttribute('aria-hidden', 'false');
+      panel.removeAttribute('inert');
       panel.style.display = 'flex';
       // Laisser les tailles contrôlées par privateChat.css (variables CSS par défaut)
 
@@ -165,12 +165,12 @@ function showDialogue(dialogues, index, choices) {
       if (hint) hint.style.display = 'none';
 
       // Gérer le bouton de fermeture intégré au header
-      const closeBtn = document.getElementById('close-window');
+      const closeBtn = document.getElementById('close-private-chat');
       if (closeBtn) {
         closeBtn.onclick = () => {
           console.log('[VN] Chat privé – fermeture.');
           panel.classList.add('hidden');
-          panel.setAttribute('aria-hidden', 'true');
+          panel.setAttribute('inert', '');
           panel.style.display = 'none';
           const hint2 = document.getElementById('dialogue-hint');
           if (hint2) hint2.style.display = '';
@@ -179,6 +179,17 @@ function showDialogue(dialogues, index, choices) {
     }
   }
 
+
+
+  // Ouvrir le panneau de chat principal au message exact demandé
+  if (
+    typeof dialogue.text === 'string' &&
+    dialogue.text.trim() === 'Ah tiens un nouveau message. Surement une erreur ce numéro n’est pas dans mes contacts'
+  ) {
+    if (window.ChatAppAPI) {
+      window.ChatAppAPI.showChatApp();
+    }
+  }
 
 
   // Le son de notification est maintenant géré uniquement par le sfx dans story.json
@@ -235,24 +246,16 @@ function showDialogue(dialogues, index, choices) {
     }
     if (!advanced) {
       advanced = true;
-      const nextIndex = index + 1;
-      // Vérifier si le prochain message est vide
-      if (nextIndex < dialogues.length && typeof dialogues[nextIndex].text === 'string' && dialogues[nextIndex].text.trim() === '') {
-        // Étape 1: Masquer l'application de chat privé
+      // Si le message précédent était vide, masquer l'application de chat privé
+      if (isEmptyMessage) {
         const privateChatApp = document.getElementById('private-chat-app');
         if (privateChatApp) {
           privateChatApp.classList.add('hidden');
-          privateChatApp.setAttribute('aria-hidden', 'true');
+          privateChatApp.setAttribute('inert', '');
           privateChatApp.style.display = 'none';
         }
-        // Étape 2: Afficher le rappel après un délai pour s'assurer que le chat est bien masqué
-        setTimeout(() => {
-          if (window.RappelMessageVideAPI) {
-            window.RappelMessageVideAPI.handleDialogue(dialogues[nextIndex].text);
-          }
-        }, 100); // Délai minimal pour que le DOM mette à jour le masquage
       }
-      showDialogue(dialogues, nextIndex, choices);
+      showDialogue(dialogues, index + 1, choices);
     }
   };
 

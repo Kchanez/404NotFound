@@ -7,13 +7,17 @@ body, html {
 
 #chat-app { 
   width: 50%;
-  min-height: 67vh;
-  display: flex;
+  height: 62%;
+  display: none; /* Changed from flex to none */
   flex-direction: column;
   border: 5px solid #000;
-  margin: 2%;
+  margin: 0 auto; /* Centrage horizontal */
   box-shadow: -5px 5px;
   border-radius: 24px 0px 0px 0px;
+  position: absolute; /* Positionnement absolu */
+  top: 45%; /* Centrage vertical */
+  left: 50%; /* Centrage horizontal */
+  transform: translate(-50%, -50%); /* Ajustement pour un centrage parfait */
 }
 
 .window-header {
@@ -52,7 +56,7 @@ body, html {
   background: #fff; 
 }
 .thread-header { 
-  height: 50px; 
+  height: 60px; 
   display: flex; 
   align-items: center; 
   justify-content: space-between; 
@@ -79,8 +83,8 @@ body, html {
   flex-direction: column; 
   gap: 10px; 
   /* Hauteur fixe avec scroll, style WhatsApp */
-  height: 60vh;
-  max-height: 60vh;
+  height: 40vh;
+  max-height: 40vh;
   overflow-y: auto; 
   overscroll-behavior: contain;
   scroll-behavior: smooth;
@@ -107,7 +111,10 @@ body, html {
 .composer button { padding: 8px 12px; border: 2px solid #000; border-radius: 8px; background: #fff; cursor: pointer; }
 
 /* Contacts */
-#contacts { background: #fff; }
+#contacts { 
+  background: #fff; 
+  height: 100%;
+}
 .contact-list { list-style: none; margin: 0; padding: 0; }
 .contact-item { 
   display: flex; 

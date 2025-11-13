@@ -9,7 +9,6 @@
   const addBtn = document.getElementById('toggle-contact');
   const inputEl = document.getElementById('composer-input');
   const sendBtn = document.getElementById('composer-send');
-  const closeBtn = document.getElementById('close-window');
 
   // Persistance simple via localStorage
   const STORAGE_KEY = 'chat_threads_v1';
@@ -130,7 +129,6 @@
   sendBtn.addEventListener('click', sendMessage);
   inputEl.addEventListener('keydown', e => { if (e.key === 'Enter') sendMessage(); });
   addBtn.addEventListener('click', toggleContact);
-  closeBtn.addEventListener('click', () => { window.location.href = 'index.html'; });
 
   // initialisation
   renderContacts();
