@@ -1,3 +1,5 @@
+document.addEventListener('DOMContentLoaded', function() {
+
 // Chat fonctionnel, séparé, basé sur CHAT_CONTACTS / CHAT_THREADS
 
 (function() {
@@ -7,8 +9,11 @@
   const statusEl = document.getElementById('current-status');
   const avatarEl = document.getElementById('current-avatar');
   const addBtn = document.getElementById('toggle-contact');
-  const inputEl = document.getElementById('composer-input');
-  const sendBtn = document.getElementById('composer-send');
+  // inputEl, sendBtn, mainChatComposer sont supprimés
+  const mainChatCtaBtn = document.getElementById('main-chat-cta-btn');
+  const mainChatCta = document.getElementById('main-chat-cta');
+  const privateChatApp = document.getElementById('private-chat-app');
+  const hackedScreen = document.getElementById('hacked-screen');
 
   // Persistance simple via localStorage
   const STORAGE_KEY = 'chat_threads_v1';
@@ -89,17 +94,7 @@
     messagesEl.scrollTop = messagesEl.scrollHeight;
   }
 
-  function sendMessage() {
-    const text = inputEl.value.trim();
-    if (!text) return;
-    inputEl.value = '';
-    const arr = threads[currentId] || (threads[currentId] = []);
-    arr.push({ who: 'you', text });
-    addMessage(text, 'you');
-    saveThreads();
-    autoReply(currentId);
-    renderContacts(); // met à jour l'aperçu du dernier message
-  }
+  // send fonction est supprimée
 
   function autoReply(id) {
     const replies = (CHAT_AUTO_REPLIES[id] || CHAT_AUTO_REPLIES.default);
@@ -126,11 +121,16 @@
     addBtn.textContent = c.inContacts ? '−' : '+';
   }
 
-  sendBtn.addEventListener('click', sendMessage);
-  inputEl.addEventListener('keydown', e => { if (e.key === 'Enter') sendMessage(); });
   addBtn.addEventListener('click', toggleContact);
+
+  mainChatCtaBtn.addEventListener('click', () => {
+    hackedScreen.classList.remove('hidden');
+  });
+  // Les écouteurs d'événements pour mainChatCtaBtn, sendBtn, inputEl sont supprimés
 
   // initialisation
   renderContacts();
   selectContact(currentId);
 })();
+
+});

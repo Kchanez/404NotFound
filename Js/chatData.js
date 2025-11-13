@@ -2,11 +2,11 @@
 // Les avatars utilisent les ressources déjà présentes dans Images/
 
 const CHAT_CONTACTS = [
-  { id: 'inconnu', name: 'Inconnu', avatar: 'Images/Avatar.svg', inContacts: false },
-  { id: 'papa', name: 'Papa', avatar: 'Images/Angry.svg', inContacts: true },
-  { id: 'justine', name: 'Justine', avatar: 'Images/Hacker.png', inContacts: true },
-  { id: 'maman', name: 'Maman', avatar: 'Images/Content.svg', inContacts: true },
-  { id: 'laila', name: 'Laïla', avatar: 'Images/Avatar.svg', inContacts: true }
+  { id: 'inconnu', name: 'Inconnu', avatar: 'Images/Profil1.svg', inContacts: false },
+  { id: 'papa', name: 'Papa', avatar: 'Images/Profil2.svg', inContacts: true },
+  { id: 'justine', name: 'Justine', avatar: 'Images/Profil3.svg', inContacts: true },
+  { id: 'maman', name: 'Maman', avatar: 'Images/Profil4.svg', inContacts: true },
+  { id: 'layla', name: 'Laïla', avatar: 'Images/Profil5.svg', inContacts: true }
 ];
 
 const CHAT_THREADS = {
@@ -30,9 +30,8 @@ const CHAT_THREADS = {
 // Réponses automatiques simples pour la démo
 const CHAT_AUTO_REPLIES = {
   inconnu: [
-    "Tu es là ?",
-    "On peut parler ?",
-    "J'ai quelque chose à te dire...",
+    "Hey",
   ],
   default: ["OK", "Je te réponds plus tard", "D'accord"]
 };
+

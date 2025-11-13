@@ -5,7 +5,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #fff; /* Fond noir semi-transparent */
+    background-color: rgba(0, 0, 0, 0.5); /* Fond noir semi-transparent */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,6 +26,7 @@
     color: #000;
     display: flex;
     flex-direction: column;
+    border-radius: 18px 0px 0px 0px;
 }
 
 .error-header {
@@ -35,7 +36,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid #000;
+    border-bottom: 4px solid #000;
+    border-radius: 16px 0px 0px 0px;
 }
 
 .error-title {

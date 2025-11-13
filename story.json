@@ -135,6 +135,31 @@
           "character": "protagonist",
           "avatar": "happy",
           "text": "...."
+        },
+        {
+          "character": "protagonist",
+          "avatar": "sad",
+          "text": "Mais c'est quoi ça encore"
+        },
+        {
+          "character": "protagonist",
+          "avatar": "sad",
+          "text": "...."
+        },
+        {
+          "character": "protagonist",
+          "avatar": "sad",
+          "text": "...."
+        },
+        {
+          "character": "protagonist",
+          "avatar": "Choc",
+          "text": "Hein quoi !"
+        },
+        {
+          "character": "protagonist",
+          "avatar": "Choc",
+          "text": "Layla !"
         }
       ]
     }

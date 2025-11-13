@@ -39,7 +39,6 @@
         <div id="private-chat-app" class="private-chat-app hidden pc-centered">
           <div class="pc-header">
             <span class="pc-title">message</span>
-            <button id="close-private-chat" class="close">×</button>
           </div>
           <div class="pc-body">
             <div id="pc-messages" class="pc-messages"></div>
@@ -49,17 +48,12 @@
                 <img class="pc-cta-icon" src="Images/Envoyer.svg" alt="Envoyer" />
               </button>
             </div>
-            <div id="pc-composer" class="pc-composer hidden">
-              <input id="pc-input" type="text" placeholder="Écrire un message..." />
-              <button id="pc-send" class="pc-send">Envoyer</button>
-            </div>
           </div>
         </div>
         <div id="dialogue-box">
             <!-- Indication visuelle pour cliquer et continuer -->
             <img id="dialogue-hint" class="dialogue-hint" src="Images/down.svg" alt="Cliquez pour continuer" title="Cliquez pour continuer"/>
         </div>
-
         <!-- Affichage du chat qui contient tout les contacts de l'utilisateur -->
         <div id="chat-app" class="hidden" aria-hidden="true">
           <div class="window-header">
@@ -79,10 +73,13 @@
                 <button id="toggle-contact" class="add-btn" title="Ajouter / Retirer des contacts">+</button>
               </div>
               <div id="messages" class="messages"></div>
-              <div class="composer">
-                <input id="composer-input" type="text" placeholder="Écrire un message..." />
-                <button id="composer-send">Envoyer</button>
+              <div id="main-chat-cta" class="pc-cta">
+                <button id="main-chat-cta-btn" class="pc-cta-btn">
+                  Cliquer pour répondre
+                  <img class="pc-cta-icon" src="Images/Envoyer.svg" alt="Envoyer" />
+                </button>
               </div>
+
             </section>
 
             <aside id="contacts">
@@ -90,10 +87,8 @@
             </aside>
           </div>
       </div>
-
     </div>
-
-
+    
     <!-- Écran d'erreur/piratage -->
     <div id="hacked-screen" class="hacked-screen hidden">
         <div class="error-window">
@@ -114,9 +109,12 @@
         </div>
     </div>
     
+
+
+
+
     <script src="./Js/visualNovel.js"></script>
     <script src="./Js/Horloge.js"></script>
-    <script src="./Js/Messagerie.js"></script>
     <script src="./Js/Calendrier.js"></script>
     <script src="./Js/Rappel.js"></script>
     <script src="./Js/RappelAnniversaire.js"></script>
@@ -127,6 +125,7 @@
     <script src="Js/chat.js"></script>
     <script src="./Js/AffichageChatApp.js"></script>
     <script src="./Js/hackedEffect.js"></script>
+    <script src="./Js/Messagerie.js"></script>
 
     
     <!-- Audio elements -->

@@ -1,8 +1,10 @@
 
+document.addEventListener('DOMContentLoaded', function() {
+
 // Ouvrir le chat en cliquant sur l'icône Mail
 document.getElementById('mail-icon').addEventListener('click', function() {
     if (this.classList.contains('disabled')) return; // inactif
-    const chat = document.getElementById('chat-widget');
+    const chat = document.getElementById('chat-app');
     chat.classList.remove('hidden');
     chat.setAttribute('aria-hidden', 'false');
     chatMessages.innerHTML = '';
@@ -12,7 +14,7 @@ document.getElementById('mail-icon').addEventListener('click', function() {
 });
 
 // Fermer le chat
-document.getElementById('close-chat').addEventListener('click', function() {
+document.getElementById('close-window').addEventListener('click', function() {
     const chat = document.getElementById('chat-widget');
     chat.classList.add('hidden');
     chat.setAttribute('aria-hidden', 'true');
@@ -84,4 +86,6 @@ chatInput.addEventListener('keydown', function(e) {
     if (e.key === 'Enter') {
         chatSend.click();
     }
+});
+
 });

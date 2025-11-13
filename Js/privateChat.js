@@ -1,11 +1,9 @@
-// Chat privé fonctionnel: rendu des anciens messages, CTA répondre, envoi et auto-réponse
-(function() {
+document.addEventListener('DOMContentLoaded', function() {
   const messagesEl = document.getElementById('pc-messages');
   const ctaEl = document.getElementById('pc-cta');
   const ctaBtn = document.getElementById('pc-cta-btn');
-  const composerEl = document.getElementById('pc-composer');
-  const inputEl = document.getElementById('pc-input');
-  const sendBtn = document.getElementById('pc-send');
+  const privateChatApp = document.getElementById('private-chat-app');
+  // composerEl, inputEl, sendBtn sont supprimés
 
   const STORAGE_KEY = 'private_chat_thread_v1';
   let thread = loadThread();
@@ -50,21 +48,8 @@
     messagesEl.scrollTop = messagesEl.scrollHeight;
   }
 
-  function showComposer() {
-    ctaEl.classList.add('hidden');
-    composerEl.classList.remove('hidden');
-    inputEl.focus();
-  }
-
-  function send() {
-    const text = inputEl.value.trim();
-    if (!text) return;
-    inputEl.value = '';
-    thread.push({ who: 'you', text });
-    saveThread();
-    render();
-    autoReply();
-  }
+  // showComposer fonction est supprimée
+  // send fonction est supprimée
 
   function autoReply() {
     const reply = PRIVATE_CHAT_REPLIES[Math.floor(Math.random() * PRIVATE_CHAT_REPLIES.length)];
@@ -77,9 +62,10 @@
     }, 800);
   }
 
-  ctaBtn.addEventListener('click', showComposer);
-  sendBtn.addEventListener('click', send);
-  inputEl.addEventListener('keydown', e => { if (e.key === 'Enter') send(); });
+  ctaBtn.addEventListener('click', function() {
+    privateChatApp.classList.add('hidden');
+  });
+  // Les écouteurs d'événements pour sendBtn, inputEl sont supprimés
 
   render();
-})();
+});

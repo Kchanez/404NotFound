@@ -23,7 +23,6 @@
     notificationIcon.alt = 'Notification de message';
     notificationIcon.title = 'Notification de message vide';
     notificationIcon.classList.remove('hidden');
-    notificationIcon.classList.add('attention-shake'); // Ajouter une animation si nécessaire
     notificationSound.currentTime = 0;
     notificationSound.play().catch(error => console.error("Erreur lecture son notification:", error));
 
@@ -41,7 +40,6 @@
     const notificationIcon = document.getElementById('message-notif-icon');
     if (notificationIcon) {
       notificationIcon.classList.add('hidden');
-      notificationIcon.classList.remove('attention-shake');
     }
     if (notificationSound) {
       notificationSound.pause();

@@ -9,7 +9,6 @@
     const icon = document.getElementById('notification-icon');
     if (!icon) return null;
     icon.classList.remove('hidden');
-    icon.classList.add('attention-shake');
     // Jouer le son de notification à l'apparition de l'icône
     const notifAudio = document.getElementById('notification-sound');
     if (notifAudio) {

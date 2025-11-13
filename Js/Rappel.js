@@ -11,7 +11,6 @@
     const icon = document.getElementById('rappel-icon');
     if (!icon) return null;
     icon.classList.remove('hidden');
-    icon.classList.add('attention-shake');
     return icon;
   }
 

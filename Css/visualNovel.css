@@ -261,7 +261,7 @@ body, html {
         /* Styles pour l'icône Rappel */
         .rappel-icon, .rappel-icon2 {
             position: absolute;
-            bottom: 80%;
+            top: 15%;
             right: 1%;
             transform: translateY(-50%);
             cursor: pointer;
@@ -271,7 +271,7 @@ body, html {
             max-width: 20%;
         }
         .rappel-icon2 {
-            bottom: 67%;
+            top: 28%;
         }
         .rappel-icon.hidden {
             display: none;
@@ -282,19 +282,6 @@ body, html {
             height: calc(100vh - 50px); */
             height: 100vh;
         }
-/* Animation shake pour attirer fortement l'attention */
-.rappel-icon.attention-shake , .rappel-icon2.attention-shake {
-  animation: rappelShake 0.8s  ease-in-out infinite;
-  transform-origin: center;
-}
-
-@keyframes rappelShake {
-    0%   { transform: translateY(0); }
-  25%  { transform: translateY(2px); }
-  
-  75%  { transform: translateY(-2px); }
-  100% { transform: translateY(0); }
-}
 
 /* Modal pour le chat privé */
 .pc-modal {
