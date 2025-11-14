@@ -46,8 +46,10 @@
 }
 
 .close-error-window {
-    background-color: #B5BAC0;
-    border: 1px solid #000;
+    /* background-color: #B5BAC0; 
+    border: 1px solid #000;*/
+    background-color: transparent;
+    border: none;
     color: #000;
     font-size: 1.2em;
     width: 25px;

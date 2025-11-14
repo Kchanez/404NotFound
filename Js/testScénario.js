@@ -1,7 +1,7 @@
 const SCENARIOS = {
   start: {
     who: "inconnu",
-    text: "Hey",
+    texts: ["Hey"],
     // audio: "assets/audio/notification.mp3",
     choices: [
       { text: "Répondre", reply: "?", next: "reply_1" },
@@ -17,7 +17,7 @@ const SCENARIOS = {
       {
         text: "Répondre",
         reply: "Je pense que vous vous êtes trompé de personne !",
-        next: "Reply_11",
+        next: "reply_11",
       },
       {
         text: "ignorer",

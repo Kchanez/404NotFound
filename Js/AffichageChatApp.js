@@ -13,13 +13,6 @@ window.ChatAppAPI = {
     chatApp.setAttribute('aria-hidden', 'false');
     chatApp.style.display = 'flex';
 
-    // Masquer l'icône de notification de message
-    // const messageNotifIcon = document.getElementById('message-notif-icon');
-    // if (messageNotifIcon) {
-    //   messageNotifIcon.classList.add('hidden');
-    //   messageNotifIcon.classList.remove('attention-shake');
-    // }
-
     // Cacher l'indication de clic pour continuer
     const hint = document.getElementById('dialogue-hint');
     if (hint) hint.style.display = 'none';

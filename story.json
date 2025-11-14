@@ -15,7 +15,7 @@
         "Choc": "Images/Choquee.svg",
         "angry": "Images/Angry.svg",
         "rigolo": "Images/Rigolo.svg",
-        "Enlarme": "Images/pleur.svg"
+        "Larme": "Images/pleur.svg"
 
       }
     },
@@ -113,7 +113,7 @@
         },
         {
           "character": "protagonist",
-          "avatar": "Enlarme",
+          "avatar": "Larme",
           "text": "Joyeux anniversaire ma veille, tu me manques."
         },
         {
@@ -134,17 +134,17 @@
         {
           "character": "protagonist",
           "avatar": "happy",
-          "text": "...."
+          "text": "..."
+        },
+        {
+          "character": "protagonist",
+          "avatar": "happy",
+          "text": "Hein"
         },
         {
           "character": "protagonist",
           "avatar": "sad",
           "text": "Mais c'est quoi ça encore"
-        },
-        {
-          "character": "protagonist",
-          "avatar": "sad",
-          "text": "...."
         },
         {
           "character": "protagonist",
@@ -160,6 +160,39 @@
           "character": "protagonist",
           "avatar": "Choc",
           "text": "Layla !"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Répondre",
+          "nextScenario": "start"
+        },
+        {
+          "text": "Ignorer",
+          "nextScenario": "ignore_1"
+        }
+      ]
+    },
+    "next_scene_after_chat": {
+      "background": "room",
+      "bgm": "main",
+      "dialogue": [
+        {
+          "character": "protagonist",
+          "avatar": "default",
+          "text": "J'ai ignoré le message. Que va-t-il se passer maintenant ?"
+        }
+      ],
+      "nextScene": "after_ignore_chat"
+    },
+    "after_ignore_chat": {
+      "background": "room",
+      "bgm": "main",
+      "dialogue": [
+        {
+          "character": "protagonist",
+          "avatar": "default",
+          "text": "L'histoire continue après avoir ignoré le message."
         }
       ]
     }

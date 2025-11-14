@@ -24,9 +24,25 @@ document.addEventListener('DOMContentLoaded', function() {
   function loadThreads() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return JSON.parse(JSON.stringify(CHAT_THREADS));
-      const parsed = JSON.parse(raw);
-      return Object.assign({}, CHAT_THREADS, parsed);
+      // Toujours commencer avec CHAT_THREADS pour s'assurer que les messages initiaux sont présents
+      let loadedThreads = JSON.parse(JSON.stringify(CHAT_THREADS));
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        // Fusionner les threads sauvegardés avec les threads initiaux
+        Object.keys(parsed).forEach(contactId => {
+          if (loadedThreads[contactId]) {
+            // Ajouter de nouveaux messages sans écraser les messages initiaux
+            parsed[contactId].forEach(msg => {
+              if (!loadedThreads[contactId].some(existingMsg => existingMsg.text === msg.text && existingMsg.who === msg.who)) {
+                loadedThreads[contactId].push(msg);
+              }
+            });
+          } else {
+            loadedThreads[contactId] = parsed[contactId];
+          }
+        });
+      }
+      return loadedThreads;
     } catch(_) {
       return JSON.parse(JSON.stringify(CHAT_THREADS));
     }
@@ -65,17 +81,29 @@ document.addEventListener('DOMContentLoaded', function() {
   function truncate(s, n) { return s.length > n ? s.slice(0, n - 1) + '…' : s; }
 
   function selectContact(id) {
-    currentId = id;
-    const c = contacts.find(x => x.id === id);
-    nameEl.textContent = c.name;
-    avatarEl.src = c.avatar;
-    statusEl.textContent = c.inContacts ? 'Dans vos contacts' : 'Ce compte ne fait pas partie de votre liste de contacts';
-    addBtn.textContent = c.inContacts ? '−' : '+';
-    renderThread();
+    if (currentId !== id) { // Only clear if switching to a different contact
+      messagesEl.innerHTML = '';
+      currentId = id;
+      const c = contacts.find(x => x.id === id);
+      nameEl.textContent = c.name;
+      avatarEl.src = c.avatar;
+      statusEl.textContent = c.inContacts ? 'Dans vos contacts' : 'Ce compte ne fait pas partie de votre liste de contacts';
+      addBtn.textContent = c.inContacts ? '−' : '+';
+      renderThread();
+    } else {
+      // If the same contact is selected, just ensure the display is correct without clearing
+      currentId = id;
+      const c = contacts.find(x => x.id === id);
+      nameEl.textContent = c.name;
+      avatarEl.src = c.avatar;
+      statusEl.textContent = c.inContacts ? 'Dans vos contacts' : 'Ce compte ne fait pas partie de votre liste de contacts';
+      addBtn.textContent = c.inContacts ? '−' : '+';
+      // No need to call renderThread() or clear messagesEl.innerHTML here
+    }
   }
 
   function renderThread() {
-    messagesEl.innerHTML = '';
+    // messagesEl.innerHTML = ''; // This line is removed to prevent clearing messages
     const arr = threads[currentId] || [];
     arr.forEach(m => addMessage(m.text, m.who));
     // Se placer en bas pour voir les plus récents (ancien style WhatsApp)
@@ -125,12 +153,39 @@ document.addEventListener('DOMContentLoaded', function() {
 
   mainChatCtaBtn.addEventListener('click', () => {
     hackedScreen.classList.remove('hidden');
+    if (window.VisualNovelAPI) {
+      window.VisualNovelAPI.unblockStory();
+    }
   });
   // Les écouteurs d'événements pour mainChatCtaBtn, sendBtn, inputEl sont supprimés
 
   // initialisation
   renderContacts();
   selectContact(currentId);
+
+  // Exposer l'API du chat pour le visual novel
+  window.ChatAppAPI = {
+    addMessage: addMessage,
+    selectContact: selectContact,
+    showChatApp: () => {
+      const chatApp = document.getElementById('chat-app');
+      if (chatApp) {
+        chatApp.classList.remove('hidden');
+        chatApp.removeAttribute('inert');
+        chatApp.removeAttribute('aria-hidden');
+        chatApp.style.display = 'flex';
+      }
+    },
+    hideChatApp: () => {
+      const chatApp = document.getElementById('chat-app');
+      if (chatApp) {
+        chatApp.classList.add('hidden');
+        chatApp.setAttribute('inert', '');
+        chatApp.setAttribute('aria-hidden', 'true');
+        chatApp.style.display = 'none';
+      }
+    }
+  };
 })();
 
 });

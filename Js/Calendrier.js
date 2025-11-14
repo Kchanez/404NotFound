@@ -253,12 +253,21 @@ function renderCalendar(date, titleEl, gridEl) {
   }
 }
 
+let autoCloseTimeout;
+
 function toggleCalendar(container, show) {
   if (show) {
     container.style.display = "block";
     container.setAttribute("aria-hidden", "false");
+    // Définir un minuteur pour fermer automatiquement après 2 secondes
+    autoCloseTimeout = setTimeout(() => {
+      toggleCalendar(container, false);
+      window.CalendarAPI.disableCalendar();
+    }, 2000); // 2000 ms = 2 secondes
   } else {
     container.style.display = "none";
     container.setAttribute("aria-hidden", "true");
+    // Annuler le minuteur si le calendrier est fermé manuellement
+    clearTimeout(autoCloseTimeout);
   }
 }
