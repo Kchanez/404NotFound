@@ -1,0 +1,111 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    color: #0f0;
+    font-family: 'Courier New', Courier, monospace;
+    overflow: hidden;
+}
+.window-container {
+    background-image: url("../Images/Intro.svg");
+    width: 100vw;
+    height: 100vh;
+}
+
+.window-frame {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 600px;
+    background-color: #010082;
+    box-shadow: 5px 5px 0px #808080;
+    font-family: 'MS Sans Serif', Geneva, sans-serif;
+}
+
+.title-bar {
+    color: #fff;
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+.title-bar-controls button {
+    background-color: #c0c0c0;
+    border: 1px solid #000;
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+    line-height: 10px;
+    padding: 0;
+    cursor: pointer;
+}
+
+.window-content {
+    padding: 10px;
+    background-color: #c0c0c0;
+    color: #000;
+}
+
+.window-content p {
+    margin-bottom: 5px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.captchaa_image-container {
+    border: 2px solid #808080;
+    background-color: #fff;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    background-image: linear-gradient(45deg, #ccc 25%, transparent 25%),
+                      linear-gradient(-45deg, #ccc 25%, transparent 25%),
+                      linear-gradient(45deg, transparent 75%, #ccc 75%),
+                      linear-gradient(-45deg, transparent 75%, #ccc 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+.captcha-image , .Not404-image{
+    width: 100%;
+    max-height: 90%;
+    object-fit: contain;
+}
+.captcha-image{
+    width:  20%;
+}
+
+.input-container {
+    width: 70%;
+    height: 5vh;
+    display: flex;
+    border: 2px inset #c0c0c0;
+    background-color: #fff;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: inset 0 0px 0px 1px #000,
+            inset 0 0px 3px 0px #000
+}
+
+.captcha-input {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    padding: 5px;
+    font-size: 14px;
+    background-color: transparent;
+    color: #000;
+}
+
+
+
+
+
+
+
