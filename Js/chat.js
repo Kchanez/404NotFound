@@ -151,12 +151,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
   addBtn.addEventListener('click', toggleContact);
 
-  mainChatCtaBtn.addEventListener('click', () => {
+  let isHackedShowing = false;
+  function openHacked() {
+    if (isHackedShowing) return;
     hackedScreen.classList.remove('hidden');
-    if (window.VisualNovelAPI) {
-      window.VisualNovelAPI.unblockStory();
-    }
+    isHackedShowing = true;
+  }
+  mainChatCtaBtn.addEventListener('click', () => {
+    openHacked();
+    setTimeout(() => {
+      if (window.VisualNovelAPI && window.VisualNovelAPI.showScenarioChoices) {
+        window.VisualNovelAPI.showScenarioChoices('start');
+      }
+      if (window.VisualNovelAPI) {
+        window.VisualNovelAPI.unblockStory();
+      }
+    }, 180);
   });
+  document.addEventListener('hackedScreenClosed', () => { isHackedShowing = false; });
   // Les écouteurs d'événements pour mainChatCtaBtn, sendBtn, inputEl sont supprimés
 
   // initialisation

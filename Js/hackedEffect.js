@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function hideHackedScreen() {
         hackedScreen.classList.add('hidden');
+        try { document.dispatchEvent(new CustomEvent('hackedScreenClosed')); } catch(_) {}
     }
 
     // Event Listeners for buttons

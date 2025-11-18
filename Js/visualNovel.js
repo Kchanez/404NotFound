@@ -11,6 +11,7 @@ let blockedChoices = null;
 let blockedDialogues = null;
 let blockedIndex = -1;
 let isWaitingForCtaClick = false; // Nouvelle variable d'état
+let hasInjectedHeyMessage = false;
 
 // Charger l'histoire depuis le fichier JSON
 function loadStory() {
@@ -107,18 +108,7 @@ function showDialogue(dialogues, index, choices, scenarioChoices = null) {
   const mainChatCtaBtn = document.getElementById('main-chat-cta-btn'); // Récupérer le bouton
   const dialogueBoxEl = document.getElementById("dialogue-box");
 
-  // Bloquer la progression si le dialogue est "..." et que le bouton n'a pas été cliqué
-  if (dialogue.text.trim() === '...' && dialogue.character === 'protagonist') {
-    isWaitingForCtaClick = true;
-    blockedDialogues = dialogues;
-    blockedIndex = index;
-    blockedChoices = choices;
-    if (dialogueHint) dialogueHint.style.display = 'none'; // Cacher l'indicateur de dialogue
-    if (mainChatCtaBtn) mainChatCtaBtn.classList.add('blinking'); // Ajouter la classe pour faire clignoter
-    // Empêcher la progression automatique
-    if (dialogueBoxEl) dialogueBoxEl.onclick = null; // Désactiver le clic pour avancer le dialogue
-    return; // Arrêter l'affichage du dialogue ici
-  }
+  
 
   // S'assurer que le texte est visible
   dialogueText.style.display = "block";
@@ -209,6 +199,16 @@ function showDialogue(dialogues, index, choices, scenarioChoices = null) {
   ) {
     if (window.ChatAppAPI) {
       window.ChatAppAPI.showChatApp();
+      window.ChatAppAPI.selectContact('inconnu');
+      if (!hasInjectedHeyMessage) {
+        setTimeout(() => {
+          window.ChatAppAPI.addMessage('Hey', 'friend');
+        }, 500);
+        hasInjectedHeyMessage = true;
+      }
+    }
+    if (mainChatCtaBtn) {
+      mainChatCtaBtn.classList.add('blinking');
     }
   }
 
@@ -261,7 +261,6 @@ function showDialogue(dialogues, index, choices, scenarioChoices = null) {
   let isTyping = true;
   let advanced = false;
   dialogueBoxEl.onclick = () => {
-    if (isWaitingForCtaClick) return; // Ne rien faire si on attend le clic sur le CTA
     if (isTyping) {
       if (dialogueText.__typewriterCancel) {
         dialogueText.__typewriterCancel();
@@ -371,28 +370,7 @@ function typewriterEffect(
 
 // Afficher les choix
 // Nouvelle fonction pour afficher les choix
-function showChoices(choices) {
-  const choicesContainer = document.getElementById("choices-container");
-  choicesContainer.innerHTML = ""; // Clear previous choices
-
-  if (choices.length === 1 && choices[0].text === "Répondre") {
-    // Si un seul choix avec le texte "Répondre", afficher un bouton générique
-    const button = document.createElement("button");
-    button.textContent = choices[0].text; // Revert to displaying choice.text on the button
-    button.classList.add("choice-button");
-    button.onclick = () => handleChoice(choices[0]);
-    choicesContainer.appendChild(button);
-  } else {
-    // S'il y a des choix, les afficher
-    choices.forEach((choice) => {
-      const button = document.createElement("button");
-      button.textContent = choice.text; // Revert to displaying choice.text on the button
-      button.classList.add("choice-button");
-      button.onclick = () => handleChoice(choice);
-      choicesContainer.appendChild(button);
-    });
-  }
-}
+// (ancienne implémentation showChoices supprimée)
 
 // Nouvelle fonction pour gérer les choix
 function handleChoice(choice) {
@@ -404,7 +382,12 @@ function handleChoice(choice) {
     window.ChatAppAPI.addMessage(choice.reply, 'you');
   }
 
-  if (choice.next && SCENARIOS[choice.next]) {
+  const hackedScreen = document.getElementById('hacked-screen');
+  if (hackedScreen) hackedScreen.classList.add('hidden');
+  const mainChatCtaBtn = document.getElementById('main-chat-cta-btn');
+  if (mainChatCtaBtn) mainChatCtaBtn.classList.remove('blinking');
+
+  if (choice.next && storyData && storyData.scenarios && storyData.scenarios[choice.next]) {
     // Gérer les transitions internes des scénarios via la propriété 'next'
     window.VisualNovelAPI.startScenario(choice.next);
   } else if (choice.nextScenario) {
@@ -416,6 +399,33 @@ function handleChoice(choice) {
   } else {
     console.warn("Choice has no valid nextScene or nextScenario:", choice);
   }
+}
+
+// Override: afficher les choix via #hacked-screen
+function showChoices(choices) {
+  const hackedScreen = document.getElementById('hacked-screen');
+  const errorActions = hackedScreen ? hackedScreen.querySelector('.error-actions') : null;
+
+  if (hackedScreen) hackedScreen.classList.remove('hidden');
+  if (errorActions) errorActions.innerHTML = "";
+
+  setTimeout(() => {
+    if (choices.length === 1 && choices[0].text === "Répondre") {
+      const button = document.createElement("button");
+      button.textContent = choices[0].text;
+      button.classList.add("choice-button");
+      button.onclick = () => handleChoice(choices[0]);
+      if (errorActions) errorActions.appendChild(button);
+    } else {
+      choices.forEach((choice) => {
+        const button = document.createElement("button");
+        button.textContent = choice.text;
+        button.classList.add("choice-button");
+        button.onclick = () => handleChoice(choice);
+        if (errorActions) errorActions.appendChild(button);
+      });
+    }
+  }, 400);
 }
 
 // Jouer un fichier audio
@@ -450,13 +460,18 @@ window.VisualNovelAPI = {
   startScenario: (scenarioName) => {
     console.log("startScenario: scenarioName=", scenarioName);
     // hideHackedScreen(); // Ensure hacked screen is hidden
-    if (SCENARIOS[scenarioName]) {
-      currentScenario = SCENARIOS[scenarioName];
+    if (storyData && storyData.scenarios && storyData.scenarios[scenarioName]) {
+      currentScenario = storyData.scenarios[scenarioName];
       console.log("startScenario: currentScenario after assignment=", currentScenario);
       currentScenarioIndex = 0;
       displayScenarioDialogue();
     } else {
       console.error(`Scenario ${scenarioName} not found.`);
+    }
+  },
+  showScenarioChoices: (scenarioName) => {
+    if (storyData && storyData.scenarios && storyData.scenarios[scenarioName] && Array.isArray(storyData.scenarios[scenarioName].choices)) {
+      showChoices(storyData.scenarios[scenarioName].choices);
     }
   }
 };
@@ -470,8 +485,8 @@ function displayScenarioDialogue() {
 
   if (!currentScenario || (currentScenario.texts === undefined && currentScenario.text === undefined && !currentScenario.choices)) {
     console.log("Scenario finished or not started, or invalid scenario structure.");
-    if (dialogueBox) dialogueBox.classList.remove('hidden'); // Show VN dialogue box
-    if (window.ChatAppAPI) window.ChatAppAPI.hideChatApp(); // Hide chat app
+    if (dialogueBox) dialogueBox.classList.remove('hidden');
+    if (window.ChatAppAPI) window.ChatAppAPI.hideChatApp();
 
     if (currentScenario && currentScenario.nextScene) {
       displayScene(currentScenario.nextScene);
@@ -479,7 +494,7 @@ function displayScenarioDialogue() {
       currentScenarioIndex = 0; // Reset scenario index
     } else {
       // If no nextScene, then truly end of scenario
-      if (dialogueBox) dialogueBox.classList.add('hidden');
+      if (dialogueBox) dialogueBox.classList.remove('hidden');
     }
     return;
   }
@@ -499,15 +514,22 @@ function displayScenarioDialogue() {
       currentScenario = null; // Reset current scenario
       currentScenarioIndex = 0; // Reset scenario index
     } else {
-      // If no nextScene, then truly end of scenario
-      if (dialogueBox) dialogueBox.classList.add('hidden');
+      if (dialogueBox) dialogueBox.classList.remove('hidden');
     }
     return;
   }
 
-  // Hide VN dialogue box and show chat app
-  if (dialogueBox) dialogueBox.classList.add('hidden');
+  if (dialogueBox) dialogueBox.classList.remove('hidden');
   if (window.ChatAppAPI) window.ChatAppAPI.showChatApp();
+  if (window.ChatAppAPI) {
+    window.ChatAppAPI.selectContact('inconnu');
+    if (!hasInjectedHeyMessage) {
+      setTimeout(() => {
+        window.ChatAppAPI.addMessage('Hey', 'friend');
+      }, 500);
+      hasInjectedHeyMessage = true;
+    }
+  }
 
   const dialogue = {
     character: currentScenario.who,
@@ -520,7 +542,10 @@ function displayScenarioDialogue() {
   if (window.ChatAppAPI) {
     // Assuming 'inconnu' is the contact ID for the unknown sender
     window.ChatAppAPI.selectContact('inconnu');
-    window.ChatAppAPI.addMessage(dialogue.text, dialogue.character === 'protagonist' ? 'you' : 'friend');
+    const msgText = (dialogue.text || '').trim();
+    if (!(hasInjectedHeyMessage && msgText === 'Hey')) {
+      window.ChatAppAPI.addMessage(dialogue.text, dialogue.character === 'protagonist' ? 'you' : 'friend');
+    }
   }
 
   // Manage advancing the dialogue or showing choices
@@ -544,158 +569,15 @@ function displayScenarioDialogue() {
       currentScenarioIndex = 0; // Reset scenario index
       if (window.ChatAppAPI) window.ChatAppAPI.hideChatApp(); // Hide chat app
     } else {
-      // Truly end of scenario, hide chat app and dialogue box
       if (window.ChatAppAPI) window.ChatAppAPI.hideChatApp();
-      if (dialogueBox) dialogueBox.classList.add('hidden');
+      if (dialogueBox) dialogueBox.classList.remove('hidden');
     }
   }
 }
 
-const SCENARIOS = {
-  start: {
-    who: "inconnu",
-    texts: ["Hey"],
-    // audio: "assets/audio/notification.mp3",
-    choices: [
-      { text: "Répondre", reply: "c'est qui ?", next: "reply_1" },
-      { text: "Ignorer", next: "ignore_1" },
-    ],
-  },
+ 
 
-  reply_1: {
-    who: "inconnu",
-    texts: ["On peut parler ?"],
-    // image: "assets/images/photo_mystere.jpg",
-    choices: [
-      {
-        text: "Répondre",
-        reply: "Je pense que vous vous êtes trompé de personne !",
-        next: "reply_11",
-      },
-      {
-        text: "ignorer",
-        next: "reply_11",
-      },
-    ],
-  },
-
-  reply_11: {
-    who: "inconnu",
-    texts: [
-      "C'est Layla",
-      "J'aimerais si tu l’acceptes qu’on s’explique. Je comprendrais totalement si tu ne veux pas. Bonne soirée",
-    ],
-    // image: "assets/images/photo_mystere.jpg",
-    choices: [
-      {
-        text: "Gentiment",
-        reply: "...",
-        next: "Gentiment_2",
-      },
-      {
-        text: "Méchament",
-        reply: "",
-        next: "Mechament_2",
-      },
-    ],
-  },
-
-  ignore_1: {
-    who: "inconnu",
-    texts: ["Hey", "On peut parler ?"],
-    choices: [
-      {
-        text: "Répondre",
-        reply: "Je pense que vous vous êtes trompé de personne !",
-        next: "ignore_11",
-      },
-      {
-        text: "Ignorer",
-        next: "ignore_11",
-      },
-    ],
-  },
-  ignore_11: {
-    who: "inconnu",
-    texts: [
-      "C'est Layla",
-      "J'aimerais si tu l’acceptes qu’on s’explique. Je comprendrais totalement si tu ne veux pas. Bonne soirée",
-    ],
-    choices: [
-      {
-        text: "Gentiment",
-        reply: "...",
-        next: "Gentiment_1",
-      },
-      {
-        text: "Méchament",
-        reply: "...",
-        next: "Mechament_1",
-      },
-    ],
-  },
-  Gentiment_1: {
-    who: "protagonist",
-    texts: ["..."],
-    nextScene: "next_scene_after_chat",
-  },
-  Mechament_1: {
-    who: "protagonist",
-    texts: ["..."],
-    nextScene: "next_scene_after_chat",
-  },
-  Gentiment_2: {
-    who: "protagonist",
-    texts: ["..."],
-    nextScene: "next_scene_after_chat",
-  },
-  Mechament_2: {
-    who: "protagonist",
-    texts: ["..."],
-    nextScene: "next_scene_after_chat",
-  },
-};
-
-function startScenario(scenarioId) {
-  console.log("startScenario: scenarioId=", scenarioId);
-  const hackedScreen = document.getElementById('hacked-screen');
-  if (hackedScreen) {
-    hackedScreen.classList.add('hidden'); // Hide hacked screen when a scenario starts
-  }
-  if (SCENARIOS[scenarioId]) {
-    currentScenario = SCENARIOS[scenarioId];
-    currentScenarioIndex = 0;
-    displayScenarioDialogue();
-  } else {
-    console.error("Scenario not found:", scenarioId);
-  }
-}
+// (ancienne fonction startScenario supprimée – utiliser VisualNovelAPI.startScenario)
 
 // Function to unblock the story progression
-function unblockStory() {
-  console.log("unblockStory called");
-  const dialogueBox = document.getElementById("dialogue-box");
-  const choicesContainer = document.getElementById("choices-container");
-  const hackedScreen = document.getElementById('hacked-screen');
-
-  if (dialogueBox) {
-    dialogueBox.classList.remove('hidden');
-    dialogueBox.onclick = null; // Remove any existing click handlers
-  }
-  if (choicesContainer) {
-    choicesContainer.innerHTML = ''; // Clear choices
-  }
-  if (hackedScreen) {
-    hackedScreen.classList.add('hidden'); // Ensure hacked screen is hidden
-  }
-
-  // Resume dialogue progression using the stored state
-  if (blockedDialogues && blockedDialogues.length > 0) {
-    showDialogue(blockedDialogues, blockedIndex, blockedChoices);
-    blockedDialogues = null;
-    blockedIndex = 0;
-    blockedChoices = null;
-  } else {
-    console.error("No blocked dialogue to unblock.");
-  }
-}
+// (ancienne fonction unblockStory supprimée – utiliser VisualNovelAPI.unblockStory)
