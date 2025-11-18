@@ -7,15 +7,15 @@ body, html {
 #private-chat-app 
 { 
   /* Tailles adaptables via variables CSS (réduites par défaut pour VN) */
-  width: var(--pc-width, 20%);
-  height: 67vh; 
-  display: flex; 
-  flex-direction: column; 
-  border: 5px solid #000;
-  margin: 0 auto; /* centrage horizontal par défaut */
-  box-shadow: -5px 5px;
-  border-radius: 24px 0px 0px 0px;
-  background-color: #fff;
+    width: var(--pc-width, 20%);
+    height: 58vh;
+    display: flex;
+    flex-direction: column;
+    border: 5px solid #000;
+    margin: 0 auto;
+    box-shadow: -5px 5px;
+    border-radius: 24px 0px 0px 0px;
+    background-color: #fff;
 }
 
 /* Centrage plein écran optionnel pour intégration au milieu de la page */
@@ -108,18 +108,18 @@ body, html {
 
 /* CTA en bas comme sur l’image */
 .pc-cta { 
-  margin: 16px 0px; 
+  margin: 10px 0px; 
   text-align: center; 
 }
 .pc-cta-btn { 
     width: 90%;
     padding: 10px;
-    border: 3px solid #000;
+    border: 2px solid #000;
     border-radius: 18px;
     background: #fff;
     cursor: pointer;
     font-size: 15px;
-    box-shadow: -5px 5px;
+    box-shadow: -5px 4px;
 }
 .pc-cta-icon { 
   width: 22px; 

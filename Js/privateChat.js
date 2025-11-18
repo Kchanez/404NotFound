@@ -5,19 +5,13 @@ document.addEventListener('DOMContentLoaded', function() {
   const privateChatApp = document.getElementById('private-chat-app');
   // composerEl, inputEl, sendBtn sont supprimés
 
-  const STORAGE_KEY = 'private_chat_thread_v1';
+  
   let thread = loadThread();
 
   function loadThread() {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return PRIVATE_CHAT_DATA.thread.slice();
-      return JSON.parse(raw);
-    } catch(_) { return PRIVATE_CHAT_DATA.thread.slice(); }
+    return PRIVATE_CHAT_DATA.thread.slice();
   }
-  function saveThread() {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(thread)); } catch(_) {}
-  }
+
 
   function render() {
     messagesEl.innerHTML = '';
@@ -55,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const reply = PRIVATE_CHAT_REPLIES[Math.floor(Math.random() * PRIVATE_CHAT_REPLIES.length)];
     setTimeout(() => {
       thread.push({ who: 'friend', text: reply });
-      saveThread();
+
       render();
       // Protection supplémentaire si des assets se chargent après coup
       setTimeout(() => { messagesEl.scrollTop = messagesEl.scrollHeight; }, 0);

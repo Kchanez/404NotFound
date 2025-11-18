@@ -12,9 +12,3 @@ const PRIVATE_CHAT_DATA = {
   ]
 };
 
-// Quelques réponses automatiques légères si l’utilisateur continue la discussion
-const PRIVATE_CHAT_REPLIES = [
-  "Oui, tout va bien !",
-  "On se parle demain ?",
-  "Désolée, j’étais occupée."
-];
