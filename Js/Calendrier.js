@@ -83,7 +83,7 @@ function createCalendarWidget() {
     top: "20%",
     right: "40%",
     width: "330px",
-    background: "#EDE1B3",
+    background: "#c0c0c0",
     border: "3px solid #000",
     borderRadius: "12px",
     boxShadow: "0 8px 16px rgba(0,0,0,0.25)",

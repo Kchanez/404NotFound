@@ -10,25 +10,22 @@ body, html {
   height: 65%;
   display: none; /* Changed from flex to none */
   flex-direction: column;
-  border: 5px solid #000;
   margin: 0 auto; /* Centrage horizontal */
-  box-shadow: -5px 5px;
-  border-radius: 24px 0px 0px 0px;
   position: absolute; /* Positionnement absolu */
-  top: 45%; /* Centrage vertical */
-  left: 50%; /* Centrage horizontal */
+  top: 34%; /* Centrage vertical */
+  left: 39%; /* Centrage horizontal */
   transform: translate(-50%, -50%); /* Ajustement pour un centrage parfait */
 }
 
 .window-header {
   height: 40px;
-  background: linear-gradient(#4d6aa3, #1c2460);
+  /* background: linear-gradient(#4d6aa3, #1c2460); */
+  background-color: #010082;
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 12px;
-  border-radius: 18px 0px 0px 0px;
 }
 .window-header .title { font-weight: bold; }
 .window-header .close { 
@@ -44,15 +41,16 @@ body, html {
 .window-body { 
   flex: 1; 
   display: grid; 
-  grid-template-columns: 2fr 1fr; 
+  grid-template-columns: 1fr 2fr; 
   gap: 0; 
+  border: 5px solid #c0c0c0;
 }
 
 /* Thread (conversation) */
 #thread { 
   display: flex; 
   flex-direction: column; 
-  border-right: 3px solid #000; 
+  border-left: 3px solid #A9A9A9; 
   background: #fff; 
 }
 .thread-header { 
@@ -61,8 +59,8 @@ body, html {
   align-items: center; 
   justify-content: space-between; 
   padding: 0 10px; 
-  border-bottom: 3px solid #000; 
-  background: #e8ecf5; 
+  border-bottom: 3px solid #c0c0c0; 
+  /* background: #e8ecf5;  */
 }
 .contact-info { display: flex; gap: 10px; align-items: center; }
 .avatar { width: 36px; height: 36px; border-radius: 50%; border: 2px solid #000; }
@@ -94,12 +92,15 @@ body, html {
 .msg-row.friend { justify-content: flex-start; }
 .bubble { 
   padding: 8px 10px; 
-  border-radius: 8px; 
+  border-radius: 0px; 
   border: 2px solid #000; 
   background: #fff; 
 }
-.bubble.you { background: #dfe8ff; }
-.bubble.friend { background: #e6ffe1; }
+
+.bubble.you, .bubble.friend 
+  {
+  background: #D9D9D9; 
+  }
 
 .composer { 
   display: flex; 
@@ -130,3 +131,46 @@ body, html {
 .contact-preview { font-size: 12px; color: #666; }
 
 .hidden { display: none; }
+
+
+
+/* CTA en bas comme sur l’image */
+.pc-cta { 
+  margin: 10px 0px; 
+  text-align: center; 
+}
+.pc-cta-btn { 
+    width: 90%;
+    padding: 10px;
+    border: 2px solid #000;
+    border-radius: 18px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 15px;
+    box-shadow: -5px 4px;
+}
+.pc-cta-icon { 
+  width: 22px; 
+  margin-left: 8px; 
+  vertical-align: middle; 
+}
+
+.pc-composer { 
+  display: flex; 
+  gap: 8px; 
+  margin: 12px 5px; 
+}
+.pc-composer input { 
+  flex: 1; 
+  padding: 10px; 
+  border: 3px solid #000; 
+  border-radius: 12px; 
+}
+.pc-send { 
+  padding: 10px 14px; 
+  border: 3px solid #000; 
+  border-radius: 12px; 
+  background: #fff; 
+  cursor: pointer; 
+}
+

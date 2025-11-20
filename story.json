@@ -16,7 +16,6 @@
         "angry": "Images/Angry.svg",
         "rigolo": "Images/Rigolo.svg",
         "Larme": "Images/pleur.svg"
-
       }
     },
     "ami": {
@@ -53,12 +52,12 @@
       "dialogue": [
         {
           "character": null,
-          "text": "Un jour ordinaire dans ta chambre, tu reçois un message étrange..."
+          "text": "Hmm"
         },
         {
           "character": null,
           "sfx": "notification",
-          "text": "*Ding* - Ton ordinateur affiche une notification"
+          "text": "J'ai l'impression d'avoir oublié un truc..."
         },
 
         {
@@ -139,6 +138,11 @@
         {
           "character": "protagonist",
           "avatar": "happy",
+          "text": "Surement une erreur ce numéro n’est pas dans mes contacts"
+        },
+        {
+          "character": "protagonist",
+          "avatar": "happy",
           "text": "Hein"
         },
         {
@@ -212,7 +216,11 @@
       "texts": ["On peut parler ?"],
       "thoughts": ["c'est quoi ça encore !"],
       "choices": [
-        { "text": "Répondre", "reply": "Je pense que vous vous êtes trompé de personne !", "next": "reply_11" },
+        {
+          "text": "Répondre",
+          "reply": "Je pense que vous vous êtes trompé de personne !",
+          "next": "reply_11"
+        },
         { "text": "ignorer", "next": "reply_11" }
       ]
     },
@@ -222,10 +230,7 @@
         "C'est Layla",
         "J'aimerais si tu l’acceptes qu’on s’explique. Je comprendrais totalement si tu ne veux pas. Bonne soirée"
       ],
-      "thoughts": [
-        "Hein",
-        "Layla ?"
-      ],
+      "thoughts": ["Hein", "Layla ?"],
       "choices": [
         { "text": "Gentiment", "reply": "...", "next": "Gentiment_2" },
         { "text": "Méchament", "reply": "", "next": "Mechament_2" }
@@ -236,7 +241,11 @@
       "texts": ["Hey", "On peut parler ?"],
       "thoughts": ["c'est quoi ça encore !"],
       "choices": [
-        { "text": "Répondre", "reply": "Je pense que vous vous êtes trompé de personne !", "next": "ignore_11" },
+        {
+          "text": "Répondre",
+          "reply": "Je pense que vous vous êtes trompé de personne !",
+          "next": "ignore_11"
+        },
         { "text": "Ignorer", "next": "ignore_11" }
       ]
     },
@@ -246,10 +255,7 @@
         "C'est Layla",
         "J'aimerais si tu l’acceptes qu’on s’explique. Je comprendrais totalement si tu ne veux pas. Bonne soirée"
       ],
-      "thoughts": [
-        "hein",
-        "Layla ?"
-      ],
+      "thoughts": ["hein", "Layla ?"],
       "choices": [
         { "text": "Gentiment", "reply": "...", "next": "Gentiment_1" },
         { "text": "Méchament", "reply": "...", "next": "Mechament_1" }
@@ -270,7 +276,7 @@
     "Gentiment_2": {
       "who": "protagonist",
       "texts": ["..."],
-      "thoughts": ["D'accord, calmement."] ,
+      "thoughts": ["D'accord, calmement."],
       "nextScene": "next_scene_after_chat"
     },
     "Mechament_2": {

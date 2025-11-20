@@ -11,11 +11,6 @@
    
 </head>
 <body>
-    <!-- Bande colorée en haut -->
-    <div id="header-bar">
-        <div id="header-title">404: Save a friend</div>
-        <div id="header-clock"></div>
-    </div>
     
     <div id="novel-container">
         <img id="character-image" src="Images/Logo.svg" alt="Personnage" style="display: block;">
@@ -34,22 +29,6 @@
         <img id="notification-icon" src="Images/Notif.svg" alt="Rappel (anniversaire)" class="rappel-icon rappel-icon2 hidden">
         <!-- Icône Notification de message cachée par défaut -->
         <img id="message-notif-icon" src="Images/NotifMess.svg" alt="Notification message" class="rappel-icon rappel-icon3 hidden">
-
-        <!-- Affichage direct du chat privé comme élément de page -->
-        <div id="private-chat-app" class="private-chat-app hidden pc-centered">
-          <div class="pc-header">
-            <span class="pc-title">message</span>
-          </div>
-          <div class="pc-body">
-            <div id="pc-messages" class="pc-messages"></div>
-            <div id="pc-cta" class="pc-cta">
-              <button id="pc-cta-btn" class="pc-cta-btn">
-                Cliquer pour répondre
-                <img class="pc-cta-icon" src="Images/Envoyer.svg" alt="Envoyer" />
-              </button>
-            </div>
-          </div>
-        </div>
         <div id="dialogue-box">
             <!-- Indication visuelle pour cliquer et continuer -->
             <img id="dialogue-hint" class="dialogue-hint" src="Images/down.svg" alt="Cliquez pour continuer" title="Cliquez pour continuer"/>
@@ -61,6 +40,9 @@
             <button id="close-window" class="close">×</button>
           </div>
           <div class="window-body">
+            <aside id="contacts">
+              <ul id="contact-list" class="contact-list"></ul>
+            </aside>
             <section id="thread">
               <div class="thread-header">
                 <div class="contact-info">
@@ -80,10 +62,6 @@
                 </button>
               </div>
             </section>
-
-            <aside id="contacts">
-              <ul id="contact-list" class="contact-list"></ul>
-            </aside>
           </div>
         </div>
     </div>

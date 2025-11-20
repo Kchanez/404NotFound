@@ -43,7 +43,7 @@
     // onBlock: fonction appelée pour stocker les choix et index bloqués
     // onUnblock: fonction appelée après clic sur rappel pour reprendre
     handleDialogue: (text, onBlock, onUnblock) => {
-      const dingTrigger = '*Ding* - Ton ordinateur affiche une notification';
+      const dingTrigger = "J'ai l'impression d'avoir oublié un truc...";
       const examTrigger = 'QUOI ! EXAMEN DE MATHS, COMMENT J’AI PU OUBLIER !';
 
       // 1) À la phrase Ding: afficher l’icône (non-bloquant)
