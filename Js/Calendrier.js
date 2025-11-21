@@ -23,13 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
     toggleCalendar(container, true);
-    // Si activé pour un seul usage, le re-désactiver après le clic
-    if (disableOnNextIconClick) {
-      icon.classList.add("disabled");
-      icon.classList.remove("active");
-      icon.setAttribute("aria-disabled", "true");
-      disableOnNextIconClick = false;
-    }
   });
 
   // Navigation mois précédent/suivant
@@ -134,7 +127,7 @@ function createCalendarWidget() {
   close.style.cursor = "pointer";
   close.addEventListener("click", () => {
     toggleCalendar(container, false);
-    window.CalendarAPI.disableCalendar();
+
   });
   header.appendChild(close);
 
@@ -261,8 +254,8 @@ function toggleCalendar(container, show) {
     container.setAttribute("aria-hidden", "false");
     // Définir un minuteur pour fermer automatiquement après 2 secondes
     autoCloseTimeout = setTimeout(() => {
-      toggleCalendar(container, false);
-      window.CalendarAPI.disableCalendar();
+      container.style.display = "none";
+      container.setAttribute("aria-hidden", "true");
     }, 2000); // 2000 ms = 2 secondes
   } else {
     container.style.display = "none";

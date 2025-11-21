@@ -150,46 +150,6 @@ function showDialogue(dialogues, index, choices, scenarioChoices = null) {
     isEmptyMessage = window.RappelMessageVideAPI.handleDialogue(dialogue.text);
   }
 
-  // Ouvrir le panneau inline private-chat-app au message exact demandé
-  if (
-    typeof dialogue.text === 'string' &&
-    dialogue.text.trim() === 'Joyeux anniversaire ma veille, tu me manques.'
-  ) {
-    const notificationIcon = document.getElementById('notification-icon');
-    if (notificationIcon) {
-      notificationIcon.classList.add('hidden');
-    }
-    const messageNotifIcon = document.getElementById('rappel-icon');
-    if (messageNotifIcon) {
-      messageNotifIcon.classList.add('hidden');
-    }
-    const panel = document.getElementById('private-chat-app');
-    if (panel) {
-      console.log('[VN] Déclencheur chat privé – ouverture.');
-      // Retirer le masquage et forcer l’affichage
-      panel.classList.remove('hidden');
-      panel.removeAttribute('inert');
-      panel.style.display = 'flex';
-      // Laisser les tailles contrôlées par privateChat.css (variables CSS par défaut)
-
-      const hint = document.getElementById('dialogue-hint');
-      if (hint) hint.style.display = 'none';
-
-      // Gérer le bouton de fermeture intégré au header
-      const closeBtn = document.getElementById('close-private-chat');
-      if (closeBtn) {
-        closeBtn.onclick = () => {
-          console.log('[VN] Chat privé – fermeture.');
-          panel.classList.add('hidden');
-          panel.setAttribute('inert', '');
-          panel.style.display = 'none';
-          const hint2 = document.getElementById('dialogue-hint');
-          if (hint2) hint2.style.display = '';
-        };
-      }
-    }
-  }
-
 
 
   // Ouvrir le panneau de chat principal au message exact demandé

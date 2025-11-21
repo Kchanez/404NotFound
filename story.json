@@ -42,7 +42,8 @@
     "sfx": {
       "notification": "./Audios/notification.mp3",
       "typing": "./Audios/typing.mp3",
-      "mouse": "./Audios/mouse.mp3"
+      "mouse": "./Audios/mouse.mp3",
+      "errorWindows": "./Audios/errorWindows.mp3"
     }
   },
   "scenes": {
@@ -52,7 +53,7 @@
       "dialogue": [
         {
           "character": null,
-          "text": "Hmm"
+          "text": "Un jour ordinaire dans ta chambre, tu reçois un message étrange..."
         },
         {
           "character": null,
@@ -232,8 +233,30 @@
       ],
       "thoughts": ["Hein", "Layla ?"],
       "choices": [
-        { "text": "Gentiment", "reply": "...", "next": "Gentiment_2" },
-        { "text": "Méchament", "reply": "", "next": "Mechament_2" }
+        {
+          "text": "Gentiment",
+          "reply": [
+            "Laila !???? Ou étais-tu passer meuf.",
+            "Oh mon dieu, tu vas bien ????",
+            "On t’a cherchée partout, on pensait que t’étais morte.",
+            "Tes parents sont au courant? et la police elle te cherchent tjrs?",
+            "J’ai inconsciemment commencer à y croire..."
+          ],
+          "next": "Gentiment_2"
+        },
+        {
+          "text": "Méchament",
+          "reply": [
+            "Sérieusement Laïla ?",
+            "On t’a cherchée partout, les gens pensaient que tu étais disparue comme les autres, ou morte...",
+            "J’ai inconsciemment commencer à y croire!",
+            "Tes parents sont-ils au courant? Et la police Laïla, elle te cherchent toujours tu sais !!",
+            "T’es vraiment égoïste de n’avoir prévenue personne Laïla... On se faisait du soucis pour toi. J’espère au moins que tu vas bien.",
+            "Tu as raison... Je m’attendais un peu à cette réaction",
+            "Tu as raison... Je m’attendais un peu à cette réaction"
+          ],
+          "next": "Mechament_2"
+        }
       ]
     },
     "ignore_1": {
@@ -257,29 +280,130 @@
       ],
       "thoughts": ["hein", "Layla ?"],
       "choices": [
-        { "text": "Gentiment", "reply": "...", "next": "Gentiment_1" },
-        { "text": "Méchament", "reply": "...", "next": "Mechament_1" }
+        {
+          "text": "Gentiment",
+          "reply": [
+            "Laila !???? Ou étais-tu passer meuf.",
+            "Oh mon dieu, tu vas bien ????",
+            "On t’a cherchée partout, on pensait que t’étais morte.",
+            "Tes parents sont au courant? et la police elle te cherchent tjrs?",
+            "J’ai inconsciemment commencer à y croire..."
+          ],
+          "next": "Gentiment_1"
+        },
+        {
+          "text": "Méchament",
+          "reply": [
+            "Sérieusement Laïla ?",
+            "On t’a cherchée partout, les gens pensaient que tu étais disparue comme les autres, ou morte...",
+            "J’ai inconsciemment commencer à y croire!",
+            "Tes parents sont-ils au courant? Et la police Laïla, elle te cherchent toujours tu sais !!",
+            "T’es vraiment égoïste de n’avoir prévenue personne Laïla... On se faisait du soucis pour toi. J’espère au moins que tu vas bien.",
+            "Tu as raison... Je m’attendais un peu à cette réaction"
+          ],
+          "next": "Mechament_1"
+        }
       ]
     },
     "Gentiment_1": {
       "who": "protagonist",
       "texts": ["..."],
       "thoughts": ["Je vais rester poli."],
-      "nextScene": "next_scene_after_chat"
+      "choices": [
+        {
+          "text": "Gentiment",
+          "reply": "",
+          "next": "Gentiment_3"
+        },
+        {
+          "text": "Méchament",
+          "reply": "",
+          "next": "Mechament_3"
+        }
+      ]
     },
     "Mechament_1": {
       "who": "protagonist",
       "texts": ["..."],
       "thoughts": ["Je ne veux pas parler."],
-      "nextScene": "next_scene_after_chat"
+      "choices": [
+        {
+          "text": "Gentiment",
+          "reply": "",
+          "next": "Gentiment_4"
+        },
+        {
+          "text": "Méchament",
+          "reply": "",
+          "next": "Mechament_4"
+        }
+      ]
     },
     "Gentiment_2": {
       "who": "protagonist",
       "texts": ["..."],
       "thoughts": ["D'accord, calmement."],
-      "nextScene": "next_scene_after_chat"
+      "choices": [
+        {
+          "text": "Gentiment",
+          "reply": "",
+          "next": "Gentiment_3"
+        },
+        {
+          "text": "Méchament",
+          "reply": "",
+          "next": "Mechament_3"
+        }
+      ]
     },
     "Mechament_2": {
+      "who": "protagonist",
+      "texts": ["..."],
+      "thoughts": ["Non, stop."],
+      "choices": [
+        {
+          "text": "Gentiment",
+          "reply": "",
+          "next": "Gentiment_4"
+        },
+        {
+          "text": "Méchament",
+          "reply":"",
+          "next": "Mechament_4"
+        }
+      ]
+    },
+
+
+
+
+
+
+
+
+
+
+
+    
+    "Gentiment_3": {
+      "who": "protagonist",
+      "texts": ["..."],
+      "thoughts": ["Je vais rester poli."],
+      "nextScene": "next_scene_after_chat"
+    },
+    "Mechament_3": {
+      "who": "protagonist",
+      "texts": ["..."],
+      "thoughts": ["Je ne veux pas parler."],
+      "nextScene": "next_scene_after_chat"
+    },
+    "Gentiment_4": {
+      "who": "protagonist",
+      "texts": ["..."],
+      "thoughts": ["D'accord, calmement."],
+      "nextScene": "next_scene_after_chat"
+    },
+    "Mechament_4": {
       "who": "protagonist",
       "texts": ["..."],
       "thoughts": ["Non, stop."],

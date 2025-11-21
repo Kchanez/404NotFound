@@ -16,6 +16,17 @@
 
   // On ne masque plus l’icône; elle reste visible à l’écran
 
+  function hideRappelIcon() {
+    const rappelIcon = document.getElementById('rappel-icon');
+    if (rappelIcon) {
+      rappelIcon.classList.add('hidden');
+      const notificationIcon = document.getElementById('notification-icon');
+      if (notificationIcon) {
+        notificationIcon.style.top = '9%';
+      }
+    }
+  }
+
   function activateCalendarWithExam() {
     const now = new Date();
     const examYear = now.getFullYear();
@@ -62,17 +73,15 @@
         const icon = showRappelIcon();
         if (!icon) return false;
         hasShownIcon = true;
-        // Lier le clic (si pas déjà lié depuis Ding)
-        if (!icon.onclick) {
-          icon.onclick = () => {
-            if (hasClicked) return;
-            hasClicked = true;
-            activateCalendarWithExam();
-            // Ne pas masquer l’icône; ne pas appeler onUnblock (pas de blocage)
-          };
-        }
         return false; // non-bloquant
       }
+      // 3) Masquer l’icône de rappel à un message spécifique
+      const hideRappelTrigger = "Je sais qu'ils se trompent. Ces histoires de kidnapping de la ville, je sais que tu n’as rien à faire avec! Tu n'as pas disparue ou été kidnappée ! Tu as juste fuis pour réaliser tes rêves...";
+      if (typeof text === 'string' && text.trim() === hideRappelTrigger) {
+        hideRappelIcon();
+        return false; // non-bloquant
+      }
+
       return false; // pas de blocage pour ce texte
     },
   };

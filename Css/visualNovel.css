@@ -173,7 +173,6 @@ body, html {
             opacity: 1;
             pointer-events: auto;
             cursor: pointer;
-            box-shadow: 0 0 0 2px #c0c0c0;
         }
         
         .app-icon:hover.disabled {
@@ -259,7 +258,7 @@ body, html {
         /* Styles pour l'icône Rappel */
         .rappel-icon, .rappel-icon2 {
             position: absolute;
-            top: 15%;
+            top: 9%;
             right: 1%;
             transform: translateY(-50%);
             cursor: pointer;
@@ -269,7 +268,7 @@ body, html {
             max-width: 20%;
         }
         .rappel-icon2 {
-            top: 28%;
+            top: 21%;
         }
         .rappel-icon.hidden {
             display: none;

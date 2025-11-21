@@ -156,6 +156,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if (isHackedShowing) return;
     hackedScreen.classList.remove('hidden');
     isHackedShowing = true;
+
+    // Jouer le son "errorWindows.mp3"
+    const errorSound = new Audio('./Audios/errorWindows.mp3');
+    errorSound.play();
   }
   mainChatCtaBtn.addEventListener('click', () => {
     openHacked();
