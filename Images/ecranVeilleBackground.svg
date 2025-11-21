@@ -1,0 +1,29 @@
+<svg width="1467" height="924" viewBox="0 0 1467 924" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_in_145_845)">
+<path d="M24.4746 56.6622C27.9961 24.3821 55.3684 0 87.8401 0H1378.93C1411.64 0 1439.12 24.7622 1442.4 57.3071C1474.24 373.456 1475.07 565.554 1442.76 867.219C1439.3 899.548 1411.9 924 1379.39 924H88.2083C55.5802 924 28.1302 899.348 24.7684 866.893C-8.51385 545.586 -7.90012 353.435 24.4746 56.6622Z" fill="#413AC7"/>
+</g>
+<defs>
+<filter id="filter0_in_145_845" x="0" y="-4" width="1470.64" height="928" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dx="30" dy="-30"/>
+<feGaussianBlur stdDeviation="2"/>
+<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="shape" result="effect1_innerShadow_145_845"/>
+<feTurbulence type="fractalNoise" baseFrequency="0.25641024112701416 0.25641024112701416" stitchTiles="stitch" numOctaves="3" result="noise" seed="7639" />
+<feColorMatrix in="noise" type="luminanceToAlpha" result="alphaNoise" />
+<feComponentTransfer in="alphaNoise" result="coloredNoise1">
+<feFuncA type="discrete" tableValues="1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "/>
+</feComponentTransfer>
+<feComposite operator="in" in2="effect1_innerShadow_145_845" in="coloredNoise1" result="noise1Clipped" />
+<feFlood flood-color="rgba(0, 0, 0, 0.25)" result="color1Flood" />
+<feComposite operator="in" in2="noise1Clipped" in="color1Flood" result="color1" />
+<feMerge result="effect2_noise_145_845">
+<feMergeNode in="effect1_innerShadow_145_845" />
+<feMergeNode in="color1" />
+</feMerge>
+</filter>
+</defs>
+</svg>

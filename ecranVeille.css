@@ -1,0 +1,49 @@
+/* Fullscreen */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #000;
+    font-family: "Courier New", monospace;
+    overflow: hidden;
+}
+
+/* Main screen */
+.screen {
+    width: 100vw;
+    height: 100vh;
+    background: #3535cc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* centre horizontal */
+    align-items: center;  
+    padding: 40px;
+    box-sizing: border-box;
+    position: relative;
+
+    /* Lignes horizontales CRT */
+    background-image: repeating-linear-gradient(
+        to bottom,
+        rgba(0,0,0,0) 0px,
+        rgba(0,0,0,0) 2px,
+        rgba(0,0,0,0.12) 3px
+    );
+}
+
+/* Play. text */
+.play {
+    color: white;
+    font-size: 32px;
+    margin: 0;
+}
+
+/* Timestamp in bottom-right */
+.timestamp {
+    position: absolute;
+    right: 40px;
+    bottom: 40px;
+    text-align: right;
+    color: white;
+    font-size: 16px;
+    line-height: 22px;
+}
