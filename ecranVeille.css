@@ -1,4 +1,3 @@
-/* Fullscreen */
 body, html {
     margin: 0;
     padding: 0;
@@ -8,20 +7,18 @@ body, html {
     overflow: hidden;
 }
 
-/* Main screen */
 .screen {
     width: 100vw;
     height: 100vh;
     background: #3535cc;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* centre horizontal */
+    justify-content: center;
     align-items: center;  
     padding: 40px;
     box-sizing: border-box;
     position: relative;
 
-    /* Lignes horizontales CRT */
     background-image: repeating-linear-gradient(
         to bottom,
         rgba(0,0,0,0) 0px,
@@ -30,14 +27,6 @@ body, html {
     );
 }
 
-/* Play. text */
-.play {
-    color: white;
-    font-size: 32px;
-    margin: 0;
-}
-
-/* Timestamp in bottom-right */
 .timestamp {
     position: absolute;
     right: 40px;
@@ -47,3 +36,146 @@ body, html {
     font-size: 16px;
     line-height: 22px;
 }
+
+.top-bar {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: space-between;
+    font-family: "Courier New", monospace;
+    color: white;
+    font-size: 32px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+#disparition-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+
+    width: 100vw;
+    height: 100vh;
+    background: #3535cc;
+    color: white;
+    font-family: "Courier New", monospace;
+    padding: 40px;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-image: repeating-linear-gradient(
+        to bottom,
+        rgba(0,0,0,0) 0px,
+        rgba(0,0,0,0) 2px,
+        rgba(0,0,0,0.12) 3px
+    );
+
+    animation: smoothFade 0.8s ease-out both,
+               scanlines-move 0.15s linear infinite,
+               crt-flicker 0.2s infinite alternate;
+}
+
+
+.card {
+    width: 100%;
+    max-width: 1400px; 
+    background: #3535cc;
+    padding: 30px 20px;
+    border-radius: 8px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.card h1 {
+    font-size: 3rem;
+    margin-bottom: 0;
+}
+
+.card h2 {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+}
+
+.content-row {
+    display: flex;
+    gap: 80px;
+    align-items: flex-start;
+}
+
+.photo {
+    width: 340px;
+    flex-shrink: 0;
+    box-shadow: 0 0 8px rgba(255,255,255,0.4);
+}
+
+.text-block {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+
+    font-size: 1.3rem;
+    line-height: 1.9rem;
+
+    max-width: 1000px;
+    flex-grow: 1;
+    text-shadow: 0 0 4px rgba(255,255,255,0.35);
+}
+
+.screen, 
+#disparition-screen {
+    width: 100vw;
+    height: 100vh;
+    background: #3535cc;
+    color: white;
+    font-family: "Courier New", monospace;
+    padding: 40px;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    /* Scanlines animées */
+    background-image:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(255,255,255,0.03) 0px,
+            rgba(255,255,255,0.03) 1px,
+            rgba(0,0,0,0) 2px
+        );
+
+    animation: scanlines-move 0.15s linear infinite,
+               crt-flicker 0.2s infinite alternate;
+}
+
+
+/* --- Effet scanlines animées --- */
+@keyframes scanlines-move {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 4px; }
+}
+
+/* --- Flicker léger CRT --- */
+@keyframes crt-flicker {
+    0%, 100% { opacity: 0.96; }
+    50% { opacity: 1; }
+}
+
+/* --- Fade-in pour l’écran de disparition --- */
+@keyframes smoothFade {
+    from { opacity: 0; transform: scale(1.02); }
+    to { opacity: 1; transform: scale(1); }
+}
+

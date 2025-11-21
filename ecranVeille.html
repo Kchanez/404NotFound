@@ -1,23 +1,51 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>404 — Screen</title>
-    <link rel="stylesheet" href="ecranVeille.css">
-</head>
-<body>
-
+    <link rel="stylesheet" href="ecranVeille.css" />
+  </head>
+  <body>
     <div class="screen">
-        <p class="play">Play.</p>
 
-        <!-- Timestamp dynamique -->
-        <div class="timestamp">
-            <span class="date"></span>
-            <span class="time"></span>
+        <!-- Barre du haut -->
+        <div class="top-bar">
+            <span class="play-text">Play ▸</span>
+            <span class="sp-text">SP</span>
         </div>
+      <!-- Timestamp dynamique -->
+      <div class="timestamp">
+        <span class="date"></span>
+        <span class="time"></span>
+      </div>
+
+      
     </div>
 
+    <div id="disparition-screen" class="hidden">
+    <div class="card">
+        <h1>Laïla M⍰r⍰g⍰⍰nz</h1>
+        <h2>Alerte nouvelle disparition - Dossier : #D-087</h2>
+        <div class="content-row"> 
+        <img src="Images/photoLaila.svg" alt="Photo de Laila" class="photo">
+        <div class="text-block">
+        <p><strong>Âgée de 21 ans</strong></p>
+
+        <p>
+            Dernière apparition le 11 décembre 202⍰ à 16:17, quittant sa résidence.  
+            Aucune trace physique retrouvée sur les lieux.
+        </p>
+
+        <p>
+            Si vous disposez d'informations, vous êtes prié(e) de contacter  
+            le Bureau Central des Disparitions - Ligne 07-9⍰-0⍰-⍰⍰-8⍰.
+        </p>
+        </div>
+        </div>
+    </div>
+</div>
     <script src="ecranVeille.js"></script>
-</body>
+    <audio id="crtSound" src="Audios/Tv_Effect.mp3"></audio>
+  </body>
 </html>

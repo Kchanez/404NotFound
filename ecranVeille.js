@@ -24,3 +24,24 @@ updateTimestamp(); // Première exécution
 
 // Pour plus tard => interactions
 console.log("Screen loaded");
+
+setTimeout(() => {
+
+    // cacher l'écran de veille
+    document.querySelector(".screen").classList.add("hidden");
+
+    // afficher l'écran disparition
+    const disp = document.getElementById("disparition-screen");
+    disp.classList.remove("hidden");
+
+    // jouer le son CRT
+    const crtSound = document.getElementById("crtSound");
+    if (crtSound) {
+        crtSound.currentTime = 0;
+        crtSound.volume = 0.9; // ajuste le volume si besoin
+        crtSound.play().catch(e => console.log("Son bloqué par le navigateur :", e));
+    }
+
+}, 5000);
+
+
