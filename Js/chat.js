@@ -110,16 +110,35 @@ document.addEventListener('DOMContentLoaded', function() {
     messagesEl.scrollTop = messagesEl.scrollHeight;
   }
 
-  function addMessage(text, who) {
+  function addMessage(text, who, image = null) {
     const row = document.createElement('div');
     row.className = 'msg-row ' + (who === 'you' ? 'you' : 'friend');
     const bubble = document.createElement('div');
     bubble.className = 'bubble ' + (who === 'you' ? 'you' : 'friend');
-    bubble.textContent = text;
+
+    if (image) {
+      const imgElement = document.createElement('img');
+      imgElement.src = image;
+      imgElement.style.maxWidth = '100%';
+      imgElement.style.borderRadius = '8px';
+      imgElement.style.marginTop = '5px';
+      bubble.appendChild(imgElement);
+    }
+
+    if (text) {
+      const textNode = document.createTextNode(text);
+      bubble.appendChild(textNode);
+    }
+
     row.appendChild(bubble);
     messagesEl.appendChild(row);
     // Auto-scroll pour voir le message le plus récent
-    messagesEl.scrollTop = messagesEl.scrollHeight;
+    setTimeout(() => { messagesEl.scrollTop = messagesEl.scrollHeight; }, 0);
+
+    // Enregistrer le message dans le thread actuel
+    const arr = threads[currentId] || (threads[currentId] = []);
+    arr.push({ who, text, image });
+    saveThreads();
   }
 
   // send fonction est supprimée
@@ -158,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
     isHackedShowing = true;
 
     // Jouer le son "errorWindows.mp3"
-    const errorSound = new Audio('./Audios/errorWindows.mp3');
+    const errorSound = new Audio("./Audios/windowsError.mp3");
     errorSound.play();
   }
   mainChatCtaBtn.addEventListener('click', () => {

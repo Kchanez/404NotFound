@@ -12,6 +12,7 @@ body, html {
   flex-direction: column;
   margin: 0 auto; /* Centrage horizontal */
   position: absolute; /* Positionnement absolu */
+  z-index: 10000;
   top: 34%; /* Centrage vertical */
   left: 39%; /* Centrage horizontal */
   transform: translate(-50%, -50%); /* Ajustement pour un centrage parfait */
@@ -87,9 +88,19 @@ body, html {
   overscroll-behavior: contain;
   scroll-behavior: smooth;
 }
-.msg-row { display: flex; gap: 8px; align-items: flex-end; }
-.msg-row.you { justify-content: flex-end; }
-.msg-row.friend { justify-content: flex-start; }
+.msg-row { 
+  width: 80%;
+  display: flex; 
+  gap: 8px; 
+  align-items: flex-end; 
+}
+.msg-row.you {
+  margin-left: auto;
+  justify-content: flex-end;
+}
+.msg-row.friend {
+  margin-right: auto;
+}
 .bubble { 
   padding: 8px 10px; 
   border-radius: 0px; 

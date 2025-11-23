@@ -4,13 +4,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const ignoreErrorButton = document.getElementById('ignore-error');
     const respondErrorButton = document.getElementById('respond-error');
 
+    window.isHackedScreenActive = false; // Initialize global state
+
     function showHackedScreen() {
         hackedScreen.classList.remove('hidden');
+        window.isHackedScreenActive = true;
     }
 
     function hideHackedScreen() {
         hackedScreen.classList.add('hidden');
+        window.isHackedScreenActive = false;
         try { document.dispatchEvent(new CustomEvent('hackedScreenClosed')); } catch(_) {}
+        if (window.ChatAppAPI) window.ChatAppAPI.showChatApp();
     }
 
     // Event Listeners for buttons

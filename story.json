@@ -43,7 +43,7 @@
       "notification": "./Audios/notification.mp3",
       "typing": "./Audios/typing.mp3",
       "mouse": "./Audios/mouse.mp3",
-      "errorWindows": "./Audios/errorWindows.mp3"
+      "errorWindows": "./Audios/windowsError.mp3"
     }
   },
   "scenes": {
@@ -206,7 +206,7 @@
     "start": {
       "who": "inconnu",
       "texts": ["Hey"],
-      "thoughts": ["Hein"],
+      "thoughts": ["surement une erreur ce numéro n’est pas dans mes contacts"],
       "choices": [
         { "text": "Répondre", "reply": "?", "next": "reply_1" },
         { "text": "Ignorer", "next": "ignore_1" }
@@ -306,60 +306,62 @@
       ]
     },
     "Gentiment_1": {
-      "who": "protagonist",
-      "texts": ["..."],
-      "thoughts": ["Je vais rester poli."],
-      "choices": [
-        {
-          "text": "Gentiment",
-          "reply": "",
-          "next": "Gentiment_3"
-        },
-        {
-          "text": "Méchament",
-          "reply": "",
-          "next": "Mechament_3"
-        }
-      ]
+      "who": "inconnu",
+      "texts": ["Tu m’as tellement manqué"],
+      "thoughts": [
+        "Et si je m’étais emporté trop vite par les émotions ? Et si au final ce n’était qu’un mauvais canular ?"
+      ],
+      "who2": "protagonist",
+      "textsProtagonist": [
+        "J’espère juste sincèrement que ce n’est pas une blague",
+        "Rire d’une disparition n’est vraiment pas drôle!"
+      ],
+      "next": "galerie"
     },
     "Mechament_1": {
-      "who": "protagonist",
-      "texts": ["..."],
-      "thoughts": ["Je ne veux pas parler."],
-      "choices": [
-        {
-          "text": "Gentiment",
-          "reply": "",
-          "next": "Gentiment_4"
-        },
-        {
-          "text": "Méchament",
-          "reply": "",
-          "next": "Mechament_4"
-        }
-      ]
+      "who": "inconnu",
+      "texts": ["Tu as raison...Je m’attendais un peu à cette réaction"],
+      "thoughts": [
+        "Et si je m’étais emporté trop vite par les émotions ? Et si au final ce n’était qu’un mauvais canular ?"
+      ],
+      "who2": "protagonist",
+      "textsProtagonist": ["J’espère juste sincèrement que ce n’est pas une blague", "Rire d’une disparition n’est vraiment pas drôle!"],
+      "next": "galerie"
     },
     "Gentiment_2": {
-      "who": "protagonist",
-      "texts": ["..."],
-      "thoughts": ["D'accord, calmement."],
-      "choices": [
-        {
-          "text": "Gentiment",
-          "reply": "",
-          "next": "Gentiment_3"
-        },
-        {
-          "text": "Méchament",
-          "reply": "",
-          "next": "Mechament_3"
-        }
-      ]
-    },
+      "who": "inconnu",
+      "texts": ["Tu m’as tellement manqué"],
+      "thoughts": [
+        "Et si je m’étais emporté trop vite par les émotions ? Et si au final ce n’était qu’un mauvais canular ?"
+      ],
+      "who2": "protagonist",
+      "textsProtagonist": [
+        "J’espère juste sincèrement que ce n’est pas une blague",
+        "Rire d’une disparition n’est vraiment pas drôle!"
+      ],
+      "next": "galerie"
+      },
     "Mechament_2": {
-      "who": "protagonist",
-      "texts": ["..."],
-      "thoughts": ["Non, stop."],
+      "who": "inconnu",
+      "texts": ["Tu as raison...Je m’attendais un peu à cette réaction"],
+      "thoughts": [
+        "Et si je m’étais emporté trop vite par les émotions ? Et si au final ce n’était qu’un mauvais canular ?"
+      ],
+      "who2": "protagonist",
+      "textsProtagonist": [
+        "J’espère juste sincèrement que ce n’est pas une blague",
+        "Rire d’une disparition n’est vraiment pas drôle!"
+      ],
+      "next": "galerie"
+    },
+
+
+    "galerie": {
+      "who": "inconnu",
+      "texts": [
+        "Désolée de revenir comme une fleur... C’est bien moi. J’ai perdu mon ancien tel, voilà mon nouveau numéro."
+      ],
+      "image": "./Images/Choix.jpg",
       "choices": [
         {
           "text": "Gentiment",
@@ -368,23 +370,11 @@
         },
         {
           "text": "Méchament",
-          "reply":"",
+          "reply": "",
           "next": "Mechament_4"
         }
       ]
-    },
-
-
-
-
-
-
-
-
-
-
-
-    
+    },    
     "Gentiment_3": {
       "who": "protagonist",
       "texts": ["..."],

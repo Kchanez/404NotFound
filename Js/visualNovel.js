@@ -3,6 +3,9 @@ let storyData = null;
 let currentScene = "start";
 let currentScenario = null; // Déclarer globalement
 let currentScenarioIndex = 0; // Déclarer globalement
+let currentProtagonistDialogueIndex = 0;
+let currentThoughtIndex = 0;
+let isCurrentlyProtagonistDialogue = false;
 
 // État global pour bloquer la progression en attendant le clic sur le rappel
 let isWaitingForNotificationClick = false;
@@ -12,6 +15,7 @@ let blockedDialogues = null;
 let blockedIndex = -1;
 let isWaitingForCtaClick = false; // Nouvelle variable d'état
 let hasInjectedHeyMessage = false;
+let hasMainChatCtaBeenClicked = false;
 
 // Charger l'histoire depuis le fichier JSON
 function loadStory() {
@@ -408,7 +412,19 @@ function playAudio(src, isLoop = true) {
 window.VisualNovelAPI = {
   unblockStory: () => {
     isWaitingForCtaClick = false;
-    document.getElementById('main-chat-cta-btn').classList.remove('blinking');
+    const mainChatCtaBtn = document.getElementById('main-chat-cta-btn');
+    if (mainChatCtaBtn) {
+      mainChatCtaBtn.classList.remove('blinking');
+    }
+
+    if (!hasMainChatCtaBeenClicked) {
+      const mainChatCta = document.getElementById('main-chat-cta');
+      if (mainChatCta) {
+        mainChatCta.style.display = 'none';
+      }
+      hasMainChatCtaBeenClicked = true;
+    }
+    
     // Resume dialogue from where it was blocked
     if (blockedDialogues && blockedIndex !== -1) {
       showDialogue(blockedDialogues, blockedIndex + 1, blockedChoices);
@@ -424,6 +440,9 @@ window.VisualNovelAPI = {
       currentScenario = storyData.scenarios[scenarioName];
       console.log("startScenario: currentScenario after assignment=", currentScenario);
       currentScenarioIndex = 0;
+      currentProtagonistDialogueIndex = 0;
+      currentThoughtIndex = 0;
+      isCurrentlyProtagonistDialogue = false;
       displayScenarioDialogue();
     } else {
       console.error(`Scenario ${scenarioName} not found.`);
@@ -440,39 +459,69 @@ window.VisualNovelAPI = {
 document.addEventListener("DOMContentLoaded", loadStory);
 
 function displayScenarioDialogue() {
-  console.log("displayScenarioDialogue: currentScenario=", currentScenario, "currentScenarioIndex=", currentScenarioIndex);
+  console.log("displayScenarioDialogue: currentScenario=", currentScenario, "currentScenarioIndex=", currentScenarioIndex, "currentProtagonistDialogueIndex=", currentProtagonistDialogueIndex, "isCurrentlyProtagonistDialogue=", isCurrentlyProtagonistDialogue);
   const dialogueBox = document.getElementById("dialogue-box");
+  const dialogueTextEl = document.getElementById("dialogue-text");
+  const characterNameEl = document.getElementById("character-name");
+  const dialogueImageEl = document.getElementById("dialogue-image"); // Get the image element
 
-  if (!currentScenario || (currentScenario.texts === undefined && currentScenario.text === undefined && !currentScenario.choices)) {
-    console.log("Scenario finished or not started, or invalid scenario structure.");
-    if (dialogueBox) dialogueBox.classList.remove('hidden');
-    if (window.ChatAppAPI) window.ChatAppAPI.hideChatApp();
+  // Clear previous dialogue image
+  if (dialogueImageEl) dialogueImageEl.remove();
 
-    if (currentScenario && currentScenario.nextScene) {
-      displayScene(currentScenario.nextScene);
-      currentScenario = null; // Reset current scenario
-      currentScenarioIndex = 0; // Reset scenario index
-    } else {
-      // If no nextScene, then truly end of scenario
-      if (dialogueBox) dialogueBox.classList.remove('hidden');
-    }
-    return;
+  // Déterminer quel ensemble de textes et quel personnage est actif
+  let currentTexts;
+  let currentCharacter;
+  let currentIndex;
+
+  // Phase 2: Afficher les dialogues parlés du protagoniste
+  if (currentScenario.textsProtagonist && currentProtagonistDialogueIndex < currentScenario.textsProtagonist.length) {
+    currentTexts = currentScenario.textsProtagonist;
+    currentCharacter = "protagonist";
+    currentIndex = currentProtagonistDialogueIndex;
+    isCurrentlyProtagonistDialogue = true;
   }
+  // Phase 3: Afficher les dialogues des autres personnages
+  else if (currentScenario.texts && currentScenarioIndex < currentScenario.texts.length) {
+    currentTexts = currentScenario.texts;
+    currentCharacter = currentScenario.who || "inconnu";
+    currentIndex = currentScenarioIndex;
+    isCurrentlyProtagonistDialogue = false;
+  }
+  // Phase 1: Afficher les pensées du protagoniste
+  else if (currentScenario.thoughts && currentThoughtIndex < currentScenario.thoughts.length) {
+    characterNameEl.style.display = "block";
+    dialogueTextEl.textContent = ""; // Clear previous text
+    typewriterEffect(
+      dialogueTextEl,
+      currentScenario.thoughts[currentThoughtIndex],
+      () => {},
+      30,
+      false
+    );
 
-  // Ensure scenarioTexts is always an array
-  const scenarioTexts = currentScenario.texts || (currentScenario.text ? [currentScenario.text] : []);
+    dialogueBox.onclick = () => {
+      currentThoughtIndex++;
+      displayScenarioDialogue();
+    };
+    return; // Arrêter ici pour afficher la pensée
+  }
+  // Si tous les dialogues sont épuisés
+  else {
+    console.log("All dialogues in scenario exhausted.");
+    if (dialogueBox) dialogueBox.classList.remove('hidden');
 
-  // Hide all scenes initially
-  console.log("Before checking currentScenario.texts.length: currentScenario=", currentScenario, "currentScenario.texts=", currentScenario ? currentScenario.texts : "undefined");
-  if (!currentScenario || currentScenarioIndex >= scenarioTexts.length) {
-    console.log("Scenario finished or not started.");
-    if (dialogueBox) dialogueBox.classList.remove('hidden'); // Show VN dialogue box
-    if (window.ChatAppAPI) window.ChatAppAPI.hideChatApp(); // Hide chat app
-
-    if (currentScenario && currentScenario.nextScene) {
+    if (currentScenario && currentScenario.next) {
+      window.VisualNovelAPI.startScenario(currentScenario.next);
+    } else if (currentScenario && currentScenario.choices && currentScenario.choices.length > 0) {
+      if (dialogueBox) dialogueBox.classList.remove('hidden');
+      showChoices(currentScenario.choices);
+    } else if (currentScenario && currentScenario.nextScene) {
       displayScene(currentScenario.nextScene);
-      currentScenario = null; // Reset current scenario
-      currentScenarioIndex = 0; // Reset scenario index
+      currentScenario = null;
+      currentScenarioIndex = 0;
+      currentProtagonistDialogueIndex = 0;
+      currentThoughtIndex = 0;
+      isCurrentlyProtagonistDialogue = false;
     } else {
       if (dialogueBox) dialogueBox.classList.remove('hidden');
     }
@@ -482,57 +531,62 @@ function displayScenarioDialogue() {
   if (dialogueBox) dialogueBox.classList.remove('hidden');
   if (window.ChatAppAPI) window.ChatAppAPI.showChatApp();
   if (window.ChatAppAPI) {
-    window.ChatAppAPI.selectContact('inconnu');
-    if (!hasInjectedHeyMessage) {
-      setTimeout(() => {
-        window.ChatAppAPI.addMessage('Hey', 'friend');
-      }, 500);
-      hasInjectedHeyMessage = true;
-    }
+    window.ChatAppAPI.selectContact('inconnu'); // Assurez-vous que le contact est toujours l'inconnu pour le chat
   }
 
   const dialogue = {
-    character: currentScenario.who,
-    text: scenarioTexts[currentScenarioIndex],
+    character: currentCharacter,
+    text: currentTexts[currentIndex],
     avatar: currentScenario.avatar || '',
     sfx: currentScenario.audio || '',
+    image: currentScenario.image || '',
   };
 
   // Display message in chat app
   if (window.ChatAppAPI) {
-    // Assuming 'inconnu' is the contact ID for the unknown sender
-    window.ChatAppAPI.selectContact('inconnu');
-    const msgText = (dialogue.text || '').trim();
-    if (!(hasInjectedHeyMessage && msgText === 'Hey')) {
-      window.ChatAppAPI.addMessage(dialogue.text, dialogue.character === 'protagonist' ? 'you' : 'friend');
-    }
+    window.ChatAppAPI.addMessage(dialogue.text, dialogue.character === 'protagonist' ? 'you' : 'friend', dialogue.image);
   }
 
-  // Manage advancing the dialogue or showing choices
-  if (currentScenarioIndex < scenarioTexts.length - 1) {
-    // If there are more texts in the current scenario, advance to the next text
-    // We need a way to advance the chat dialogue, perhaps a click on the chat window itself
-    // For now, let's just advance automatically after a short delay for demonstration
-    setTimeout(() => {
-      currentScenarioIndex++;
-      displayScenarioDialogue();
-    }, 1500); // Simulate reading time
-  } else if (currentScenario.choices && currentScenario.choices.length > 0) {
-    // If it's the last text and there are choices, show them in the VN dialogue box
-    if (dialogueBox) dialogueBox.classList.remove('hidden'); // Show VN dialogue box for choices
-    showChoices(currentScenario.choices);
+  // Afficher le nom du personnage
+  if (currentCharacter) {
+    characterNameEl.textContent = currentCharacter === "inconnu" ? "" : (currentCharacter === "protagonist" ? "" : storyData.characters[currentCharacter] ? storyData.characters[currentCharacter].name : currentCharacter);
+    characterNameEl.style.display = "block";
   } else {
-    // If it's the last text and no choices, automatically transition if nextScene is defined
-    if (currentScenario.nextScene) {
-      displayScene(currentScenario.nextScene);
-      currentScenario = null; // Reset current scenario
-      currentScenarioIndex = 0; // Reset scenario index
-      if (window.ChatAppAPI) window.ChatAppAPI.hideChatApp(); // Hide chat app
-    } else {
-      if (window.ChatAppAPI) window.ChatAppAPI.hideChatApp();
-      if (dialogueBox) dialogueBox.classList.remove('hidden');
-    }
+    characterNameEl.style.display = "none";
   }
+
+  // Clear dialogue text for non-thought dialogues, as they are in chat
+  if (!isCurrentlyProtagonistDialogue) {
+    dialogueTextEl.textContent = "";
+  }
+
+
+
+
+  // Gérer l'avancement du dialogue
+  // Le clic sur la boîte de dialogue avancera le message
+  const dialogueBoxEl = document.getElementById("dialogue-box");
+  let advanced = false;
+  dialogueBoxEl.onclick = () => {
+    if (advanced) return;
+    advanced = true;
+
+    if (isCurrentlyProtagonistDialogue) {
+      currentProtagonistDialogueIndex++;
+    } else {
+      currentScenarioIndex++;
+    }
+    displayScenarioDialogue();
+  };
+
+  // Afficher le texte avec effet de machine à écrire
+  // Note: The actual chat message is sent via ChatAppAPI.addMessage.
+  // The typewriter effect here is for thoughts or other VN specific dialogue.
+  // If it's a protagonist thought, it's already handled above.
+  // If it's an unknown character's dialogue, it's primarily in the chat.
+  // We might need to re-evaluate if typewriterEffect is still needed here for non-thought dialogues.
+  // For now, let's ensure it doesn't interfere with chat messages.
+
 }
 
  
