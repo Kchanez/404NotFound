@@ -117,13 +117,7 @@ function showDialogue(dialogues, index, choices, scenarioChoices = null) {
   // S'assurer que le texte est visible
   dialogueText.style.display = "block";
 
-  // Créer l'élément d'image du personnage s'il n'existe pas
-  let characterImage = document.getElementById("character-image");
-  if (!characterImage) {
-    characterImage = document.createElement("img");
-    characterImage.id = "character-image";
-    document.getElementById("novel-container").appendChild(characterImage);
-  }
+
 
   // Jouer un effet sonore si spécifié
   if (dialogue.sfx && storyData.audio.sfx[dialogue.sfx]) {
@@ -192,22 +186,10 @@ function showDialogue(dialogues, index, choices, scenarioChoices = null) {
     characterName.style.display = "block";
 
     // Afficher l'avatar du personnage si spécifié
-    if (
-      dialogue.avatar &&
-      storyData.characters[dialogue.character].avatars[dialogue.avatar]
-    ) {
-      characterImage.src =
-        storyData.characters[dialogue.character].avatars[dialogue.avatar];
-      characterImage.style.display = "block";
-    } else {
-      characterImage.style.display = "none";
-    }
-  } else {
-    characterName.style.display = "none";
-    characterImage.style.display = "none";
-  }
 
-  // Déterminer si le son typing doit être activé
+
+}
+
   // Uniquement pour le message "Un jour ordinaire dans ta chambre, tu reçois un message étrange..."
   let enableTypingSound = false;
   if (

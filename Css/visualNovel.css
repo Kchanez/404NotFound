@@ -15,38 +15,37 @@ body, html {
         
         #character-image {
             position: absolute;
-            bottom: 200px;
-            left: 10%;
-            top: 72%;
+            left: 15%;
+            top: 67%;
             transform: translateX(-50%);
             height: 20vh;
             z-index: 1;
-            width: 7%;
+            width: 8%;
         }
         
         #dialogue-box {
             position: absolute;
-            bottom: 0px;
+            bottom: 6%;
             left: 50%;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding-left: 40%;
-            padding-right: 10%;
             transform: translateX(-50%);
-            width: 100%;
+            width: 80%;
             height: 17vh;
-            background-color: #C2C2C2;
+            background-color: #FEFFC5;
             color: rgb(0, 0, 0);
             cursor: pointer;
-            border-top: 5px solid #000;
+            border: 5px solid #000;
+            border-radius: 20px;
+            box-shadow: 8px 8px 8px 0px rgba(0, 0, 0, 25%);
         }
         #dialogue-hint {
-            position:absolute; 
-            bottom:50%; 
-            left:80%; 
-            transform:translateX(-50%); 
-            width:28px; 
+            position: absolute;
+            bottom: 35%;
+            left: 96%;
+            transform: translateX(-50%);
+            width: 3%;
         }
         
         #character-name {
@@ -60,7 +59,7 @@ body, html {
             font-size: 1.1em;
             line-height: 1.5;
             min-height: 3em;
-            padding-right: 20%;
+            padding: 0% 12%;
         }
         
         #choices-container {
@@ -142,19 +141,22 @@ body, html {
         }
         
         /* Styles pour les icônes d'applications dans le novel-container */
-        #app-icons-container {
+        #app-icons-container, #app-icons-container2 {
             position: absolute;
-            top: 14%;
+            top: 6%;
             left: 3%;
             display: flex;
             flex-direction: column;
-            gap: 22px;
+            gap: 35px;
             z-index: 10;
+        }
+        #app-icons-container2 {   
+            left: 12%;   
         }
         
         .app-icon {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 10vh;
             cursor: not-allowed;
             transition: all 0.3s ease;
             border-radius: 8px;

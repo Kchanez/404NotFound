@@ -7,27 +7,11 @@
   },
   "characters": {
     "protagonist": {
-      "description": "Le personnage principal contrôlé par le joueur",
-      "avatars": {
-        "default": "Images/Avatar.svg",
-        "happy": "Images/Content.svg",
-        "sad": "Images/Deçu.svg",
-        "Choc": "Images/Choquee.svg",
-        "angry": "Images/Angry.svg",
-        "rigolo": "Images/Rigolo.svg",
-        "Larme": "Images/pleur.svg"
-      }
+      "description": "Le personnage principal contrôlé par le joueur"
     },
     "ami": {
       "name": "Ami",
-      "description": "L'ami en ligne que le joueur essaie de sauver - en réalité le hacker en secret",
-      "avatars": {
-        "default": "Images/Avatar.svg",
-        "happy": "Images/Content.svg",
-        "sad": "Images/Deçu.svg",
-        "Choc": "Images/Choquee.svg",
-        "hacker": "Images/Hacker.png"
-      }
+      "description": "L'ami en ligne que le joueur essaie de sauver - en réalité le hacker en secret"
     }
   },
   "backgrounds": {
@@ -325,7 +309,10 @@
         "Et si je m’étais emporté trop vite par les émotions ? Et si au final ce n’était qu’un mauvais canular ?"
       ],
       "who2": "protagonist",
-      "textsProtagonist": ["J’espère juste sincèrement que ce n’est pas une blague", "Rire d’une disparition n’est vraiment pas drôle!"],
+      "textsProtagonist": [
+        "J’espère juste sincèrement que ce n’est pas une blague",
+        "Rire d’une disparition n’est vraiment pas drôle!"
+      ],
       "next": "galerie"
     },
     "Gentiment_2": {
@@ -340,7 +327,7 @@
         "Rire d’une disparition n’est vraiment pas drôle!"
       ],
       "next": "galerie"
-      },
+    },
     "Mechament_2": {
       "who": "inconnu",
       "texts": ["Tu as raison...Je m’attendais un peu à cette réaction"],
@@ -355,49 +342,151 @@
       "next": "galerie"
     },
 
-
     "galerie": {
       "who": "inconnu",
       "texts": [
         "Désolée de revenir comme une fleur... C’est bien moi. J’ai perdu mon ancien tel, voilà mon nouveau numéro."
       ],
-      "image": "./Images/Choix.jpg",
+      "image": "./Galerie/Choix.jpg",
       "choices": [
         {
-          "text": "Gentiment",
-          "reply": "",
-          "next": "Gentiment_4"
+          "text": "Voir_Galerie",
+          "reply": [
+            "Tu n’as pas changé. j’avais presque oublié sur quel bras été ton tatouage",
+            "je pensais qu’il etait sur ton épaule gauche et non droite"
+          ],
+          "next": "galerie_explore"
         },
         {
-          "text": "Méchament",
-          "reply": "",
-          "next": "Mechament_4"
+          "text": "Non_Voir_Galerie",
+          "reply": ["Tu n’as pas changé.", "Toujours aussi belle"],
+          "next": "galerie_non_explore"
         }
       ]
-    },    
-    "Gentiment_3": {
-      "who": "protagonist",
-      "texts": ["..."],
-      "thoughts": ["Je vais rester poli."],
-      "nextScene": "next_scene_after_chat"
     },
-    "Mechament_3": {
-      "who": "protagonist",
-      "texts": ["..."],
-      "thoughts": ["Je ne veux pas parler."],
-      "nextScene": "next_scene_after_chat"
+    "galerie_explore": {
+      "who": "inconnu",
+      "texts": [
+        "haha ça fait longtemps qu’on ne s’est pas vu tu as du oublier"
+      ],
+      "who2": "protagonist",
+      "textsProtagonist": ["Mais Laïla j’ai une question"],
+      "next": "galerie_explore1"
     },
-    "Gentiment_4": {
-      "who": "protagonist",
-      "texts": ["..."],
-      "thoughts": ["D'accord, calmement."],
-      "nextScene": "next_scene_after_chat"
+    "galerie_non_explore": {
+      "who": "inconnu",
+      "texts": [
+        "Oui haha tada",
+        "Toi aussi tu n’as pas changée, tjrs aussi gentille."
+      ],
+      "who2": "protagonist",
+      "textsProtagonist": ["Mais Laïla j’ai une question"],
+      "next": "galerie_non_explore1"
     },
-    "Mechament_4": {
-      "who": "protagonist",
-      "texts": ["..."],
-      "thoughts": ["Non, stop."],
-      "nextScene": "next_scene_after_chat"
+
+    "galerie_explore1": {
+      "who": "inconnu",
+      "texts": ["Oui dis moi ?"],
+      "who2": "protagonist",
+      "textsProtagonist": [
+        "Je suis contente de ton retour.",
+        "Mais où étais-tu bon sang ? Avec ces histoires de disparition... On s’est vraiment fait du soucis pour toi"
+      ],
+      "next": "galerie_explore2"
+    },
+    "galerie_non_explore1": {
+      "who": "inconnu",
+      "texts": ["Oui dis moi ?"],
+      "who2": "protagonist",
+      "textsProtagonist": [
+        "Je suis contente de ton retour.",
+        "Mais où étais-tu bon sang ? Avec ces histoires de disparition... On s’est vraiment fait du soucis pour toi"
+      ],
+      "next": "galerie_non_explore2"
+    },
+    "galerie_explore2": {
+      "who": "inconnu",
+      "texts": [
+        "J’avais besoin de prendre l’air je t’avoue",
+        "Je suis parti à la campagne car ça n’allait pas bien."
+      ],
+      "who2": "protagonist",
+      "textsProtagonist": [
+        "Je pensais qu’on était de bonnes amies, pourquoi ne m’avoir rien dit",
+        "Je suis désolé de ne pas m’en être rendu compte"
+      ],
+      "next": "galerie_explore3"
+    },
+    "galerie_non_explore2": {
+      "who": "inconnu",
+      "texts": [
+        "J’avais besoin de prendre l’air je t’avoue",
+        "Je suis parti à la campagne car ça n’allait pas bien."
+      ],
+      "who2": "protagonist",
+      "textsProtagonist": [
+        "Je pensais qu’on était de bonnes amies, pourquoi ne m’avoir rien dit",
+        "Je suis désolé de ne pas m’en être rendu compte"
+      ],
+      "next": "galerie_non_explore3"
+    },
+    "galerie_explore3": {
+      "who": "inconnu",
+      "texts": [
+        "Il y a une autre raison...",
+        "Tout à commencer un jour où je rentrais du travail",
+        "Une énorme dispute a éclaté avec ma mère. C’est devenu violent",
+        "Ça s’est répété à plusieurs reprises, j’ai du prendre des précautions et m’éloigner"
+      ],
+      "who2": "protagonist",
+      "textsProtagonist": ["Oui tu peux me faire confiance."],
+      "next": "galerie_explore4"
+    },
+    "galerie_non_explore3": {
+      "who": "inconnu",
+      "texts": [
+        "Il y a une autre raison...",
+        "Tout à commencer un jour où je rentrais du travail",
+        "Une énorme dispute a éclaté avec ma mère. C’est devenu violent",
+        "Ça s’est répété à plusieurs reprises, j’ai du prendre des précautions et m’éloigner"
+      ],
+      "who2": "protagonist",
+      "textsProtagonist": ["Oui tu peux me faire confiance."],
+      "next": "galerie_non_explore4"
+    },
+    "galerie_explore4": {
+      "who": "inconnu",
+      "texts": ["Vocal dont un rire un moment"],
+      "audios": "./Voicemail/Voicemail.mp3",
+      "choices": [
+        {
+          "text": "Ecouter_Voicemail",
+          "reply": [""],
+          "next": ""
+        },
+        {
+          "text": "Non_Ecouter_Voicemail",
+          "reply": [""],
+          "next": ""
+        }
+      ]
+    },
+    "galerie_non_explore4": {
+      "who": "inconnu",
+      "texts": ["Vocal dont un rire un moment"],
+      "audios": "./Voicemail/Voicemail.mp3",
+      "choices": [
+        {
+          "text": "Ecouter_Voicemail",
+          "reply": [""],
+          "next": ""
+        },
+        {
+          "text": "Non_Ecouter_Voicemail",
+          "reply": [""],
+          "next": ""
+        }
+      ]
     }
   }
 }

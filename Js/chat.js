@@ -22,34 +22,9 @@ document.addEventListener('DOMContentLoaded', function() {
   let currentId = contacts[0].id; // par défaut: inconnu
 
   function loadThreads() {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      // Toujours commencer avec CHAT_THREADS pour s'assurer que les messages initiaux sont présents
-      let loadedThreads = JSON.parse(JSON.stringify(CHAT_THREADS));
-      if (raw) {
-        const parsed = JSON.parse(raw);
-        // Fusionner les threads sauvegardés avec les threads initiaux
-        Object.keys(parsed).forEach(contactId => {
-          if (loadedThreads[contactId]) {
-            // Ajouter de nouveaux messages sans écraser les messages initiaux
-            parsed[contactId].forEach(msg => {
-              if (!loadedThreads[contactId].some(existingMsg => existingMsg.text === msg.text && existingMsg.who === msg.who)) {
-                loadedThreads[contactId].push(msg);
-              }
-            });
-          } else {
-            loadedThreads[contactId] = parsed[contactId];
-          }
-        });
-      }
-      return loadedThreads;
-    } catch(_) {
-      return JSON.parse(JSON.stringify(CHAT_THREADS));
-    }
+    return JSON.parse(JSON.stringify(CHAT_THREADS));
   }
-  function saveThreads() {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(threads)); } catch(_) {}
-  }
+  function saveThreads() {}
 
   function renderContacts() {
     contactsEl.innerHTML = '';
