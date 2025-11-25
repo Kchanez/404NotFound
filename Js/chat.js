@@ -97,6 +97,14 @@ document.addEventListener('DOMContentLoaded', function() {
       imgElement.style.maxWidth = '100%';
       imgElement.style.borderRadius = '8px';
       imgElement.style.marginTop = '5px';
+      if (window.VisualNovelAPI && window.VisualNovelAPI.getIsGalleryClickable && window.VisualNovelAPI.getIsGalleryClickable()) {
+        imgElement.style.cursor = 'pointer';
+        imgElement.addEventListener('click', () => {
+          if (window.ChatAppAPI && window.ChatAppAPI.openImageModal) {
+            window.ChatAppAPI.openImageModal(image);
+          }
+        });
+      }
       bubble.appendChild(imgElement);
     }
 
@@ -194,6 +202,18 @@ document.addEventListener('DOMContentLoaded', function() {
         chatApp.setAttribute('aria-hidden', 'true');
         chatApp.style.display = 'none';
       }
+    },
+    sendRandomGalleryImage: (images) => {
+      if (images && images.length > 0) {
+        const randomIndex = Math.floor(Math.random() * images.length);
+        const imageUrl = images[randomIndex];
+        addMessage(null, 'friend', imageUrl);
+      }
+    },
+    openImageModal: (imageUrl) => {
+      console.log("Ouverture de l'image en modale: ", imageUrl);
+      // Ici, vous pouvez implémenter la logique pour afficher une modale avec l'image
+      // Par exemple, créer un élément div pour la modale, y ajouter l'image, et l'afficher.
     }
   };
 })();

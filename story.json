@@ -347,10 +347,20 @@
       "texts": [
         "Désolée de revenir comme une fleur... C’est bien moi. J’ai perdu mon ancien tel, voilà mon nouveau numéro."
       ],
-      "image": "./Galerie/Choix.jpg",
+      "galleryPhotos": [
+        "./Galerie/photo.jpg",
+        "./Galerie/photo1.jpg",
+        "./Galerie/photo2.jpg",
+        "./Galerie/photo3.jpg",
+        "./Galerie/photo4.jpg",
+        "./Galerie/photo5.jpg",
+        "./Galerie/photo6.jpg",
+        "./Galerie/photo7.jpg",
+        "./Galerie/photo8.jpg"
+      ],
       "choices": [
         {
-          "text": "Voir_Galerie",
+          "text": "Voir Galerie",
           "reply": [
             "Tu n’as pas changé. j’avais presque oublié sur quel bras été ton tatouage",
             "je pensais qu’il etait sur ton épaule gauche et non droite"
@@ -358,7 +368,7 @@
           "next": "galerie_explore"
         },
         {
-          "text": "Non_Voir_Galerie",
+          "text": "Non Voir Galerie",
           "reply": ["Tu n’as pas changé.", "Toujours aussi belle"],
           "next": "galerie_non_explore"
         }

@@ -16,6 +16,9 @@ let blockedIndex = -1;
 let isWaitingForCtaClick = false; // Nouvelle variable d'état
 let hasInjectedHeyMessage = false;
 let hasMainChatCtaBeenClicked = false;
+let isGalleryClickable = false;
+let galleryViewCount = 0;
+let isWaitingForGalleryInteraction = false;
 
 // Charger l'histoire depuis le fichier JSON
 function loadStory() {
@@ -94,6 +97,12 @@ function displayScene(sceneId) {
 
 // Afficher un dialogue
 function showDialogue(dialogues, index, choices, scenarioChoices = null) {
+  if (isWaitingForGalleryInteraction) {
+    blockedDialogues = dialogues;
+    blockedIndex = index;
+    blockedChoices = choices;
+    return;
+  }
   console.log("showDialogue: index=", index, "dialogue=", dialogues[index]);
   if (index >= dialogues.length) {
     // Fin des dialogues: afficher les choix
@@ -321,6 +330,7 @@ function typewriterEffect(
 // Nouvelle fonction pour gérer les choix
 function handleChoice(choice) {
   console.log("handleChoice: choice=", choice);
+  console.log("isGalleryClickable before choice handling:", isGalleryClickable);
 
   // Add the chosen reply text to the chat as a message from the protagonist
   if (window.ChatAppAPI && choice.reply) {
@@ -335,10 +345,19 @@ function handleChoice(choice) {
 
   if (choice.next && storyData && storyData.scenarios && storyData.scenarios[choice.next]) {
     // Gérer les transitions internes des scénarios via la propriété 'next'
-    window.VisualNovelAPI.startScenario(choice.next);
-  } else if (choice.nextScenario) {
-    // Si le choix mène à un scénario, le démarrer
-    window.VisualNovelAPI.startScenario(choice.nextScenario);
+    if (choice.next === 'galerie_explore') {
+      isGalleryClickable = true;
+      galleryViewCount++;
+      const galleryIcon = document.getElementById('gallery-icon');
+      if (galleryIcon) {
+        galleryIcon.classList.remove('disabled');
+        galleryIcon.classList.add('active');
+      }
+      isWaitingForGalleryInteraction = true;
+      console.log("isGalleryClickable after update:", isGalleryClickable);
+    } else {
+      window.VisualNovelAPI.startScenario(choice.next);
+    }
   } else if (choice.nextScene) {
     // Sinon, continuer avec la scène normale
     displayScene(choice.nextScene);
@@ -425,6 +444,12 @@ window.VisualNovelAPI = {
       currentProtagonistDialogueIndex = 0;
       currentThoughtIndex = 0;
       isCurrentlyProtagonistDialogue = false;
+
+      // Si le scénario est 'galerie' et qu'il y a des photos, envoyer une photo aléatoire
+      if (scenarioName === 'galerie' && currentScenario.galleryPhotos && window.ChatAppAPI && window.ChatAppAPI.sendRandomGalleryImage) {
+        window.ChatAppAPI.sendRandomGalleryImage(currentScenario.galleryPhotos);
+      }
+
       displayScenarioDialogue();
     } else {
       console.error(`Scenario ${scenarioName} not found.`);
@@ -434,11 +459,61 @@ window.VisualNovelAPI = {
     if (storyData && storyData.scenarios && storyData.scenarios[scenarioName] && Array.isArray(storyData.scenarios[scenarioName].choices)) {
       showChoices(storyData.scenarios[scenarioName].choices);
     }
+  },
+  getIsGalleryClickable: () => isGalleryClickable,
+  getGalleryViewCount: () => galleryViewCount,
+  showGallery: () => {
+    console.log("showGallery function called.");
+    const galleryWindow = document.getElementById('gallery-window');
+    if (galleryWindow) {
+      galleryWindow.style.display = 'block';
+      galleryWindow.removeAttribute('aria-hidden');
+    }
+  },
+  hideGallery: () => {
+    const galleryWindow = document.getElementById('gallery-window');
+    if (galleryWindow) {
+      galleryWindow.style.display = 'none';
+      galleryWindow.setAttribute('aria-hidden', 'true');
+    }
   }
 };
-
+console.log("galleryViewCount:", galleryViewCount);
 // Initialiser le visual novel au chargement de la page
-document.addEventListener("DOMContentLoaded", loadStory);
+document.addEventListener("DOMContentLoaded", () => {
+  loadStory();
+
+  const galleryIcon = document.getElementById('gallery-icon');
+  console.log("galleryIcon element:", galleryIcon);
+  const closeGalleryButton = document.getElementById('close-gallery');
+
+  if (galleryIcon) {
+    galleryIcon.addEventListener('click', () => {
+      console.log("Gallery icon clicked. isGalleryClickable:", isGalleryClickable);
+      if (isGalleryClickable) {
+        window.VisualNovelAPI.showGallery();
+        if (isWaitingForGalleryInteraction) {
+          isWaitingForGalleryInteraction = false;
+          window.VisualNovelAPI.startScenario('galerie_explore'); // Démarrer le scénario ici
+          if (blockedDialogues && blockedIndex !== -1) {
+            showDialogue(blockedDialogues, blockedIndex, blockedChoices);
+            blockedDialogues = null;
+            blockedIndex = -1;
+            blockedChoices = null;
+          }
+        }
+      } else {
+        alert("La galerie n'est pas encore accessible.");
+      }
+    });
+  }
+
+  if (closeGalleryButton) {
+    closeGalleryButton.addEventListener('click', () => {
+      window.VisualNovelAPI.hideGallery();
+    });
+  }
+});
 
 function displayScenarioDialogue() {
   console.log("displayScenarioDialogue: currentScenario=", currentScenario, "currentScenarioIndex=", currentScenarioIndex, "currentProtagonistDialogueIndex=", currentProtagonistDialogueIndex, "isCurrentlyProtagonistDialogue=", isCurrentlyProtagonistDialogue);
