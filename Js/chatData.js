@@ -2,11 +2,11 @@
 // Les avatars utilisent les ressources déjà présentes dans Images/
 
 const CHAT_CONTACTS = [
-  { id: 'inconnu', name: 'Inconnu', avatar: 'Images/Profil1.svg', inContacts: false },
-  { id: 'papa', name: 'Papa', avatar: 'Images/Profil2.svg', inContacts: true },
-  { id: 'justine', name: 'Justine', avatar: 'Images/Profil3.svg', inContacts: true },
-  { id: 'maman', name: 'Maman', avatar: 'Images/Profil4.svg', inContacts: true },
-  { id: 'layla', name: 'Laïla', avatar: 'Images/Profil5.svg', inContacts: true }
+  { id: 'inconnu', name: 'Inconnu', avatar: 'Images/Profil.svg', inContacts: false },
+  { id: 'papa', name: 'Papa', avatar: 'Images/Profil.svg', inContacts: true },
+  { id: 'justine', name: 'Justine', avatar: 'Images/Profil.svg', inContacts: true },
+  { id: 'maman', name: 'Maman', avatar: 'Images/Profil.svg', inContacts: true },
+  { id: 'layla', name: 'Laïla', avatar: 'Images/Profil.svg', inContacts: true }
 ];
 
 const CHAT_THREADS = {

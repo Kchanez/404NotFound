@@ -1,18 +1,17 @@
 #gallery-window {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 10%;
+    left: 10%;
+    width: 30vw;
+    height: 38vh;
     background-color: #fff;
-    border: 2px solid #000;
-    border-radius: 2px;
-    width: 600px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    border: 5px solid #0B65F4;
     z-index: 20000;
+    display: flex;
 }
 
 #gallery-header {
-    background-color: #0066cc;
+    background-color: #0B65F4;
     color: #fff;
     padding: 4px 8px;
     display: flex;
@@ -33,13 +32,17 @@
     font-size: 16px;
     cursor: pointer;
     padding: 0 4px;
+    background-color: #CB4929;
 }
 
 #folders-container {
-    padding: 16px;
+    padding: 10px;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(16%, 1fr));
     gap: 16px;
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height:32vh /* Adjust based on header height */
 }
 
 .folder-item {
@@ -65,6 +68,93 @@
 
 .folder-item:hover {
     opacity: 0.8;
+}
+
+
+/* Styles pour la fenêtre modale d'image */
+#image-modal {
+    display: none; /* Caché par défaut */
+    position: fixed; /* Reste en place même en défilant */
+    z-index: 20001; /* Doit être au-dessus de tout le reste */
+    left: 0;
+    top: 0;
+    width: 100%; /* Pleine largeur */
+    height: 100%; /* Pleine hauteur */
+    overflow: auto; /* Permet le défilement si l'image est trop grande */
+    background-color: rgba(0,0,0,0.9); /* Fond semi-transparent noir */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#image-modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+#modal-image {
+    width: 30%;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    margin: auto;
+}
+
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.nav-button {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    -webkit-user-select: none;
+    background-color: rgba(0,0,0,0.8);
+    border: none;
+}
+
+.prev-button {
+    left: 10%;
+    border-radius: 3px 0 0 3px;
+}
+
+.next-button {
+    right: 10%;
+    border-radius: 3px 0 0 3px;
+}
+
+.nav-button:hover {
+    background-color: rgba(0,0,0,0.8);
 }
 
 /* Responsivité pour petits écrans */

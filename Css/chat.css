@@ -21,7 +21,7 @@ body, html {
 .window-header {
   height: 40px;
   /* background: linear-gradient(#4d6aa3, #1c2460); */
-  background-color: #010082;
+  background-color: #0B65F4;
   color: #fff;
   display: flex;
   align-items: center;
@@ -31,7 +31,7 @@ body, html {
 .window-header .title { font-weight: bold; }
 .window-header .close { 
   border: 2px solid #fff; 
-  background: transparent; 
+  background: #CB4929; 
   color: #fff; 
   width: 28px; 
   height: 28px; 
@@ -64,7 +64,11 @@ body, html {
   /* background: #e8ecf5;  */
 }
 .contact-info { display: flex; gap: 10px; align-items: center; }
-.avatar { width: 36px; height: 36px; border-radius: 50%; border: 2px solid #000; }
+.avatar { 
+  width: 40px; 
+  height: 40px;  
+}
+
 .contact-meta { display: flex; flex-direction: column; }
 .name { font-weight: bold; }
 .status { font-size: 12px; color: #666; }
