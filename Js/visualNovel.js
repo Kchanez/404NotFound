@@ -18,7 +18,7 @@ let hasInjectedHeyMessage = false;
 let hasMainChatCtaBeenClicked = false;
 let isGalleryClickable = false;
 let galleryViewCount = 0;
-let isWaitingForGalleryInteraction = false;
+
 
 // Charger l'histoire depuis le fichier JSON
 function loadStory() {
@@ -97,13 +97,8 @@ function displayScene(sceneId) {
 
 // Afficher un dialogue
 function showDialogue(dialogues, index, choices, scenarioChoices = null) {
-  if (isWaitingForGalleryInteraction) {
-    blockedDialogues = dialogues;
-    blockedIndex = index;
-    blockedChoices = choices;
-    return;
-  }
-  console.log("showDialogue: index=", index, "dialogue=", dialogues[index]);
+
+  console.log("showDialogue: index=", index, "dialogue=", dialogues[index], "isGalleryClickable=", isGalleryClickable);
   if (index >= dialogues.length) {
     // Fin des dialogues: afficher les choix
     if (scenarioChoices) {
@@ -329,7 +324,7 @@ function typewriterEffect(
 
 // Nouvelle fonction pour gérer les choix
 function handleChoice(choice) {
-  console.log("handleChoice: choice=", choice);
+  console.log("handleChoice: choice=", choice, "isGalleryClickable=", isGalleryClickable);
   console.log("isGalleryClickable before choice handling:", isGalleryClickable);
 
   // Add the chosen reply text to the chat as a message from the protagonist
@@ -353,11 +348,9 @@ function handleChoice(choice) {
         galleryIcon.classList.remove('disabled');
         galleryIcon.classList.add('active');
       }
-      isWaitingForGalleryInteraction = true;
       console.log("isGalleryClickable after update:", isGalleryClickable);
-    } else {
-      window.VisualNovelAPI.startScenario(choice.next);
     }
+    window.VisualNovelAPI.startScenario(choice.next);
   } else if (choice.nextScene) {
     // Sinon, continuer avec la scène normale
     displayScene(choice.nextScene);
@@ -492,16 +485,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("Gallery icon clicked. isGalleryClickable:", isGalleryClickable);
       if (isGalleryClickable) {
         window.VisualNovelAPI.showGallery();
-        if (isWaitingForGalleryInteraction) {
-          isWaitingForGalleryInteraction = false;
-          window.VisualNovelAPI.startScenario('galerie_explore'); // Démarrer le scénario ici
-          if (blockedDialogues && blockedIndex !== -1) {
-            showDialogue(blockedDialogues, blockedIndex, blockedChoices);
-            blockedDialogues = null;
-            blockedIndex = -1;
-            blockedChoices = null;
-          }
-        }
+        window.VisualNovelAPI.startScenario('galerie_explore'); // Démarrer le scénario ici
       } else {
         alert("La galerie n'est pas encore accessible.");
       }
