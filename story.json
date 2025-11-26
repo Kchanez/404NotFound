@@ -123,67 +123,11 @@
         {
           "character": "protagonist",
           "avatar": "happy",
-          "text": "Surement une erreur ce numéro n’est pas dans mes contacts"
-        },
-        {
-          "character": "protagonist",
-          "avatar": "happy",
-          "text": "Hein"
-        },
-        {
-          "character": "protagonist",
-          "avatar": "sad",
-          "text": "Mais c'est quoi ça encore"
-        },
-        {
-          "character": "protagonist",
-          "avatar": "sad",
-          "text": "...."
-        },
-        {
-          "character": "protagonist",
-          "avatar": "Choc",
-          "text": "Hein quoi !"
-        },
-        {
-          "character": "protagonist",
-          "avatar": "Choc",
-          "text": "Layla !"
-        }
-      ],
-      "choices": [
-        {
-          "text": "Répondre",
+          "text": "Surement une erreur ce numéro n’est pas dans mes contacts",
           "nextScenario": "start"
-        },
-        {
-          "text": "Ignorer",
-          "nextScenario": "ignore_1"
         }
       ]
-    },
-    "next_scene_after_chat": {
-      "background": "room",
-      "bgm": "main",
-      "dialogue": [
-        {
-          "character": "protagonist",
-          "avatar": "default",
-          "text": "J'ai ignoré le message. Que va-t-il se passer maintenant ?"
-        }
-      ],
-      "nextScene": "after_ignore_chat"
-    },
-    "after_ignore_chat": {
-      "background": "room",
-      "bgm": "main",
-      "dialogue": [
-        {
-          "character": "protagonist",
-          "avatar": "default",
-          "text": "L'histoire continue après avoir ignoré le message."
-        }
-      ]
+      
     }
   },
   "scenarios": {

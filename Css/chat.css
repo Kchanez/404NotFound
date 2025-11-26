@@ -44,7 +44,7 @@ body, html {
   display: grid; 
   grid-template-columns: 1fr 2fr; 
   gap: 0; 
-  border: 5px solid #c0c0c0;
+  border: 5px solid #0B65F4;
 }
 
 /* Thread (conversation) */
