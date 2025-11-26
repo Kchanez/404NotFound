@@ -1,13 +1,10 @@
 // Logique interactif de la galerie
 
 document.addEventListener('visualNovelAPIReady', () => {
-    console.log("gallery.js: visualNovelAPIReady event received. Initializing gallery...");
     initGallery();
 });
 
 function initGallery() {
-    console.log("gallery.js: initGallery function called.");
-
     const folderItems = document.querySelectorAll('.folder-item');
     const imageModal = document.getElementById('image-modal');
     const modalImage = document.getElementById('modal-image');
@@ -66,11 +63,6 @@ folderItems.forEach((folder) => {
 
     folder.addEventListener('click', () => {
         const folderName = folder.dataset.folder;
-        console.log(`Clic sur le dossier : ${folderName}`);
-        // Placeholder pour la logique future :
-        // - Charger les photos du dossier ${folderName}
-        // - Afficher les photos dans la galerie
-        // - Mettre à jour le compteur de galerie si nécessaire
     });
 });
 

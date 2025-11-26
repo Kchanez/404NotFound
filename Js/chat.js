@@ -102,7 +102,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const fileNameWithExtension = image.split('/').pop();
         const fileName = fileNameWithExtension.split('.')[0];
         window.VisualNovelAPI.setUnknownImageFilename(fileName);
-        console.log("Unknown image filename set to:", fileName);
       }
       if (window.VisualNovelAPI && window.VisualNovelAPI.getIsGalleryClickable && window.VisualNovelAPI.getIsGalleryClickable()) {
         imgElement.style.cursor = 'pointer';

@@ -23,17 +23,14 @@ let unknownImageFilename = null;
 
 // Charger l'histoire depuis le fichier JSON
 function loadStory() {
-  console.log("Chargement du scénario...");
   fetch("./story.json")
     .then((response) => {
       if (!response.ok) {
         throw new Error("Erreur lors du chargement du scénario");
       }
-      console.log("Réponse reçue:", response);
       return response.json();
     })
     .then((data) => {
-      console.log("Données chargées:", data);
       storyData = data;
       // Commencer par la scène de départ
       if (storyData && storyData.scenes && storyData.scenes.start) {
@@ -52,7 +49,6 @@ function loadStory() {
 
 // Afficher une scène
 function displayScene(sceneId) {
-  console.log("displayScene:", sceneId);
   if (!storyData || !storyData.scenes[sceneId]) {
     console.error("Scène non trouvée:", sceneId);
     return;
@@ -98,8 +94,6 @@ function displayScene(sceneId) {
 
 // Afficher un dialogue
 function showDialogue(dialogues, index, choices, scenarioChoices = null) {
-
-  console.log("showDialogue: index=", index, "dialogue=", dialogues[index], "isGalleryClickable=", isGalleryClickable);
   if (index >= dialogues.length) {
     // Fin des dialogues: afficher les choix
     if (scenarioChoices) {
@@ -325,12 +319,9 @@ function typewriterEffect(
 
 // Nouvelle fonction pour gérer les choix
 function handleChoice(choice) {
-  console.log("handleChoice: choice=", choice, "isGalleryClickable=", isGalleryClickable);
-  console.log("isGalleryClickable before choice handling:", isGalleryClickable);
 
   // Add the chosen reply text to the chat as a message from the protagonist
   if (window.ChatAppAPI && choice.reply) {
-    console.log("Attempting to add user reply to chat:", choice.reply);
     window.ChatAppAPI.addMessage(choice.reply, 'you');
   }
 
@@ -348,7 +339,6 @@ function handleChoice(choice) {
         galleryIcon.classList.remove('disabled');
         galleryIcon.classList.add('active');
       }
-      console.log("isGalleryClickable after update:", isGalleryClickable);
     }
     window.VisualNovelAPI.startScenario(choice.next);
   } else if (choice.nextScene) {
@@ -358,7 +348,6 @@ function handleChoice(choice) {
     console.warn("Choice has no valid nextScene or nextScenario:", choice);
   }
 }
-console.log("galleryViewCount:", galleryViewCount);
 
 // Override: afficher les choix via #hacked-screen
 function showChoices(choices) {
@@ -404,7 +393,6 @@ function playAudio(src, isLoop = true) {
   }
 }
 
-console.log("visualNovel.js: Defining window.VisualNovelAPI...");
 window.VisualNovelAPI = {
   unblockStory: () => {
     isWaitingForCtaClick = false;
@@ -430,11 +418,9 @@ window.VisualNovelAPI = {
     }
   },
   startScenario: (scenarioName) => {
-    console.log("startScenario: scenarioName=", scenarioName);
     // hideHackedScreen(); // Ensure hacked screen is hidden
     if (storyData && storyData.scenarios && storyData.scenarios[scenarioName]) {
       currentScenario = storyData.scenarios[scenarioName];
-      console.log("startScenario: currentScenario after assignment=", currentScenario);
       currentScenarioIndex = 0;
       currentProtagonistDialogueIndex = 0;
       currentThoughtIndex = 0;
@@ -462,7 +448,6 @@ window.VisualNovelAPI = {
   getUnknownImageFilename: () => unknownImageFilename,
   setUnknownImageFilename: (filename) => { unknownImageFilename = filename; },
   showGallery: () => {
-    console.log("showGallery function called.");
     const galleryWindow = document.getElementById('gallery-window');
     if (galleryWindow) {
       galleryWindow.style.display = 'block';
@@ -477,18 +462,18 @@ window.VisualNovelAPI = {
     }
   }
 };
+console.log("galleryViewCount:", galleryViewCount);
 
 // Initialiser le visual novel au chargement de la page
 document.addEventListener("DOMContentLoaded", () => {
   loadStory();
 
   const galleryIcon = document.getElementById('gallery-icon');
-  console.log("galleryIcon element:", galleryIcon);
+  
   const closeGalleryButton = document.getElementById('close-gallery');
 
   if (galleryIcon) {
     galleryIcon.addEventListener('click', () => {
-      console.log("Gallery icon clicked. isGalleryClickable:", isGalleryClickable);
       if (isGalleryClickable) {
         window.VisualNovelAPI.showGallery();
         window.VisualNovelAPI.startScenario('galerie_explore'); // Démarrer le scénario ici
@@ -506,11 +491,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Déclencher un événement lorsque VisualNovelAPI est prêt
   document.dispatchEvent(new Event('visualNovelAPIReady'));
-  console.log("visualNovel.js: visualNovelAPIReady event dispatched.");
 });
 
 function displayScenarioDialogue() {
-  console.log("displayScenarioDialogue: currentScenario=", currentScenario, "currentScenarioIndex=", currentScenarioIndex, "currentProtagonistDialogueIndex=", currentProtagonistDialogueIndex, "isCurrentlyProtagonistDialogue=", isCurrentlyProtagonistDialogue);
   const dialogueBox = document.getElementById("dialogue-box");
   const dialogueTextEl = document.getElementById("dialogue-text");
   const characterNameEl = document.getElementById("character-name");
@@ -558,7 +541,6 @@ function displayScenarioDialogue() {
   }
   // Si tous les dialogues sont épuisés
   else {
-    console.log("All dialogues in scenario exhausted.");
     if (dialogueBox) dialogueBox.classList.remove('hidden');
 
     if (currentScenario && currentScenario.next) {
