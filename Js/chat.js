@@ -97,6 +97,13 @@ document.addEventListener('DOMContentLoaded', function() {
       imgElement.style.maxWidth = '100%';
       imgElement.style.borderRadius = '8px';
       imgElement.style.marginTop = '5px';
+      // Si l'image est envoyée par l'ami (l'inconnu), stocker son nom de fichier
+      if (who === 'friend' && window.VisualNovelAPI && window.VisualNovelAPI.setUnknownImageFilename) {
+        const fileNameWithExtension = image.split('/').pop();
+        const fileName = fileNameWithExtension.split('.')[0];
+        window.VisualNovelAPI.setUnknownImageFilename(fileName);
+        console.log("Unknown image filename set to:", fileName);
+      }
       if (window.VisualNovelAPI && window.VisualNovelAPI.getIsGalleryClickable && window.VisualNovelAPI.getIsGalleryClickable()) {
         imgElement.style.cursor = 'pointer';
         imgElement.addEventListener('click', () => {

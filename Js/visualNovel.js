@@ -18,6 +18,7 @@ let hasInjectedHeyMessage = false;
 let hasMainChatCtaBeenClicked = false;
 let isGalleryClickable = false;
 let galleryViewCount = 0;
+let unknownImageFilename = null;
 
 
 // Charger l'histoire depuis le fichier JSON
@@ -342,7 +343,6 @@ function handleChoice(choice) {
     // Gérer les transitions internes des scénarios via la propriété 'next'
     if (choice.next === 'galerie_explore') {
       isGalleryClickable = true;
-      galleryViewCount++;
       const galleryIcon = document.getElementById('gallery-icon');
       if (galleryIcon) {
         galleryIcon.classList.remove('disabled');
@@ -358,6 +358,7 @@ function handleChoice(choice) {
     console.warn("Choice has no valid nextScene or nextScenario:", choice);
   }
 }
+console.log("galleryViewCount:", galleryViewCount);
 
 // Override: afficher les choix via #hacked-screen
 function showChoices(choices) {
@@ -403,6 +404,7 @@ function playAudio(src, isLoop = true) {
   }
 }
 
+console.log("visualNovel.js: Defining window.VisualNovelAPI...");
 window.VisualNovelAPI = {
   unblockStory: () => {
     isWaitingForCtaClick = false;
@@ -454,7 +456,11 @@ window.VisualNovelAPI = {
     }
   },
   getIsGalleryClickable: () => isGalleryClickable,
+  setIsGalleryClickable: (value) => { isGalleryClickable = value; },
   getGalleryViewCount: () => galleryViewCount,
+  setGalleryViewCount: (value) => { galleryViewCount = value; },
+  getUnknownImageFilename: () => unknownImageFilename,
+  setUnknownImageFilename: (filename) => { unknownImageFilename = filename; },
   showGallery: () => {
     console.log("showGallery function called.");
     const galleryWindow = document.getElementById('gallery-window');
@@ -471,7 +477,7 @@ window.VisualNovelAPI = {
     }
   }
 };
-console.log("galleryViewCount:", galleryViewCount);
+
 // Initialiser le visual novel au chargement de la page
 document.addEventListener("DOMContentLoaded", () => {
   loadStory();
@@ -497,6 +503,10 @@ document.addEventListener("DOMContentLoaded", () => {
       window.VisualNovelAPI.hideGallery();
     });
   }
+
+  // Déclencher un événement lorsque VisualNovelAPI est prêt
+  document.dispatchEvent(new Event('visualNovelAPIReady'));
+  console.log("visualNovel.js: visualNovelAPIReady event dispatched.");
 });
 
 function displayScenarioDialogue() {
