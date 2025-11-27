@@ -725,11 +725,21 @@ function displayScenarioDialogue() {
 
   // Display thoughts directly in dialogueTextEl
   if (isThought) {
+    const dialogueHint = document.getElementById("dialogue-hint");
+    if (dialogueHint) {
+      dialogueHint.style.display = "block";
+      console.log(
+        "dialogueHint est maintenant display: block; dans displayScenarioDialogue (isThought)."
+      );
+    }
     dialogueTextEl.textContent = ""; // Clear previous text
     typewriterEffect(
       dialogueTextEl,
       dialogue.text,
-      () => {},
+      () => {
+        // Once typing is complete, allow advancing
+        // The click handler on dialogueBoxEl will manage progression
+      },
       30,
       false // No typing sound for thoughts
     );

@@ -182,7 +182,7 @@ document.addEventListener("DOMContentLoaded", function () {
             notif.play();
           } catch (_) {}
         }
-      }, 700);
+      }, 1000);
     }
 
     function toggleContact() {
