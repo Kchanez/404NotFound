@@ -8,43 +8,66 @@
   </head>
   <body>
     <div class="screen">
-
-        <!-- Barre du haut -->
-        <div class="top-bar">
-            <span class="play-text">Play ▸</span>
-            <span class="sp-text">SP</span>
-        </div>
+      <!-- Barre du haut -->
+      <div class="top-bar">
+        <span class="play-text">Play ▸</span>
+        <span class="sp-text">SP</span>
+      </div>
       <!-- Timestamp dynamique -->
       <div class="timestamp">
         <span class="date"></span>
         <span class="time"></span>
       </div>
-
-      
     </div>
 
     <div id="disparition-screen" class="hidden">
-    <div class="card">
+      <div class="card">
         <h1>Laïla M⍰r⍰g⍰⍰nz</h1>
         <h2>Alerte nouvelle disparition - Dossier : #D-087</h2>
-        <div class="content-row"> 
-        <img src="Images/photoLaila.svg" alt="Photo de Laila" class="photo">
-        <div class="text-block">
-        <p><strong>Âgée de 21 ans</strong></p>
+        <div class="content-row">
+          <img src="Images/photoLaila.svg" alt="Photo de Laila" class="photo" />
+          <div class="text-block">
+            <p><strong>Âgée de 21 ans</strong></p>
 
-        <p>
-            Dernière apparition le 11 décembre 202⍰ à 16:17, quittant sa résidence.  
-            Aucune trace physique retrouvée sur les lieux.
-        </p>
+            <p>
+              Dernière apparition le 11 décembre 202⍰ à 16:17, quittant sa
+              résidence. Aucune trace physique retrouvée sur les lieux.
+            </p>
 
-        <p>
-            Si vous disposez d'informations, vous êtes prié(e) de contacter  
-            le Bureau Central des Disparitions - Ligne 07-9⍰-0⍰-⍰⍰-8⍰.
-        </p>
+            <p>
+              Si vous disposez d'informations, vous êtes prié(e) de contacter le
+              Bureau Central des Disparitions - Ligne 07-9⍰-0⍰-⍰⍰-8⍰.
+            </p>
+          </div>
         </div>
-        </div>
+      </div>
     </div>
-</div>
+
+    <div id="message-gouv" class="hidden">
+      <div class="card message-card">
+        <h1>Attention</h1>
+        <h2>Rappel des règles de sécurité</h2>
+
+        <p>Ceci est un message du gouvernement.</p>
+
+        <p>
+          Depuis plusieurs semaines, des disparitions inexpliquées se
+          multiplient à travers la ville. Les autorités compétentes poursuivent
+          actuellement l'enquête.
+        </p>
+
+        <p>
+          Gardez vos portes et fenêtres fermées. Et restez attentif à la moindre
+          ouverture de l'une d'elles.
+        </p>
+
+        <p>
+          Ne répondez pas aux appels et messages après minuit. Et ne sortez pas
+          seul.
+        </p>
+      </div>
+    </div>
+
     <script src="ecranVeille.js"></script>
     <audio id="crtSound" src="Audios/Tv_Effect.mp3"></audio>
   </body>

@@ -44,4 +44,22 @@ setTimeout(() => {
 
 }, 5000);
 
+// Après 15 secondes, afficher le message du gouvernement
+setTimeout(() => {
+
+    // cacher la fiche de disparition
+    document.getElementById("disparition-screen").classList.add("hidden");
+
+    // afficher le message gouvernemental
+    const msg = document.getElementById("message-gouv");
+    msg.classList.remove("hidden");
+
+    // réinitialisation facultative du son CRT
+    const crtSound = document.getElementById("crtSound");
+    if (crtSound) {
+        crtSound.currentTime = 0;
+        crtSound.play().catch(() => {});
+    }
+
+}, 15000);
 
