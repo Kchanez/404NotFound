@@ -191,17 +191,17 @@ body, html {
 
 /* Styles pour la modale d'image */
 .image-modal {
-  display: none; /* Caché par défaut */
-  position: fixed; /* Reste en place */
-  z-index: 10001; /* S'affiche au-dessus de tout */
+  display: none; 
+  position: fixed; 
+  z-index: 10001; 
   left: 0;
   top: 0;
-  width: 100%; /* Pleine largeur */
-  height: 100%; /* Pleine hauteur */
-  overflow: auto; /* Permet le défilement si nécessaire */
-  background-color: rgba(0,0,0,0.8); /* Fond semi-transparent noir */
-  justify-content: center; /* Centre horizontalement le contenu */
-  align-items: center; /* Centre verticalement le contenu */
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgba(0,0,0,0.8); 
+  justify-content: center; 
+  align-items: center; 
 }
 
 .image-modal-content {

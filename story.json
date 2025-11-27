@@ -26,7 +26,6 @@
     "sfx": {
       "notification": "./Audios/notification.mp3",
       "typing": "./Audios/typing.mp3",
-      "mouse": "./Audios/mouse.mp3",
       "errorWindows": "./Audios/windowsError.mp3"
     }
   },
@@ -88,7 +87,7 @@
         {
           "character": "protagonist",
           "avatar": "rigolo",
-          "text": "Imagine-nous : Layla et prenomProtagoniste de campagnarde à Parisiennes” tu disais."
+          "text": "Imagine-nous : Layla de campagnarde à Parisiennes” tu disais."
         },
         {
           "character": "protagonist",
@@ -127,7 +126,6 @@
           "nextScenario": "start"
         }
       ]
-      
     }
   },
   "scenarios": {
@@ -411,32 +409,122 @@
     "galerie_explore4": {
       "who": "inconnu",
       "texts": ["Vocal dont un rire un moment"],
-      "audios": "./Voicemail/Voicemail.mp3",
+      "audioPlayer": {
+        "src": "./Audios/creepy-whispering-6690.mp3"
+      },
       "choices": [
         {
           "text": "Ecouter_Voicemail",
-          "reply": [""],
-          "next": ""
+          "reply": [
+            "Wow quelle histoire de fou!!",
+            "Même si je t’avoue ne pas avoir tout compris.",
+            "La qualité de l’audio est grave mauvaise.",
+            "Même ton rire est différent. On dirait un robot"
+          ],
+          "next": "Ecouter_Voicemail1"
         },
         {
           "text": "Non_Ecouter_Voicemail",
-          "reply": [""],
-          "next": ""
+          "reply": [
+            "Wow quelle histoire de fou!!",
+            "Je comprend mieux mtn pourquoi tu as du fuir",
+            "T’as du avoir sacrément peur. Ça fait froid dans le dos"
+          ],
+          "next": "Non_Ecouter_Voicemail1"
         }
       ]
     },
     "galerie_non_explore4": {
       "who": "inconnu",
       "texts": ["Vocal dont un rire un moment"],
-      "audios": "./Voicemail/Voicemail.mp3",
+      "audioPlayer": {
+        "src": "./Audios/creepy-whispering-6690.mp3"
+      },
       "choices": [
         {
           "text": "Ecouter_Voicemail",
-          "reply": [""],
-          "next": ""
+          "reply": [
+            "Wow quelle histoire de fou!!",
+            "Même si je t’avoue ne pas avoir tout compris.",
+            "La qualité de l’audio est grave mauvaise.",
+            "Même ton rire est différent. On dirait un robot"
+          ],
+          "next": "Ecouter_Voicemail1"
         },
         {
           "text": "Non_Ecouter_Voicemail",
+          "reply": [
+            "Wow quelle histoire de fou!!",
+            "Je comprend mieux mtn pourquoi tu as du fuir",
+            "T’as du avoir sacrément peur. Ça fait froid dans le dos"
+          ],
+          "next": "Non_Ecouter_Voicemail1"
+        }
+      ]
+    },
+    "Ecouter_Voicemail1": {
+      "who": "inconnu",
+      "texts": [
+        "Écoutes on fait avec les moyens du bord haha",
+        "J’ai pris le premier téléphone trouvé chez mes grands parents"
+      ],
+      "who2": "protagonist",
+      "textsProtagonist": [
+        "D’accord je vois.",
+        "Excuse moi encore pour tout à l’heure, je n’aurais jamais pensé que tu traversais ça"
+      ],
+      "next": "Ecouter_Voicemail2"
+    },
+    "Non_Ecouter_Voicemail1": {
+      "who": "inconnu",
+      "texts": [
+        "Écoutes on fait avec les moyens du bord haha",
+        "J’ai pris le premier téléphone trouvé chez mes grands parents"
+      ],
+      "who2": "protagonist",
+      "textsProtagonist": [
+        "D’accord je vois.",
+        "Excuse moi encore pour tout à l’heure, je n’aurais jamais pensé que tu traversais ça"
+      ],
+      "next": "Non_Ecouter_Voicemail2"
+    },
+    "Ecouter_Voicemail2": {
+      "who": "inconnu",
+      "texts": [
+        "Mais moi qui suit désolé j’aurai du savoir que tu étais de confiance",
+        "Et je m’en serai voulu de ne pas fêter mon anniversaire avec toi",
+        "C’est pourquoi je veux qu’on se revoie en cachette de mes parents et de la protection policière",
+        "Une soirée le 28 février ?"
+      ],
+      "choices": [
+        {
+          "text": "Voir_Calenderier",
+          "reply": [],
+          "next": ""
+        },
+        {
+          "text": "Non_Voir_Calenderier",
+          "reply": [""],
+          "next": ""
+        }
+      ]
+    },
+    "Non_Ecouter_Voicemail2": {
+      "who": "inconnu",
+      "texts": [
+        "Mais moi qui suit désolé j’aurai du savoir que tu étais de confiance",
+        "Et je m’en serai voulu de ne pas fêter mon anniversaire avec toi",
+        "C’est pourquoi je veux qu’on se revoie en cachette de mes parents et de la protection policière",
+        "Une soirée le 28 février ?"
+      ],
+      "choices": [
+        {
+          "text": "Voir_Calenderier",
+          "reply": [],
+          "next": ""
+        },
+        {
+          "text": "Non_Voir_Calenderier",
           "reply": [""],
           "next": ""
         }

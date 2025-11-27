@@ -18,8 +18,10 @@ let hasInjectedHeyMessage = false;
 let hasMainChatCtaBeenClicked = false;
 let isGalleryClickable = false;
 let galleryViewCount = 0;
+let hasImageBeenClicked = false;
+let hasAudioBeenClicked = false;
 let unknownImageFilename = null;
-
+let currentTypewriterEffect = null; // Variable pour suivre l'effet de machine à écrire en cours
 
 // Charger l'histoire depuis le fichier JSON
 function loadStory() {
@@ -108,15 +110,11 @@ function showDialogue(dialogues, index, choices, scenarioChoices = null) {
   const characterName = document.getElementById("character-name");
   const dialogueText = document.getElementById("dialogue-text");
   const dialogueHint = document.getElementById("dialogue-hint");
-  const mainChatCtaBtn = document.getElementById('main-chat-cta-btn'); // Récupérer le bouton
+  const mainChatCtaBtn = document.getElementById("main-chat-cta-btn"); // Récupérer le bouton
   const dialogueBoxEl = document.getElementById("dialogue-box");
-
-  
 
   // S'assurer que le texte est visible
   dialogueText.style.display = "block";
-
-
 
   // Jouer un effet sonore si spécifié
   if (dialogue.sfx && storyData.audio.sfx[dialogue.sfx]) {
@@ -147,30 +145,29 @@ function showDialogue(dialogues, index, choices, scenarioChoices = null) {
     isEmptyMessage = window.RappelMessageVideAPI.handleDialogue(dialogue.text);
   }
 
-
-
   // Ouvrir le panneau de chat principal au message exact demandé
   if (
-    typeof dialogue.text === 'string' &&
-    dialogue.text.trim() === 'Ah tiens un nouveau message. Surement une erreur ce numéro n’est pas dans mes contacts'
+    typeof dialogue.text === "string" &&
+    dialogue.text.trim() ===
+      "Ah tiens un nouveau message. Surement une erreur ce numéro n’est pas dans mes contacts"
   ) {
     if (window.ChatAppAPI) {
       window.ChatAppAPI.showChatApp();
-      window.ChatAppAPI.selectContact('inconnu');
+      window.ChatAppAPI.selectContact("inconnu");
       if (!hasInjectedHeyMessage) {
         setTimeout(() => {
-          window.ChatAppAPI.addMessage('Hey', 'friend');
+          window.ChatAppAPI.addMessage("Hey", "friend");
         }, 500);
         hasInjectedHeyMessage = true;
       }
     }
     if (mainChatCtaBtn) {
-      mainChatCtaBtn.classList.add('blinking');
+      mainChatCtaBtn.classList.add("blinking");
     }
   }
 
   // Afficher l'écran piraté si le texte est "...."
-  if (typeof dialogue.text === 'string' && dialogue.text.trim() === '....') {
+  if (typeof dialogue.text === "string" && dialogue.text.trim() === "....") {
     if (window.showHackedScreen) {
       window.showHackedScreen();
     }
@@ -185,9 +182,7 @@ function showDialogue(dialogues, index, choices, scenarioChoices = null) {
     characterName.style.display = "block";
 
     // Afficher l'avatar du personnage si spécifié
-
-
-}
+  }
 
   // Uniquement pour le message "Un jour ordinaire dans ta chambre, tu reçois un message étrange..."
   let enableTypingSound = false;
@@ -204,27 +199,33 @@ function showDialogue(dialogues, index, choices, scenarioChoices = null) {
   // Gérer le clic pendant la frappe: premier clic termine le texte, clic suivant avance
   // const dialogueBoxEl = document.getElementById("dialogue-box"); // Already declared above
   let isTyping = true;
-  let advanced = false;
+  let canAdvance = false; // New flag
   dialogueBoxEl.onclick = () => {
     if (isTyping) {
+      // First click: complete typing
       if (dialogueText.__typewriterCancel) {
         dialogueText.__typewriterCancel();
       } else {
-        // Fallback: afficher instantanément le texte
         dialogueText.textContent = dialogue.text;
       }
       isTyping = false;
+      // Allow advancing after a short delay to prevent accidental double-clicks
+      setTimeout(() => {
+        canAdvance = true;
+      }, 100); // Small delay
       return;
     }
-    if (!advanced) {
-      advanced = true;
+
+    if (canAdvance) {
+      // Second click (or subsequent clicks after typing is done): advance dialogue
+      canAdvance = false; // Reset to prevent further rapid advances
       // Si le message précédent était vide, masquer l'application de chat privé
       if (isEmptyMessage) {
-        const privateChatApp = document.getElementById('private-chat-app');
+        const privateChatApp = document.getElementById("private-chat-app");
         if (privateChatApp) {
-          privateChatApp.classList.add('hidden');
-          privateChatApp.setAttribute('inert', '');
-          privateChatApp.style.display = 'none';
+          privateChatApp.classList.add("hidden");
+          privateChatApp.setAttribute("inert", "");
+          privateChatApp.style.display = "none";
         }
       }
       showDialogue(dialogues, index + 1, choices, scenarioChoices);
@@ -232,12 +233,20 @@ function showDialogue(dialogues, index, choices, scenarioChoices = null) {
   };
 
   // Afficher le texte avec effet de machine à écrire
-  typewriterEffect(
+  if (currentTypewriterEffect && currentTypewriterEffect.cancel) {
+    currentTypewriterEffect.cancel();
+  }
+  currentTypewriterEffect = typewriterEffect(
     dialogueText,
     dialogue.text,
     () => {
       // Une fois fini, le clic avancera (handler déjà en place)
       isTyping = false;
+      currentTypewriterEffect = null; // Réinitialiser après la fin
+      // Allow advancing after a short delay to prevent accidental double-clicks
+      setTimeout(() => {
+        canAdvance = true;
+      }, 100); // Small delay
     },
     30,
     enableTypingSound
@@ -256,10 +265,10 @@ function typewriterEffect(
   let i = 0;
   let finished = false;
   let timeoutId = null;
+  let typingSound = null;
 
-  // Jouer le son de typing seulement si activé
   if (isTypingSoundEnabled) {
-    const typingSound = document.getElementById("typing-sound");
+    typingSound = document.getElementById("typing-sound");
     if (typingSound) {
       typingSound.currentTime = 0;
       typingSound.play().catch((error) => {
@@ -268,33 +277,30 @@ function typewriterEffect(
     }
   }
 
-  // Permettre d'annuler la frappe et d'afficher instantanément le texte
-  element.__typewriterCancel = () => {
+  const cancel = () => {
     if (finished) return;
     finished = true;
     if (timeoutId) {
       clearTimeout(timeoutId);
       timeoutId = null;
     }
-    element.textContent = text;
-    if (isTypingSoundEnabled) {
-      const typingSound = document.getElementById("typing-sound");
-      if (typingSound) {
-        typingSound.pause();
-        typingSound.currentTime = 0;
-      }
+    if (typingSound) {
+      typingSound.pause();
+      typingSound.currentTime = 0;
     }
-    // Ne pas appeler le callback ici: le prochain clic avancera
+  };
+
+  element.__typewriterCancel = () => {
+    cancel();
+    element.textContent = text;
+    if (callback) callback();
   };
 
   function completeAndCallback() {
     finished = true;
-    if (isTypingSoundEnabled) {
-      const typingSound = document.getElementById("typing-sound");
-      if (typingSound) {
-        typingSound.pause();
-        typingSound.currentTime = 0;
-      }
+    if (typingSound) {
+      typingSound.pause();
+      typingSound.currentTime = 0;
     }
     if (callback) callback();
   }
@@ -311,6 +317,8 @@ function typewriterEffect(
   }
 
   type();
+
+  return { cancel };
 }
 
 // Afficher les choix
@@ -319,25 +327,29 @@ function typewriterEffect(
 
 // Nouvelle fonction pour gérer les choix
 function handleChoice(choice) {
-
   // Add the chosen reply text to the chat as a message from the protagonist
   if (window.ChatAppAPI && choice.reply) {
-    window.ChatAppAPI.addMessage(choice.reply, 'you');
+    window.ChatAppAPI.addMessage(choice.reply, "you");
   }
 
-  const hackedScreen = document.getElementById('hacked-screen');
-  if (hackedScreen) hackedScreen.classList.add('hidden');
-  const mainChatCtaBtn = document.getElementById('main-chat-cta-btn');
-  if (mainChatCtaBtn) mainChatCtaBtn.classList.remove('blinking');
+  const hackedScreen = document.getElementById("hacked-screen");
+  if (hackedScreen) hackedScreen.classList.add("hidden");
+  const mainChatCtaBtn = document.getElementById("main-chat-cta-btn");
+  if (mainChatCtaBtn) mainChatCtaBtn.classList.remove("blinking");
 
-  if (choice.next && storyData && storyData.scenarios && storyData.scenarios[choice.next]) {
+  if (
+    choice.next &&
+    storyData &&
+    storyData.scenarios &&
+    storyData.scenarios[choice.next]
+  ) {
     // Gérer les transitions internes des scénarios via la propriété 'next'
-    if (choice.next === 'galerie_explore') {
+    if (choice.next === "galerie_explore") {
       isGalleryClickable = true;
-      const galleryIcon = document.getElementById('gallery-icon');
+      const galleryIcon = document.getElementById("gallery-icon");
       if (galleryIcon) {
-        galleryIcon.classList.remove('disabled');
-        galleryIcon.classList.add('active');
+        galleryIcon.classList.remove("disabled");
+        galleryIcon.classList.add("active");
       }
     }
     window.VisualNovelAPI.startScenario(choice.next);
@@ -347,14 +359,28 @@ function handleChoice(choice) {
   } else {
     console.warn("Choice has no valid nextScene or nextScenario:", choice);
   }
+
+  if (choice.text === "Ecouter_Voicemail") {
+    const laylaContact = document.querySelector(
+      'li.contact-item[data-id="layla"]'
+    );
+    if (laylaContact) {
+      laylaContact.style.backgroundColor = "#FEFFC5";
+      setTimeout(() => {
+        laylaContact.style.backgroundColor = "";
+      }, 1000);
+    }
+  }
 }
 
 // Override: afficher les choix via #hacked-screen
 function showChoices(choices) {
-  const hackedScreen = document.getElementById('hacked-screen');
-  const errorActions = hackedScreen ? hackedScreen.querySelector('.error-actions') : null;
+  const hackedScreen = document.getElementById("hacked-screen");
+  const errorActions = hackedScreen
+    ? hackedScreen.querySelector(".error-actions")
+    : null;
 
-  if (hackedScreen) hackedScreen.classList.remove('hidden');
+  if (hackedScreen) hackedScreen.classList.remove("hidden");
   if (errorActions) errorActions.innerHTML = "";
 
   setTimeout(() => {
@@ -393,22 +419,34 @@ function playAudio(src, isLoop = true) {
   }
 }
 
+function updateGalleryViewCount() {
+  let count = 0;
+  if (hasImageBeenClicked) {
+    count++;
+  }
+  if (hasAudioBeenClicked) {
+    count++;
+  }
+  galleryViewCount = count;
+  console.log("galleryViewCount mis à jour à:", galleryViewCount);
+}
+
 window.VisualNovelAPI = {
   unblockStory: () => {
     isWaitingForCtaClick = false;
-    const mainChatCtaBtn = document.getElementById('main-chat-cta-btn');
+    const mainChatCtaBtn = document.getElementById("main-chat-cta-btn");
     if (mainChatCtaBtn) {
-      mainChatCtaBtn.classList.remove('blinking');
+      mainChatCtaBtn.classList.remove("blinking");
     }
 
     if (!hasMainChatCtaBeenClicked) {
-      const mainChatCta = document.getElementById('main-chat-cta');
+      const mainChatCta = document.getElementById("main-chat-cta");
       if (mainChatCta) {
-        mainChatCta.style.display = 'none';
+        mainChatCta.style.display = "none";
       }
       hasMainChatCtaBeenClicked = true;
     }
-    
+
     // Resume dialogue from where it was blocked
     if (blockedDialogues && blockedIndex !== -1) {
       showDialogue(blockedDialogues, blockedIndex + 1, blockedChoices);
@@ -424,10 +462,19 @@ window.VisualNovelAPI = {
       currentScenarioIndex = 0;
       currentProtagonistDialogueIndex = 0;
       currentThoughtIndex = 0;
-      isCurrentlyProtagonistDialogue = false;
+      isCurrentlyProtagonistDialogue = false; // Ensure this is reset
+      const dialogueBox = document.getElementById("dialogue-box");
+      if (dialogueBox) dialogueBox.classList.remove("hidden");
+      currentScenario.currentDialogueTurn =
+        currentScenario.who === "protagonist" ? "you" : "friend"; // Initialiser le tour de dialogue
 
       // Si le scénario est 'galerie' et qu'il y a des photos, envoyer une photo aléatoire
-      if (scenarioName === 'galerie' && currentScenario.galleryPhotos && window.ChatAppAPI && window.ChatAppAPI.sendRandomGalleryImage) {
+      if (
+        scenarioName === "galerie" &&
+        currentScenario.galleryPhotos &&
+        window.ChatAppAPI &&
+        window.ChatAppAPI.sendRandomGalleryImage
+      ) {
         window.ChatAppAPI.sendRandomGalleryImage(currentScenario.galleryPhotos);
       }
 
@@ -437,30 +484,47 @@ window.VisualNovelAPI = {
     }
   },
   showScenarioChoices: (scenarioName) => {
-    if (storyData && storyData.scenarios && storyData.scenarios[scenarioName] && Array.isArray(storyData.scenarios[scenarioName].choices)) {
+    if (
+      storyData &&
+      storyData.scenarios &&
+      storyData.scenarios[scenarioName] &&
+      Array.isArray(storyData.scenarios[scenarioName].choices)
+    ) {
       showChoices(storyData.scenarios[scenarioName].choices);
     }
   },
   getIsGalleryClickable: () => isGalleryClickable,
-  setIsGalleryClickable: (value) => { isGalleryClickable = value; },
+  setIsGalleryClickable: (value) => {
+    isGalleryClickable = value;
+  },
   getGalleryViewCount: () => galleryViewCount,
-  setGalleryViewCount: (value) => { galleryViewCount = value; },
+  setHasImageBeenClicked: (value) => {
+    hasImageBeenClicked = value;
+    updateGalleryViewCount();
+  },
+  getHasAudioBeenClicked: () => hasAudioBeenClicked,
+  setHasAudioBeenClicked: (value) => {
+    hasAudioBeenClicked = value;
+    updateGalleryViewCount();
+  },
   getUnknownImageFilename: () => unknownImageFilename,
-  setUnknownImageFilename: (filename) => { unknownImageFilename = filename; },
+  setUnknownImageFilename: (filename) => {
+    unknownImageFilename = filename;
+  },
   showGallery: () => {
-    const galleryWindow = document.getElementById('gallery-window');
+    const galleryWindow = document.getElementById("gallery-window");
     if (galleryWindow) {
-      galleryWindow.style.display = 'block';
-      galleryWindow.removeAttribute('aria-hidden');
+      galleryWindow.style.display = "block";
+      galleryWindow.removeAttribute("aria-hidden");
     }
   },
   hideGallery: () => {
-    const galleryWindow = document.getElementById('gallery-window');
+    const galleryWindow = document.getElementById("gallery-window");
     if (galleryWindow) {
-      galleryWindow.style.display = 'none';
-      galleryWindow.setAttribute('aria-hidden', 'true');
+      galleryWindow.style.display = "none";
+      galleryWindow.setAttribute("aria-hidden", "true");
     }
-  }
+  },
 };
 console.log("galleryViewCount:", galleryViewCount);
 
@@ -468,15 +532,14 @@ console.log("galleryViewCount:", galleryViewCount);
 document.addEventListener("DOMContentLoaded", () => {
   loadStory();
 
-  const galleryIcon = document.getElementById('gallery-icon');
-  
-  const closeGalleryButton = document.getElementById('close-gallery');
+  const galleryIcon = document.getElementById("gallery-icon");
+
+  const closeGalleryButton = document.getElementById("close-gallery");
 
   if (galleryIcon) {
-    galleryIcon.addEventListener('click', () => {
+    galleryIcon.addEventListener("click", () => {
       if (isGalleryClickable) {
         window.VisualNovelAPI.showGallery();
-        window.VisualNovelAPI.startScenario('galerie_explore'); // Démarrer le scénario ici
       } else {
         alert("La galerie n'est pas encore accessible.");
       }
@@ -484,14 +547,39 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (closeGalleryButton) {
-    closeGalleryButton.addEventListener('click', () => {
+    closeGalleryButton.addEventListener("click", () => {
       window.VisualNovelAPI.hideGallery();
     });
   }
 
   // Déclencher un événement lorsque VisualNovelAPI est prêt
-  document.dispatchEvent(new Event('visualNovelAPIReady'));
+  document.dispatchEvent(new Event("visualNovelAPIReady"));
 });
+
+function handleEndOfScenario() {
+  const dialogueBox = document.getElementById("dialogue-box");
+  if (dialogueBox) dialogueBox.classList.remove("hidden");
+
+  if (currentScenario && currentScenario.next) {
+    window.VisualNovelAPI.startScenario(currentScenario.next);
+  } else if (
+    currentScenario &&
+    currentScenario.choices &&
+    currentScenario.choices.length > 0
+  ) {
+    if (dialogueBox) dialogueBox.classList.remove("hidden");
+    showChoices(currentScenario.choices);
+  } else if (currentScenario && currentScenario.nextScene) {
+    displayScene(currentScenario.nextScene);
+    currentScenario = null;
+    currentScenarioIndex = 0;
+    currentProtagonistDialogueIndex = 0;
+    currentThoughtIndex = 0;
+    isCurrentlyProtagonistDialogue = false;
+  } else {
+    if (dialogueBox) dialogueBox.classList.remove("hidden");
+  }
+}
 
 function displayScenarioDialogue() {
   const dialogueBox = document.getElementById("dialogue-box");
@@ -506,125 +594,147 @@ function displayScenarioDialogue() {
   let currentTexts;
   let currentCharacter;
   let currentIndex;
+  let isThought = false; // New flag to indicate if current text is a thought
 
-  // Phase 2: Afficher les dialogues parlés du protagoniste
-  if (currentScenario.textsProtagonist && currentProtagonistDialogueIndex < currentScenario.textsProtagonist.length) {
-    currentTexts = currentScenario.textsProtagonist;
-    currentCharacter = "protagonist";
-    currentIndex = currentProtagonistDialogueIndex;
+  // Prioritize protagonist's thoughts
+  if (
+    currentScenario.currentDialogueTurn === "you" &&
+    currentScenario.thoughts &&
+    currentThoughtIndex < currentScenario.thoughts.length
+  ) {
+    currentTexts = currentScenario.thoughts;
+    currentCharacter = "protagonist"; // Thoughts are from protagonist
+    currentIndex = currentThoughtIndex;
     isCurrentlyProtagonistDialogue = true;
-  }
-  // Phase 3: Afficher les dialogues des autres personnages
-  else if (currentScenario.texts && currentScenarioIndex < currentScenario.texts.length) {
-    currentTexts = currentScenario.texts;
-    currentCharacter = currentScenario.who || "inconnu";
-    currentIndex = currentScenarioIndex;
-    isCurrentlyProtagonistDialogue = false;
-  }
-  // Phase 1: Afficher les pensées du protagoniste
-  else if (currentScenario.thoughts && currentThoughtIndex < currentScenario.thoughts.length) {
-    characterNameEl.style.display = "block";
-    dialogueTextEl.textContent = ""; // Clear previous text
-    typewriterEffect(
-      dialogueTextEl,
-      currentScenario.thoughts[currentThoughtIndex],
-      () => {},
-      30,
-      false
-    );
-
-    dialogueBox.onclick = () => {
-      currentThoughtIndex++;
-      displayScenarioDialogue();
-    };
-    return; // Arrêter ici pour afficher la pensée
-  }
-  // Si tous les dialogues sont épuisés
-  else {
-    if (dialogueBox) dialogueBox.classList.remove('hidden');
-
-    if (currentScenario && currentScenario.next) {
-      window.VisualNovelAPI.startScenario(currentScenario.next);
-    } else if (currentScenario && currentScenario.choices && currentScenario.choices.length > 0) {
-      if (dialogueBox) dialogueBox.classList.remove('hidden');
-      showChoices(currentScenario.choices);
-    } else if (currentScenario && currentScenario.nextScene) {
-      displayScene(currentScenario.nextScene);
-      currentScenario = null;
-      currentScenarioIndex = 0;
-      currentProtagonistDialogueIndex = 0;
-      currentThoughtIndex = 0;
+    isThought = true;
+  } else if (currentScenario.currentDialogueTurn === "you") {
+    if (
+      currentScenario.textsProtagonist &&
+      currentProtagonistDialogueIndex < currentScenario.textsProtagonist.length
+    ) {
+      currentTexts = currentScenario.textsProtagonist;
+      currentCharacter = "protagonist";
+      currentIndex = currentProtagonistDialogueIndex;
+      isCurrentlyProtagonistDialogue = true;
+    } else if (
+      currentScenario.texts &&
+      currentScenarioIndex < currentScenario.texts.length
+    ) {
+      // Si le protagoniste n'a plus de texte, mais l'ami en a, passer à l'ami
+      currentTexts = currentScenario.texts;
+      currentCharacter = currentScenario.who || "inconnu";
+      currentIndex = currentScenarioIndex;
       isCurrentlyProtagonistDialogue = false;
     } else {
-      if (dialogueBox) dialogueBox.classList.remove('hidden');
+      // Aucun des deux n'a de texte, passer à la suite
+      handleEndOfScenario();
+      return;
     }
+  } else if (currentScenario.currentDialogueTurn === "friend") {
+    if (
+      currentScenario.texts &&
+      currentScenarioIndex < currentScenario.texts.length
+    ) {
+      currentTexts = currentScenario.texts;
+      currentCharacter = currentScenario.who || "inconnu";
+      currentIndex = currentScenarioIndex;
+      isCurrentlyProtagonistDialogue = false;
+    } else if (
+      currentScenario.textsProtagonist &&
+      currentProtagonistDialogueIndex < currentScenario.textsProtagonist.length
+    ) {
+      // Si l'ami n'a plus de texte, mais le protagoniste en a, passer au protagoniste
+      currentTexts = currentScenario.textsProtagonist;
+      currentCharacter = "protagonist";
+      currentIndex = currentProtagonistDialogueIndex;
+      isCurrentlyProtagonistDialogue = true;
+    } else {
+      // Aucun des deux n'a de texte, passer à la suite
+      handleEndOfScenario();
+      return;
+    }
+  } else {
+    // Fallback if currentDialogueTurn is not set or invalid
+    handleEndOfScenario();
     return;
   }
 
-  if (dialogueBox) dialogueBox.classList.remove('hidden');
+  // Set the click handler for advancing the scenario dialogue
+  dialogueBox.onclick = null; // Clear previous click handler
+  dialogueBox.onclick = () => {
+    if (isThought) {
+      currentThoughtIndex++;
+      currentScenario.currentDialogueTurn = "friend"; // After thought, switch to friend's turn
+    } else if (isCurrentlyProtagonistDialogue) {
+      currentProtagonistDialogueIndex++;
+      currentScenario.currentDialogueTurn = "friend"; // Switch to friend's turn
+    } else {
+      currentScenarioIndex++;
+      currentScenario.currentDialogueTurn = "you"; // Switch to protagonist's turn
+    }
+    displayScenarioDialogue(); // Advance to the next dialogue
+  };
+
+  if (dialogueBox) dialogueBox.classList.remove("hidden");
   if (window.ChatAppAPI) window.ChatAppAPI.showChatApp();
   if (window.ChatAppAPI) {
-    window.ChatAppAPI.selectContact('inconnu'); // Assurez-vous que le contact est toujours l'inconnu pour le chat
+    window.ChatAppAPI.selectContact("inconnu"); // Assurez-vous que le contact est toujours l'inconnu pour le chat
   }
 
   const dialogue = {
     character: currentCharacter,
     text: currentTexts[currentIndex],
-    avatar: currentScenario.avatar || '',
-    sfx: currentScenario.audio || '',
-    image: currentScenario.image || '',
+    avatar: currentScenario.avatar || "",
+    sfx: currentScenario.audio || "",
+    image: currentScenario.image || "",
+    audioPlayer: currentScenario.audioPlayer || null, // Ajouter audioPlayer ici
   };
 
   // Display message in chat app
-  if (window.ChatAppAPI) {
-    window.ChatAppAPI.addMessage(dialogue.text, dialogue.character === 'protagonist' ? 'you' : 'friend', dialogue.image);
+  if (!isThought && window.ChatAppAPI) {
+    // Only send to chat if it's not a thought
+    if (dialogue.audioPlayer) {
+      window.ChatAppAPI.addAudioMessage(
+        dialogue.audioPlayer.src,
+        dialogue.character === "protagonist" ? "you" : "friend"
+      );
+    } else {
+      window.ChatAppAPI.addMessage(
+        dialogue.text,
+        dialogue.character === "protagonist" ? "you" : "friend",
+        dialogue.image
+      );
+    }
   }
 
   // Afficher le nom du personnage
-  if (currentCharacter) {
-    characterNameEl.textContent = currentCharacter === "inconnu" ? "" : (currentCharacter === "protagonist" ? "" : storyData.characters[currentCharacter] ? storyData.characters[currentCharacter].name : currentCharacter);
+  if (currentCharacter && !isThought) {
+    // Hide character name for thoughts
+    characterNameEl.textContent =
+      currentCharacter === "inconnu"
+        ? ""
+        : currentCharacter === "protagonist"
+        ? ""
+        : storyData.characters[currentCharacter]
+        ? storyData.characters[currentCharacter].name
+        : currentCharacter;
     characterNameEl.style.display = "block";
   } else {
     characterNameEl.style.display = "none";
   }
 
-  // Clear dialogue text for non-thought dialogues, as they are in chat
-  if (!isCurrentlyProtagonistDialogue) {
+  // Display thoughts directly in dialogueTextEl
+  if (isThought) {
+    dialogueTextEl.textContent = ""; // Clear previous text
+    typewriterEffect(
+      dialogueTextEl,
+      dialogue.text,
+      () => {},
+      30,
+      false // No typing sound for thoughts
+    );
+  } else {
+    // Clear dialogue text for non-thought dialogues, as they are in chat
     dialogueTextEl.textContent = "";
   }
-
-
-
-
-  // Gérer l'avancement du dialogue
-  // Le clic sur la boîte de dialogue avancera le message
-  const dialogueBoxEl = document.getElementById("dialogue-box");
-  let advanced = false;
-  dialogueBoxEl.onclick = () => {
-    if (advanced) return;
-    advanced = true;
-
-    if (isCurrentlyProtagonistDialogue) {
-      currentProtagonistDialogueIndex++;
-    } else {
-      currentScenarioIndex++;
-    }
-    displayScenarioDialogue();
-  };
-
-  // Afficher le texte avec effet de machine à écrire
-  // Note: The actual chat message is sent via ChatAppAPI.addMessage.
-  // The typewriter effect here is for thoughts or other VN specific dialogue.
-  // If it's a protagonist thought, it's already handled above.
-  // If it's an unknown character's dialogue, it's primarily in the chat.
-  // We might need to re-evaluate if typewriterEffect is still needed here for non-thought dialogues.
-  // For now, let's ensure it doesn't interfere with chat messages.
-
 }
-
- 
-
-// (ancienne fonction startScenario supprimée – utiliser VisualNovelAPI.startScenario)
-
-// Function to unblock the story progression
-// (ancienne fonction unblockStory supprimée – utiliser VisualNovelAPI.unblockStory)

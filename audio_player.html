@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lecteur Audio Typing</title>
+    <link rel="stylesheet" href="./Css/audio_player.css" />
+  </head>
+  <body>
+    <div class="audio-player-container">
+      <!-- Bouton de lecture -->
+      <button class="play-button" id="playButton">
+        <div class="play-triangle"></div>
+      </button>
+      <!-- Barre de progression -->
+      <div class="progress-bar" id="progressBar">
+        <div class="progress-fill" id="progressFill"></div>
+        <div class="time-display" id="timeDisplay">00:00</div>
+      </div>
+      <!-- Élément audio caché -->
+      <audio id="typingAudio" src="./Audios/creepy-whispering-6690.mp3"></audio>
+    </div>
+
+    <script src="./Js/audio_player.js"></script>
+  </body>
+</html>
