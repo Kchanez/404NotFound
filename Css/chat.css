@@ -1,11 +1,12 @@
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
-  font-family: 'Courier Prime', monospace;
+  font-family: "Courier Prime", monospace;
   background: #f4f4f6;
 }
 
-#chat-app { 
+#chat-app {
   width: 50%;
   height: 65%;
   display: none; /* Changed from flex to none */
@@ -21,187 +22,223 @@ body, html {
 .window-header {
   height: 40px;
   /* background: linear-gradient(#4d6aa3, #1c2460); */
-  background-color: #0B65F4;
+  background-color: #0b65f4;
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 12px;
 }
-.window-header .title { font-weight: bold; }
-.window-header .close { 
-  border: 2px solid #fff; 
-  background: #CB4929; 
-  color: #fff; 
-  width: 28px; 
-  height: 28px; 
-  border-radius: 6px; 
-  cursor: pointer; 
+.window-header .title {
+  font-weight: bold;
+}
+.window-header .close {
+  border: 2px solid #fff;
+  background: #cb4929;
+  color: #fff;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
-.window-body { 
-  flex: 1; 
-  display: grid; 
-  grid-template-columns: 1fr 2fr; 
-  gap: 0; 
-  border: 5px solid #0B65F4;
+.window-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 0;
+  border: 5px solid #0b65f4;
 }
 
 /* Thread (conversation) */
-#thread { 
-  display: flex; 
-  flex-direction: column; 
-  border-left: 3px solid #A9A9A9; 
-  background: #fff; 
+#thread {
+  display: flex;
+  flex-direction: column;
+  border-left: 3px solid #a9a9a9;
+  background: #fff;
 }
-.thread-header { 
-  height: 60px; 
-  display: flex; 
-  align-items: center; 
-  justify-content: space-between; 
-  padding: 0 10px; 
-  border-bottom: 3px solid #c0c0c0; 
+.thread-header {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  border-bottom: 3px solid #c0c0c0;
   /* background: #e8ecf5;  */
 }
-.contact-info { display: flex; gap: 10px; align-items: center; }
-.avatar { 
-  width: 40px; 
-  height: 40px;  
+.contact-info {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.avatar {
+  width: 40px;
+  height: 40px;
 }
 
-.contact-meta { display: flex; flex-direction: column; }
-.name { font-weight: bold; }
-.status { font-size: 12px; color: #666; }
-.add-btn { 
-  width: 28px; height: 28px; 
-  border: 2px solid #000; 
-  border-radius: 6px; 
-  background: #fff; 
-  cursor: pointer; 
+.contact-meta {
+  display: flex;
+  flex-direction: column;
+}
+.name {
+  font-weight: bold;
+}
+.status {
+  font-size: 12px;
+  color: #666;
+}
+.add-btn {
+  width: 28px;
+  height: 28px;
+  border: 2px solid #000;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
 }
 
-.messages { 
-  padding: 12px; 
-  display: flex; 
-  flex-direction: column; 
-  gap: 10px; 
+.messages {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   /* Hauteur fixe avec scroll, style WhatsApp */
   height: 40vh;
   max-height: 40vh;
-  overflow-y: auto; 
+  overflow-y: auto;
   overscroll-behavior: contain;
   scroll-behavior: smooth;
 }
-.msg-row { 
+.msg-row {
   width: 80%;
-  display: flex; 
-  gap: 8px; 
-  align-items: flex-end; 
+  display: flex;
+  gap: 8px;
 }
-.msg-row.you {
-  margin-left: auto;
-  justify-content: flex-end;
-}
+
 .msg-row.friend {
   margin-right: auto;
 }
-.bubble { 
-  padding: 8px 10px; 
-  border-radius: 0px; 
-  border: 2px solid #000; 
-  background: #fff; 
+.bubble {
+  padding: 8px 10px 8px 30px;
+  border-radius: 0px;
+  /* border: 2px solid #000;  */
+  background: #fff;
 }
 
-.bubble.you, .bubble.friend 
+/* .bubble.you, .bubble.friend 
   {
   background: #D9D9D9; 
-  }
+  } */
 
-.composer { 
-  display: flex; 
-  gap: 8px; 
-  padding: 10px; 
-  border-top: 3px solid #000; 
+.composer {
+  display: flex;
+  gap: 8px;
+  padding: 10px;
+  border-top: 3px solid #000;
 }
-.composer input { flex: 1; padding: 8px; border: 2px solid #000; border-radius: 8px; }
-.composer button { padding: 8px 12px; border: 2px solid #000; border-radius: 8px; background: #fff; cursor: pointer; }
+.composer input {
+  flex: 1;
+  padding: 8px;
+  border: 2px solid #000;
+  border-radius: 8px;
+}
+.composer button {
+  padding: 8px 12px;
+  border: 2px solid #000;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+}
 
 /* Contacts */
-#contacts { 
-  background: #fff; 
+#contacts {
+  background: #fff;
   height: 100%;
 }
-.contact-list { list-style: none; margin: 0; padding: 0; }
-.contact-item { 
-  display: flex; 
-  align-items: center; 
-  gap: 10px; 
-  padding: 12px; 
-  border-bottom: 2px solid #eee; 
-  cursor: pointer; 
+.contact-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
-.contact-item:hover { background: #f5f7fb; }
-.contact-item .avatar { width: 32px; height: 32px; }
-.contact-name { font-weight: bold; }
-.contact-preview { font-size: 12px; color: #666; }
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border-bottom: 2px solid #eee;
+  cursor: pointer;
+}
+.contact-item:hover {
+  background: #f5f7fb;
+}
+.contact-item .avatar {
+  width: 32px;
+  height: 32px;
+}
+.contact-name {
+  font-weight: bold;
+}
+.contact-preview {
+  font-size: 12px;
+  color: #666;
+}
 
-.hidden { display: none; }
-
-
+.hidden {
+  display: none;
+}
 
 /* CTA en bas comme sur l’image */
-.pc-cta { 
-  margin: 10px 0px; 
-  text-align: center; 
+.pc-cta {
+  margin: 10px 0px;
+  text-align: center;
 }
-.pc-cta-btn { 
-    width: 90%;
-    padding: 10px;
-    border: 2px solid #000;
-    border-radius: 18px;
-    background: #fff;
-    cursor: pointer;
-    font-size: 15px;
-    box-shadow: -5px 4px;
+.pc-cta-btn {
+  width: 90%;
+  padding: 10px;
+  border: 2px solid #000;
+  border-radius: 18px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 15px;
+  box-shadow: -5px 4px;
 }
-.pc-cta-icon { 
-  width: 22px; 
-  margin-left: 8px; 
-  vertical-align: middle; 
+.pc-cta-icon {
+  width: 22px;
+  margin-left: 8px;
+  vertical-align: middle;
 }
 
-.pc-composer { 
-  display: flex; 
-  gap: 8px; 
-  margin: 12px 5px; 
+.pc-composer {
+  display: flex;
+  gap: 8px;
+  margin: 12px 5px;
 }
-.pc-composer input { 
-  flex: 1; 
-  padding: 10px; 
-  border: 3px solid #000; 
-  border-radius: 12px; 
+.pc-composer input {
+  flex: 1;
+  padding: 10px;
+  border: 3px solid #000;
+  border-radius: 12px;
 }
-.pc-send { 
-  padding: 10px 14px; 
-  border: 3px solid #000; 
-  border-radius: 12px; 
-  background: #fff; 
-  cursor: pointer; 
+.pc-send {
+  padding: 10px 14px;
+  border: 3px solid #000;
+  border-radius: 12px;
+  background: #fff;
+  cursor: pointer;
 }
 
 /* Styles pour la modale d'image */
 .image-modal {
-  display: none; 
-  position: fixed; 
-  z-index: 10001; 
+  display: none;
+  position: fixed;
+  z-index: 10001;
   left: 0;
   top: 0;
-  width: 100%; 
-  height: 100%; 
-  overflow: auto; 
-  background-color: rgba(0,0,0,0.8); 
-  justify-content: center; 
-  align-items: center; 
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
 }
 
 .image-modal-content {
@@ -235,4 +272,3 @@ body, html {
   text-decoration: none;
   cursor: pointer;
 }
-

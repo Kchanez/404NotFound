@@ -104,6 +104,29 @@ document.addEventListener("DOMContentLoaded", function () {
     function addMessage(text, who, image = null, shouldSave = true) {
       const row = document.createElement("div");
       row.className = "msg-row " + (who === "you" ? "you" : "friend");
+      row.style.flexDirection = "column";
+
+      const avatarContainer = document.createElement("div");
+      avatarContainer.className = "avatar-container";
+      avatarContainer.style.display = "flex";
+      avatarContainer.style.flexDirection = "row";
+      avatarContainer.style.alignItem = "center " ;
+      avatarContainer.style.gap = "10px";
+
+      const avatarImg = document.createElement("img");
+      avatarImg.className = "avatar-chat";
+      avatarImg.src =
+        who === "you" ? "./Images/Moi.svg" : "./Images/inconnu.svg";
+      avatarImg.alt = who === "you" ? "Moi" : "Inconnu";
+      avatarContainer.appendChild(avatarImg);
+
+      const nameSpan = document.createElement("span");
+      nameSpan.className = "avatar-name";
+      nameSpan.textContent = who === "you" ? "Moi" : nameEl.textContent;
+      avatarContainer.appendChild(nameSpan);
+
+      row.appendChild(avatarContainer);
+
       const bubble = document.createElement("div");
       bubble.className = "bubble " + (who === "you" ? "you" : "friend");
 
