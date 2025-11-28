@@ -61,6 +61,10 @@
         if (!icon) return false;
         activateCalendarWithAnniversary();
         window.CalendarAPI.openCalendar();
+        // Désactiver le calendrier après un court délai (par exemple, 3 secondes)
+        setTimeout(() => {
+          window.CalendarAPI.disableCalendar();
+        }, 3000); // 3000 ms = 3 secondes
         return false; // non-bloquant
       }
       // Masquer l'icône de notification à un message spécifique

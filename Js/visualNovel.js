@@ -157,7 +157,7 @@ function showDialogue(dialogues, index, choices, scenarioChoices = null) {
       if (!hasInjectedHeyMessage) {
         setTimeout(() => {
           window.ChatAppAPI.addMessage("Hey", "friend");
-        }, 500);
+        }, 1000);
         hasInjectedHeyMessage = true;
       }
     }
@@ -248,7 +248,7 @@ function showDialogue(dialogues, index, choices, scenarioChoices = null) {
         canAdvance = true;
       }, 100); // Small delay
     },
-    30,
+    50,
     enableTypingSound
   );
 }
@@ -399,7 +399,7 @@ function showChoices(choices) {
         if (errorActions) errorActions.appendChild(button);
       });
     }
-  }, 400);
+  }, 200);
 }
 
 // Jouer un fichier audio
@@ -692,19 +692,21 @@ function displayScenarioDialogue() {
 
   // Display message in chat app
   if (!isThought && window.ChatAppAPI) {
-    // Only send to chat if it's not a thought
-    if (dialogue.audioPlayer) {
-      window.ChatAppAPI.addAudioMessage(
-        dialogue.audioPlayer.src,
-        dialogue.character === "protagonist" ? "you" : "friend"
-      );
-    } else {
-      window.ChatAppAPI.addMessage(
-        dialogue.text,
-        dialogue.character === "protagonist" ? "you" : "friend",
-        dialogue.image
-      );
-    }
+    const delay = window.ChatAppAPI.messageDisplayDelay || 200; // Utiliser le délai du chat ou 200ms par défaut
+    setTimeout(() => {
+      if (dialogue.audioPlayer) {
+        window.ChatAppAPI.addAudioMessage(
+          dialogue.audioPlayer.src,
+          dialogue.character === "protagonist" ? "you" : "friend"
+        );
+      } else {
+        window.ChatAppAPI.addMessage(
+          dialogue.text,
+          dialogue.character === "protagonist" ? "you" : "friend",
+          dialogue.image
+        );
+      }
+    }, delay);
   }
 
   // Afficher le nom du personnage

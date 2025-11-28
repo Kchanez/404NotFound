@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // inputEl, sendBtn, mainChatComposer sont supprimés
     const mainChatCtaBtn = document.getElementById("main-chat-cta-btn");
     const mainChatCta = document.getElementById("main-chat-cta");
-    const privateChatApp = document.getElementById("private-chat-app");
     const hackedScreen = document.getElementById("hacked-screen");
 
     // Persistance simple via localStorage
@@ -19,11 +18,15 @@ document.addEventListener("DOMContentLoaded", function () {
     let threads = loadThreads();
     let contacts = JSON.parse(JSON.stringify(CHAT_CONTACTS));
     let currentId = contacts[0].id; // par défaut: inconnu
+    let lastSender = null; // Variable pour suivre le dernier expéditeur
+    const messageDisplayDelay = 200; // Délai d'affichage normal des messages (ms)
 
     function loadThreads() {
       return JSON.parse(JSON.stringify(CHAT_THREADS));
     }
-    function saveThreads() {}
+    function saveThreads() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(threads));
+    }
 
     function renderContacts() {
       contactsEl.innerHTML = "";
@@ -90,15 +93,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function renderThread() {
       messagesEl.innerHTML = "";
+      lastSender = null; // Réinitialiser le dernier expéditeur pour un nouveau thread
       const arr = threads[currentId] || [];
+      let cumulativeDelay = 0;
       arr.forEach((m) => {
-        if (m.type === "audio") {
-          window.ChatAppAPI.addAudioMessage(m.src, m.who, m.text, false);
-        } else {
-          addMessage(m.text, m.who, m.image, false);
-        }
+        setTimeout(() => {
+          if (m.type === "audio") {
+            window.ChatAppAPI.addAudioMessage(m.src, m.who, m.text, false);
+          } else {
+            addMessage(m.text, m.who, m.image, false);
+          }
+          messagesEl.scrollTop = messagesEl.scrollHeight;
+        }, cumulativeDelay);
+        cumulativeDelay += messageDisplayDelay;
       });
-      messagesEl.scrollTop = messagesEl.scrollHeight;
+      // messagesEl.scrollTop = messagesEl.scrollHeight; // Déplacé à l'intérieur du setTimeout
     }
 
     function addMessage(text, who, image = null, shouldSave = true) {
@@ -106,26 +115,28 @@ document.addEventListener("DOMContentLoaded", function () {
       row.className = "msg-row " + (who === "you" ? "you" : "friend");
       row.style.flexDirection = "column";
 
-      const avatarContainer = document.createElement("div");
-      avatarContainer.className = "avatar-container";
-      avatarContainer.style.display = "flex";
-      avatarContainer.style.flexDirection = "row";
-      avatarContainer.style.alignItem = "center " ;
-      avatarContainer.style.gap = "10px";
+      if (who !== lastSender) {
+        const avatarContainer = document.createElement("div");
+        avatarContainer.className = "avatar-container";
+        avatarContainer.style.display = "flex";
+        avatarContainer.style.flexDirection = "row";
+        avatarContainer.style.alignItem = "center ";
+        avatarContainer.style.gap = "10px";
 
-      const avatarImg = document.createElement("img");
-      avatarImg.className = "avatar-chat";
-      avatarImg.src =
-        who === "you" ? "./Images/Moi.svg" : "./Images/inconnu.svg";
-      avatarImg.alt = who === "you" ? "Moi" : "Inconnu";
-      avatarContainer.appendChild(avatarImg);
+        const avatarImg = document.createElement("img");
+        avatarImg.className = "avatar-chat";
+        avatarImg.src =
+          who === "you" ? "./Images/Moi.svg" : "./Images/inconnu.svg";
+        avatarImg.alt = who === "you" ? "Moi" : "Inconnu";
+        avatarContainer.appendChild(avatarImg);
 
-      const nameSpan = document.createElement("span");
-      nameSpan.className = "avatar-name";
-      nameSpan.textContent = who === "you" ? "Moi" : nameEl.textContent;
-      avatarContainer.appendChild(nameSpan);
+        const nameSpan = document.createElement("span");
+        nameSpan.className = "avatar-name";
+        nameSpan.textContent = who === "you" ? "Moi" : nameEl.textContent;
+        avatarContainer.appendChild(nameSpan);
 
-      row.appendChild(avatarContainer);
+        row.appendChild(avatarContainer);
+      }
 
       const bubble = document.createElement("div");
       bubble.className = "bubble " + (who === "you" ? "you" : "friend");
@@ -179,6 +190,7 @@ document.addEventListener("DOMContentLoaded", function () {
         arr.push({ who, text, image, type: image ? "image" : "text" });
         saveThreads();
       }
+      lastSender = who; // Mettre à jour le dernier expéditeur
     }
 
     // send fonction est supprimée
@@ -205,7 +217,7 @@ document.addEventListener("DOMContentLoaded", function () {
             notif.play();
           } catch (_) {}
         }
-      }, 1000);
+      }, messageDisplayDelay);
     }
 
     function toggleContact() {
@@ -258,6 +270,32 @@ document.addEventListener("DOMContentLoaded", function () {
       addAudioMessage: (src, who, text = null, shouldSave = true) => {
         const row = document.createElement("div");
         row.className = "msg-row " + (who === "you" ? "you" : "friend");
+        row.style.flexDirection = "column";
+        row.style.alignItems = who === "you" ? "flex-end" : "flex-start";
+
+        if (who !== lastSender) {
+          const avatarContainer = document.createElement("div");
+          avatarContainer.className = "avatar-container";
+          avatarContainer.style.display = "flex";
+          avatarContainer.style.flexDirection = "row";
+          avatarContainer.style.alignItem = "center ";
+          avatarContainer.style.gap = "10px";
+
+          const avatarImg = document.createElement("img");
+          avatarImg.className = "avatar-chat";
+          avatarImg.src =
+            who === "you" ? "./Images/Moi.svg" : "./Images/inconnu.svg";
+          avatarImg.alt = who === "you" ? "Moi" : "Inconnu";
+          avatarContainer.appendChild(avatarImg);
+
+          const nameSpan = document.createElement("span");
+          nameSpan.className = "avatar-name";
+          nameSpan.textContent = who === "you" ? "Moi" : nameEl.textContent;
+          avatarContainer.appendChild(nameSpan);
+
+          row.appendChild(avatarContainer);
+        }
+
         const bubble = document.createElement("div");
         bubble.className = "bubble " + (who === "you" ? "you" : "friend");
 
@@ -368,6 +406,7 @@ document.addEventListener("DOMContentLoaded", function () {
           arr.push({ who, src, type: "audio", text });
           saveThreads();
         }
+        lastSender = who; // Mettre à jour le dernier expéditeur
       },
       selectContact: selectContact,
       showChatApp: () => {
@@ -398,6 +437,7 @@ document.addEventListener("DOMContentLoaded", function () {
       openImageModal: (imageUrl) => {
         console.log("Ouverture de l'image en modale: ", imageUrl);
       },
+      messageDisplayDelay: messageDisplayDelay, // Exposer le délai d'affichage des messages
     };
   })();
 })();

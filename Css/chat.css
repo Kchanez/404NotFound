@@ -7,16 +7,16 @@ html {
 }
 
 #chat-app {
-  width: 50%;
-  height: 65%;
-  display: none; /* Changed from flex to none */
-  flex-direction: column;
-  margin: 0 auto; /* Centrage horizontal */
-  position: absolute; /* Positionnement absolu */
-  z-index: 10000;
-  top: 34%; /* Centrage vertical */
-  left: 39%; /* Centrage horizontal */
-  transform: translate(-50%, -50%); /* Ajustement pour un centrage parfait */
+    width: 45%;
+    height: 60%;
+    display: none;
+    flex-direction: column;
+    margin: 0 auto;
+    position: absolute;
+    z-index: 10000;
+    top: 34%;
+    left: 45%;
+    transform: translate(-50%, -50%);
 }
 
 .window-header {
@@ -84,7 +84,7 @@ html {
   font-weight: bold;
 }
 .status {
-  font-size: 12px;
+  font-size: 11px;
   color: #666;
 }
 .add-btn {
@@ -112,22 +112,17 @@ html {
   width: 80%;
   display: flex;
   gap: 8px;
+  font-size: 15px;
 }
 
 .msg-row.friend {
   margin-right: auto;
 }
 .bubble {
-  padding: 8px 10px 8px 30px;
+  padding: 0px 10px 5px 30px;
   border-radius: 0px;
-  /* border: 2px solid #000;  */
   background: #fff;
 }
-
-/* .bubble.you, .bubble.friend 
-  {
-  background: #D9D9D9; 
-  } */
 
 .composer {
   display: flex;
