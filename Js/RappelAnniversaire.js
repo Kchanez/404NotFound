@@ -73,7 +73,6 @@
         hideNotificationIcon();
         return false; // non-bloquant
       }
-
       return false; // pas de blocage pour ce texte
     },
   };

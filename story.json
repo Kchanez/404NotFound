@@ -499,16 +499,176 @@
       "choices": [
         {
           "text": "Voir_Calenderier",
-          "reply": [],
-          "next": ""
+          "reply": ["Je suis partante mais Laïla, pourquoi 28 et pas le 29 ?"],
+          "next": "Voir_Calenderier1"
         },
         {
           "text": "Non_Voir_Calenderier",
+          "reply": ["Je suis partante mais Laïla pour le 28 ?"],
+          "next": "Non_Voir_Calenderier1"
+        }
+      ]
+    },
+    "Voir_Calenderier1": {
+      "who": "inconnu",
+      "texts": ["Comment ça ?"],
+      "who2": "protagonist",
+      "textsProtagonist": [
+        "On est en année bissextile, autant en profiter pour fêter le jour exacte ?"
+      ],
+      "next": "Voir_Calenderier2"
+    },
+    "Non_Voir_Calenderier1": {
+      "who": "inconnu",
+      "texts": [
+        "28 au soir, tu me souhaiteras à minuit !",
+        "C’est toujours ok pour toi ?"
+      ],
+      "who2": "protagonist",
+      "textsProtagonist": [
+        "Oui ça me va ! Je vais demander à mon père de me descendre chez toi.",
+        "Tu peux me donner l’adresse s’il te plait ?"
+      ],
+      "next": "Non_Voir_Calenderier2"
+    },
+    "Voir_Calenderier2": {
+      "who": "inconnu",
+      "texts": [
+        "Ah oui, le 29 haha excuse moi. J’ai un peu la tête en l’air...",
+        "J’avais oublié qu’on était en année bisextille.",
+        "T’es vraiment une bonne amie pour t’en être souvenu !"
+      ],
+      "who2": "protagonist",
+      "textsProtagonist": ["Oui haha surement"],
+      "next": "Voir_Calenderier3"
+    },
+    "Non_Voir_Calenderier2": {
+      "who": "inconnu",
+      "texts": [
+        "Euh oui avec plaisir, mais comme je t’ai dit je préfère que tu viennes seule.",
+        "Si mes parents ou la police apprennent que j’ai pris un risque, ils ne me pardonneront jamais."
+      ],
+      "who2": "protagonist",
+      "textsProtagonist": [
+        "Je dirai à mon père que je vais chez une autre amie tkt"
+      ],
+      "next": "Non_Voir_Calenderier3"
+    },
+    "Voir_Calenderier3": {
+      "who": "inconnu",
+      "texts": [
+        "Euh oui vaec plaisir, mais comme je t’ai dit je préfére que tu viennes seule.",
+        "Si mes parents ou la police apprennent que j’ai pris un risque, ils ne me pardonneront jamais."
+      ],
+      "who2": "protagonist",
+      "textsProtagonist": [
+        "Je dirai à mon père que je vais chez une autre amie tkt"
+      ],
+      "next": "Voir_Calenderier4"
+    },
+    "Non_Voir_Calenderier3": {
+      "who": "inconnu",
+      "texts": [
+        "Non j’insiste, serieusement",
+        "Tu sais quoi au pire on va faire ça comme à l’ancienne, dans notre ancienne ville",
+        "J’ai vraiment besoin de te voir, ça me fera un bien au mental."
+      ],
+      "who2": "protagonist",
+      "textsProtagonist": ["Tu m’as manqué Laïla. J’ai hâte qu’on se revoit."],
+      "next": "Non_Voir_Calenderier4"
+    },
+    "Voir_Calenderier4": {
+      "who": "inconnu",
+      "texts": ["Mais j’aurais un service à te demander"],
+      "who2": "protagonist",
+      "textsProtagonist": ["Oui dis moi."],
+      "next": "Voir_Calenderier5"
+    },
+    "Non_Voir_Calenderier4": {
+      "who": "inconnu",
+      "texts": ["Mais j’aurais un service à te demander"],
+      "who2": "protagonist",
+      "textsProtagonist": ["Oui dis moi."],
+      "next": "Non_Voir_Calenderier5"
+    },
+    "Voir_Calenderier5": {
+      "who": "inconnu",
+      "texts": [
+        "Ne m’achète pas de cadeau. Mais peut-tu me faire un virement , Je vais t’envoyer une demande",
+        "Je vais venir, mais si je prend un ticket de bus ou de train, mes parents seront au courant."
+      ],
+      "who2": "protagonist",
+      "textsProtagonist": ["D’accord ça marche"],
+      "next": "Voir_Calenderier6"
+    },
+    "Non_Voir_Calenderier5": {
+      "who": "inconnu",
+      "texts": [
+        "Ne m’achète pas de cadeau. Mais peut-tu me faire un virement , Je vais t’envoyer une demande",
+        "Je vais venir, mais si je prends un ticket de bus ou de train, mes parents seront au courant."
+      ],
+      "who2": "protagonist",
+      "textsProtagonist": ["D’accord ça marche"],
+      "next": "Non_Voir_Calenderier6"
+    },
+    "Voir_Calenderier6": {
+      "who": "inconnu",
+      "texts": ["Merci beaucoup, je t’ai envoyé un petit virement."],
+      "who2": "protagonist",
+      "textsProtagonist": ["D’accord je vois."],
+      "next": "Voir_Calenderier7"
+    },
+    "Non_Voir_Calenderier6": {
+      "who": "inconnu",
+      "texts": ["Ils traquent mes moindres gestes et mouvements"],
+      "who2": "protagonist",
+      "textsProtagonist": ["C’est pour ta sécurité je les comprends."],
+      "next": "Non_Voir_Calenderier7"
+    },
+    "Voir_Calenderier7": {
+      "who": "inconnu",
+      "texts": ["Ils traquent mes moindres gestes et mouvements"],
+      "who2": "protagonist",
+      "textsProtagonist": ["C’est pour ta sécurité je les comprends."],
+      "next": "Voir_Calenderier8"
+    },
+    "Non_Voir_Calenderier7": {
+      "who": "inconnu",
+      "texts": ["Ça marche super, je t’envoie l’adresse :"],
+      "choices": [
+        {
+          "text": "Si recherche sur internet",
+          "reply": [""],
+          "next": ""
+        },
+        {
+          "text": "Si pas de recherche sur internet",
           "reply": [""],
           "next": ""
         }
       ]
     },
+    "Voir_Calenderier8": {
+      "who": "inconnu",
+      "texts": ["Ça marche super, je t’envoie l’adresse :"],
+      "choices": [
+        {
+          "text": "Si recherche sur internet",
+          "reply": [""],
+          "next": ""
+        },
+        {
+          "text": "Si pas de recherche sur internet",
+          "reply": [""],
+          "next": ""
+        }
+      ]
+    },
+
+
+
+
+    
     "Non_Ecouter_Voicemail2": {
       "who": "inconnu",
       "texts": [
