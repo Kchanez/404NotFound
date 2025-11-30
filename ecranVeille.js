@@ -18,6 +18,10 @@ function updateTimestamp() {
     timeElem.textContent = `${hours} : ${minutes} : ${seconds}`;
 }
 
+function goToIndex() {
+    window.location.href = "index.html";
+}
+
 // Mise à jour chaque seconde
 setInterval(updateTimestamp, 1000);
 updateTimestamp(); // Première exécution
@@ -62,4 +66,18 @@ setTimeout(() => {
     }
 
 }, 15000);
+
+// Après 15 secondes, afficher la page de début du jeu 
+setTimeout(() => {
+
+    // cacher la fiche de disparition
+    document.getElementById("disparition-screen").classList.add("hidden");
+
+    // cacher le msg du gouvernement
+    document.getElementById("message-gouv").classList.add("hidden");
+
+    // afficher la page de début du jeu
+    goToIndex();
+
+}, 27000);
 
