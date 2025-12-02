@@ -157,7 +157,7 @@ function showDialogue(dialogues, index, choices, scenarioChoices = null) {
       if (!hasInjectedHeyMessage) {
         setTimeout(() => {
           window.ChatAppAPI.addMessage("Hey", "friend");
-        }, 1000);
+        }, 300);
         hasInjectedHeyMessage = true;
       }
     }
