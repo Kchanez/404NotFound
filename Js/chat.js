@@ -95,19 +95,16 @@ document.addEventListener("DOMContentLoaded", function () {
       messagesEl.innerHTML = "";
       lastSender = null; // Réinitialiser le dernier expéditeur pour un nouveau thread
       const arr = threads[currentId] || [];
-      let cumulativeDelay = 0;
       arr.forEach((m) => {
-        setTimeout(() => {
-          if (m.type === "audio") {
-            window.ChatAppAPI.addAudioMessage(m.src, m.who, m.text, false);
-          } else {
-            addMessage(m.text, m.who, m.image, false);
-          }
-          messagesEl.scrollTop = messagesEl.scrollHeight;
-        }, cumulativeDelay);
-        cumulativeDelay += messageDisplayDelay;
+        if (m.type === "audio") {
+          // Utiliser addAudioMessage avec shouldSave = false pour ne pas re-sauvegarder
+          window.ChatAppAPI.addAudioMessage(m.src, m.who, m.text, false);
+        } else {
+          // Utiliser addMessage avec shouldSave = false pour ne pas re-sauvegarder
+          addMessage(m.text, m.who, m.image, false);
+        }
       });
-      // messagesEl.scrollTop = messagesEl.scrollHeight; // Déplacé à l'intérieur du setTimeout
+      messagesEl.scrollTop = messagesEl.scrollHeight; // S'assurer que le scroll est en bas après le rendu
     }
 
     function addMessage(text, who, image = null, shouldSave = true) {

@@ -371,6 +371,11 @@ function handleChoice(choice) {
       }, 1000);
     }
   }
+
+  // Ajout de la logique pour activer et désactiver le calendrier
+  if (choice.text === "Voir Calenderier" && window.CalendarAPI) {
+    window.CalendarAPI.enableCalendar(true);
+  }
 }
 
 // Override: afficher les choix via #hacked-screen

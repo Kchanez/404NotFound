@@ -498,12 +498,33 @@
       ],
       "choices": [
         {
-          "text": "Voir_Calenderier",
+          "text": "Voir Calenderier",
           "reply": ["Je suis partante mais Laïla, pourquoi 28 et pas le 29 ?"],
           "next": "Voir_Calenderier1"
         },
         {
-          "text": "Non_Voir_Calenderier",
+          "text": "Non Voir Calenderier",
+          "reply": ["Je suis partante mais Laïla pour le 28 ?"],
+          "next": "Non_Voir_Calenderier1"
+        }
+      ]
+    },
+    "Non_Ecouter_Voicemail2": {
+      "who": "inconnu",
+      "texts": [
+        "Mais moi qui suit désolé j’aurai du savoir que tu étais de confiance",
+        "Et je m’en serai voulu de ne pas fêter mon anniversaire avec toi",
+        "C’est pourquoi je veux qu’on se revoie en cachette de mes parents et de la protection policière",
+        "Une soirée le 28 février ?"
+      ],
+      "choices": [
+        {
+          "text": "Voir Calenderier",
+          "reply": ["Je suis partante mais Laïla, pourquoi 28 et pas le 29 ?"],
+          "next": "Voir_Calenderier1"
+        },
+        {
+          "text": "Non Voir Calenderier",
           "reply": ["Je suis partante mais Laïla pour le 28 ?"],
           "next": "Non_Voir_Calenderier1"
         }
@@ -557,12 +578,13 @@
     "Voir_Calenderier3": {
       "who": "inconnu",
       "texts": [
-        "Euh oui vaec plaisir, mais comme je t’ai dit je préfére que tu viennes seule.",
-        "Si mes parents ou la police apprennent que j’ai pris un risque, ils ne me pardonneront jamais."
+        "Mais restons sur 28 au soir, tu me souhaiteras à minuit !",
+        "C’est toujours ok pour toi ?"
       ],
       "who2": "protagonist",
       "textsProtagonist": [
-        "Je dirai à mon père que je vais chez une autre amie tkt"
+        "Oui ça me va ! Je vais demander à mon père de me descendre chez toi.",
+        "Tu peux me donner l’adresse s’il te plait ?"
       ],
       "next": "Voir_Calenderier4"
     },
@@ -579,9 +601,14 @@
     },
     "Voir_Calenderier4": {
       "who": "inconnu",
-      "texts": ["Mais j’aurais un service à te demander"],
+      "texts": [
+        "Euh oui avec plaisir, mais comme je t’ai dit je préfére que tu viennes seule.",
+        "Si mes parents ou la police apprennent que j’ai pris un risque, ils ne me pardonneront jamais."
+      ],
       "who2": "protagonist",
-      "textsProtagonist": ["Oui dis moi."],
+      "textsProtagonist": [
+        "Je dirai à mon père que je vais chez une autre amie tkt"
+      ],
       "next": "Voir_Calenderier5"
     },
     "Non_Voir_Calenderier4": {
@@ -594,11 +621,12 @@
     "Voir_Calenderier5": {
       "who": "inconnu",
       "texts": [
-        "Ne m’achète pas de cadeau. Mais peut-tu me faire un virement , Je vais t’envoyer une demande",
-        "Je vais venir, mais si je prend un ticket de bus ou de train, mes parents seront au courant."
+        "Non j’insiste, serieusement",
+        "Tu sais quoi au pire on va faire ça comme à l’ancienne, dans notre ancienne ville",
+        "J’ai vraiment besoin de te voir, ça me fera un bien au mental."
       ],
       "who2": "protagonist",
-      "textsProtagonist": ["D’accord ça marche"],
+      "textsProtagonist": ["Tu m’as manqué Laïla. J’ai hâte qu’on se revoit."],
       "next": "Voir_Calenderier6"
     },
     "Non_Voir_Calenderier5": {
@@ -613,9 +641,9 @@
     },
     "Voir_Calenderier6": {
       "who": "inconnu",
-      "texts": ["Merci beaucoup, je t’ai envoyé un petit virement."],
+      "texts": ["Mais j’aurais un service à te demander"],
       "who2": "protagonist",
-      "textsProtagonist": ["D’accord je vois."],
+      "textsProtagonist": ["Oui dis moi."],
       "next": "Voir_Calenderier7"
     },
     "Non_Voir_Calenderier6": {
@@ -627,9 +655,12 @@
     },
     "Voir_Calenderier7": {
       "who": "inconnu",
-      "texts": ["Ils traquent mes moindres gestes et mouvements"],
+      "texts": [
+        "Ne m’achète pas de cadeau. Mais peut-tu me faire un virement , Je vais t’envoyer une demande",
+        "Je vais venir, mais si je prend un ticket de bus ou de train, mes parents seront au courant."
+      ],
       "who2": "protagonist",
-      "textsProtagonist": ["C’est pour ta sécurité je les comprends."],
+      "textsProtagonist": ["D’accord ça marche"],
       "next": "Voir_Calenderier8"
     },
     "Non_Voir_Calenderier7": {
@@ -637,12 +668,12 @@
       "texts": ["Ça marche super, je t’envoie l’adresse :"],
       "choices": [
         {
-          "text": "Si recherche sur internet",
+          "text": "Recherche sur internet",
           "reply": [""],
           "next": ""
         },
         {
-          "text": "Si pas de recherche sur internet",
+          "text": "Non recherche sur internet",
           "reply": [""],
           "next": ""
         }
@@ -650,41 +681,31 @@
     },
     "Voir_Calenderier8": {
       "who": "inconnu",
+      "texts": ["Ils traquent mes moindres gestes et mouvements"],
+      "who2": "protagonist",
+      "textsProtagonist": ["C’est pour ta sécurité je les comprends."],
+      "next": "Voir_Calenderier9"
+    },
+
+    "Voir_Calenderier9": {
+      "who": "inconnu",
+      "texts": ["Ils traquent mes moindres gestes et mouvements"],
+      "who2": "protagonist",
+      "textsProtagonist": ["C’est pour ta sécurité je les comprends."],
+      "next": "Voir_Calenderier10"
+    },
+
+    "Voir_Calenderier10": {
+      "who": "inconnu",
       "texts": ["Ça marche super, je t’envoie l’adresse :"],
       "choices": [
         {
-          "text": "Si recherche sur internet",
+          "text": "Recherche sur internet",
           "reply": [""],
           "next": ""
         },
         {
-          "text": "Si pas de recherche sur internet",
-          "reply": [""],
-          "next": ""
-        }
-      ]
-    },
-
-
-
-
-    
-    "Non_Ecouter_Voicemail2": {
-      "who": "inconnu",
-      "texts": [
-        "Mais moi qui suit désolé j’aurai du savoir que tu étais de confiance",
-        "Et je m’en serai voulu de ne pas fêter mon anniversaire avec toi",
-        "C’est pourquoi je veux qu’on se revoie en cachette de mes parents et de la protection policière",
-        "Une soirée le 28 février ?"
-      ],
-      "choices": [
-        {
-          "text": "Voir_Calenderier",
-          "reply": [],
-          "next": ""
-        },
-        {
-          "text": "Non_Voir_Calenderier",
+          "text": "Non recherche sur internet",
           "reply": [""],
           "next": ""
         }

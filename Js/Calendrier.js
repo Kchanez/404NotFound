@@ -1,7 +1,6 @@
-
-
 // Calendrier.js — petit calendrier simple, dans le style du jeu
 let currentCalendarDate = new Date();
+let isPermanentlyEnabled = false;
 let calendarEvents = [];
 let disableOnNextIconClick = false;
 
@@ -19,10 +18,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // Ouvrir/fermer au clic sur l'icône (fonctionnera une fois activée).
   icon.addEventListener("click", () => {
     // Ignorer si désactivé
-    if (icon.classList.contains("disabled") || icon.getAttribute("aria-disabled") === "true") {
+    if (
+      icon.classList.contains("disabled") ||
+      icon.getAttribute("aria-disabled") === "true"
+    ) {
       return;
     }
-    toggleCalendar(container, true);
+    toggleCalendar(container, true, isPermanentlyEnabled);
   });
 
   // Navigation mois précédent/suivant
@@ -35,19 +37,16 @@ document.addEventListener("DOMContentLoaded", () => {
     renderCalendar(currentCalendarDate, title, grid);
   });
 
-
   // Exposer une API simple pour le Visual Novel
   window.CalendarAPI = {
-    enableCalendar: (disableOnClick = false) => {
+    enableCalendar: (isPermanent = false) => {
       icon.classList.remove("disabled");
       icon.classList.add("active");
       icon.setAttribute("aria-disabled", "false");
-      if (disableOnClick === true) {
-        disableOnNextIconClick = true;
-      }
+      isPermanentlyEnabled = isPermanent;
     },
-    openCalendar: () => {
-      toggleCalendar(container, true);
+    openCalendar: (disableAutoClose = false) => {
+      toggleCalendar(container, true, disableAutoClose);
     },
     addEvent: (year, monthIndex, day, label = "Événement") => {
       calendarEvents.push({ year, month: monthIndex, day, label });
@@ -80,7 +79,7 @@ function createCalendarWidget() {
     border: "3px solid #000",
     borderRadius: "12px",
     boxShadow: "0 8px 16px rgba(0,0,0,0.25)",
-    zIndex: "2500",
+    zIndex: "10001",
     display: "none",
     fontFamily: "Courier Prime, monospace",
     color: "#000",
@@ -127,7 +126,6 @@ function createCalendarWidget() {
   close.style.cursor = "pointer";
   close.addEventListener("click", () => {
     toggleCalendar(container, false);
-
   });
   header.appendChild(close);
 
@@ -248,15 +246,17 @@ function renderCalendar(date, titleEl, gridEl) {
 
 let autoCloseTimeout;
 
-function toggleCalendar(container, show) {
+function toggleCalendar(container, show, disableAutoClose = false) {
   if (show) {
     container.style.display = "block";
     container.setAttribute("aria-hidden", "false");
-    // Définir un minuteur pour fermer automatiquement après 2 secondes
-    autoCloseTimeout = setTimeout(() => {
-      container.style.display = "none";
-      container.setAttribute("aria-hidden", "true");
-    }, 2000); // 2000 ms = 2 secondes
+    // Définir un minuteur pour fermer automatiquement après 2 secondes (sauf si désactivé)
+    if (!disableAutoClose) {
+      autoCloseTimeout = setTimeout(() => {
+        container.style.display = "none";
+        container.setAttribute("aria-hidden", "true");
+      }, 2000); // 2000 ms = 2 secondes
+    }
   } else {
     container.style.display = "none";
     container.setAttribute("aria-hidden", "true");
