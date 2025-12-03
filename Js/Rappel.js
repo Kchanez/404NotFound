@@ -37,7 +37,13 @@
       }
       if (typeof window.CalendarAPI.addEvent === "function") {
         // Novembre = 10 (index à partir de 0)
-        window.CalendarAPI.addEvent(examYear, 10, 28, "Examen de Math");
+        window.CalendarAPI.addEvent(
+          examYear,
+          11,
+          28,
+          "Examen de Math",
+          "./Images/rappelExam.svg"
+        );
       }
       // Ne pas ouvrir automatiquement le calendrier; l’utilisateur cliquera sur l’icône.
     }

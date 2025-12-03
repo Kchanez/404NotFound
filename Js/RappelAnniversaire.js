@@ -40,7 +40,7 @@
       }
       if (typeof window.CalendarAPI.addEvent === "function") {
         // Novembre = 10 (index à partir de 0), Jour = 30
-        window.CalendarAPI.addEvent(year, 10, 30, "Anniversaire Laila");
+        window.CalendarAPI.addEvent(year, 11, 30, "Anniversaire Laila");
       }
       // Ne pas ouvrir automatiquement le calendrier; l’utilisateur cliquera sur l’icône.
     }

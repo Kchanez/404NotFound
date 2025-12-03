@@ -48,8 +48,8 @@ document.addEventListener("DOMContentLoaded", () => {
     openCalendar: (disableAutoClose = false) => {
       toggleCalendar(container, true, disableAutoClose);
     },
-    addEvent: (year, monthIndex, day, label = "Événement") => {
-      calendarEvents.push({ year, month: monthIndex, day, label });
+    addEvent: (year, monthIndex, day, label = "Événement", image = null) => {
+      calendarEvents.push({ year, month: monthIndex, day, label, image });
       // Re-render si on est sur le même mois/année
       const v = currentCalendarDate;
       if (v.getFullYear() === year && v.getMonth() === monthIndex) {
@@ -215,6 +215,7 @@ function renderCalendar(date, titleEl, gridEl) {
       border: "2px solid #000",
       borderRadius: "8px",
       cursor: "default",
+      position: "relative", // Added for positioning image
     });
     // Surbrillance pour aujourd'hui
     if (
@@ -238,6 +239,17 @@ function renderCalendar(date, titleEl, gridEl) {
       );
       if (ev) {
         cell.title = ev.label;
+        if (ev.image) {
+          const eventImage = document.createElement("img");
+          eventImage.src = ev.image;
+          eventImage.style.position = "absolute";
+          eventImage.style.top = "-12px";
+          eventImage.style.right = "-10px";
+          eventImage.style.width = "25px";
+          eventImage.style.height = "25px";
+          eventImage.style.zIndex = "10";
+          cell.appendChild(eventImage);
+        }
       }
     }
     gridEl.appendChild(cell);
