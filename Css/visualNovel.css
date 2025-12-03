@@ -1,298 +1,326 @@
-body, html {
-            margin: 0;
-            padding: 0;
-            font-family: 'Courier Prime', monospace;
-        }
-        
-        #novel-container {
-            width: 100%;
-            height: 100vh;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        #character-image {
-            position: absolute;
-            left: 15%;
-            top: 67%;
-            transform: translateX(-50%);
-            height: 20vh;
-            z-index: 1;
-            width: 8%;
-        }
-        
-        #dialogue-box {
-            position: absolute;
-            bottom: 6%;
-            left: 50%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            transform: translateX(-50%);
-            width: 80%;
-            height: 17vh;
-            background-color: #FEFFC5;
-            color: rgb(0, 0, 0);
-            cursor: pointer;
-            border: 5px solid #000;
-            border-radius: 20px;
-            box-shadow: 8px 8px 8px 0px rgba(0, 0, 0, 25%);
-        }
-        #dialogue-hint {
-            position: absolute;
-            bottom: 35%;
-            left: 96%;
-            transform: translateX(-50%);
-            width: 3%;
-        }
-        
-        #character-name {
-            font-weight: bold;
-            font-size: 1.2em;
-            padding-top: 15px;
-            color: #000000;
-        }
-        
-        #dialogue-text {
-            font-size: 1.1em;
-            line-height: 1.5;
-            min-height: 3em;
-            padding: 0% 12%;
-        }
-        
-        #choices-container {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 10px;
-            padding-bottom: 10px; 
-        }
-        
-        #choices-container button {
-            background-color: #333;
-            color: white;
-            border: 1px solid #ffcc00;
-            border-radius: 5px;
-            padding: 10px 15px;
-            font-size: 1em;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            width: 15%;
-        }
-        
-        #choices-container button:hover {
-            background-color: #555;
-        }
-        
-        .error {
-            color: red;
-            text-align: center;
-            font-size: 1.5em;
-            margin-top: 50px;
-        }
-        
-        /* Styles pour la bande colorée en haut */
-        #header-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 35px;
-            /* background-color: #EDE1B3; */
-            background-color: #fff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            z-index: 1000;
-            border: 5px solid #000000;
-            border-radius: 0px 0px 0px 25px;
-        }
-        
-        #header-left {
-            flex: 1;
-        }
-        
-        #header-center {
-            flex: 1;
-            text-align: center;
-        }
-        
-        #header-right {
-            flex: 1;
-            display: flex;
-            justify-content: flex-end;
-        }
-        
-        #header-title {
-            font-size: 1.3em;
-            color: #000;
-            font-family: "VT323";
-        }
-        
-        #header-clock {
-            font-size: 1em;
-            color: #333;
-            font-family: 'Courier Prime', monospace;
-            font-weight: 500;
-            text-align: right;
-        }
-        
-        /* Styles pour les icônes d'applications dans le novel-container */
-        #app-icons-container, #app-icons-container2 {
-            position: absolute;
-            top: 6%;
-            left: 3%;
-            display: flex;
-            flex-direction: column;
-            gap: 35px;
-            z-index: 10;
-        }
-        #app-icons-container2 {   
-            left: 12%;   
-        }
-        
-        .app-icon {
-            width: 100px;
-            height: 10vh;
-            cursor: not-allowed;
-            transition: all 0.3s ease;
-            border-radius: 8px;
-            padding: 8px;
-        }
-        
-        .app-icon.disabled {
-            filter: grayscale(100%) brightness(0.7);
-            opacity: 0.7;
-            pointer-events: none;
-            cursor: not-allowed;
-        }
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: "Courier Prime", monospace;
+}
 
-        .app-icon.active {
-            filter: none;
-            opacity: 1;
-            pointer-events: auto;
-            cursor: pointer;
-        }
-        
-        .app-icon:hover.disabled {
-            filter: grayscale(100%) brightness(0.8);
-            transform: scale(1.05);
-        }
+#novel-container {
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+}
 
-        /* Chat widget */
-        .chat-widget {
-            position: fixed;
-            bottom: 35%;
-            right: 50%;
-            width: 320px;
-            height: 50vh;
-            display: flex;
-            flex-direction: column;
-            background: #Efff;
-            border: 3px solid #000;
-            border-radius: 12px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
-            z-index: 2000;
-        }
+#character-image {
+  position: absolute;
+  left: 15%;
+  top: 67%;
+  transform: translateX(-50%);
+  height: 20vh;
+  z-index: 1;
+  width: 8%;
+}
 
-        #private-chat-app .hidden { display: none; }
+#dialogue-box {
+  position: absolute;
+  bottom: 6%;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 17vh;
+  background-color: #feffc5;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  border: 5px solid #000;
+  border-radius: 20px;
+  box-shadow: 8px 8px 8px 0px rgba(0, 0, 0, 25%);
+}
+#dialogue-hint {
+  position: absolute;
+  bottom: 35%;
+  left: 96%;
+  transform: translateX(-50%);
+  width: 3%;
+  display: none;
+}
 
-        .chat-header {
-            padding: 10px 12px;
-            font-weight: bold;
-            border-bottom: 3px solid #000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+#character-name {
+  font-weight: bold;
+  font-size: 1.2em;
+  padding-top: 15px;
+  color: #000000;
+}
 
-        .chat-messages {
-            padding: 10px 12px;
-            overflow-y: auto;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
+#dialogue-text {
+  font-size: 1.1em;
+  line-height: 1.5;
+  min-height: 3em;
+  padding: 0% 12%;
+}
 
-        .chat-input-area {
-            display: flex;
-            gap: 8px;
-            padding: 10px 12px;
-            border-top: 3px solid #000;
-        }
+#choices-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 10px;
+}
 
-        .chat-input-area input {
-            flex: 1;
-            padding: 8px;
-            border: 2px solid #000;
-            border-radius: 8px;
-            font-family: 'Courier Prime', monospace;
-        }
+#choices-container button {
+  background-color: #333;
+  color: white;
+  border: 1px solid #ffcc00;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 15%;
+}
 
-        .chat-input-area button {
-            padding: 8px 12px;
-            background: #fff;
-            color: #000;
-            border-radius: 8px;
-            cursor: pointer;
-        }
+#choices-container button:hover {
+  background-color: #555;
+}
 
-        .message {
-            padding: 8px 10px;
-            border-radius: 8px;
-            border: 2px solid #000;
-            background: #fff;
-        }
+.error {
+  color: red;
+  text-align: center;
+  font-size: 1.5em;
+  margin-top: 50px;
+}
 
-        .message.you { align-self: flex-end; background: #dfe8ff; }
-        .message.friend { align-self: flex-start; background: #e6ffe1; }
-        
-        /* Row + avatar for messages */
-        .message-row { display: flex; gap: 8px; align-items: flex-end; }
-        .message-row.you { justify-content: flex-end; }
-        .message-row.friend { justify-content: flex-start; }
-        .message-avatar { width: 28px; height: 28px; border-radius: 50%; border: 2px solid #000; background: #fff; }
-        
-        /* Styles pour l'icône Rappel */
-        .rappel-icon, .rappel-icon2 {
-            position: absolute;
-            top: 9%;
-            right: 1%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 15;
-            border-radius: 10px;
-            max-width: 20%;
-        }
-        .rappel-icon2 {
-            top: 21%;
-        }
-        .rappel-icon.hidden {
-            display: none;
-        }
-        /* Ajuster le conteneur pour ne pas être caché par la bande */
-        #novel-container {
-            /*margin-top: 50px;
+/* Styles pour la bande colorée en haut */
+#header-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 35px;
+  /* background-color: #EDE1B3; */
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 1000;
+  border: 5px solid #000000;
+  border-radius: 0px 0px 0px 25px;
+}
+
+#header-left {
+  flex: 1;
+}
+
+#header-center {
+  flex: 1;
+  text-align: center;
+}
+
+#header-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#header-title {
+  font-size: 1.3em;
+  color: #000;
+  font-family: "VT323";
+}
+
+#header-clock {
+  font-size: 1em;
+  color: #333;
+  font-family: "Courier Prime", monospace;
+  font-weight: 500;
+  text-align: right;
+}
+
+/* Styles pour les icônes d'applications dans le novel-container */
+#app-icons-container,
+#app-icons-container2 {
+  position: absolute;
+  top: 6%;
+  left: 3%;
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  z-index: 10;
+}
+#app-icons-container2 {
+  left: 12%;
+}
+
+.app-icon {
+  width: 100px;
+  height: 10vh;
+  cursor: not-allowed;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.app-icon.disabled {
+  filter: grayscale(100%) brightness(0.7);
+  opacity: 0.7;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.app-icon.active {
+  filter: none;
+  opacity: 1;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.app-icon:hover.disabled {
+  filter: grayscale(100%) brightness(0.8);
+  transform: scale(1.05);
+}
+
+/* Chat widget */
+.chat-widget {
+  position: fixed;
+  bottom: 35%;
+  right: 50%;
+  width: 320px;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  background: #efff;
+  border: 3px solid #000;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+  z-index: 2000;
+}
+
+#private-chat-app .hidden {
+  display: none;
+}
+
+.chat-header {
+  padding: 10px 12px;
+  font-weight: bold;
+  border-bottom: 3px solid #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-messages {
+  padding: 10px 12px;
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chat-input-area {
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px;
+  border-top: 3px solid #000;
+}
+
+.chat-input-area input {
+  flex: 1;
+  padding: 8px;
+  border: 2px solid #000;
+  border-radius: 8px;
+  font-family: "Courier Prime", monospace;
+}
+
+.chat-input-area button {
+  padding: 8px 12px;
+  background: #fff;
+  color: #000;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.message {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 2px solid #000;
+  background: #fff;
+}
+
+.message.you {
+  align-self: flex-end;
+  background: #dfe8ff;
+}
+.message.friend {
+  align-self: flex-start;
+  background: #e6ffe1;
+}
+
+/* Row + avatar for messages */
+.message-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+.message-row.you {
+  justify-content: flex-end;
+}
+.message-row.friend {
+  justify-content: flex-start;
+}
+.message-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid #000;
+  background: #fff;
+}
+
+/* Styles pour l'icône Rappel */
+.rappel-icon,
+.rappel-icon2 {
+  position: absolute;
+  top: 9%;
+  right: 1%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 15;
+  border-radius: 10px;
+  max-width: 20%;
+}
+.rappel-icon2 {
+  top: 21%;
+}
+.rappel-icon.hidden {
+  display: none;
+}
+/* Ajuster le conteneur pour ne pas être caché par la bande */
+#novel-container {
+  /*margin-top: 50px;
             height: calc(100vh - 50px); */
-            height: 100vh;
-        }
+  height: 100vh;
+}
 
 /* Modal pour le chat privé */
 .pc-modal {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 3000;
 }
-.pc-modal.hidden { display: none; }
+.pc-modal.hidden {
+  display: none;
+}
 
 .pc-modal-content {
   width: 80vw;
@@ -301,7 +329,7 @@ body, html {
   background: #fff;
   border: 4px solid #000;
   border-radius: 12px;
-  box-shadow: 0 12px 24px rgba(0,0,0,0.35);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
   position: relative;
   overflow: hidden;
   display: flex;
@@ -336,16 +364,18 @@ body, html {
   line-height: 28px;
 }
 
-
-
 @keyframes blink {
-  0% { opacity: 1; }
-  50% { opacity: 0.2; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .blinking {
-    animation: blink 2s linear infinite;
+  animation: blink 2s linear 2;
 }
-
-

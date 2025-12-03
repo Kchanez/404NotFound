@@ -22,6 +22,7 @@ let hasImageBeenClicked = false;
 let hasAudioBeenClicked = false;
 let unknownImageFilename = null;
 let currentTypewriterEffect = null; // Variable pour suivre l'effet de machine à écrire en cours
+let isChoicesActive = false; // Drapeau pour bloquer la progression quand des choix sont affichés
 
 // Charger l'histoire depuis le fichier JSON
 function loadStory() {
@@ -166,13 +167,6 @@ function showDialogue(dialogues, index, choices, scenarioChoices = null) {
     }
   }
 
-  // Afficher l'écran piraté si le texte est "...."
-  if (typeof dialogue.text === "string" && dialogue.text.trim() === "....") {
-    if (window.showHackedScreen) {
-      window.showHackedScreen();
-    }
-  }
-
   // Le son de notification est maintenant géré uniquement par le sfx dans story.json
   // pour le message "*Ding* - Ton ordinateur affiche une notification"
 
@@ -201,6 +195,10 @@ function showDialogue(dialogues, index, choices, scenarioChoices = null) {
   let isTyping = true;
   let canAdvance = false; // New flag
   dialogueBoxEl.onclick = () => {
+    if (isChoicesActive) {
+      // Si des choix sont actifs, ignorer le clic sur la boîte de dialogue
+      return;
+    }
     if (isTyping) {
       // First click: complete typing
       if (dialogueText.__typewriterCancel) {
@@ -219,6 +217,11 @@ function showDialogue(dialogues, index, choices, scenarioChoices = null) {
     if (canAdvance) {
       // Second click (or subsequent clicks after typing is done): advance dialogue
       canAdvance = false; // Reset to prevent further rapid advances
+      const dialogueHint = document.getElementById("dialogue-hint");
+      if (dialogueHint) {
+        dialogueHint.classList.remove("blinking");
+        dialogueHint.style.display = "none"; // Cacher l'élément après le clic
+      }
       // Si le message précédent était vide, masquer l'application de chat privé
       if (isEmptyMessage) {
         const privateChatApp = document.getElementById("private-chat-app");
@@ -332,8 +335,6 @@ function handleChoice(choice) {
     window.ChatAppAPI.addMessage(choice.reply, "you");
   }
 
-  const hackedScreen = document.getElementById("hacked-screen");
-  if (hackedScreen) hackedScreen.classList.add("hidden");
   const mainChatCtaBtn = document.getElementById("main-chat-cta-btn");
   if (mainChatCtaBtn) mainChatCtaBtn.classList.remove("blinking");
 
@@ -376,35 +377,64 @@ function handleChoice(choice) {
   if (choice.text === "Voir Calenderier" && window.CalendarAPI) {
     window.CalendarAPI.enableCalendar(true);
   }
+  isChoicesActive = false; // Désactiver le drapeau après qu'un choix ait été fait
+
+  const dialogueHint = document.getElementById("dialogue-hint");
+  if (dialogueHint) {
+    dialogueHint.classList.add("blinking");
+    dialogueHint.style.display = "block"; // S'assurer qu'il est visible
+  }
 }
 
-// Override: afficher les choix via #hacked-screen
+// Afficher les choix dans #chat-app
 function showChoices(choices) {
-  const hackedScreen = document.getElementById("hacked-screen");
-  const errorActions = hackedScreen
-    ? hackedScreen.querySelector(".error-actions")
-    : null;
+  console.log(
+    "showChoices appelée - Nombre de choix à afficher :",
+    choices.length
+  );
+  const chatApp = document.getElementById("chat-app");
+  const messagesContainer = chatApp ? chatApp.querySelector(".messages") : null;
 
-  if (hackedScreen) hackedScreen.classList.remove("hidden");
-  if (errorActions) errorActions.innerHTML = "";
+  if (!chatApp || !messagesContainer) {
+    console.error("Conteneur #chat-app ou .messages non trouvé.");
+    return;
+  }
 
-  setTimeout(() => {
-    if (choices.length === 1 && choices[0].text === "Répondre") {
-      const button = document.createElement("button");
-      button.textContent = choices[0].text;
-      button.classList.add("choice-button");
-      button.onclick = () => handleChoice(choices[0]);
-      if (errorActions) errorActions.appendChild(button);
-    } else {
-      choices.forEach((choice) => {
-        const button = document.createElement("button");
-        button.textContent = choice.text;
-        button.classList.add("choice-button");
-        button.onclick = () => handleChoice(choice);
-        if (errorActions) errorActions.appendChild(button);
-      });
-    }
-  }, 200);
+  // S'assurer que #chat-app est visible
+  chatApp.style.display = "flex";
+
+  // Supprimer tous les anciens wrappers de choix avant d'en ajouter de nouveaux
+  const existingChoicesWrappers =
+    messagesContainer.querySelectorAll(".choices-wrapper");
+  existingChoicesWrappers.forEach((wrapper) => wrapper.remove());
+
+  // Réintroduire le son d'erreur pour le premier affichage des boutons
+  if (!window.hasErrorSoundPlayed) {
+    // Utiliser le son d'erreur existant (ajustez le chemin si nécessaire)
+    playAudio("./Audios/error.mp3", false);
+    window.hasErrorSoundPlayed = true;
+  }
+
+  // Créer un conteneur pour les boutons de choix pour les regrouper
+  const choicesWrapper = document.createElement("div");
+  choicesWrapper.classList.add("choices-wrapper"); // Ajouter une classe pour le style
+
+  choices.forEach((choice) => {
+    const button = document.createElement("button");
+    button.textContent = choice.text;
+    button.classList.add("choice-button");
+    button.onclick = () => {
+      // Supprimer les choix après qu'un choix ait été fait
+      choicesWrapper.remove();
+      handleChoice(choice);
+    };
+    choicesWrapper.appendChild(button);
+  });
+
+  messagesContainer.appendChild(choicesWrapper);
+  // Faire défiler jusqu'au bas des messages pour afficher les nouveaux choix
+  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  isChoicesActive = true; // Activer le drapeau quand les choix sont affichés
 }
 
 // Jouer un fichier audio

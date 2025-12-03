@@ -108,6 +108,37 @@ html {
   overscroll-behavior: contain;
   scroll-behavior: smooth;
 }
+
+.choices-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 10px;
+  border-top: 2px solid #000; 
+  background-color: #f0f0f0; 
+  width: 70%;
+}
+
+.choice-button {
+  padding: 10px 15px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 15px;
+  transition: all 0.1s ease; 
+}
+
+.choice-button:hover {
+  background: #e0e0e0; 
+  box-shadow: -1px 1px #888; 
+  transform: translate(-2px, 2px); 
+}
+
+.choice-button:active {
+  background: #d0d0d0; /* Couleur au clic */
+  box-shadow: none; /* Suppression de l'ombre au clic */
+  transform: translate(0, 0); /* Retour à la position normale au clic */
+}
 .msg-row {
   width: 80%;
   display: flex;

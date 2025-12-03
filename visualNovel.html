@@ -35,6 +35,14 @@
         <img id="notification-icon" src="Images/Notif.svg" alt="Rappel (anniversaire)" class="rappel-icon rappel-icon2 hidden">
         <!-- Icône Notification de message cachée par défaut -->
         <img id="message-notif-icon" src="Images/NotifMess.svg" alt="Notification message" class="rappel-icon rappel-icon3 hidden">
+        <div id="hacked-screen">
+            <div class="error-window">
+                <div class="title-bar">
+                    <div class="buttons">
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="dialogue-box">
             <!-- Indication visuelle pour cliquer et continuer -->
             <img id="dialogue-hint" class="dialogue-hint" src="Images/down.svg" alt="Cliquez pour continuer" title="Cliquez pour continuer"/>
@@ -129,28 +137,10 @@
         </div>
     </div>
     
-    <!-- Écran d'erreur/piratage -->
-    <div id="hacked-screen" class="hacked-screen hidden">
-        <div class="error-window">
-            <div class="error-header">
-                <span class="error-title">error 404</span>
-                <!-- <button class="close-error-window"> × </button> -->
-                 <button class="close-error-window">  </button>
-            </div>
-            <div class="error-body">
-                <img src="Images/error.svg" alt="Error Icon" class="error-icon"/>
-                <p  class="p1">Une erreur fatale [ERREUR_Σ#404] est survenue ! Nécessite l'intervention d'un utilisateur Admin de l'ordinateur
-                </p>
-                <p>Ignorer ou répondre à la notification de l'inconnu ?</p>
-                <div class="error-actions">
-                    <button id="respond-error">Répondre</button>
-                    <button id="ignore-error">Ignorer</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
+
+    <script src="./Js/hackedEffect.js"></script>
     <script src="./Js/visualNovel.js"></script>
     <script src="./Js/Calendrier.js"></script>
     <script src="./Js/Rappel.js"></script>
@@ -158,7 +148,7 @@
     <script src="Js/RappelMessageVide.js"></script>
     <script src="Js/chatData.js"></script>
     <script src="Js/chat.js"></script>
-    <script src="./Js/hackedEffect.js"></script>
+
     <script src="./Js/gallery.js"></script>
 
     

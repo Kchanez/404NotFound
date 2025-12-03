@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const mainChatCtaBtn = document.getElementById("main-chat-cta-btn");
     const mainChatCta = document.getElementById("main-chat-cta");
     const hackedScreen = document.getElementById("hacked-screen");
-
     // Persistance simple via localStorage
     const STORAGE_KEY = "chat_threads_v1";
     let threads = loadThreads();
@@ -252,11 +251,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }, 180);
     });
+
     document.addEventListener("hackedScreenClosed", () => {
       isHackedShowing = false;
     });
-    // Les écouteurs d'événements pour mainChatCtaBtn, sendBtn, inputEl sont supprimés
-
+    document.addEventListener("hackedScreenClosed", () => {
+      isHackedShowing = false;
+    });
     // initialisation
     renderContacts();
     selectContact(currentId);
