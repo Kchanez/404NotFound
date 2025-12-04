@@ -75,9 +75,8 @@ function createCalendarWidget() {
     top: "20%",
     right: "40%",
     width: "330px",
-    background: "#c0c0c0",
-    border: "3px solid #000",
-    borderRadius: "12px",
+    background: "#fff",
+    border: "3px solid #0b65f4",
     boxShadow: "0 8px 16px rgba(0,0,0,0.25)",
     zIndex: "10001",
     display: "none",
@@ -90,16 +89,17 @@ function createCalendarWidget() {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: "10px 12px",
-    borderBottom: "3px solid #000",
+    padding: "5px 12px",
+    borderBottom: "3px solid #0b65f4",
     fontWeight: "bold",
+    backgroundColor: "#0b65f4",
+    color: "#fff",
   });
   const prev = document.createElement("button");
   prev.textContent = "◀";
   Object.assign(prev.style, {
     border: "2px solid #000",
     background: "#fff",
-    borderRadius: "8px",
     padding: "2px 8px",
     cursor: "pointer",
   });
@@ -114,8 +114,7 @@ function createCalendarWidget() {
   Object.assign(next.style, {
     border: "2px solid #000",
     background: "#fff",
-    borderRadius: "8px",
-    padding: "2px 8px",
+    padding: "3px 8px",
     cursor: "pointer",
   });
   header.appendChild(next);
@@ -123,7 +122,15 @@ function createCalendarWidget() {
   const close = document.createElement("span");
   close.textContent = "×";
   close.title = "Fermer";
-  close.style.cursor = "pointer";
+  Object.assign(close.style, {
+    border: "1px solid #fff",
+    background: "#cb4929",
+    color: "#fff",
+    cursor: "pointer",
+    fontSize: "20px",
+    padding: "0px 4px",
+    fontWeight: "normal",
+  });
   close.addEventListener("click", () => {
     toggleCalendar(container, false);
   });
@@ -213,7 +220,6 @@ function renderCalendar(date, titleEl, gridEl) {
       padding: "8px",
       background: "#fff",
       border: "2px solid #000",
-      borderRadius: "8px",
       cursor: "default",
       position: "relative", // Added for positioning image
     });

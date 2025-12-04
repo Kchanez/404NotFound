@@ -253,13 +253,13 @@ html {
   background: #fff;
 }
 
-.message.you {
-  align-self: flex-end;
-  background: #dfe8ff;
-}
-.message.friend {
+.bubble.you {
   align-self: flex-start;
-  background: #e6ffe1;
+  color: #2657c2;
+}
+.bubble.friend {
+  align-self: flex-start;
+  color: #4fb673;
 }
 
 /* Row + avatar for messages */

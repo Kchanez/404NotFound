@@ -19,30 +19,31 @@ body {
     transform: translate(-50%, -50%);
     width: 80%;
     max-width: 650px;
-    background-color: #010082;
-    box-shadow: 5px 5px 0px #808080;
+    background-color: #0B65F4;
+    box-shadow: 5px 5px 0px #000, -5px -5px 0px #fff;
     font-family: 'Courier New', Courier, monospace;
 }
 
 .title-bar {
     color: #fff;
     height: 35px;
-    padding: 8px;
+    padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-weight: bold;
+    font-size: 1.2em;
 }
 
 .title-bar-controls button {
-    background-color: #c0c0c0;
-    border: 1px solid #000;
+    background-color: #CB4929;
+    border: 1px solid #fff;
     width: 30px;
     height: 30px;
-    font-size: 10px;
+    font-size: 30px;
     line-height: 10px;
     padding: 0;
     cursor: pointer;
+    color: #fff;
 }
 
 .window-content {
@@ -52,7 +53,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 45vh;
+    height: 30vh;
 }
 
 .window-content p {
@@ -88,7 +89,8 @@ body {
 .input-container {
     width: 70%;
     height: 5vh;
-    display: flex;
+    display: flex; 
+    padding: 0px 10px;
     border: 2px inset #c0c0c0;
     background-color: #fff;
     justify-content: space-between;
@@ -101,8 +103,7 @@ body {
     flex-grow: 1;
     border: none;
     outline: none;
-    padding: 5px;
-    font-size: 14px;
+    font-size: 14px; 
     background-color: transparent;
     color: #000;
 }

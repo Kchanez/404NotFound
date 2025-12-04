@@ -31,7 +31,9 @@ document.addEventListener("DOMContentLoaded", function () {
       contactsEl.innerHTML = "";
       contacts.forEach((c) => {
         const li = document.createElement("li");
-        li.className = "contact-item";
+        li.className =
+          "contact-item" +
+          (c.id === currentId ? " active-contact" : " inactive-contact");
         li.dataset.id = c.id;
         const img = document.createElement("img");
         img.className = "avatar";
@@ -75,6 +77,21 @@ document.addEventListener("DOMContentLoaded", function () {
           ? "Dans vos contacts"
           : "Ce compte ne fait pas partie de votre liste de contacts";
         addBtn.textContent = c.inContacts ? "−" : "+";
+
+        // Mettre à jour les classes active/inactive pour les contacts
+        contactsEl.querySelectorAll(".contact-item").forEach((item) => {
+          if (item.dataset.id === id) {
+            item.classList.add("active-contact");
+            item.classList.remove("inactive-contact");
+          } else if (
+            item.dataset.id !== "inconnu" &&
+            item.dataset.id !== "layla"
+          ) {
+            // Ne pas désactiver "inconnu" ou "layla"
+            item.classList.remove("active-contact");
+            item.classList.add("inactive-contact");
+          }
+        });
         renderThread();
       } else {
         // If the same contact is selected, just ensure the display is correct without clearing

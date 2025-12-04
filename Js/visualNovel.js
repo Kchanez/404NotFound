@@ -72,6 +72,11 @@ function displayScene(sceneId) {
         <img id="dialogue-hint" src="Images/down.svg" alt="Cliquez pour continuer" title="Cliquez pour continuer" />
     `;
 
+  const dialogueHint = document.getElementById("dialogue-hint");
+  if (dialogueHint) {
+    dialogueHint.style.display = "block";
+  }
+
   // Les références seront récupérées à la volée dans showDialogue
 
   // Changer l'arrière-plan si spécifié
@@ -125,8 +130,8 @@ function showDialogue(dialogues, index, choices, scenarioChoices = null) {
   // Déléguer le rappel au module séparé (Rappel.js)
   // Déléguer aux modules de rappel
   const onBlock = () => {
-    // Ne pas bloquer l'histoire: laisser les notifications visibles et continuer
-    if (dialogueHint) dialogueHint.style.display = "block";
+    // Ne pas bloquer l'histoire: masquer le dialogue-hint
+    if (dialogueHint) dialogueHint.style.display = "none";
   };
   const onUnblock = () => {
     // Plus de logique de déblocage: on ne bloque plus la progression
@@ -220,7 +225,6 @@ function showDialogue(dialogues, index, choices, scenarioChoices = null) {
       const dialogueHint = document.getElementById("dialogue-hint");
       if (dialogueHint) {
         dialogueHint.classList.remove("blinking");
-        dialogueHint.style.display = "none"; // Cacher l'élément après le clic
       }
       // Si le message précédent était vide, masquer l'application de chat privé
       if (isEmptyMessage) {
@@ -362,14 +366,13 @@ function handleChoice(choice) {
   }
 
   if (choice.text === "Ecouter_Voicemail") {
+    // Activer visuellement le contact de Layla
     const laylaContact = document.querySelector(
       'li.contact-item[data-id="layla"]'
     );
     if (laylaContact) {
-      laylaContact.style.backgroundColor = "#FEFFC5";
-      setTimeout(() => {
-        laylaContact.style.backgroundColor = "";
-      }, 1000);
+      laylaContact.classList.add("active-contact");
+      laylaContact.classList.remove("inactive-contact");
     }
   }
 
@@ -388,10 +391,6 @@ function handleChoice(choice) {
 
 // Afficher les choix dans #chat-app
 function showChoices(choices) {
-  console.log(
-    "showChoices appelée - Nombre de choix à afficher :",
-    choices.length
-  );
   const chatApp = document.getElementById("chat-app");
   const messagesContainer = chatApp ? chatApp.querySelector(".messages") : null;
 
@@ -402,6 +401,12 @@ function showChoices(choices) {
 
   // S'assurer que #chat-app est visible
   chatApp.style.display = "flex";
+
+  // Masquer le dialogue-hint lorsque les choix sont affichés
+  const dialogueHint = document.getElementById("dialogue-hint");
+  if (dialogueHint) {
+    dialogueHint.style.display = "none";
+  }
 
   // Supprimer tous les anciens wrappers de choix avant d'en ajouter de nouveaux
   const existingChoicesWrappers =
@@ -765,9 +770,6 @@ function displayScenarioDialogue() {
     const dialogueHint = document.getElementById("dialogue-hint");
     if (dialogueHint) {
       dialogueHint.style.display = "block";
-      console.log(
-        "dialogueHint est maintenant display: block; dans displayScenarioDialogue (isThought)."
-      );
     }
     dialogueTextEl.textContent = ""; // Clear previous text
     typewriterEffect(

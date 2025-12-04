@@ -17,16 +17,16 @@
         notifAudio.play();
       } catch (_) {}
     }
-    icon.classList.remove('hidden');
+    icon.classList.remove("hidden");
     return icon;
   }
 
   // On ne masque plus l’icône; elle reste présente à l’écran
 
   function hideNotificationIcon() {
-    const icon = document.getElementById('notification-icon');
+    const icon = document.getElementById("notification-icon");
     if (icon) {
-      icon.classList.add('hidden');
+      icon.classList.add("hidden");
     }
   }
 
@@ -68,8 +68,9 @@
         return false; // non-bloquant
       }
       // Masquer l'icône de notification à un message spécifique
-      const hideNotificationTrigger = "Joyeux anniversaire ma veille, tu me manques.";
-      if (typeof text === 'string' && text.trim() === hideNotificationTrigger) {
+      const hideNotificationTrigger =
+        "Joyeux anniversaire ma veille, tu me manques.";
+      if (typeof text === "string" && text.trim() === hideNotificationTrigger) {
         hideNotificationIcon();
         return false; // non-bloquant
       }

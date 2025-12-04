@@ -8,7 +8,7 @@ html {
 
 #chat-app {
     width: 45%;
-    height: 60%;
+    /* height: 60%; */
     display: none;
     flex-direction: column;
     margin: 0 auto;
@@ -21,7 +21,7 @@ html {
 
 .window-header {
   height: 40px;
-  /* background: linear-gradient(#4d6aa3, #1c2460); */
+  border-radius: 10px 10px 0px 0px;
   background-color: #0b65f4;
   color: #fff;
   display: flex;
@@ -30,16 +30,15 @@ html {
   padding: 0 12px;
 }
 .window-header .title {
-  font-weight: bold;
+  font-family: "tahoma";
+  font-size: 1.2em;
 }
 .window-header .close {
-  border: 2px solid #fff;
-  background: #cb4929;
-  color: #fff;
-  width: 28px;
-  height: 28px;
-  border-radius: 6px;
-  cursor: pointer;
+    border: 1px solid #fff;
+    background: #cb4929;
+    color: #fff;
+    cursor: pointer;
+    font-size: 20px;
 }
 
 .window-body {
@@ -115,8 +114,6 @@ html {
   gap: 8px;
   margin-top: 10px;
   padding: 10px;
-  border-top: 2px solid #000; 
-  background-color: #f0f0f0; 
   width: 70%;
 }
 
@@ -208,6 +205,15 @@ html {
   color: #666;
 }
 
+.contact-item.active-contact {
+  background-color: #e0e0e0; 
+  padding-left: 7px; 
+}
+
+.contact-item.inactive-contact {
+  opacity: 0.6; 
+  pointer-events: none; 
+}
 .hidden {
   display: none;
 }
@@ -221,11 +227,9 @@ html {
   width: 90%;
   padding: 10px;
   border: 2px solid #000;
-  border-radius: 18px;
   background: #fff;
   cursor: pointer;
   font-size: 15px;
-  box-shadow: -5px 4px;
 }
 .pc-cta-icon {
   width: 22px;
