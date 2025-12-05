@@ -54,8 +54,7 @@
     // onBlock: fonction appelée pour stocker les choix et index bloqués
     // onUnblock: fonction appelée après clic sur rappel pour reprendre
     handleDialogue: (text, onBlock, onUnblock) => {
-      const triggerPrefix =
-        "Bon, pas de panique il me reste encore du temps pour réviser. Je vais commencer par le chapitre sur";
+      const triggerPrefix = "Hein un rappel...";
       if (typeof text === "string" && text.includes(triggerPrefix)) {
         const icon = showIcon();
         if (!icon) return false;

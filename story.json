@@ -40,88 +40,61 @@
         },
         {
           "character": null,
-          "sfx": "notification",
+          
           "text": "J'ai l'impression d'avoir oublié un truc..."
         },
 
         {
           "character": "protagonist",
-          "avatar": "default",
+          "sfx": "notification",
           "text": "Hein un rappel..."
         },
         {
           "character": "protagonist",
-          "avatar": "Choc",
-          "text": "QUOI ! EXAMEN DE MATHS, COMMENT J’AI PU OUBLIER !"
-        },
-        {
-          "character": "protagonist",
-          "avatar": "happy",
-          "text": "Bon, pas de panique il me reste encore du temps pour réviser."
-        },
-        {
-          "character": "protagonist",
-          "avatar": "happy",
-          "text": "Bon, pas de panique il me reste encore du temps pour réviser. Je vais commencer par le chapitre sur..."
-        },
-        {
-          "character": "protagonist",
-          "avatar": "sad",
           "text": "Oh... Layla..."
         },
         {
           "character": "protagonist",
-          "avatar": "sad",
           "text": "Oh, ça aussi j’ai faillit l’oublier. Je me souviens, de cet anniversaire. Déjà 1 an que tu m’as abandonée. J’espère au moins que tu vas bien... "
         },
         {
           "character": "protagonist",
-          "avatar": "angry",
           "text": "Toute la monde invente ces folles rumeurs sur toi. Mais je sais qu’ils disent n’importe quoi comme d’habitude. Et ça justifie bien ton départ."
         },
         {
           "character": "protagonist",
-          "avatar": "angry",
           "text": "Je sais qu'ils se trompent. Ces histoires de kidnapping, je sais que tu n’as rien à faire avec! Tu n'as pas disparue ou été kidnappée ! Tu as juste fuis pour réaliser tes rêves..."
         },
         {
           "character": "protagonist",
-          "avatar": "rigolo",
           "text": "Imagine-nous : Layla de campagnarde à Parisiennes tu disais."
         },
         {
           "character": "protagonist",
-          "avatar": "sad",
           "text": "J’espère au moins que tu t’es fait de nouveaux amis à Paris, avec qui fêter ton anniversaire."
         },
         {
           "character": "protagonist",
-          "avatar": "Larme",
           "text": "Joyeux anniversaire ma veille, tu me manques."
         },
         {
           "character": "protagonist",
-          "avatar": "happy",
           "text": ""
         },
         {
           "character": "protagonist",
-          "avatar": "happy",
           "text": "Ah tiens un nouveau message."
         },
         {
           "character": "protagonist",
-          "avatar": "happy",
           "text": "Ah tiens un nouveau message. Surement une erreur ce numéro n’est pas dans mes contacts"
         },
         {
           "character": "protagonist",
-          "avatar": "happy",
           "text": "..."
         },
         {
           "character": "protagonist",
-          "avatar": "happy",
           "text": "Surement une erreur ce numéro n’est pas dans mes contacts",
           "nextScenario": "start"
         }
@@ -162,7 +135,7 @@
         {
           "text": "Accepter",
           "reply": [
-            "Laila !???? Ou étais-tu passer meuf.",
+            "Laila !???? Ou étais-tu passé meuf.",
             "Oh mon dieu, tu vas bien ????",
             "On t’a cherchée partout, on pensait que t’étais morte.",
             "Tes parents sont au courant? et la police elle te cherchent tjrs?",
@@ -491,246 +464,56 @@
       "who": "inconnu",
       "texts": [
         "Mais moi qui suit désolé j’aurai du savoir que tu étais de confiance",
-        "Et je m’en serai voulu de ne pas fêter mon anniversaire avec toi",
-        "C’est pourquoi je veux qu’on se revoie en cachette de mes parents et de la protection policière",
-        "Une soirée le 28 février ?"
+        "Mais j’aurais un service à te demander"
       ],
-      "choices": [
-        {
-          "text": "Voir Calenderier",
-          "reply": ["Je suis partante mais Layla, pourquoi 28 et pas le 29 ?"],
-          "next": "Voir_Calenderier1"
-        },
-        {
-          "text": "Non Voir Calenderier",
-          "reply": ["Je suis partante mais Layla pour le 28 ?"],
-          "next": "Non_Voir_Calenderier1"
-        }
-      ]
+      "next": "Ecouter_Voicemail3"
     },
     "Non_Ecouter_Voicemail2": {
       "who": "inconnu",
       "texts": [
         "Mais moi qui suit désolé j’aurai du savoir que tu étais de confiance",
-        "Et je m’en serai voulu de ne pas fêter mon anniversaire avec toi",
-        "C’est pourquoi je veux qu’on se revoie en cachette de mes parents et de la protection policière",
-        "Une soirée le 28 février ?"
+        "Mais j’aurais un service à te demander"
       ],
-      "choices": [
-        {
-          "text": "Voir Calenderier",
-          "reply": ["Je suis partante mais Layla, pourquoi 28 et pas le 29 ?"],
-          "next": "Voir_Calenderier1"
-        },
-        {
-          "text": "Non Voir Calenderier",
-          "reply": ["Je suis partante mais Layla pour le 28 ?"],
-          "next": "Non_Voir_Calenderier1"
-        }
-      ]
+      "next": "Non_Ecouter_Voicemail3"
     },
-    "Voir_Calenderier1": {
-      "who": "inconnu",
-      "texts": ["Comment ça ?"],
-      "who2": "protagonist",
-      "textsProtagonist": [
-        "On est en année bissextile, autant en profiter pour fêter le jour exacte ?"
-      ],
-      "next": "Voir_Calenderier2"
-    },
-    "Non_Voir_Calenderier1": {
-      "who": "inconnu",
-      "texts": [
-        "28 au soir, tu me souhaiteras à minuit !",
-        "C’est toujours ok pour toi ?"
-      ],
-      "who2": "protagonist",
-      "textsProtagonist": [
-        "Oui ça me va ! Je vais demander à mon père de me descendre chez toi.",
-        "Tu peux me donner l’adresse s’il te plait ?"
-      ],
-      "next": "Non_Voir_Calenderier2"
-    },
-    "Voir_Calenderier2": {
-      "who": "inconnu",
-      "texts": [
-        "Ah oui, le 29 haha excuse moi. J’ai un peu la tête en l’air...",
-        "J’avais oublié qu’on était en année bisextille.",
-        "T’es vraiment une bonne amie pour t’en être souvenu !"
-      ],
-      "who2": "protagonist",
-      "textsProtagonist": ["Oui haha surement"],
-      "next": "Voir_Calenderier3"
-    },
-    "Non_Voir_Calenderier2": {
-      "who": "inconnu",
-      "texts": [
-        "Euh oui avec plaisir, mais comme je t’ai dit je préfère que tu viennes seule.",
-        "Si mes parents ou la police apprennent que j’ai pris un risque, ils ne me pardonneront jamais."
-      ],
-      "who2": "protagonist",
-      "textsProtagonist": [
-        "Je dirai à mon père que je vais chez une autre amie tkt"
-      ],
-      "next": "Non_Voir_Calenderier3"
-    },
-    "Voir_Calenderier3": {
-      "who": "inconnu",
-      "texts": [
-        "Mais restons sur 28 au soir, tu me souhaiteras à minuit !",
-        "C’est toujours ok pour toi ?"
-      ],
-      "who2": "protagonist",
-      "textsProtagonist": [
-        "Oui ça me va ! Je vais demander à mon père de me descendre chez toi.",
-        "Tu peux me donner l’adresse s’il te plait ?"
-      ],
-      "next": "Voir_Calenderier4"
-    },
-    "Non_Voir_Calenderier3": {
-      "who": "inconnu",
-      "texts": [
-        "Non j’insiste, serieusement",
-        "Tu sais quoi au pire on va faire ça comme à l’ancienne, dans notre ancienne ville",
-        "J’ai vraiment besoin de te voir, ça me fera un bien au mental."
-      ],
-      "who2": "protagonist",
-      "textsProtagonist": ["Tu m’as manqué Layla. J’ai hâte qu’on se revoit."],
-      "next": "Non_Voir_Calenderier4"
-    },
-    "Voir_Calenderier4": {
-      "who": "inconnu",
-      "texts": [
-        "Euh oui avec plaisir, mais comme je t’ai dit je préfére que tu viennes seule.",
-        "Si mes parents ou la police apprennent que j’ai pris un risque, ils ne me pardonneront jamais."
-      ],
-      "who2": "protagonist",
-      "textsProtagonist": [
-        "Je dirai à mon père que je vais chez une autre amie tkt"
-      ],
-      "next": "Voir_Calenderier5"
-    },
-    "Non_Voir_Calenderier4": {
-      "who": "inconnu",
-      "texts": ["Mais j’aurais un service à te demander"],
+    "Ecouter_Voicemail3": {
       "who2": "protagonist",
       "textsProtagonist": ["Oui dis moi."],
-      "next": "Non_Voir_Calenderier5"
-    },
-    "Voir_Calenderier5": {
       "who": "inconnu",
       "texts": [
-        "Non j’insiste, serieusement",
-        "Tu sais quoi au pire on va faire ça comme à l’ancienne, dans notre ancienne ville",
-        "J’ai vraiment besoin de te voir, ça me fera un bien au mental."
+        "Peut-tu me faire un virement , Je vais t’envoyer une demande",
+        "Je vais venir, mais si je prend un ticket de bus ou de train, mes parents seront au courant.",
+        "Ils traquent mes moindres gestes et mouvements"
       ],
-      "who2": "protagonist",
-      "textsProtagonist": ["Tu m’as manqué Layla. J’ai hâte qu’on se revoit."],
-      "next": "Voir_Calenderier6"
+      "next": "Ecouter_Voicemail4"
     },
-    "Non_Voir_Calenderier5": {
-      "who": "inconnu",
-      "texts": [
-        "Ne m’achète pas de cadeau. Mais peut-tu me faire un virement , Je vais t’envoyer une demande",
-        "Je vais venir, mais si je prends un ticket de bus ou de train, mes parents seront au courant."
-      ],
-      "who2": "protagonist",
-      "textsProtagonist": ["D’accord ça marche"],
-      "next": "Non_Voir_Calenderier6"
-    },
-    "Voir_Calenderier6": {
-      "who": "inconnu",
-      "texts": ["Mais j’aurais un service à te demander"],
-      "who2": "protagonist",
-      "textsProtagonist": ["Oui dis moi."],
-      "next": "Voir_Calenderier7"
-    },
-    "Non_Voir_Calenderier6": {
-      "who": "inconnu",
-      "texts": ["Ils traquent mes moindres gestes et mouvements"],
+     "Non_Ecouter_Voicemail3": {
+       "who2": "protagonist",
+       "textsProtagonist": ["Oui dis moi."],
+       "who": "inconnu",
+       "texts": [
+         "Peut-tu me faire un virement , Je vais t’envoyer une demande",
+         "Je vais venir, mais si je prend un ticket de bus ou de train, mes parents seront au courant.",
+         "Ils traquent mes moindres gestes et mouvements"
+       ],
+       "next": "Non_Ecouter_Voicemail4"
+     },
+    "Ecouter_Voicemail4": {
       "who2": "protagonist",
       "textsProtagonist": ["C’est pour ta sécurité je les comprends."],
-      "next": "Non_Voir_Calenderier7"
-    },
-    "Voir_Calenderier7": {
-      "who": "inconnu",
-      "texts": [
-        "Ne m’achète pas de cadeau. Mais peut-tu me faire un virement , Je vais t’envoyer une demande",
-        "Je vais venir, mais si je prend un ticket de bus ou de train, mes parents seront au courant."
-      ],
-      "who2": "protagonist",
-      "textsProtagonist": ["D’accord ça marche"],
-      "next": "Voir_Calenderier8"
-    },
-    "Non_Voir_Calenderier7": {
       "who": "inconnu",
       "texts": ["Ça marche super, je t’envoie l’adresse :"],
-      "choices": [
-        {
-          "text": "Recherche sur internet",
-          "reply": [""],
-          "next": ""
-        },
-        {
-          "text": "Non recherche sur internet",
-          "reply": [""],
-          "next": ""
-        }
-      ]
+      "lien": "https://paylib.com/fr/transaction/virement"
     },
-    "Voir_Calenderier8": {
-      "who": "inconnu",
-      "texts": ["Ils traquent mes moindres gestes et mouvements"],
+    "@Ecouter_Voicemail4": {
       "who2": "protagonist",
       "textsProtagonist": ["C’est pour ta sécurité je les comprends."],
-      "next": "Voir_Calenderier9"
-    },
-
-    "Voir_Calenderier9": {
-      "who": "inconnu",
-      "texts": ["Ils traquent mes moindres gestes et mouvements"],
-      "who2": "protagonist",
-      "textsProtagonist": ["C’est pour ta sécurité je les comprends."],
-      "next": "Voir_Calenderier10"
-    },
-
-    "Voir_Calenderier10": {
       "who": "inconnu",
       "texts": ["Ça marche super, je t’envoie l’adresse :"],
-      "choices": [
-        {
-          "text": "Internet",
-          "reply": ["..."],
-          "next": "Internet"
-        },
-        {
-          "text": "Non internet",
-          "reply": ["..."],
-          "next": ""
-        }
-      ]
-    },
-    "Internet": {
-      "thoughts": [
-        "C’est quand même bizarre, le nom ne correspond pas à celui de Layla, je vais vérifier sur internet",
-        "John DOE disparu ?",
-        "Mais c’est quoi ce bordel",
-        "De l’ia ?",
-        "SkinWalker numérique ?"
-      ],
-      "next": "Internet1"
-    },
-    "Internet1": {
-      "who": "inconnu",
-      "texts": [
-        "J’ai pas reçu le virement, tu l’as bien accepté ?",
-        "Bon tant pis pour le virement... Le train va bientôt passer.",
-        "Rendez-vous à 21h, 2 rue Saint-Denis. Et ne le dis à personne... Ça m’embêterait que tes parents ou les miens soient au courant"
-      ],
-      "who2": "protagonist",
-      "textsProtagonist": [""],
-      "next": ""
+      "lien": "https://paylib.com/fr/transaction/virement"
     }
+
+   
   }
 }
 

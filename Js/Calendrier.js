@@ -56,12 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
         renderCalendar(currentCalendarDate, title, grid);
       }
     },
-    disableCalendar: () => {
-      icon.classList.add("disabled");
-      icon.classList.remove("active");
-      icon.setAttribute("aria-disabled", "true");
-      disableOnNextIconClick = false;
-    },
   };
 });
 

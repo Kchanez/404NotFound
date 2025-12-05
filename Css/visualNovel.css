@@ -295,9 +295,6 @@ html {
   border-radius: 10px;
   max-width: 20%;
 }
-.rappel-icon2 {
-  top: 22%;
-}
 .rappel-icon.hidden {
   display: none;
 }
@@ -377,5 +374,5 @@ html {
 }
 
 .blinking {
-  animation: blink 2s linear 2;
+  animation: blink 2s linear infinite;
 }

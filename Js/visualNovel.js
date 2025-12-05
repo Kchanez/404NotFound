@@ -141,10 +141,7 @@ function showDialogue(dialogues, index, choices, scenarioChoices = null) {
   if (window.RappelAnnivAPI) {
     window.RappelAnnivAPI.handleDialogue(dialogue.text, onBlock, onUnblock);
   }
-  // 2) Rappel examen / Ding (module existant)
-  if (window.RappelAPI) {
-    window.RappelAPI.handleDialogue(dialogue.text, onBlock, onUnblock);
-  }
+
   // 3) Rappel message vide (ne bloque pas)
   let isEmptyMessage = false;
   if (window.RappelMessageVideAPI) {

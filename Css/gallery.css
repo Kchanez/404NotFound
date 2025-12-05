@@ -21,7 +21,8 @@
 
 #gallery-header h2 {
     margin: 0;
-    font-size: 14px;
+    font-size: 1.2em;
+    font-family: 'tahoma';
     font-weight: normal;
 }
 
@@ -29,10 +30,11 @@
     background: none;
     border: none;
     color: #fff;
-    font-size: 16px;
+    font-size: 20px;
     cursor: pointer;
     padding: 0 4px;
     background-color: #CB4929;
+    border: 1px solid #fff;
 }
 
 #folders-container {

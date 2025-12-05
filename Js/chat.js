@@ -432,6 +432,11 @@ document.addEventListener("DOMContentLoaded", function () {
           chatApp.removeAttribute("aria-hidden");
           chatApp.style.display = "flex";
         }
+        const mailIcon = document.getElementById("mail-icon");
+        if (mailIcon) {
+          mailIcon.classList.remove("disabled");
+          mailIcon.classList.add("active");
+        }
       },
       hideChatApp: () => {
         const chatApp = document.getElementById("chat-app");
@@ -440,6 +445,11 @@ document.addEventListener("DOMContentLoaded", function () {
           chatApp.setAttribute("inert", "");
           chatApp.setAttribute("aria-hidden", "true");
           chatApp.style.display = "none";
+        }
+        const mailIcon = document.getElementById("mail-icon");
+        if (mailIcon) {
+          mailIcon.classList.remove("active");
+          mailIcon.classList.add("disabled");
         }
       },
       sendRandomGalleryImage: (images) => {
