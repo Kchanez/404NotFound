@@ -72,22 +72,22 @@
         {
           "character": "protagonist",
           "avatar": "sad",
-          "text": "Oh, ça aussi j’ai faillit l’oublier. Je me souviens, de cet anniversaire. Déjà 1 an que tu m’as abandonée dans ce trou paumé. J’espère au moins que tu vas bien... "
+          "text": "Oh, ça aussi j’ai faillit l’oublier. Je me souviens, de cet anniversaire. Déjà 1 an que tu m’as abandonée. J’espère au moins que tu vas bien... "
         },
         {
           "character": "protagonist",
           "avatar": "angry",
-          "text": "Toute la ville invente ces folles rumeurs sur toi. Mais je sais qu’ils disent n’importe quoi comme d’habitude. Et ça justifie bien ton départ de cette ville pourrie."
+          "text": "Toute la monde invente ces folles rumeurs sur toi. Mais je sais qu’ils disent n’importe quoi comme d’habitude. Et ça justifie bien ton départ."
         },
         {
           "character": "protagonist",
           "avatar": "angry",
-          "text": "Je sais qu'ils se trompent. Ces histoires de kidnapping de la ville, je sais que tu n’as rien à faire avec! Tu n'as pas disparue ou été kidnappée ! Tu as juste fuis pour réaliser tes rêves..."
+          "text": "Je sais qu'ils se trompent. Ces histoires de kidnapping, je sais que tu n’as rien à faire avec! Tu n'as pas disparue ou été kidnappée ! Tu as juste fuis pour réaliser tes rêves..."
         },
         {
           "character": "protagonist",
           "avatar": "rigolo",
-          "text": "Imagine-nous : Layla de campagnarde à Parisiennes” tu disais."
+          "text": "Imagine-nous : Layla de campagnarde à Parisiennes tu disais."
         },
         {
           "character": "protagonist",
@@ -160,7 +160,7 @@
       "thoughts": ["Hein", "Layla ?"],
       "choices": [
         {
-          "text": "Gentiment",
+          "text": "Accepter",
           "reply": [
             "Laila !???? Ou étais-tu passer meuf.",
             "Oh mon dieu, tu vas bien ????",
@@ -171,14 +171,13 @@
           "next": "Gentiment_2"
         },
         {
-          "text": "Méchament",
+          "text": "S'énerver",
           "reply": [
             "Sérieusement Laïla ?",
             "On t’a cherchée partout, les gens pensaient que tu étais disparue comme les autres, ou morte...",
             "J’ai inconsciemment commencer à y croire!",
             "Tes parents sont-ils au courant? Et la police Laïla, elle te cherchent toujours tu sais !!",
             "T’es vraiment égoïste de n’avoir prévenue personne Laïla... On se faisait du soucis pour toi. J’espère au moins que tu vas bien.",
-            "Tu as raison... Je m’attendais un peu à cette réaction",
             "Tu as raison... Je m’attendais un peu à cette réaction"
           ],
           "next": "Mechament_2"
@@ -207,7 +206,7 @@
       "thoughts": ["hein", "Layla ?"],
       "choices": [
         {
-          "text": "Gentiment",
+          "text": "Accepter",
           "reply": [
             "Laila !???? Ou étais-tu passer meuf.",
             "Oh mon dieu, tu vas bien ????",
@@ -218,7 +217,7 @@
           "next": "Gentiment_1"
         },
         {
-          "text": "Méchament",
+          "text": "S'énerver",
           "reply": [
             "Sérieusement Laïla ?",
             "On t’a cherchée partout, les gens pensaient que tu étais disparue comme les autres, ou morte...",
@@ -287,7 +286,7 @@
     "galerie": {
       "who": "inconnu",
       "texts": [
-        "Désolée de revenir comme une fleur... C’est bien moi. J’ai perdu mon ancien tel, voilà mon nouveau numéro."
+        "Désolée de revenir comme une fleur... C’est bien moi. J’ai perdu mon ancien tel, voilà mon nouveau compte."
       ],
       "galleryPhotos": [
         "./Galerie/photo.jpg",
@@ -499,12 +498,12 @@
       "choices": [
         {
           "text": "Voir Calenderier",
-          "reply": ["Je suis partante mais Laïla, pourquoi 28 et pas le 29 ?"],
+          "reply": ["Je suis partante mais Layla, pourquoi 28 et pas le 29 ?"],
           "next": "Voir_Calenderier1"
         },
         {
           "text": "Non Voir Calenderier",
-          "reply": ["Je suis partante mais Laïla pour le 28 ?"],
+          "reply": ["Je suis partante mais Layla pour le 28 ?"],
           "next": "Non_Voir_Calenderier1"
         }
       ]
@@ -520,12 +519,12 @@
       "choices": [
         {
           "text": "Voir Calenderier",
-          "reply": ["Je suis partante mais Laïla, pourquoi 28 et pas le 29 ?"],
+          "reply": ["Je suis partante mais Layla, pourquoi 28 et pas le 29 ?"],
           "next": "Voir_Calenderier1"
         },
         {
           "text": "Non Voir Calenderier",
-          "reply": ["Je suis partante mais Laïla pour le 28 ?"],
+          "reply": ["Je suis partante mais Layla pour le 28 ?"],
           "next": "Non_Voir_Calenderier1"
         }
       ]
@@ -596,7 +595,7 @@
         "J’ai vraiment besoin de te voir, ça me fera un bien au mental."
       ],
       "who2": "protagonist",
-      "textsProtagonist": ["Tu m’as manqué Laïla. J’ai hâte qu’on se revoit."],
+      "textsProtagonist": ["Tu m’as manqué Layla. J’ai hâte qu’on se revoit."],
       "next": "Non_Voir_Calenderier4"
     },
     "Voir_Calenderier4": {
@@ -626,7 +625,7 @@
         "J’ai vraiment besoin de te voir, ça me fera un bien au mental."
       ],
       "who2": "protagonist",
-      "textsProtagonist": ["Tu m’as manqué Laïla. J’ai hâte qu’on se revoit."],
+      "textsProtagonist": ["Tu m’as manqué Layla. J’ai hâte qu’on se revoit."],
       "next": "Voir_Calenderier6"
     },
     "Non_Voir_Calenderier5": {
@@ -713,9 +712,9 @@
     },
     "Internet": {
       "thoughts": [
-        "C’est quand même bizarre, le nom ne correspond pas à celui de Laïla, je vais vérifier sur internet",
+        "C’est quand même bizarre, le nom ne correspond pas à celui de Layla, je vais vérifier sur internet",
         "John DOE disparu ?",
-        "Mais c’est quoi ce bordel ptn",
+        "Mais c’est quoi ce bordel",
         "De l’ia ?",
         "SkinWalker numérique ?"
       ],

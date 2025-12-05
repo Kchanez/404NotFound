@@ -72,7 +72,6 @@
         "Joyeux anniversaire ma veille, tu me manques.";
       if (typeof text === "string" && text.trim() === hideNotificationTrigger) {
         hideNotificationIcon();
-        return false; // non-bloquant
       }
       return false; // pas de blocage pour ce texte
     },

@@ -23,7 +23,10 @@
       const notificationIcon = document.getElementById("notification-icon");
       if (notificationIcon) {
         notificationIcon.style.top = "9%";
+      } else {
       }
+    } else {
+      console.log("Condition: rappelIcon n'existe pas.");
     }
   }
 
@@ -91,7 +94,7 @@
       }
       // 3) Masquer l’icône de rappel à un message spécifique
       const hideRappelTrigger =
-        "Je sais qu'ils se trompent. Ces histoires de kidnapping de la ville, je sais que tu n’as rien à faire avec! Tu n'as pas disparue ou été kidnappée ! Tu as juste fuis pour réaliser tes rêves...";
+        "Je sais qu'ils se trompent. Ces histoires de kidnapping, je sais que tu n’as rien à faire avec! Tu n'as pas disparue ou été kidnappée ! Tu as juste fuis pour réaliser tes rêves...";
       if (typeof text === "string" && text.trim() === hideRappelTrigger) {
         hideRappelIcon();
         return false; // non-bloquant

@@ -58,7 +58,7 @@ html {
 }
 
 #dialogue-text {
-  font-size: 1.1em;
+  font-size: 1.5em;
   line-height: 1.5;
   min-height: 3em;
   padding: 0% 12%;
@@ -296,7 +296,7 @@ html {
   max-width: 20%;
 }
 .rappel-icon2 {
-  top: 21%;
+  top: 22%;
 }
 .rappel-icon.hidden {
   display: none;

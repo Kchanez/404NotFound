@@ -16,6 +16,12 @@ const CHAT_CONTACTS = [
     inContacts: true,
   },
   { id: "maman", name: "Maman", avatar: "Images/profil.svg", inContacts: true },
+  {
+    id: "mamanLayla",
+    name: "MamanLayla",
+    avatar: "Images/profil.svg",
+    inContacts: true,
+  },
   { id: "layla", name: "Laïla", avatar: "Images/profil.svg", inContacts: true },
 ];
 
@@ -24,6 +30,13 @@ const CHAT_THREADS = {
   papa: [{ who: "friend", text: "Dernier message en attente..." }],
   justine: [{ who: "friend", text: "Dernier message en attente..." }],
   maman: [{ who: "friend", text: "Dernier message en attente..." }],
+  mamanLayla: [
+    {
+      who: "friend",
+      type: "text",
+      text: "Bonsoir, J’ai enfin des nouvelles de Laïla. Elle a été retrouvée, cependant elle n’avait pas fuguée comme les enquêteurs et le reste de la ville le pensait. Les autorités affirment qu’elle avait été enlevée par un réseau organisé de kidnappeurs.Dans son téléphone on a trouvé qu’elle pensait échanger avec sa cousine disparue quelque temps plus tôt.Elle avait été à un point de rendez- vous. Était - tu au courant ? Tout ça semble encore irréel… Layla est méconnaissable, les docteurs parlent de troubles post traumatique.Elle est prise de panique et ne cesse de répeter “Je ne ferai plus confiance à l’identité numérique. Maman de Layla",
+    },
+  ],
   layla: [
     {
       who: "friend",
