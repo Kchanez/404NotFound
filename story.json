@@ -135,7 +135,7 @@
         {
           "text": "Accepter",
           "reply": [
-            "Laila !???? Ou étais-tu passé meuf.",
+            "Layla !???? Ou étais-tu passé meuf.",
             "Oh mon dieu, tu vas bien ????",
             "On t’a cherchée partout, on pensait que t’étais morte.",
             "Tes parents sont au courant? et la police elle te cherchent tjrs?",
@@ -146,11 +146,11 @@
         {
           "text": "S'énerver",
           "reply": [
-            "Sérieusement Laïla ?",
+            "Sérieusement Layla ?",
             "On t’a cherchée partout, les gens pensaient que tu étais disparue comme les autres, ou morte...",
             "J’ai inconsciemment commencer à y croire!",
-            "Tes parents sont-ils au courant? Et la police Laïla, elle te cherchent toujours tu sais !!",
-            "T’es vraiment égoïste de n’avoir prévenue personne Laïla... On se faisait du soucis pour toi. J’espère au moins que tu vas bien.",
+            "Tes parents sont-ils au courant? Et la police Layla, elle te cherchent toujours tu sais !!",
+            "T’es vraiment égoïste de n’avoir prévenue personne Layla... On se faisait du soucis pour toi. J’espère au moins que tu vas bien.",
             "Tu as raison... Je m’attendais un peu à cette réaction"
           ],
           "next": "Mechament_2"
@@ -192,11 +192,11 @@
         {
           "text": "S'énerver",
           "reply": [
-            "Sérieusement Laïla ?",
+            "Sérieusement Layla ?",
             "On t’a cherchée partout, les gens pensaient que tu étais disparue comme les autres, ou morte...",
             "J’ai inconsciemment commencer à y croire!",
-            "Tes parents sont-ils au courant? Et la police Laïla, elle te cherchent toujours tu sais !!",
-            "T’es vraiment égoïste de n’avoir prévenue personne Laïla... On se faisait du soucis pour toi. J’espère au moins que tu vas bien.",
+            "Tes parents sont-ils au courant? Et la police Layla, elle te cherchent toujours tu sais !!",
+            "T’es vraiment égoïste de n’avoir prévenue personne Layla... On se faisait du soucis pour toi. J’espère au moins que tu vas bien.",
             "Tu as raison... Je m’attendais un peu à cette réaction"
           ],
           "next": "Mechament_1"
@@ -294,7 +294,7 @@
         "haha ça fait longtemps qu’on ne s’est pas vu tu as du oublier"
       ],
       "who2": "protagonist",
-      "textsProtagonist": ["Mais Laïla j’ai une question"],
+      "textsProtagonist": ["Mais Layla j’ai une question"],
       "next": "galerie_explore1"
     },
     "galerie_non_explore": {
@@ -304,7 +304,7 @@
         "Toi aussi tu n’as pas changée, tjrs aussi gentille."
       ],
       "who2": "protagonist",
-      "textsProtagonist": ["Mais Laïla j’ai une question"],
+      "textsProtagonist": ["Mais Layla j’ai une question"],
       "next": "galerie_non_explore1"
     },
 
@@ -479,41 +479,88 @@
     "Ecouter_Voicemail3": {
       "who2": "protagonist",
       "textsProtagonist": ["Oui dis moi."],
+      "next": "Ecouter_Voicemail4"
+    },
+    "Non_Ecouter_Voicemail3": {
+      "who2": "protagonist",
+      "textsProtagonist": ["Oui dis moi."],
+      "next": "Non_Ecouter_Voicemail4"
+    },
+    "Ecouter_Voicemail4": {
       "who": "inconnu",
       "texts": [
         "Peut-tu me faire un virement , Je vais t’envoyer une demande",
         "Je vais venir, mais si je prend un ticket de bus ou de train, mes parents seront au courant.",
         "Ils traquent mes moindres gestes et mouvements"
       ],
-      "next": "Ecouter_Voicemail4"
-    },
-     "Non_Ecouter_Voicemail3": {
-       "who2": "protagonist",
-       "textsProtagonist": ["Oui dis moi."],
-       "who": "inconnu",
-       "texts": [
-         "Peut-tu me faire un virement , Je vais t’envoyer une demande",
-         "Je vais venir, mais si je prend un ticket de bus ou de train, mes parents seront au courant.",
-         "Ils traquent mes moindres gestes et mouvements"
-       ],
-       "next": "Non_Ecouter_Voicemail4"
-     },
-    "Ecouter_Voicemail4": {
       "who2": "protagonist",
       "textsProtagonist": ["C’est pour ta sécurité je les comprends."],
-      "who": "inconnu",
-      "texts": ["Ça marche super, je t’envoie l’adresse :"],
-      "lien": "https://paylib.com/fr/transaction/virement"
+      "next": "Ecouter_Voicemail5"
     },
-    "@Ecouter_Voicemail4": {
+    "Non_Ecouter_Voicemail4": {
+      "who": "inconnu",
+      "texts": [
+        "Peut-tu me faire un virement , Je vais t’envoyer une demande",
+        "Je vais venir, mais si je prend un ticket de bus ou de train, mes parents seront au courant.",
+        "Ils traquent mes moindres gestes et mouvements"
+      ],
       "who2": "protagonist",
       "textsProtagonist": ["C’est pour ta sécurité je les comprends."],
+      "next": "Non_Ecouter_Voicemail5"
+    },
+    "Ecouter_Voicemail5": {
       "who": "inconnu",
       "texts": ["Ça marche super, je t’envoie l’adresse :"],
-      "lien": "https://paylib.com/fr/transaction/virement"
+      "lien": "https://paylib.com/fr/transaction/virement",
+      "choices": [
+        {
+          "text": "Enqueter",
+          "reply": ["..."],
+          "next": "Enqueter"
+        },
+        {
+          "text": "Non_Enqueter",
+          "reply": ["..."],
+          "next": "Non_Enqueter"
+        }
+      ]
+    },
+    "Non_Ecouter_Voicemail5": {
+      "who": "inconnu",
+      "texts": ["Ça marche super, je t’envoie l’adresse :"],
+      "lien": "https://paylib.com/fr/transaction/virement",
+      "choices": [
+        {
+          "text": "Enqueter",
+          "reply": ["..."],
+          "next": "Enqueter"
+        },
+        {
+          "text": "Non_Enqueter",
+          "reply": ["..."],
+          "next": "Non_Enqueter"
+        }
+      ]
+    },
+    "Enqueter": {
+      "thoughts": [
+        "C’est quand même bizarre, le nom ne correspond pas à celui de Layla, je vais vérifier sur internet?",
+        "John DOE disparu ?",
+        "Mais c’est quoi ce bordel",
+        "De l’ia ?",
+        "SkinWalker numérique ?"
+      ], 
+      "next": "Enqueter1"   
+    }, 
+    "Non_Enqueter": {
+      "who": "inconnu",
+      "texts": [
+        "J’ai pas reçu le virement, tu l’as bien accepté ?",
+        "Bon tant pis pour le virement... Le train va bientôt passer.",
+        "Rendez-vous à 21h, 2 rue Saint-Denis. Et ne le dis à personne... Ça m’embêterait que tes parents ou les miens soient au courant"
+      ],
+      "next": "Enqueter2"
     }
-
-   
   }
 }
 

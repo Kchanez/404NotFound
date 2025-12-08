@@ -23,6 +23,7 @@ let hasAudioBeenClicked = false;
 let unknownImageFilename = null;
 let currentTypewriterEffect = null; // Variable pour suivre l'effet de machine à écrire en cours
 let isChoicesActive = false; // Drapeau pour bloquer la progression quand des choix sont affichés
+let isWaitingForChatAppMessage = false; // Nouveau drapeau pour gérer l'attente des messages du chat
 
 // Charger l'histoire depuis le fichier JSON
 function loadStory() {
@@ -504,6 +505,7 @@ window.VisualNovelAPI = {
       if (dialogueBox) dialogueBox.classList.remove("hidden");
       currentScenario.currentDialogueTurn =
         currentScenario.who === "protagonist" ? "you" : "friend"; // Initialiser le tour de dialogue
+      currentScenario.isThoughtTurn = false; // Initialiser le tour de pensée
 
       // Si le scénario est 'galerie' et qu'il y a des photos, envoyer une photo aléatoire
       if (
@@ -633,65 +635,40 @@ function displayScenarioDialogue() {
   let currentIndex;
   let isThought = false; // New flag to indicate if current text is a thought
 
-  // Prioritize protagonist's thoughts
+  // Traitement des pensées (indépendant de la logique séquentielle inconnu/you)
   if (
-    currentScenario.currentDialogueTurn === "you" &&
     currentScenario.thoughts &&
-    currentThoughtIndex < currentScenario.thoughts.length
+    currentThoughtIndex < currentScenario.thoughts.length &&
+    // Vérifier que ce sont les pensées qui doivent être affichées actuellement
+    (currentScenario.currentDialogueTurn === "you" ||
+      currentScenario.isThoughtTurn)
   ) {
     currentTexts = currentScenario.thoughts;
-    currentCharacter = "protagonist"; // Thoughts are from protagonist
+    currentCharacter = "protagonist"; // Les pensées sont du protagoniste
     currentIndex = currentThoughtIndex;
     isCurrentlyProtagonistDialogue = true;
     isThought = true;
-  } else if (currentScenario.currentDialogueTurn === "you") {
-    if (
-      currentScenario.textsProtagonist &&
-      currentProtagonistDialogueIndex < currentScenario.textsProtagonist.length
-    ) {
-      currentTexts = currentScenario.textsProtagonist;
-      currentCharacter = "protagonist";
-      currentIndex = currentProtagonistDialogueIndex;
-      isCurrentlyProtagonistDialogue = true;
-    } else if (
-      currentScenario.texts &&
-      currentScenarioIndex < currentScenario.texts.length
-    ) {
-      // Si le protagoniste n'a plus de texte, mais l'ami en a, passer à l'ami
-      currentTexts = currentScenario.texts;
-      currentCharacter = currentScenario.who || "inconnu";
-      currentIndex = currentScenarioIndex;
-      isCurrentlyProtagonistDialogue = false;
-    } else {
-      // Aucun des deux n'a de texte, passer à la suite
-      handleEndOfScenario();
-      return;
-    }
-  } else if (currentScenario.currentDialogueTurn === "friend") {
-    if (
-      currentScenario.texts &&
-      currentScenarioIndex < currentScenario.texts.length
-    ) {
-      currentTexts = currentScenario.texts;
-      currentCharacter = currentScenario.who || "inconnu";
-      currentIndex = currentScenarioIndex;
-      isCurrentlyProtagonistDialogue = false;
-    } else if (
-      currentScenario.textsProtagonist &&
-      currentProtagonistDialogueIndex < currentScenario.textsProtagonist.length
-    ) {
-      // Si l'ami n'a plus de texte, mais le protagoniste en a, passer au protagoniste
-      currentTexts = currentScenario.textsProtagonist;
-      currentCharacter = "protagonist";
-      currentIndex = currentProtagonistDialogueIndex;
-      isCurrentlyProtagonistDialogue = true;
-    } else {
-      // Aucun des deux n'a de texte, passer à la suite
-      handleEndOfScenario();
-      return;
-    }
-  } else {
-    // Fallback if currentDialogueTurn is not set or invalid
+  }
+  // Logique séquentielle exclusivement pour inconnu et you
+  else if (
+    currentScenario.texts &&
+    currentScenarioIndex < currentScenario.texts.length
+  ) {
+    currentTexts = currentScenario.texts;
+    currentCharacter = currentScenario.who || "inconnu";
+    currentIndex = currentScenarioIndex;
+    isCurrentlyProtagonistDialogue = false;
+  } else if (
+    currentScenario.textsProtagonist &&
+    currentProtagonistDialogueIndex < currentScenario.textsProtagonist.length
+  ) {
+    currentTexts = currentScenario.textsProtagonist;
+    currentCharacter = "protagonist";
+    currentIndex = currentProtagonistDialogueIndex;
+    isCurrentlyProtagonistDialogue = true;
+  }
+  // Si aucun des deux n'a de texte, passer à la suite
+  else {
     handleEndOfScenario();
     return;
   }
@@ -699,15 +676,25 @@ function displayScenarioDialogue() {
   // Set the click handler for advancing the scenario dialogue
   dialogueBox.onclick = null; // Clear previous click handler
   dialogueBox.onclick = () => {
+    if (isWaitingForChatAppMessage || currentTypewriterEffect) {
+      return; // Bloquer le clic si un message est en cours d'affichage ou si l'effet machine à écrire est actif
+    }
+
     if (isThought) {
       currentThoughtIndex++;
-      currentScenario.currentDialogueTurn = "friend"; // After thought, switch to friend's turn
+      currentScenario.isThoughtTurn = false; // La pensée est terminée, désactiver le tour de pensée
     } else if (isCurrentlyProtagonistDialogue) {
       currentProtagonistDialogueIndex++;
-      currentScenario.currentDialogueTurn = "friend"; // Switch to friend's turn
     } else {
       currentScenarioIndex++;
-      currentScenario.currentDialogueTurn = "you"; // Switch to protagonist's turn
+    }
+    // Après un dialogue normal, on peut potentiellement avoir une pensée
+    if (
+      !isThought &&
+      currentScenario.thoughts &&
+      currentThoughtIndex < currentScenario.thoughts.length
+    ) {
+      currentScenario.isThoughtTurn = true; // Activer le tour de pensée pour le prochain affichage
     }
     displayScenarioDialogue(); // Advance to the next dialogue
   };
@@ -730,6 +717,7 @@ function displayScenarioDialogue() {
   // Display message in chat app
   if (!isThought && window.ChatAppAPI) {
     const delay = window.ChatAppAPI.messageDisplayDelay || 200; // Utiliser le délai du chat ou 200ms par défaut
+    isWaitingForChatAppMessage = true; // Bloquer la progression
     setTimeout(() => {
       if (dialogue.audioPlayer) {
         window.ChatAppAPI.addAudioMessage(
@@ -743,6 +731,7 @@ function displayScenarioDialogue() {
           dialogue.image
         );
       }
+      isWaitingForChatAppMessage = false; // Débloquer la progression une fois le message affiché
     }, delay);
   }
 
@@ -773,12 +762,12 @@ function displayScenarioDialogue() {
       dialogueTextEl,
       dialogue.text,
       () => {
-        // Once typing is complete, allow advancing
-        // The click handler on dialogueBoxEl will manage progression
+        currentTypewriterEffect = null; // Réinitialiser une fois l'effet terminé
       },
       30,
       false // No typing sound for thoughts
     );
+    currentTypewriterEffect = true; // Indiquer qu'un effet est en cours
   } else {
     // Clear dialogue text for non-thought dialogues, as they are in chat
     dialogueTextEl.textContent = "";
