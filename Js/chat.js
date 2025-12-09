@@ -187,6 +187,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (text) {
         bubble.innerHTML = text;
+        if (text) {
+          bubble.innerHTML = text;
+          // Check if the text contains a scenario link that needs to be handled
+          const scenarioLinkElement = bubble.querySelector("a.scenario-link");
+          if (scenarioLinkElement) {
+            // Add event listener to open the bank window
+            scenarioLinkElement.addEventListener("click", (event) => {
+              event.preventDefault(); // Prevent any default link action
+              if (window.VisualNovelAPI && window.VisualNovelAPI.showBank) {
+                window.VisualNovelAPI.showBank();
+              }
+            });
+          }
+        }
       }
 
       row.appendChild(bubble);
