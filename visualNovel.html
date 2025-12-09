@@ -1,157 +1,238 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./Css/visualNovel.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./Css/visualNovel.css" />
     <link rel="stylesheet" href="./Css/chat.css" />
-    <link rel="stylesheet" href="./Css/ErrorMessage.css">
-    <link rel="stylesheet" href="./Css/gallery.css">
-    <link rel="stylesheet" href="./Css/audio_player.css">
+    <link rel="stylesheet" href="./Css/ErrorMessage.css" />
+    <link rel="stylesheet" href="./Css/gallery.css" />
+    <link rel="stylesheet" href="./Css/audio_player.css" />
+    <link rel="stylesheet" href="./Css/bank.css" />
     <title>SAVE FRIEND ONLINE</title>
-</head>
-<body>
-    
+  </head>
+  <body>
     <div id="novel-container">
-        <img id="character-image" src="./Images/pensee.svg" alt="Personnage" style="display: block;">
-        
-        <!-- Icônes d'applications dans le novel-container -->
-        <div id="app-icons-container">
-            <img src="Images/dossier.svg" alt="Dossier" class="app-icon disabled">
-            <img id="calendar-icon" src="Images/calendrier.svg" alt="Calendrier" class="app-icon disabled">
-            <img id="gallery-icon" src="Images/galerie.svg" alt="Galerie" class="app-icon disabled">
-            <img src="Images/resultat.svg" alt="Résultat" class="app-icon disabled">    
-        </div> 
-        <div id="app-icons-container2">
-            <img id="mail-icon" src="Images/Mail.svg" alt="Mail" class="app-icon disabled" aria-disabled="true">
-            <img src="Images/internet.svg" alt="Internet" class="app-icon disabled">
-            <img id="bank-icon" src="Images/banque.svg" alt="Banque" class="app-icon disabled">
-            <img src="Images/note.svg" alt="Note" class="app-icon disabled">
-        </div>
-        
-        <!-- Icône Notification (2e rappel) cachée par défaut -->
-        <img id="notification-icon" src="Images/Notif.svg" alt="Rappel (anniversaire)" class="rappel-icon rappel-icon2 hidden">
-        <!-- Icône Notification de message cachée par défaut -->
-        <img id="message-notif-icon" src="Images/NotifMess.svg" alt="Notification message" class="rappel-icon rappel-icon3 hidden">
-        <div id="hacked-screen">
-            <div class="error-window">
-                <div class="title-bar">
-                    <div class="buttons">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="dialogue-box">
-            <!-- Indication visuelle pour cliquer et continuer -->
-            <img id="dialogue-hint" class="dialogue-hint" src="Images/down.svg" alt="Cliquez pour continuer" title="Cliquez pour continuer"/>
-        </div>
-        <!-- Affichage du chat qui contient tout les contacts de l'utilisateur -->
-        <div id="chat-app" class="hidden" aria-hidden="true">
-          <div class="window-header">
-            <span class="title">Messagerie</span>
-            <button id="close-window" class="close">×</button>
+      <img
+        id="character-image"
+        src="./Images/pensee.svg"
+        alt="Personnage"
+        style="display: block"
+      />
+
+      <!-- Icônes d'applications dans le novel-container -->
+      <div id="app-icons-container">
+        <img src="Images/dossier.svg" alt="Dossier" class="app-icon disabled" />
+        <img
+          id="calendar-icon"
+          src="Images/calendrier.svg"
+          alt="Calendrier"
+          class="app-icon disabled"
+        />
+        <img
+          id="gallery-icon"
+          src="Images/galerie.svg"
+          alt="Galerie"
+          class="app-icon disabled"
+        />
+        <img
+          src="Images/resultat.svg"
+          alt="Résultat"
+          class="app-icon disabled"
+        />
+      </div>
+      <div id="app-icons-container2">
+        <img
+          id="mail-icon"
+          src="Images/Mail.svg"
+          alt="Mail"
+          class="app-icon disabled"
+          aria-disabled="true"
+        />
+        <img
+          src="Images/internet.svg"
+          alt="Internet"
+          class="app-icon disabled"
+        />
+        <img
+          id="bank-icon"
+          src="Images/banque.svg"
+          alt="Banque"
+          class="app-icon disabled"
+        />
+        <img src="Images/note.svg" alt="Note" class="app-icon disabled" />
+      </div>
+
+      <!-- Icône Notification (2e rappel) cachée par défaut -->
+      <img
+        id="notification-icon"
+        src="Images/Notif.svg"
+        alt="Rappel (anniversaire)"
+        class="rappel-icon rappel-icon2 hidden"
+      />
+      <!-- Icône Notification de message cachée par défaut -->
+      <img
+        id="message-notif-icon"
+        src="Images/NotifMess.svg"
+        alt="Notification message"
+        class="rappel-icon rappel-icon3 hidden"
+      />
+      <div id="hacked-screen">
+        <div class="error-window">
+          <div class="title-bar">
+            <div class="buttons"></div>
           </div>
-          <div class="window-body">
-            <aside id="contacts">
-              <ul id="contact-list" class="contact-list"></ul>
-            </aside>
-            <section id="thread">
-              <div class="thread-header">
-                <div class="contact-info">
-                  <img id="current-avatar" class="avatar" alt="avatar" />
-                  <div class="contact-meta">
-                    <div id="current-name" class="name">Inconnu</div>
-                    <div id="current-status" class="status">Ce compte ne fait pas partie de votre liste de contacts</div>
+        </div>
+      </div>
+      <div id="dialogue-box">
+        <!-- Indication visuelle pour cliquer et continuer -->
+        <img
+          id="dialogue-hint"
+          class="dialogue-hint"
+          src="Images/down.svg"
+          alt="Cliquez pour continuer"
+          title="Cliquez pour continuer"
+        />
+      </div>
+      <!-- Affichage du chat qui contient tout les contacts de l'utilisateur -->
+      <div id="chat-app" class="hidden" aria-hidden="true">
+        <div class="window-header">
+          <span class="title">Messagerie</span>
+          <button id="close-window" class="close">×</button>
+        </div>
+        <div class="window-body">
+          <aside id="contacts">
+            <ul id="contact-list" class="contact-list"></ul>
+          </aside>
+          <section id="thread">
+            <div class="thread-header">
+              <div class="contact-info">
+                <img id="current-avatar" class="avatar" alt="avatar" />
+                <div class="contact-meta">
+                  <div id="current-name" class="name">Inconnu</div>
+                  <div id="current-status" class="status">
+                    Ce compte ne fait pas partie de votre liste de contacts
                   </div>
                 </div>
-                <button id="toggle-contact" class="add-btn" title="Ajouter / Retirer des contacts">+</button>
               </div>
-              <div id="messages" class="messages"></div>
-              <div id="main-chat-cta" class="pc-cta">
-                <button id="main-chat-cta-btn" class="pc-cta-btn">
-                  Cliquer pour répondre
-                  <img class="pc-cta-icon" src="Images/Envoyer.svg" alt="Envoyer" />
-                </button>
-              </div>
-            </section>
-          </div>
+              <button
+                id="toggle-contact"
+                class="add-btn"
+                title="Ajouter / Retirer des contacts"
+              >
+                +
+              </button>
+            </div>
+            <div id="messages" class="messages"></div>
+            <div id="main-chat-cta" class="pc-cta">
+              <button id="main-chat-cta-btn" class="pc-cta-btn">
+                Cliquer pour répondre
+                <img
+                  class="pc-cta-icon"
+                  src="Images/Envoyer.svg"
+                  alt="Envoyer"
+                />
+              </button>
+            </div>
+          </section>
         </div>
+      </div>
     </div>
     <!-- Fenetre de Galerie -->
-    <div id="gallery-window" style="display: none;">
-        <div id="gallery-header">
-            <h2>Galerie</h2>
-            <button id="close-gallery">×</button>
+    <div id="gallery-window" style="display: none">
+      <div id="gallery-header">
+        <h2>Galerie</h2>
+        <button id="close-gallery">×</button>
+      </div>
+      <div id="folders-container">
+        <!-- Dossiers de la galerie -->
+        <div class="folder-item" data-folder="AnnivLaila">
+          <img src="./Galerie/photo.jpg" alt="Photo anniversaire Laila" />
+          <span class="folder-name">Anniv Laila</span>
         </div>
-        <div id="folders-container">
-            <!-- Dossiers de la galerie -->
-            <div class="folder-item" data-folder="AnnivLaila">
-                <img src="./Galerie/photo.jpg" alt="Photo anniversaire Laila">
-                <span class="folder-name">Anniv Laila</span>
-            </div>
-            <div class="folder-item" data-folder="Seoul2025">
-                <img src="./Galerie/photo1.jpg" alt="Photo Séoul 2025">
-                <span class="folder-name">Séoul 2025</span>
-            </div>
-            <div class="folder-item" data-folder="FeteJustine">
-                <img src="./Galerie/photo2.jpg" alt="Photo Fête Justine">
-                <span class="folder-name">Fête Justine</span>
-            </div>
-            <div class="folder-item" data-folder="App1">
-                <img src="./Galerie/photo3.jpg" alt="Photo nom de app">
-                <span class="folder-name">nom de app</span>
-            </div>
-            <div class="folder-item" data-folder="App2">
-                <img src="./Galerie/photo4.jpg" alt="Photo nom de app">
-                <span class="folder-name">nom de app</span>
-            </div>
-            <div class="folder-item" data-folder="App3">
-                <img src="./Galerie/photo5.jpg" alt="Photo nom de app">
-                <span class="folder-name">nom de app</span>
-            </div>
-            <div class="folder-item" data-folder="App3">
-                <img src="./Galerie/photo6.jpg" alt="Photo nom de app">
-                <span class="folder-name">nom de app</span>
-            </div>
-            <div class="folder-item" data-folder="App3">
-                <img src="./Galerie/photo7.jpg" alt="Photo nom de app">
-                <span class="folder-name">nom de app</span>
-            </div>
-            <div class="folder-item" data-folder="App3">
-                <img src="./Galerie/photo8.jpg" alt="Photo nom de app">
-                <span class="folder-name">nom de app</span>
-            </div>            
-            </div>
+        <div class="folder-item" data-folder="Seoul2025">
+          <img src="./Galerie/photo1.jpg" alt="Photo Séoul 2025" />
+          <span class="folder-name">Séoul 2025</span>
         </div>
+        <div class="folder-item" data-folder="FeteJustine">
+          <img src="./Galerie/photo2.jpg" alt="Photo Fête Justine" />
+          <span class="folder-name">Fête Justine</span>
+        </div>
+        <div class="folder-item" data-folder="App1">
+          <img src="./Galerie/photo3.jpg" alt="Photo nom de app" />
+          <span class="folder-name">nom de app</span>
+        </div>
+        <div class="folder-item" data-folder="App2">
+          <img src="./Galerie/photo4.jpg" alt="Photo nom de app" />
+          <span class="folder-name">nom de app</span>
+        </div>
+        <div class="folder-item" data-folder="App3">
+          <img src="./Galerie/photo5.jpg" alt="Photo nom de app" />
+          <span class="folder-name">nom de app</span>
+        </div>
+        <div class="folder-item" data-folder="App3">
+          <img src="./Galerie/photo6.jpg" alt="Photo nom de app" />
+          <span class="folder-name">nom de app</span>
+        </div>
+        <div class="folder-item" data-folder="App3">
+          <img src="./Galerie/photo7.jpg" alt="Photo nom de app" />
+          <span class="folder-name">nom de app</span>
+        </div>
+        <div class="folder-item" data-folder="App3">
+          <img src="./Galerie/photo8.jpg" alt="Photo nom de app" />
+          <span class="folder-name">nom de app</span>
+        </div>
+      </div>
     </div>
 
     <!-- Fenêtre modale pour l'affichage des images en grand -->
     <div id="image-modal" class="hidden">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <button id="prev-button" class="nav-button prev-button">&#10094;</button>
-            <img id="modal-image" src="" alt="Image agrandie">
-            <button id="next-button" class="nav-button next-button">&#10095;</button>
+      <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <button id="prev-button" class="nav-button prev-button">
+          &#10094;
+        </button>
+        <img id="modal-image" src="" alt="Image agrandie" />
+        <button id="next-button" class="nav-button next-button">
+          &#10095;
+        </button>
+      </div>
+    </div>
+
+
+    <div id="bank-window" class="window-container" style="display: none">
+        <div class="window-frame">
+        <div class="bar-title">
+            <div class="title-bar-text">Banque</div>
+            <div class="title-bar-controls">
+              <button class="closeB">X</button>
+            </div>
+        </div>
+        <div class="window-content">
+            <img src="./Images/smile.svg" alt="Emoji heureux" class="emoji" />
+            <p class="message-Argent">Vous avez reçu une demande d'argent de</p>
+            <p class="sender">Sam Legrand</p>
+            <div class="amount-display">1 000€</div>
+            <button class="send-button">Envoyer</button>
+        </div>
         </div>
     </div>
-    
-
-
+ 
 
     <script src="./Js/visualNovel.js"></script>
     <script src="./Js/Calendrier.js"></script>
-    <script src="./Js/Rappel.js"></script>
     <script src="./Js/RappelAnniversaire.js"></script>
     <script src="Js/RappelMessageVide.js"></script>
     <script src="Js/chatData.js"></script>
     <script src="Js/chat.js"></script>
     <script src="./Js/gallery.js"></script>
-
-    
+    <script src="./Js/bank.js"></script>
     <!-- Audio elements -->
     <audio id="typing-sound" src="Audios/typing.mp3" preload="auto"></audio>
-    <audio id="notification-sound" src="Audios/notification.mp3" preload="auto"></audio>
-  
-</body>
+    <audio
+      id="notification-sound"
+      src="Audios/notification.mp3"
+      preload="auto"
+    ></audio>
+  </body>
 </html>
-

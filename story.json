@@ -549,17 +549,85 @@
         "Mais c’est quoi ce bordel",
         "De l’ia ?",
         "SkinWalker numérique ?"
-      ], 
-      "next": "Enqueter1"   
-    }, 
-    "Non_Enqueter": {
+      ],
       "who": "inconnu",
       "texts": [
         "J’ai pas reçu le virement, tu l’as bien accepté ?",
         "Bon tant pis pour le virement... Le train va bientôt passer.",
         "Rendez-vous à 21h, 2 rue Saint-Denis. Et ne le dis à personne... Ça m’embêterait que tes parents ou les miens soient au courant"
       ],
-      "next": "Enqueter2"
+      "next": "Enqueter1"
+    },
+    "Non-Enqueter": {
+      "thoughts": [
+        "Je devrais quand même lui acheter un cadeau",
+        "Tout est fermée à cette heure.",
+        "Je lui trouverai un truc plus tard, je vais passer à la superette",
+        "Ils doivent surement avoir des fleurs"
+      ],
+      "who": "inconnu",
+      "texts": [
+        "J’ai pas reçu le virement, tu l’as bien accepté ?",
+        "Bon tant pis pour le virement... Le train va bientôt passer.",
+        "Rendez-vous à 21h, 2 rue Saint-Denis. Et ne le dis à personne... Ça m’embêterait que tes parents ou les miens soient au courant"
+      ],
+      "next": "Non_Enqueter1"
+    },
+    "Enqueter1": {
+      "who3": "MamanLayla",
+      "thoughts": [
+        "C’est quoi cette merde ???",
+        "Les enlevements et maintenant ça",
+        "Avec qui je parle depuis le début de la soirée"
+      ],
+      "who2": "protagonist",
+      "textsProtagonist": ["Laïla a été retrouvée. Qui es-tu réellement ?",
+      "Réponds maintenant ",
+      "Le message n’a pas été transmis. Nous avons été bloqué."
+      ],
+      "next": "fin"
+    },  
+    "Non_Enqueter1": {
+      "who2": "protagonist",
+      "textsProtagonist": [
+        "Je vais devoir juste avant passer quelque part j’ai un cadeau à t’acheter eheh."
+      ],
+      "who": "inconnu",
+      "texts": [
+        "Mais je t’ai dit que c’était déjà chaud pour moi de sortir, soit pas en retard."
+      ],
+      "next": "Non_Enqueter2"
+    },
+    "Non_Enqueter2": {
+      "who2": "protagonist",
+      "textsProtagonist": [
+        "Mais je veux juste te faire plaisir.",
+        "Aussi pourquoi la demande virement est de 500 euros ? J’ai accepté sans regarder"
+      ],
+      "who3": "MamanLayla",
+      "next": "Non_Enqueter3"
+    },
+    "Non_Enqueter3": {
+      "who2": "protagonist",
+      "textsProtagonist": ["Laïla a été retrouvée. Qui es-tu réellement ?",
+      "Réponds maintenant ",
+      "Le message n’a pas été transmis. Nous avons été bloqué."
+      ],
+      "next": "fin1"
+    },
+    "fin": {
+      "resultat": [
+        "(3/3)",
+        "Very Good Ending",
+        "Internet Détails + + + (3)"
+      ]
+    },
+    "fin1": {
+      "resultat": [
+        "(2/3)",
+        "Very Good Ending",
+        "Internet Détails + +  (2)"
+      ]
     }
   }
 }

@@ -186,8 +186,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       if (text) {
-        const textNode = document.createTextNode(text);
-        bubble.appendChild(textNode);
+        bubble.innerHTML = text;
       }
 
       row.appendChild(bubble);
