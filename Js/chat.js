@@ -111,6 +111,18 @@ document.addEventListener("DOMContentLoaded", function () {
       messagesEl.innerHTML = "";
       lastSender = null; // Réinitialiser le dernier expéditeur pour un nouveau thread
       const arr = threads[currentId] || [];
+
+      // Ajouter l'information contextuelle pour Laïla
+      if (currentId === "layla") {
+        const timeContextEl = document.createElement("div");
+        timeContextEl.textContent = "il y'a un an";
+        timeContextEl.style.textAlign = "center";
+        timeContextEl.style.color = "grey";
+        timeContextEl.style.fontStyle = "italic";
+        timeContextEl.style.margin = "10px 0"; // Ajoute un peu d'espace
+        messagesEl.appendChild(timeContextEl);
+      }
+
       arr.forEach((m) => {
         if (m.type === "audio") {
           // Utiliser addAudioMessage avec shouldSave = false pour ne pas re-sauvegarder

@@ -40,7 +40,7 @@
         },
         {
           "character": null,
-          
+
           "text": "J'ai l'impression d'avoir oublié un truc..."
         },
 
@@ -574,19 +574,20 @@
       "next": "Non_Enqueter1"
     },
     "Enqueter1": {
-      "who3": "MamanLayla",
+      "activateChatContact": "MamanLayla",
       "thoughts": [
         "C’est quoi cette merde ???",
         "Les enlevements et maintenant ça",
         "Avec qui je parle depuis le début de la soirée"
       ],
       "who2": "protagonist",
-      "textsProtagonist": ["Laïla a été retrouvée. Qui es-tu réellement ?",
-      "Réponds maintenant ",
-      "Le message n’a pas été transmis. Nous avons été bloqué."
+      "textsProtagonist": [
+        "Laïla a été retrouvée. Qui es-tu réellement ?",
+        "Réponds maintenant ",
+        "Le message n’a pas été transmis. Nous avons été bloqué."
       ],
       "next": "fin"
-    },  
+    },
     "Non_Enqueter1": {
       "who2": "protagonist",
       "textsProtagonist": [
@@ -604,31 +605,23 @@
         "Mais je veux juste te faire plaisir.",
         "Aussi pourquoi la demande virement est de 500 euros ? J’ai accepté sans regarder"
       ],
-      "who3": "MamanLayla",
+      "activateChatContact": "MamanLayla",
       "next": "Non_Enqueter3"
     },
     "Non_Enqueter3": {
       "who2": "protagonist",
-      "textsProtagonist": ["Laïla a été retrouvée. Qui es-tu réellement ?",
-      "Réponds maintenant ",
-      "Le message n’a pas été transmis. Nous avons été bloqué."
+      "textsProtagonist": [
+        "Laïla a été retrouvée. Qui es-tu réellement ?",
+        "Réponds maintenant ",
+        "Le message n’a pas été transmis. Nous avons été bloqué."
       ],
       "next": "fin1"
     },
     "fin": {
-      "resultat": [
-        "(3/3)",
-        "Very Good Ending",
-        "Internet Détails + + + (3)"
-      ]
+      "resultat": ["(3/3)", "Very Good Ending", "Internet Détails + + + (3)"]
     },
     "fin1": {
-      "resultat": [
-        "(2/3)",
-        "Very Good Ending",
-        "Internet Détails + +  (2)"
-      ]
+      "resultat": ["(2/3)", "Very Good Ending", "Internet Détails + +  (2)"]
     }
   }
 }
-

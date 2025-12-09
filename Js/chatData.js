@@ -17,7 +17,7 @@ const CHAT_CONTACTS = [
   },
   { id: "maman", name: "Maman", avatar: "Images/profil.svg", inContacts: true },
   {
-    id: "mamanLayla",
+    id: "MamanLayla",
     name: "MamanLayla",
     avatar: "Images/profil.svg",
     inContacts: true,
