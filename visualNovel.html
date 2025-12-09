@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./Css/gallery.css" />
     <link rel="stylesheet" href="./Css/audio_player.css" />
     <link rel="stylesheet" href="./Css/bank.css" />
+    <link rel="stylesheet" href="./Css/internet.css" />
     <title>SAVE FRIEND ONLINE</title>
   </head>
   <body>
@@ -50,6 +51,7 @@
           aria-disabled="true"
         />
         <img
+          id="internet-icon"
           src="Images/internet.svg"
           alt="Internet"
           class="app-icon disabled"
@@ -199,25 +201,268 @@
       </div>
     </div>
 
-
     <div id="bank-window" class="window-container" style="display: none">
-        <div class="window-frame">
+      <div class="window-frame">
         <div class="bar-title">
-            <div class="title-bar-text">Banque</div>
-            <div class="title-bar-controls">
-              <button class="closeB">X</button>
-            </div>
+          <div class="title-bar-text">Banque</div>
+          <div class="title-bar-controls">
+            <button class="closeB">X</button>
+          </div>
         </div>
         <div class="window-content">
-            <img src="./Images/smile.svg" alt="Emoji heureux" class="emoji" />
-            <p class="message-Argent">Vous avez reçu une demande d'argent de</p>
-            <p class="sender">Sam Legrand</p>
-            <div class="amount-display">1 000€</div>
-            <button class="send-button">Envoyer</button>
+          <img src="./Images/smile.svg" alt="Emoji heureux" class="emoji" />
+          <p class="message-Argent">Vous avez reçu une demande d'argent de</p>
+          <p class="sender">Sam Legrand</p>
+          <div class="amount-display">1 000€</div>
+          <button class="send-button">Envoyer</button>
         </div>
-        </div>
+      </div>
     </div>
- 
+
+    <div class="window-container1" id="internet-browser" style="display: none">
+      <div class="title-bar1">
+        <div class="title-bar-text">Internet</div>
+        <div class="title-bar-controls">
+          <button aria-label="Close">X</button>
+        </div>
+      </div>
+      <div class="window-content1">
+        <!-- Page 1: Initial Search Page -->
+        <div id="page-1" class="page active">
+          <img
+            src="./Images/online.svg"
+            alt="Online Logo"
+            class="online-logo"
+          />
+          <p class="description">Surfez sur le web avec Online</p>
+          <div class="search-section">
+            <input type="text" class="search-input" placeholder="" readonly />
+            <div class="buttons">
+              <button class="online-button">Online Search</button>
+              <button class="online-button">Je suis chanceux</button>
+            </div>
+          </div>
+          <a href="#" class="more-online">More Online!</a>
+          <p class="copyright">Copyright ©1999 Online Inc.</p>
+        </div>
+
+          <!-- Page 2: Search Page with Input -->
+        <div id="page-2" class="page active">
+          <img
+            src="./Images/online.svg"
+            alt="Online Logo"
+            class="online-logo"
+          />
+          <p class="description">Surfez sur le web avec Online</p>
+          <div class="search-section">
+            <input type="text" class="search-input" value="Sam LEGRAND" readonly />
+            <div class="buttons">
+              <button class="online-button">Online Search</button>
+              <button class="online-button">Je suis chanceux</button>
+            </div>
+          </div>
+          <a href="#" class="more-online">More Online!</a>
+          <p class="copyright">Copyright ©1999 Online Inc.</p>
+        </div>
+        <!-- Page 3: Search Results Page -->
+        <div id="page-3" class="page">
+          <div class="results-header">
+            <img
+              src="./Images/online.svg"
+              alt="Online Logo Small"
+              class="online-logo-small"
+            />
+            <input
+              type="text"
+              class="search-input-results"
+              value="Sam LEGRAND"
+              readonly
+            />
+            <button class="online-button-results">Online Search</button>
+          </div>
+          <div class="results-summary">
+            <span class="web-year">2000 WEB</span>
+            <span class="result-count"
+              >Résultats <strong>1 - 10</strong> d'un total de
+              <strong>20</strong> pour <strong>Sam LEGRAND</strong></span
+            >
+          </div>
+          <div class="search-results">
+            <div class="result-item">
+              <h3><a href="#">Les Égarés De Grimsvale</a></h3>
+              <p>
+                Donne cours de danse sur la capitale, n’hésitez pas à réserver
+                un cours.
+              </p>
+              <p class="url">
+                https://sam.legrand.cours-de-danse.org/ -
+                <a href="#"
+                  >Voir l’ancienne version sur les archives d’online</a
+                >
+              </p>
+            </div>
+            <div class="result-item">
+              <h3><a href="#">Mémorial <span> Sam LEGRAND </span></a></h3>
+              <p>
+                Un site en la mémoire de Sam LEGRAND, disparu depuis le xx jours
+                xxxx
+              </p>
+              <p class="url">
+                https://sam.legrand.cours-de-danse.org/ -
+                <a href="#"
+                  >Voir l’ancienne version sur les archives d’online</a
+                >
+              </p>
+            </div>
+            <div class="result-item">
+              <h3><a href="#"> Avis de recherche <span>Sam LEGRAND</span></a></h3>
+              <p>
+                Disparition de ma soeur Sam LEGRAND depuis le 17 janvier xxxx - Si informations me contacter.
+              </p>
+              <p class="url">
+                https://sam.legrand.cours-de-danse.org/ -
+                <a href="#"
+                  >Voir l’ancienne version sur les archives d’online</a
+                >
+              </p>
+            </div>
+            <div class="result-item">
+              <h3><a href="#"> <span>Sam LEGRAND</span> Danseur profesionel</a></h3>
+              <p>
+                Donne cours de danse sur la capitale, n’hésitez pas à réserver
+                un cours.
+              </p>
+              <p class="url">
+                https://sam.legrand.cours-de-danse.org/ -
+                <a href="#"
+                  >Voir l’ancienne version sur les archives d’online</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 4: Search Results Page lien cliqué -->
+        <div id="page-4" class="page">
+          <div class="results-header">
+            <img
+              src="./Images/online.svg"
+              alt="Online Logo Small"
+              class="online-logo-small"
+            />
+            <input
+              type="text"
+              class="search-input-results"
+              value="Sam LEGRAND"
+              readonly
+            />
+            <button class="online-button-results">Online Search</button>
+          </div>
+          <div class="results-summary">
+            <span class="web-year">2000 WEB</span>
+            <span class="result-count"
+              >Résultats <strong>1 - 10</strong> d'un total de
+              <strong>20</strong> pour <strong>Sam LEGRAND</strong></span
+            >
+          </div>
+          <div class="search-results">
+            <div class="result-item">
+              <h3><a class="result-title" href="#">Les Égarés De Grimsvale</a></h3>
+              <p>
+                Donne cours de danse sur la capitale, n’hésitez pas à réserver
+                un cours.
+              </p>
+              <p class="url">
+                https://sam.legrand.cours-de-danse.org/ -
+                <a href="#"
+                  >Voir l’ancienne version sur les archives d’online</a
+                >
+              </p>
+            </div>
+            <div class="result-item">
+              <h3><a href="#">Mémorial <span> Sam LEGRAND </span></a></h3>
+              <p>
+                Un site en la mémoire de Sam LEGRAND, disparu depuis le xx jours
+                xxxx
+              </p>
+              <p class="url">
+                https://sam.legrand.cours-de-danse.org/ -
+                <a href="#"
+                  >Voir l’ancienne version sur les archives d’online</a
+                >
+              </p>
+            </div>
+            <div class="result-item">
+              <h3><a href="#"> Avis de recherche <span>Sam LEGRAND</span></a></h3>
+              <p>
+                Disparition de ma soeur Sam LEGRAND depuis le 17 janvier xxxx - Si informations me contacter.
+              </p>
+              <p class="url">
+                https://sam.legrand.cours-de-danse.org/ -
+                <a href="#"
+                  >Voir l’ancienne version sur les archives d’online</a
+                >
+              </p>
+            </div>
+            <div class="result-item">
+              <h3><a href="#"> <span>Sam LEGRAND</span> Danseur profesionel</a></h3>
+              <p>
+                Donne cours de danse sur la capitale, n’hésitez pas à réserver
+                un cours.
+              </p>
+              <p class="url">
+                https://sam.legrand.cours-de-danse.org/ -
+                <a href="#"
+                  >Voir l’ancienne version sur les archives d’online</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 5: Loading Page -->
+        <div id="page-5" class="page loading-page">
+          <div class="loader"></div>
+          <p class="loading-text">LOADING...</p>
+        </div>
+
+        <!-- Page 6: Browser Page -->
+        <div id="page-6" class="page">
+          <div class="browser-header">
+            <div class="browser-controls">
+              <button class="browser-button">X</button>
+              <button class="browser-button">X</button>
+              <button class="browser-button">X</button>
+            </div>
+            <div class="address-bar">
+              <input type="text" value="https://enquete-communaute.cours-de-danse.org/" readonly />
+            </div>
+          </div>
+          <div class="browser-content">
+            <h2 class="blog-title">Blog bénévole dédié aux disparitions</h2>
+            <h2 class="blog-title">Blog bénévole dédié aux disparitions</h2>
+
+            <div class="missing-person-entry">
+              <div class="person-image-placeholder"></div>
+              <div class="person-details">
+                <h3>Sam LEGRAND</h3>
+                <p>Dernière apparition le 11 décembre 2022 à 16:17, quittant sa résidence. Aucune trace physique retrouvée sur les lieux.</p>
+                <p>Si vous disposez d'informations, vous êtes priée de contacter le Bureau Central des Disparitions – Ligne 07-92-00-00-00.</p>
+              </div>
+            </div>
+
+            <div class="missing-person-entry">
+              <div class="person-image-placeholder"></div>
+              <div class="person-details">
+                <h3>Elodie RAKOTO</h3>
+                <p>Dernière apparition le 11 décembre 2022 à 16:17, quittant sa résidence. Aucune trace physique retrouvée sur les lieux.</p>
+                <p>Si vous disposez d'informations, vous êtes priée de contacter le Bureau Central des Disparitions – Ligne 07-92-00-00-00.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+          
+    </div>
 
     <script src="./Js/visualNovel.js"></script>
     <script src="./Js/Calendrier.js"></script>
@@ -227,6 +472,7 @@
     <script src="Js/chat.js"></script>
     <script src="./Js/gallery.js"></script>
     <script src="./Js/bank.js"></script>
+    <script src="./Js/internet.js"></script>
     <!-- Audio elements -->
     <audio id="typing-sound" src="Audios/typing.mp3" preload="auto"></audio>
     <audio

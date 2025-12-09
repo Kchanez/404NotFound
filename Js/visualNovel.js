@@ -20,6 +20,7 @@ let isGalleryClickable = false;
 let galleryViewCount = 0;
 let hasImageBeenClicked = false;
 let hasAudioBeenClicked = false;
+let hasInternetBeenClicked = false;
 let unknownImageFilename = null;
 let currentTypewriterEffect = null; // Variable pour suivre l'effet de machine à écrire en cours
 let isChoicesActive = false; // Drapeau pour bloquer la progression quand des choix sont affichés
@@ -377,6 +378,15 @@ function handleChoice(choice) {
   if (choice.text === "Voir Calenderier" && window.CalendarAPI) {
     window.CalendarAPI.enableCalendar(true);
   }
+
+  // Logique pour activer l'icône internet si le choix est "Enqueter"
+  if (choice.text === "Enqueter") {
+    const internetIcon = document.getElementById("internet-icon");
+    if (internetIcon) {
+      internetIcon.classList.remove("disabled");
+      internetIcon.classList.add("active");
+    }
+  }
   isChoicesActive = false; // Désactiver le drapeau après qu'un choix ait été fait
 
   const dialogueHint = document.getElementById("dialogue-hint");
@@ -464,6 +474,9 @@ function updateGalleryViewCount() {
   if (hasAudioBeenClicked) {
     count++;
   }
+  if (hasInternetBeenClicked) {
+    count++;
+  }
   galleryViewCount = count;
   console.log("galleryViewCount mis à jour à:", galleryViewCount);
 }
@@ -544,6 +557,10 @@ window.VisualNovelAPI = {
     hasAudioBeenClicked = value;
     updateGalleryViewCount();
   },
+  getHasInternetBeenClicked: () => hasInternetBeenClicked,
+  setHasInternetBeenClicked: (value) => {
+    hasInternetBeenClicked = value;
+  },
   getUnknownImageFilename: () => unknownImageFilename,
   setUnknownImageFilename: (filename) => {
     unknownImageFilename = filename;
@@ -563,7 +580,6 @@ window.VisualNovelAPI = {
     }
   },
   showBank: () => {
-    console.log("showBank appelée.");
     const bankWindow = document.getElementById("bank-window");
     if (bankWindow) {
       bankWindow.style.display = "block";
@@ -575,6 +591,20 @@ window.VisualNovelAPI = {
     if (bankWindow) {
       bankWindow.style.display = "none";
       bankWindow.setAttribute("aria-hidden", "true");
+    }
+  },
+  showInternet: () => {
+    const internetWindow = document.getElementById("internet-browser");
+    if (internetWindow) {
+      internetWindow.style.display = "block";
+      internetWindow.removeAttribute("aria-hidden");
+    }
+  },
+  hideInternet: () => {
+    const internetWindow = document.getElementById("internet-browser");
+    if (internetWindow) {
+      internetWindow.style.display = "none";
+      internetWindow.setAttribute("aria-hidden", "true");
     }
   },
 };
@@ -608,6 +638,25 @@ document.addEventListener("DOMContentLoaded", () => {
   if (bankIcon) {
     bankIcon.addEventListener("click", () => {
       window.VisualNovelAPI.showBank();
+    });
+  }
+
+  const internetIcon = document.getElementById("internet-icon");
+  const closeInternetButton = document.querySelector(
+    "#internet-browser .title-bar-controls button"
+  );
+
+  if (internetIcon) {
+    internetIcon.addEventListener("click", () => {
+      window.VisualNovelAPI.showInternet();
+      window.VisualNovelAPI.setHasInternetBeenClicked(true);
+      updateGalleryViewCount();
+    });
+  }
+
+  if (closeInternetButton) {
+    closeInternetButton.addEventListener("click", () => {
+      window.VisualNovelAPI.hideInternet();
     });
   }
 

@@ -1,15 +1,24 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: "Tahoma", "Arial", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
 }
 
-.window-container {
+#internet-browser{
+  position: fixed;
+  top: 10%;
+  left: 10%;
+  background-color: #fff;
   border: 5px solid #0b65f4;
+  z-index: 20000;
+  display: flex;
+}
+
+.window-container1 {
+  border: 7px solid #0b65f4;
   width: 80%;
   max-width: 50%;
   height: 65vh;
@@ -18,16 +27,17 @@ body {
   border-radius: 8px 8px 0px 0px;
 }
 
-.title-bar {
+.title-bar1 {
   background: linear-gradient(to right, #0b65f4);
   height: 3.5vh;
   color: #fff;
-  padding: 3px 5px;
+  padding: 3px 0px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 1.2em;
   cursor: default;
+  font-family: "tahoma";
 }
 
 .title-bar-text {
@@ -41,8 +51,6 @@ body {
   border-bottom-color: #808080;
   width: 25px;
   height: 25px;
-  font-size: 1em;
-  line-height: 1;
   padding: 0px;
   cursor: pointer;
   color: #fff;
@@ -57,7 +65,7 @@ body {
   border-bottom-color: #fff;
 }
 
-.window-content {
+.window-content1 {
   flex-grow: 1;
   background-color: #fff;
   display: flex;
@@ -76,6 +84,7 @@ body {
   align-items: center;
   justify-content: center;
   border: 5px solid #a9a9a9;
+  height: 56vh;
 }
 
 .page.active {
