@@ -119,7 +119,8 @@ document.addEventListener("DOMContentLoaded", function () {
         timeContextEl.style.textAlign = "center";
         timeContextEl.style.color = "grey";
         timeContextEl.style.fontStyle = "italic";
-        timeContextEl.style.margin = "10px 0"; // Ajoute un peu d'espace
+        timeContextEl.style.margin = "10px 0"; 
+        timeContextEl.style.fontSize = "0.7em";
         messagesEl.appendChild(timeContextEl);
       }
 

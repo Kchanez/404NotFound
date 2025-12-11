@@ -18,9 +18,8 @@ document.addEventListener('DOMContentLoaded', function() {
             errorMessage.style.width = '30%';
             errorMessage.style.height = '50px';
             errorMessage.style.color = 'red';
-            errorMessage.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
+           errorMessage.style.marginTop = '5px';
             errorMessage.style.fontSize = '20px';
-            errorMessage.style.borderRadius = '20px';
             codeInput.value = '';
             setTimeout(() => {
                 errorMessage.style.display = 'none';
