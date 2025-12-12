@@ -690,6 +690,7 @@ function handleEndOfScenario() {
 }
 
 function displayScenarioDialogue() {
+  
   const dialogueBox = document.getElementById("dialogue-box");
   const dialogueTextEl = document.getElementById("dialogue-text");
   const characterNameEl = document.getElementById("character-name");
@@ -707,6 +708,15 @@ function displayScenarioDialogue() {
   // Check for a link in the current scenario
   const scenarioLink = currentScenario.lien;
 
+  // Afficher la fenêtre de la banque si le scénario contient le lien Paylib
+  if (
+    typeof scenarioLink === "string" &&
+    scenarioLink.includes("https://paylib.com/fr/transaction/virement") &&
+    window.VisualNovelAPI
+  ) {
+    window.VisualNovelAPI.showBank();
+  }
+
   // Prioritize protagonist's thoughts
   if (
     currentScenario.currentDialogueTurn === "you" &&
@@ -718,6 +728,12 @@ function displayScenarioDialogue() {
     currentIndex = currentThoughtIndex;
     isCurrentlyProtagonistDialogue = true;
     isThought = true;
+  } else if (currentScenario.currentDialogueTurn === "you") {
+    currentCharacter = "protagonist";
+    currentIndex = 0;
+    isCurrentlyProtagonistDialogue = true;
+    isThought = true;
+    shouldDisplayVirementThought = false; // Réinitialiser le drapeau après affichage
   } else if (currentScenario.currentDialogueTurn === "you") {
     if (
       currentScenario.textsProtagonist &&
@@ -799,6 +815,7 @@ function displayScenarioDialogue() {
     sfx: currentScenario.audio || "",
     image: currentScenario.image || "",
     audioPlayer: currentScenario.audioPlayer || null, // Ajouter audioPlayer ici
+    lien: currentScenario.lien || "", // Ajout de la propriété lien
   };
 
   // Display message in chat app

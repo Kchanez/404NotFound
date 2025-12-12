@@ -511,16 +511,19 @@
     "Ecouter_Voicemail5": {
       "who": "inconnu",
       "texts": ["Ça marche super, je t’envoie l’adresse :"],
-      "lien": "https://paylib.com/fr/transaction/virement",
+      "lien": "https://paylib.com/fr/transaction/virement/Sam_LEGRAND",
+      "who2": "protagonist",
+      "textsProtagonist": ["je viens de le recevoir."],
+      "thoughts": [
+        "C’est quand même bizarre, le nom ne correspond pas à celui de Layla, je vais vérifier sur internet?"
+      ],
       "choices": [
         {
           "text": "Enqueter",
-          "reply": ["..."],
           "next": "Enqueter"
         },
         {
           "text": "Non_Enqueter",
-          "reply": ["..."],
           "next": "Non_Enqueter"
         }
       ]
@@ -528,57 +531,58 @@
     "Non_Ecouter_Voicemail5": {
       "who": "inconnu",
       "texts": ["Ça marche super, je t’envoie l’adresse :"],
-      "lien": "https://paylib.com/fr/transaction/virement",
+      "lien": "https://paylib.com/fr/transaction/virement/Sam_LEGRAND",
+      "who2": "protagonist",
+      "textsProtagonist": ["je viens de le recevoir."],
+      "thoughts": [
+        "C’est quand même bizarre, le nom ne correspond pas à celui de Layla, je vais vérifier sur internet?"
+      ],
       "choices": [
         {
           "text": "Enqueter",
-          "reply": ["..."],
           "next": "Enqueter"
         },
         {
           "text": "Non_Enqueter",
-          "reply": ["..."],
           "next": "Non_Enqueter"
         }
       ]
     },
     "Enqueter": {
-      "thoughts": [
-        "C’est quand même bizarre, le nom ne correspond pas à celui de Layla, je vais vérifier sur internet?",
-        "Sam Legrand disparu ?",
-        "Mais c’est quoi ce bordel",
-        "De l’ia ?",
-        "SkinWalker numérique ?"
-      ],
       "who": "inconnu",
       "texts": [
         "J’ai pas reçu le virement, tu l’as bien accepté ?",
         "Bon tant pis pour le virement... Le train va bientôt passer.",
         "Rendez-vous à 21h, 2 rue Saint-Denis. Et ne le dis à personne... Ça m’embêterait que tes parents ou les miens soient au courant"
       ],
-      "next": "Enqueter1"
+      "thoughts": [
+        "Sam Legrand disparu ?",
+        "Mais c’est quoi ce bordel",
+        "De l’ia ?",
+        "SkinWalker numérique ?"
+      ],
+      "next": "Enqueter2"
     },
-    "Non-Enqueter": {
+    "Non_Enqueter": {
+      "who": "inconnu",
+      "texts": [
+        "J’ai pas reçu le virement, tu l’as bien accepté ?",
+        "Bon tant pis pour le virement... Le train va bientôt passer.",
+        "Rendez-vous à 21h, 2 rue Saint-Denis. Et ne le dis à personne... Ça m’embêterait que tes parents ou les miens soient au courant"
+      ],
       "thoughts": [
         "Je devrais quand même lui acheter un cadeau",
         "Tout est fermée à cette heure.",
         "Je lui trouverai un truc plus tard, je vais passer à la superette",
         "Ils doivent surement avoir des fleurs"
       ],
-      "who": "inconnu",
-      "texts": [
-        "J’ai pas reçu le virement, tu l’as bien accepté ?",
-        "Bon tant pis pour le virement... Le train va bientôt passer.",
-        "Rendez-vous à 21h, 2 rue Saint-Denis. Et ne le dis à personne... Ça m’embêterait que tes parents ou les miens soient au courant"
+      "who2": "protagonist",
+      "textsProtagonist": [
+        "Je vais devoir juste avant passer quelque part j’ai un cadeau à t’acheter eheh."
       ],
       "next": "Non_Enqueter1"
     },
-    "Enqueter1": {
-      "thoughts": [
-        "C’est quoi cette merde ???",
-        "Les enlevements et maintenant ça",
-        "Avec qui je parle depuis le début de la soirée"
-      ],
+    "Enqueter2": {
       "who2": "protagonist",
       "textsProtagonist": [
         "Laïla a été retrouvée. Qui es-tu réellement ?",
@@ -588,10 +592,6 @@
       "next": "fin"
     },
     "Non_Enqueter1": {
-      "who2": "protagonist",
-      "textsProtagonist": [
-        "Je vais devoir juste avant passer quelque part j’ai un cadeau à t’acheter eheh."
-      ],
       "who": "inconnu",
       "texts": [
         "Mais je t’ai dit que c’était déjà chaud pour moi de sortir, soit pas en retard."
@@ -602,7 +602,7 @@
       "who2": "protagonist",
       "textsProtagonist": [
         "Mais je veux juste te faire plaisir.",
-        "Aussi pourquoi la demande virement est de 500 euros ? J’ai accepté sans regarder"
+        "Aussi pourquoi la demande virement est de 1000 euros ? J’ai accepté sans regarder"
       ],
       "next": "Non_Enqueter3"
     },
