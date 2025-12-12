@@ -286,7 +286,8 @@
           "reply": ["Tu n’as pas changé.", "Toujours aussi belle"],
           "next": "galerie_non_explore"
         }
-      ]
+      ],
+      "preChoiceNotificationImage": "./Images/infoImg.svg"
     },
     "galerie_explore": {
       "who": "inconnu",
@@ -404,7 +405,8 @@
           ],
           "next": "Non_Ecouter_Voicemail1"
         }
-      ]
+      ],
+      "preChoiceNotificationImage": "./Images/infoAudio.svg"
     },
     "galerie_non_explore4": {
       "who": "inconnu",
@@ -432,7 +434,8 @@
           ],
           "next": "Non_Ecouter_Voicemail1"
         }
-      ]
+      ],
+      "preChoiceNotificationImage": "./Images/infoAudio.svg"
     },
     "Ecouter_Voicemail1": {
       "who": "inconnu",
@@ -512,8 +515,7 @@
       "who": "inconnu",
       "texts": ["Ça marche super, je t’envoie l’adresse :"],
       "lien": "https://paylib.com/fr/transaction/virement/Sam_LEGRAND",
-      "who2": "protagonist",
-      "textsProtagonist": ["je viens de le recevoir."],
+      "preChoiceNotificationImage": "./Images/infoVirment.svg",
       "thoughts": [
         "C’est quand même bizarre, le nom ne correspond pas à celui de Layla, je vais vérifier sur internet?"
       ],
@@ -532,8 +534,7 @@
       "who": "inconnu",
       "texts": ["Ça marche super, je t’envoie l’adresse :"],
       "lien": "https://paylib.com/fr/transaction/virement/Sam_LEGRAND",
-      "who2": "protagonist",
-      "textsProtagonist": ["je viens de le recevoir."],
+      "preChoiceNotificationImage": "./Images/infoVirment.svg",
       "thoughts": [
         "C’est quand même bizarre, le nom ne correspond pas à celui de Layla, je vais vérifier sur internet?"
       ],
@@ -604,7 +605,10 @@
         "Mais je veux juste te faire plaisir.",
         "Aussi pourquoi la demande virement est de 1000 euros ? J’ai accepté sans regarder"
       ],
-      "next": "Non_Enqueter3"
+      "next": "Non_Enqueter3",
+      "onEndScenario": {
+        "action": "activateMamanLaylaChat"
+      }
     },
     "Non_Enqueter3": {
       "who2": "protagonist",

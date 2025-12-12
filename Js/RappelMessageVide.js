@@ -38,7 +38,7 @@
 
   function hideNotification() {
     const notificationIcon = document.getElementById('message-notif-icon');
-    if (notificationIcon) {
+    if (notificationIcon && notificationIcon.src.includes('Images/NotifMess.svg')) {
       notificationIcon.classList.add('hidden');
     }
     if (notificationSound) {

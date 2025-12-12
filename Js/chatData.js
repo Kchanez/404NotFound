@@ -30,7 +30,7 @@ const CHAT_THREADS = {
   papa: [{ who: "friend", text: "Dernier message en attente..." }],
   justine: [{ who: "friend", text: "Dernier message en attente..." }],
   maman: [{ who: "friend", text: "Dernier message en attente..." }],
-  mamanLayla: [
+  MamanLayla: [
     {
       who: "friend",
       type: "text",

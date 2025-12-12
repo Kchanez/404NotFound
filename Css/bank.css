@@ -10,7 +10,7 @@ body {
 #bank-window{
   position: fixed;
   top: 10%;
-  left: 40%;
+  left: 4 0%;
   z-index: 20000;
   display: flex;
 }

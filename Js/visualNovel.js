@@ -160,7 +160,7 @@ function showDialogue(dialogues, index, choices, scenarioChoices = null) {
       window.ChatAppAPI.selectContact("inconnu");
       if (!hasInjectedHeyMessage) {
         setTimeout(() => {
-          window.ChatAppAPI.addMessage("Hey", "friend");
+          window.ChatAppAPI.addMessage("Hey", "friend", null, true, "inconnu");
         }, 300);
         hasInjectedHeyMessage = true;
       }
@@ -393,6 +393,12 @@ function handleChoice(choice) {
   if (dialogueHint) {
     dialogueHint.classList.add("blinking");
     dialogueHint.style.display = "block"; // S'assurer qu'il est visible
+  }
+
+  // Masquer la preChoiceNotificationImage après qu'un choix ait été fait
+  const messageNotifIcon = document.getElementById("message-notif-icon");
+  if (messageNotifIcon) {
+    messageNotifIcon.classList.add("hidden");
   }
 }
 
@@ -676,7 +682,41 @@ function handleEndOfScenario() {
     currentScenario.choices.length > 0
   ) {
     if (dialogueBox) dialogueBox.classList.remove("hidden");
+    if (currentScenario.preChoiceNotificationImage) {
+      const messageNotifIcon = document.getElementById("message-notif-icon");
+      if (messageNotifIcon && currentScenario.preChoiceNotificationImage) {
+        messageNotifIcon.src = currentScenario.preChoiceNotificationImage;
+        messageNotifIcon.alt = "Notification avant choix";
+        const wasHidden = messageNotifIcon.classList.contains("hidden");
+        messageNotifIcon.classList.remove("hidden");
+        messageNotifIcon.style.cssText = `
+          position: absolute;
+          top: 9%;
+          right: 1%;
+          transform: translateY(-50%);
+          cursor: pointer;
+          transition: all 0.3s ease;
+          z-index: 15;
+          border-radius: 10px;
+        `;
+        if (wasHidden) {
+          playAudio("./Audios/notification.mp3", false); // Jouer le son de notification seulement si l'icône était cachée
+        }
+      }
+    }
     showChoices(currentScenario.choices);
+  }
+
+  // Gérer l'action d'activation de MamanLayla
+  if (
+    currentScenario &&
+    currentScenario.onEndScenario &&
+    currentScenario.onEndScenario.action === "activateMamanLaylaChat"
+  ) {
+    if (window.ChatAppAPI) {
+      window.ChatAppAPI.selectContact("MamanLayla");
+      window.ChatAppAPI.showChatApp();
+    }
   } else if (currentScenario && currentScenario.nextScene) {
     displayScene(currentScenario.nextScene);
     currentScenario = null;
@@ -690,7 +730,6 @@ function handleEndOfScenario() {
 }
 
 function displayScenarioDialogue() {
-  
   const dialogueBox = document.getElementById("dialogue-box");
   const dialogueTextEl = document.getElementById("dialogue-text");
   const characterNameEl = document.getElementById("character-name");

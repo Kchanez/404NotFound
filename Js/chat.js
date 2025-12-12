@@ -85,7 +85,8 @@ document.addEventListener("DOMContentLoaded", function () {
             item.classList.remove("inactive-contact");
           } else if (
             item.dataset.id !== "inconnu" &&
-            item.dataset.id !== "layla"
+            item.dataset.id !== "layla" &&
+            item.dataset.id !== "MamanLayla"
           ) {
             // Ne pas désactiver "inconnu" ou "layla"
             item.classList.remove("active-contact");
@@ -119,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
         timeContextEl.style.textAlign = "center";
         timeContextEl.style.color = "grey";
         timeContextEl.style.fontStyle = "italic";
-        timeContextEl.style.margin = "10px 0"; 
+        timeContextEl.style.margin = "10px 0";
         timeContextEl.style.fontSize = "0.7em";
         messagesEl.appendChild(timeContextEl);
       }
@@ -136,7 +137,13 @@ document.addEventListener("DOMContentLoaded", function () {
       messagesEl.scrollTop = messagesEl.scrollHeight; // S'assurer que le scroll est en bas après le rendu
     }
 
-    function addMessage(text, who, image = null, shouldSave = true) {
+    function addMessage(
+      text,
+      who,
+      image = null,
+      shouldSave = true,
+      targetContactId = null
+    ) {
       const row = document.createElement("div");
       row.className = "msg-row " + (who === "you" ? "you" : "friend");
       row.style.flexDirection = "column";
@@ -225,7 +232,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Enregistrer le message dans le thread actuel
       if (shouldSave) {
-        const arr = threads[currentId] || (threads[currentId] = []);
+        const idToSave = targetContactId || currentId;
+        const arr = threads[idToSave] || (threads[idToSave] = []);
         arr.push({ who, text, image, type: image ? "image" : "text" });
         saveThreads();
       }
@@ -308,7 +316,13 @@ document.addEventListener("DOMContentLoaded", function () {
     // Exposer l'API du chat pour le visual novel
     window.ChatAppAPI = {
       addMessage: addMessage,
-      addAudioMessage: (src, who, text = null, shouldSave = true) => {
+      addAudioMessage: (
+        src,
+        who,
+        text = null,
+        shouldSave = true,
+        targetContactId = null
+      ) => {
         const row = document.createElement("div");
         row.className = "msg-row " + (who === "you" ? "you" : "friend");
         row.style.flexDirection = "column";
@@ -443,7 +457,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Optionally, save the audio message to the thread
         if (shouldSave) {
-          const arr = threads[currentId] || (threads[currentId] = []);
+          const idToSave = targetContactId || currentId;
+          const arr = threads[idToSave] || (threads[idToSave] = []);
           arr.push({ who, src, type: "audio", text });
           saveThreads();
         }
