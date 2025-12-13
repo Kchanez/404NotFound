@@ -272,20 +272,20 @@
         "./Galerie/photo7.jpg",
         "./Galerie/photo8.jpg"
       ],
-      "choices": [
-        {
-          "text": "Voir Galerie",
-          "reply": [
-            "Tu n’as pas changé. j’avais presque oublié sur quel bras été ton tatouage",
-            "je pensais qu’il etait sur ton épaule gauche et non droite"
-          ],
-          "next": "galerie_explore"
-        },
-        {
-          "text": "Non Voir Galerie",
-          "reply": ["Tu n’as pas changé.", "Toujours aussi belle"],
-          "next": "galerie_non_explore"
-        }
+      "choices": [ 
+        { 
+          "text": "Voir Galerie", 
+          "reply": [ 
+            "Tu n’as pas changé. j’avais presque oublié sur quel bras été ton tatouage", 
+            "je pensais qu’il etait sur ton épaule gauche et non droite" 
+          ], 
+          "next": "galerie_explore" 
+        }, 
+        { 
+          "text": "Non Voir Galerie", 
+          "reply": ["Tu n’as pas changé.", "Toujours aussi belle"], 
+          "next": "galerie_non_explore" 
+        } 
       ],
       "preChoiceNotificationImage": "./Images/infoImg.svg"
     },

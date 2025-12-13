@@ -334,7 +334,9 @@ function typewriterEffect(
 function handleChoice(choice) {
   // Add the chosen reply text to the chat as a message from the protagonist
   if (window.ChatAppAPI && choice.reply) {
-    window.ChatAppAPI.addMessage(choice.reply, "you");
+    // Router les messages du scénario Non_Enqueter2 vers l'inconnu
+    const targetContact = currentScenario?.id === "Non_Enqueter2" ? "inconnu" : null;
+    window.ChatAppAPI.addMessage(choice.reply, "you", null, true, targetContact);
   }
 
   const mainChatCtaBtn = document.getElementById("main-chat-cta-btn");

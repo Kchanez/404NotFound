@@ -233,6 +233,10 @@ document.addEventListener("DOMContentLoaded", function () {
       // Enregistrer le message dans le thread actuel
       if (shouldSave) {
         const idToSave = targetContactId || currentId;
+        // Empêcher l'ajout de nouveaux messages à la discussion de MamanLayla
+        if (idToSave === "MamanLayla") {
+          return; // Ne pas enregistrer le message
+        }
         const arr = threads[idToSave] || (threads[idToSave] = []);
         arr.push({ who, text, image, type: image ? "image" : "text" });
         saveThreads();
@@ -458,6 +462,13 @@ document.addEventListener("DOMContentLoaded", function () {
         // Optionally, save the audio message to the thread
         if (shouldSave) {
           const idToSave = targetContactId || currentId;
+          // Empêcher l'ajout de nouveaux messages à la discussion de MamanLayla
+          if (idToSave === "MamanLayla") {
+            console.log(
+              "Tentative d'ajout de message audio à MamanLayla bloquée."
+            );
+            return; // Ne pas enregistrer le message audio
+          }
           const arr = threads[idToSave] || (threads[idToSave] = []);
           arr.push({ who, src, type: "audio", text });
           saveThreads();
