@@ -80,16 +80,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Mettre à jour les classes active/inactive pour les contacts
         contactsEl.querySelectorAll(".contact-item").forEach((item) => {
-          if (item.dataset.id === id) {
+          const contactId = item.dataset.id;
+
+          // Réinitialiser les classes pour tous les contacts
+          item.classList.remove("active-contact");
+          item.classList.remove("inactive-contact");
+
+          if (contactId === id) {
+            // Le contact actuellement sélectionné est actif
             item.classList.add("active-contact");
-            item.classList.remove("inactive-contact");
           } else if (
-            item.dataset.id !== "inconnu" &&
-            item.dataset.id !== "layla" &&
-            item.dataset.id !== "MamanLayla"
+            contactId === "MamanLayla" ||
+            contactId === "inconnu" ||
+            contactId === "layla"
           ) {
-            // Ne pas désactiver "inconnu" ou "layla"
-            item.classList.remove("active-contact");
+            // MamanLayla, inconnu et layla doivent toujours être actifs et cliquables
+            item.classList.add("active-contact");
+          } else {
+            // Tous les autres contacts sont inactifs
             item.classList.add("inactive-contact");
           }
         });
@@ -105,6 +113,15 @@ document.addEventListener("DOMContentLoaded", function () {
           : "Ce compte ne fait pas partie de votre liste de contacts";
         addBtn.textContent = c.inContacts ? "−" : "+";
         // No need to call renderThread() or clear messagesEl.innerHTML here
+      }
+
+      // Resume visual novel if "inconnu" contact is selected and visual novel is paused
+      if (
+        id === "inconnu" &&
+        window.VisualNovelAPI &&
+        window.VisualNovelAPI.getIsVisualNovelPaused()
+      ) {
+        window.VisualNovelAPI.resumeVisualNovel();
       }
     }
 
@@ -235,6 +252,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const idToSave = targetContactId || currentId;
         // Empêcher l'ajout de nouveaux messages à la discussion de MamanLayla
         if (idToSave === "MamanLayla") {
+          console.log(
+            "Tentative d'ajout de message à MamanLayla bloquée. idToSave=",
+            idToSave,
+            "text=",
+            text
+          );
           return; // Ne pas enregistrer le message
         }
         const arr = threads[idToSave] || (threads[idToSave] = []);

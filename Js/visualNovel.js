@@ -6,6 +6,8 @@ let currentScenarioIndex = 0; // Déclarer globalement
 let currentProtagonistDialogueIndex = 0;
 let currentThoughtIndex = 0;
 let isCurrentlyProtagonistDialogue = false;
+let isVisualNovelPaused = false;
+let pendingVisualNovelAction = null; // Pour stocker l'action à reprendre
 
 // État global pour bloquer la progression en attendant le clic sur le rappel
 let isWaitingForNotificationClick = false;
@@ -335,8 +337,15 @@ function handleChoice(choice) {
   // Add the chosen reply text to the chat as a message from the protagonist
   if (window.ChatAppAPI && choice.reply) {
     // Router les messages du scénario Non_Enqueter2 vers l'inconnu
-    const targetContact = currentScenario?.id === "Non_Enqueter2" ? "inconnu" : null;
-    window.ChatAppAPI.addMessage(choice.reply, "you", null, true, targetContact);
+    const targetContact =
+      currentScenario?.id === "Non_Enqueter2" ? "inconnu" : null;
+    window.ChatAppAPI.addMessage(
+      choice.reply,
+      "you",
+      null,
+      true,
+      targetContact
+    );
   }
 
   const mainChatCtaBtn = document.getElementById("main-chat-cta-btn");
@@ -365,7 +374,7 @@ function handleChoice(choice) {
     console.warn("Choice has no valid nextScene or nextScenario:", choice);
   }
 
-  if (choice.text === "Ecouter_Voicemail") {
+  if (choice.text === "Ecouter") {
     // Activer visuellement le contact de Layla
     const laylaContact = document.querySelector(
       'li.contact-item[data-id="layla"]'
@@ -541,6 +550,22 @@ window.VisualNovelAPI = {
       console.error(`Scenario ${scenarioName} not found.`);
     }
   },
+  resumeVisualNovel: () => {
+    if (isVisualNovelPaused && pendingVisualNovelAction) {
+      isVisualNovelPaused = false;
+      const action = pendingVisualNovelAction;
+      pendingVisualNovelAction = null; // Réinitialiser l'action en attente
+
+      if (action.type === "startScenario") {
+        window.VisualNovelAPI.startScenario(action.value);
+      } else if (action.type === "showChoices") {
+        showChoices(action.value);
+      } else if (action.type === "displayScene") {
+        displayScene(action.value);
+      }
+    }
+  },
+  getIsVisualNovelPaused: () => isVisualNovelPaused,
   showScenarioChoices: (scenarioName) => {
     if (
       storyData &&
@@ -672,10 +697,97 @@ document.addEventListener("DOMContentLoaded", () => {
   document.dispatchEvent(new Event("visualNovelAPIReady"));
 });
 
+function startSlideshow() {
+  console.log("startSlideshow appelée.");
+  const slideshowContainer = document.querySelector(".slideshow-container");
+  const image1 = document.getElementById("image1");
+  const image2 = document.getElementById("image2");
+  const dialogueBox = document.getElementById("dialogue-box");
+
+  if (dialogueBox) dialogueBox.classList.add("hidden"); // Cacher la boîte de dialogue
+
+  // Masquer le conteneur principal du visual novel
+  document.getElementById("novel-container").style.display = "none";
+  console.log(
+    "novel-container display style set to:",
+    document.getElementById("novel-container").style.display
+  );
+
+  if (slideshowContainer) {
+    slideshowContainer.style.display = "flex";
+    console.log(
+      "slideshowContainer display style set to:",
+      slideshowContainer.style.display
+    );
+  }
+
+  // Afficher directement la première image
+  if (image1) image1.classList.add("active");
+
+  // Après 3 secondes, cacher fin.png et afficher fin1.png
+  setTimeout(() => {
+    if (image1) image1.classList.remove("active");
+    if (image2) image2.classList.add("active");
+  }, 2000); // 3000 millisecondes = 3 secondes d'affichage de fin.png
+}
+
 function handleEndOfScenario() {
+  console.log("handleEndOfScenario appelée.");
   const dialogueBox = document.getElementById("dialogue-box");
   if (dialogueBox) dialogueBox.classList.remove("hidden");
 
+  const onEndScenarioAction = currentScenario?.onEndScenario;
+
+  if (onEndScenarioAction) {
+    console.log(
+      "handleEndOfScenario: Action de fin de scénario détectée:",
+      onEndScenarioAction.action
+    );
+    switch (onEndScenarioAction.action) {
+      case "activateMamanLaylaChat":
+        if (window.ChatAppAPI) {
+          console.log("ici c'est conatct MamanLayla");
+          window.ChatAppAPI.selectContact("MamanLayla");
+          window.ChatAppAPI.showChatApp();
+          isVisualNovelPaused = true;
+          if (currentScenario && currentScenario.next) {
+            pendingVisualNovelAction = {
+              type: "startScenario",
+              value: currentScenario.next,
+            };
+          } else if (
+            currentScenario &&
+            currentScenario.choices &&
+            currentScenario.choices.length > 0
+          ) {
+            pendingVisualNovelAction = {
+              type: "showChoices",
+              value: currentScenario.choices,
+            };
+          } else if (currentScenario && currentScenario.nextScene) {
+            pendingVisualNovelAction = {
+              type: "displayScene",
+              value: currentScenario.nextScene,
+            };
+          }
+          return; // Arrêter la progression du visual novel ici
+        }
+        break;
+      case "openSlideshow":
+        console.log(
+          "handleEndOfScenario: Exécution de l'action openSlideshow."
+        );
+        startSlideshow();
+        break;
+      default:
+        console.warn(
+          "Unknown onEndScenario action:",
+          onEndScenarioAction.action
+        );
+    }
+  }
+
+  // Maintenant, vérifier pour le scénario suivant ou les choix
   if (currentScenario && currentScenario.next) {
     window.VisualNovelAPI.startScenario(currentScenario.next);
   } else if (
@@ -692,33 +804,21 @@ function handleEndOfScenario() {
         const wasHidden = messageNotifIcon.classList.contains("hidden");
         messageNotifIcon.classList.remove("hidden");
         messageNotifIcon.style.cssText = `
-          position: absolute;
-          top: 9%;
-          right: 1%;
-          transform: translateY(-50%);
-          cursor: pointer;
-          transition: all 0.3s ease;
-          z-index: 15;
-          border-radius: 10px;
-        `;
+                  position: absolute;
+                  top: 9%;
+                  right: 1%;
+                  transform: translateY(-50%);
+                  cursor: pointer;
+                  transition: all 0.3s ease;
+                  z-index: 15;
+                  border-radius: 10px;
+                `;
         if (wasHidden) {
           playAudio("./Audios/notification.mp3", false); // Jouer le son de notification seulement si l'icône était cachée
         }
       }
     }
     showChoices(currentScenario.choices);
-  }
-
-  // Gérer l'action d'activation de MamanLayla
-  if (
-    currentScenario &&
-    currentScenario.onEndScenario &&
-    currentScenario.onEndScenario.action === "activateMamanLaylaChat"
-  ) {
-    if (window.ChatAppAPI) {
-      window.ChatAppAPI.selectContact("MamanLayla");
-      window.ChatAppAPI.showChatApp();
-    }
   } else if (currentScenario && currentScenario.nextScene) {
     displayScene(currentScenario.nextScene);
     currentScenario = null;
@@ -730,8 +830,25 @@ function handleEndOfScenario() {
     if (dialogueBox) dialogueBox.classList.remove("hidden");
   }
 }
+// Si onEndScenario n'a pas été géré, et qu'il y a un next, le gérer ici
+if (
+  currentScenario &&
+  currentScenario.onEndScenario &&
+  currentScenario.onEndScenario.action === "activateMamanLaylaChat" &&
+  !currentScenario.next // S'assurer qu'il n'y a pas de next qui aurait déjà été géré
+) {
+  if (window.ChatAppAPI) {
+    console.log("ici c'est conatct MamanLayla");
+    window.ChatAppAPI.selectContact("MamanLayla");
+    window.ChatAppAPI.showChatApp();
+  }
+}
 
 function displayScenarioDialogue() {
+  console.log(
+    "displayScenarioDialogue appelée. currentScenario:",
+    currentScenario
+  );
   const dialogueBox = document.getElementById("dialogue-box");
   const dialogueTextEl = document.getElementById("dialogue-text");
   const characterNameEl = document.getElementById("character-name");
@@ -882,7 +999,12 @@ function displayScenarioDialogue() {
         window.ChatAppAPI.addMessage(
           messageText,
           dialogue.character === "protagonist" ? "you" : "friend",
-          dialogue.image
+          dialogue.image,
+          true, // shouldSave
+          currentScenario?.id === "Non_Enqueter2" &&
+            dialogue.character === "protagonist"
+            ? "inconnu"
+            : null
         );
       }
     }, delay);

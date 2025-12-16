@@ -207,7 +207,8 @@
       "who": "inconnu",
       "texts": ["Tu m’as tellement manqué"],
       "thoughts": [
-        "Et si je m’étais emporté trop vite par les émotions ? Et si au final ce n’était qu’un mauvais canular ?"
+        "Et si je m’étais emporté trop vite par les émotions ?",
+        "Et si au final ce n’était qu’un mauvais canular ?"
       ],
       "who2": "protagonist",
       "textsProtagonist": [
@@ -272,20 +273,20 @@
         "./Galerie/photo7.jpg",
         "./Galerie/photo8.jpg"
       ],
-      "choices": [ 
-        { 
-          "text": "Voir Galerie", 
-          "reply": [ 
-            "Tu n’as pas changé. j’avais presque oublié sur quel bras été ton tatouage", 
-            "je pensais qu’il etait sur ton épaule gauche et non droite" 
-          ], 
-          "next": "galerie_explore" 
-        }, 
-        { 
-          "text": "Non Voir Galerie", 
-          "reply": ["Tu n’as pas changé.", "Toujours aussi belle"], 
-          "next": "galerie_non_explore" 
-        } 
+      "choices": [
+        {
+          "text": "Vérifier",
+          "reply": [
+            "Tu n’as pas changé. j’avais presque oublié sur quel bras été ton tatouage",
+            "je pensais qu’il etait sur ton épaule gauche et non droite"
+          ],
+          "next": "galerie_explore"
+        },
+        {
+          "text": "Y croire",
+          "reply": ["Tu n’as pas changé.", "Toujours aussi belle"],
+          "next": "galerie_non_explore"
+        }
       ],
       "preChoiceNotificationImage": "./Images/infoImg.svg"
     },
@@ -387,7 +388,7 @@
       },
       "choices": [
         {
-          "text": "Ecouter_Voicemail",
+          "text": "Ecouter",
           "reply": [
             "Wow quelle histoire de fou!!",
             "Même si je t’avoue ne pas avoir tout compris.",
@@ -397,7 +398,7 @@
           "next": "Ecouter_Voicemail1"
         },
         {
-          "text": "Non_Ecouter_Voicemail",
+          "text": "Y croire",
           "reply": [
             "Wow quelle histoire de fou!!",
             "Je comprend mieux mtn pourquoi tu as du fuir",
@@ -416,7 +417,7 @@
       },
       "choices": [
         {
-          "text": "Ecouter_Voicemail",
+          "text": "Ecouter",
           "reply": [
             "Wow quelle histoire de fou!!",
             "Même si je t’avoue ne pas avoir tout compris.",
@@ -426,7 +427,7 @@
           "next": "Ecouter_Voicemail1"
         },
         {
-          "text": "Non_Ecouter_Voicemail",
+          "text": "Y croire",
           "reply": [
             "Wow quelle histoire de fou!!",
             "Je comprend mieux mtn pourquoi tu as du fuir",
@@ -525,7 +526,7 @@
           "next": "Enqueter"
         },
         {
-          "text": "Non_Enqueter",
+          "text": "Payer",
           "next": "Non_Enqueter"
         }
       ]
@@ -544,7 +545,7 @@
           "next": "Enqueter"
         },
         {
-          "text": "Non_Enqueter",
+          "text": "Payer",
           "next": "Non_Enqueter"
         }
       ]
@@ -562,6 +563,9 @@
         "De l’ia ?",
         "SkinWalker numérique ?"
       ],
+      "onEndScenario": {
+        "action": "activateMamanLaylaChat"
+      },
       "next": "Enqueter2"
     },
     "Non_Enqueter": {
@@ -605,10 +609,10 @@
         "Mais je veux juste te faire plaisir.",
         "Aussi pourquoi la demande virement est de 1000 euros ? J’ai accepté sans regarder"
       ],
-      "next": "Non_Enqueter3",
       "onEndScenario": {
         "action": "activateMamanLaylaChat"
-      }
+      },
+      "next": "Non_Enqueter3"
     },
     "Non_Enqueter3": {
       "who2": "protagonist",
@@ -617,13 +621,12 @@
         "Réponds maintenant ",
         "Le message n’a pas été transmis. Nous avons été bloqué."
       ],
-      "next": "fin1"
+      "next": "fin"
     },
     "fin": {
-      "resultat": ["(3/3)", "Very Good Ending", "Internet Détails + + + (3)"]
-    },
-    "fin1": {
-      "resultat": ["(2/3)", "Very Good Ending", "Internet Détails + +  (2)"]
+      "onEndScenario": {
+        "action": "openSlideshow"
+      }
     }
   }
 }

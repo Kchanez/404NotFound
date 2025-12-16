@@ -7,16 +7,16 @@ html {
 }
 
 #chat-app {
-    width: 45%;
-    /* height: 60%; */
-    display: none;
-    flex-direction: column;
-    margin: 0 auto;
-    position: absolute;
-    z-index: 10000;
-    top: 34%;
-    left: 45%;
-    transform: translate(-50%, -50%);
+  width: 45%;
+  /* height: 60%; */
+  display: none;
+  flex-direction: column;
+  margin: 0 auto;
+  position: absolute;
+  z-index: 10000;
+  top: 34%;
+  left: 45%;
+  transform: translate(-50%, -50%);
 }
 
 .window-header {
@@ -34,11 +34,11 @@ html {
   font-size: 1.2em;
 }
 .window-header .close {
-    border: 1px solid #fff;
-    background: #cb4929;
-    color: #fff;
-    cursor: pointer;
-    font-size: 20px;
+  border: 1px solid #fff;
+  background: #cb4929;
+  color: #fff;
+  cursor: pointer;
+  font-size: 20px;
 }
 
 .window-body {
@@ -122,13 +122,13 @@ html {
   background: #fff;
   cursor: pointer;
   font-size: 15px;
-  transition: all 0.1s ease; 
+  transition: all 0.1s ease;
 }
 
 .choice-button:hover {
-  background: #e0e0e0; 
-  box-shadow: -1px 1px #888; 
-  transform: translate(-2px, 2px); 
+  background: #e0e0e0;
+  box-shadow: -1px 1px #888;
+  transform: translate(-2px, 2px);
 }
 
 .choice-button:active {
@@ -206,13 +206,13 @@ html {
 }
 
 .contact-item.active-contact {
-  background-color: #e0e0e0; 
-  padding-left: 7px; 
+  background-color: #e0e0e0;
+  padding-left: 7px;
 }
 
 .contact-item.inactive-contact {
-  opacity: 0.6; 
-  pointer-events: none; 
+  opacity: 0.6;
+  pointer-events: none;
 }
 .hidden {
   display: none;
