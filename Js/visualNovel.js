@@ -728,6 +728,10 @@ function startSlideshow() {
   setTimeout(() => {
     if (image1) image1.classList.remove("active");
     if (image2) image2.classList.add("active");
+    // Appeler openInformationWindow après l'affichage de la deuxième image
+    if (window.openInformationWindow) {
+      window.openInformationWindow();
+    }
   }, 2000); // 3000 millisecondes = 3 secondes d'affichage de fin.png
 }
 

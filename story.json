@@ -263,15 +263,7 @@
         "Désolée de revenir comme une fleur... C’est bien moi. J’ai perdu mon ancien tel, voilà mon nouveau compte."
       ],
       "galleryPhotos": [
-        "./Galerie/photo.jpg",
-        "./Galerie/photo1.jpg",
-        "./Galerie/photo2.jpg",
-        "./Galerie/photo3.jpg",
-        "./Galerie/photo4.jpg",
-        "./Galerie/photo5.jpg",
-        "./Galerie/photo6.jpg",
-        "./Galerie/photo7.jpg",
-        "./Galerie/photo8.jpg"
+        "./Galerie/photo.jpg"
       ],
       "choices": [
         {

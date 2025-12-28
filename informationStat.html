@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Informations</title>
+    <link rel="stylesheet" href="./Css/informationStat.css" />
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="information-window" id="information-stat-window">
+      <div class="title-bar-info">
+        <span class="title">Informations</span>
+        <button class="close-button" id="close-information-stat-window-btn">
+          X
+        </button>
+      </div>
+      <div class="window-content-info">
+        <div class="container">
+          <div class="main-title-container">
+            <button class="nav-button">
+              <img
+                src="./Images/gauche.svg"
+                alt="Gauche"
+                class="main-title-icon"
+              />
+            </button>
+            <h1>Images IA vs réalité : attention aux arnaques</h1>
+            <button class="nav-button">
+              <img
+                src="./Images/droit.svg"
+                alt="Droit"
+                class="main-title-icon"
+              />
+            </button>
+          </div>
+          <div class="main-cards-row">
+            <div class="column-of-two-cards">
+              <!-- BLOC 1 : Étude + camembert -->
+              <div class="card">
+                <div class="card-content-row">
+                  <div class="card-text-content">
+                    <h2>1 - Images IA vs images réelles</h2>
+                    <p>
+                      <strong>Microsoft Research (2023–2024)</strong><br />
+                      Capacité humaine à distinguer des images générées par
+                      intelligence artificielle de vraies photographies.
+                    </p>
+                    <p class="highlight info">Conclusion</p>
+                    <p>
+                      Les humains ont des difficultés significatives à
+                      distinguer les images générées par IA des photographies
+                      réelles, en particulier lorsque les images sont de haute
+                      qualité.
+                    </p>
+                  </div>
+                  <div class="card-canvas-container">
+                    <canvas id="aiImageChart"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <!-- BLOC 2 : Escroqueries + barres + liens officiels -->
+              <div class="card">
+                <div class="card-content-row card-content-row-escroquerie">
+                  <div class="card-text-content">
+                    <h3>2 - Escroquerie internationale aux célébrités</h3>
+                    <p>
+                      Une enquête publiée par <strong>The Guardian</strong> a
+                      révélé une fraude massive utilisant des vidéos deepfake de
+                      célébrités pour promouvoir de faux investissements.
+                    </p>
+
+                    <p>
+                      - Victimes : environ <strong>6 000 personnes</strong
+                      ><br />
+                      - Pertes financières :
+                      <strong>≈ 35 millions de dollars</strong><br />
+                      - Victimes dans plusieurs pays (Royaume-Uni, Canada,
+                      Europe)
+                    </p>
+
+                    <p class="source">
+                      🔗 Source officielle :
+                      <a
+                        href="https://www.theguardian.com/money/2025/mar/05/revealed-the-scammers-who-conned-savers-out-of-35m-using-fake-celebrity-ads?"
+                        target="_blank"
+                        style="color: #0b65f4"
+                      >
+                        The Guardian — Escroquerie aux célébrités
+                      </a>
+                    </p>
+                  </div>
+                  <div class="card-text-content">
+                    <h3>3 - Romance & deepfakes — Hong Kong</h3>
+                    <p>
+                      Des profils et appels vidéo deepfake ont été utilisés dans
+                      des arnaques sentimentales et financières, causant plus de
+                      <strong>46 millions de dollars</strong> de pertes.
+                    </p>
+
+                    <p class="source">
+                      🔗 Source officielle :
+                      <a
+                        href="https://www.ndtv.com/world-news/hong-kong-busts-deepfake-scam-46-million-stolen-in-romance-fraud-6802120?utm_source=chatgpt.com"
+                        target="_blank"
+                        style="color: #0b65f4"
+                      >
+                        NDTV — Romance & deepfakes, Hong Kong
+                      </a>
+                    </p>
+                    <canvas id="scamMoneyChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="single-card-column">
+              <!-- BLOC 3 : Conseils + sources -->
+              <div class="card tips">
+                <div class="tips-main-content-row">
+                  <div class="tips-icon-column">
+                    <img src="./Images/Attention.svg" alt="Attention" />
+                  </div>
+                  <div class="tips-text-column">
+                    <h2>Attention</h2>
+                    <ul>
+                      <li>
+                        Ne jamais faire confiance uniquement à une image ou une
+                        vidéo
+                      </li>
+                      <li>
+                        Observer attentivement les visages, mains et
+                        arrière-plans
+                      </li>
+                      <li>Vérifier la source sur plusieurs médias fiables</li>
+                      <li>Se méfier des messages urgents ou émotionnels</li>
+                      <li>
+                        Demander conseil à un proche avant toute décision
+                        financière
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="tips-main-content-row">
+                  <div class="tips-icon-column"></div>
+                  <div class="tips-text-column">
+                    <h3 style="color: #000">Pour approfondir le sujet</h3>
+                    <a
+                      href="https://op.europa.eu/fr/publication-detail/-/publication/06099c52-dc33-11ee-b9d9-01aa75ed71a1/language-en"
+                      target="_blank"
+                      style="color: #0b65f4; font-size: 0.8em"
+                      >Rapport Europol – Facing reality? Deepfakes et
+                      application de la loi</a
+                    ><br />
+                    <a
+                      href="https://cyber.gouv.fr/senscyber-la-e-sensibilisation-accessible-tous"
+                      target="_blank"
+                      style="color: #0b65f4; font-size: 0.8em"
+                      >ANSSI / Cybermalveillance.gouv.fr – Programme
+                      SensCyber</a
+                    ><br />
+
+                    <a
+                      href="https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/rapport-activite-2024"
+                      target="_blank"
+                      style="color: #0b65f4; font-size: 0.8em"
+                      >Cybermalveillance.gouv.fr – Rapport d’activité 2024</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./Js/informationStat.js"></script>
+    <script>
+      // Camembert — Images IA vs réelles
+      new Chart(document.getElementById("aiImageChart"), {
+        type: "pie",
+        data: {
+          labels: ["Détection correcte (62 %)", "Erreur / confusion (38 %)"],
+          datasets: [
+            {
+              data: [62, 38],
+              color: "#000",
+              backgroundColor: ["#DB3913", "#3465CB"],
+            },
+          ],
+        },
+        options: {
+          plugins: {
+            legend: {
+              position: "bottom",
+              labels: { color: "#000" },
+            },
+          },
+        },
+      });
+
+      // Bar chart — Pertes financières
+      new Chart(document.getElementById("scamMoneyChart"), {
+        type: "bar",
+        data: {
+          labels: ["Célébrités (35 M$)", "Romance (46 M$)"],
+          datasets: [
+            {
+              label: "Pertes financières (en millions $)",
+              data: [35, 46], // Ajout d'une troisième valeur pour l'exemple
+              backgroundColor: ["#FF9903", "#139618"], // Ajout d'une troisième couleur
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: { color: "#000" },
+            },
+            x: {
+              ticks: { color: "#000" },
+            },
+          },
+          plugins: {
+            legend: { display: false },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
