@@ -10,7 +10,7 @@ body {
 #bank-window{
   position: fixed;
   top: 10%;
-  left: 4 0%;
+  left: 40%;
   z-index: 20000;
   display: flex;
 }
@@ -18,7 +18,7 @@ body {
     border: 5px solid #0b65f4;
     border-radius: 5px;
     width: 18%;
-    max-height: 50vh;
+    max-height: 53vh;
 }
 
 .window-frame {

@@ -726,13 +726,45 @@ function startSlideshow() {
 
   // Après 3 secondes, cacher fin.png et afficher fin1.png
   setTimeout(() => {
+    // Premier délai : image1 -> image2
     if (image1) image1.classList.remove("active");
     if (image2) image2.classList.add("active");
-    // Appeler openInformationWindow après l'affichage de la deuxième image
-    if (window.openInformationWindow) {
-      window.openInformationWindow();
-    }
-  }, 2000); // 3000 millisecondes = 3 secondes d'affichage de fin.png
+
+    setTimeout(() => {
+      // Deuxième délai : image2 -> novel-container
+      if (image2) image2.classList.remove("active"); // Masquer image2
+      document.getElementById("novel-container").style.display = "flex"; // Rendre le novel-container visible
+      if (slideshowContainer) {
+        slideshowContainer.style.display = "none"; // Masquer le slideshowContainer
+      }
+      if (window.openInformationWindow) {
+        window.openInformationWindow();
+      }
+
+      // Hide #chat-app
+      const chatApp = document.getElementById("chat-app");
+      if (chatApp) {
+        chatApp.style.display = "none";
+      }
+
+      // Disable all app icons except #resultat-icon
+      const appIcons = document.querySelectorAll(".app-icon");
+      appIcons.forEach((icon) => {
+        if (icon.id !== "resultat-icon") {
+          icon.classList.add("disabled");
+          icon.setAttribute("aria-disabled", "true");
+        }
+      });
+
+      // Display #information-stat-window
+      const informationStatWindow = document.getElementById(
+        "information-stat-window"
+      );
+      if (informationStatWindow) {
+        informationStatWindow.style.display = "block";
+      }
+    }, 2000); // Durée d'affichage de image2
+  }, 2000); // Durée d'affichage de image1
 }
 
 function handleEndOfScenario() {

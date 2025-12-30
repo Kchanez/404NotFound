@@ -12,22 +12,27 @@
     <div class="information-window" id="information-stat-window">
       <div class="title-bar-info">
         <span class="title">Informations</span>
-        <button class="close-button" id="close-information-stat-window-btn">
+        <button
+          class="close-button-info"
+          id="close-information-stat-window-btn"
+        >
           X
         </button>
       </div>
       <div class="window-content-info">
         <div class="container">
           <div class="main-title-container">
-            <button class="nav-button">
+            <button class="nav-button-info nav-button-left" id="prev-btn">
               <img
                 src="./Images/gauche.svg"
                 alt="Gauche"
                 class="main-title-icon"
               />
             </button>
-            <h1>Images IA vs réalité : attention aux arnaques</h1>
-            <button class="nav-button">
+            <h1 id="page-title">
+              Images IA vs réalité : attention aux arnaques
+            </h1>
+            <button class="nav-button-info nav-button-right" id="next-btn">
               <img
                 src="./Images/droit.svg"
                 alt="Droit"
@@ -35,201 +40,393 @@
               />
             </button>
           </div>
-          <div class="main-cards-row">
-            <div class="column-of-two-cards">
-              <!-- BLOC 1 : Étude + camembert -->
-              <div class="card">
-                <div class="card-content-row">
-                  <div class="card-text-content">
-                    <h2>1 - Images IA vs images réelles</h2>
-                    <p>
-                      <strong>Microsoft Research (2023–2024)</strong><br />
-                      Capacité humaine à distinguer des images générées par
-                      intelligence artificielle de vraies photographies.
-                    </p>
-                    <p class="highlight info">Conclusion</p>
-                    <p>
-                      Les humains ont des difficultés significatives à
-                      distinguer les images générées par IA des photographies
-                      réelles, en particulier lorsque les images sont de haute
-                      qualité.
-                    </p>
+          <div id="page-1" class="page">
+            <div class="main-cards-row">
+              <div class="column-of-two-cards">
+                <!-- BLOC 1 : Étude + camembert -->
+                <div class="card">
+                  <div class="card-content-row">
+                    <div class="card-text-content">
+                      <h2>1 - Images IA vs images réelles</h2>
+                      <p>
+                        <strong>Microsoft Research (2023–2024)</strong><br />
+                        Capacité humaine à distinguer des images générées par
+                        intelligence artificielle de vraies photographies.
+                      </p>
+                      <p class="highlight info">Conclusion</p>
+                      <p>
+                        Les humains ont des difficultés significatives à
+                        distinguer les images générées par IA des photographies
+                        réelles, en particulier lorsque les images sont de haute
+                        qualité.
+                      </p>
+                    </div>
+                    <div class="card-canvas-container">
+                      <canvas id="aiImageChart"></canvas>
+                    </div>
                   </div>
-                  <div class="card-canvas-container">
-                    <canvas id="aiImageChart"></canvas>
+                </div>
+
+                <!-- BLOC 2 : Escroqueries + barres + liens officiels -->
+                <div class="card">
+                  <div class="card-content-row card-content-row-escroquerie">
+                    <div class="card-text-content">
+                      <h3>2 - Escroquerie internationale aux célébrités</h3>
+                      <p>
+                        Une enquête publiée par <strong>The Guardian</strong> a
+                        révélé une fraude massive utilisant des vidéos deepfake
+                        de célébrités pour promouvoir de faux investissements.
+                      </p>
+
+                      <p>
+                        - Victimes : environ <strong>6 000 personnes</strong
+                        ><br />
+                        - Pertes financières :
+                        <strong>≈ 35 millions de dollars</strong><br />
+                        - Victimes dans plusieurs pays (Royaume-Uni, Canada,
+                        Europe)
+                      </p>
+
+                      <p class="source">
+                        🔗 Source officielle :
+                        <a
+                          href="https://www.theguardian.com/money/2025/mar/05/revealed-the-scammers-who-conned-savers-out-of-35m-using-fake-celebrity-ads?"
+                          target="_blank"
+                          style="color: #0b65f4"
+                        >
+                          The Guardian — Escroquerie aux célébrités
+                        </a>
+                      </p>
+                    </div>
+                    <div class="card-text-content">
+                      <h3>3 - Romance & deepfakes — Hong Kong</h3>
+                      <p>
+                        Des profils et appels vidéo deepfake ont été utilisés
+                        dans des arnaques sentimentales et financières, causant
+                        plus de
+                        <strong>46 millions de dollars</strong> de pertes.
+                      </p>
+
+                      <p class="source">
+                        🔗 Source officielle :
+                        <a
+                          href="https://www.ndtv.com/world-news/hong-kong-busts-deepfake-scam-46-million-stolen-in-romance-fraud-6802120?utm_source=chatgpt.com"
+                          target="_blank"
+                          style="color: #0b65f4"
+                        >
+                          NDTV — Romance & deepfakes, Hong Kong
+                        </a>
+                      </p>
+                      <canvas id="scamMoneyChart"></canvas>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <!-- BLOC 2 : Escroqueries + barres + liens officiels -->
-              <div class="card">
-                <div class="card-content-row card-content-row-escroquerie">
-                  <div class="card-text-content">
-                    <h3>2 - Escroquerie internationale aux célébrités</h3>
-                    <p>
-                      Une enquête publiée par <strong>The Guardian</strong> a
-                      révélé une fraude massive utilisant des vidéos deepfake de
-                      célébrités pour promouvoir de faux investissements.
-                    </p>
+              <div class="single-card-column">
+                <!-- BLOC 3 : Conseils + sources -->
+                <div class="card tips">
+                  <div class="tips-main-content-row">
+                    <div class="tips-icon-column">
+                      <img src="./Images/Attention.svg" alt="Attention" />
+                    </div>
+                    <div class="tips-text-column">
+                      <h2>Attention</h2>
+                      <ul>
+                        <li>
+                          Ne jamais faire confiance uniquement à une image ou
+                          une vidéo
+                        </li>
+                        <li>
+                          Observer attentivement les visages, mains et
+                          arrière-plans
+                        </li>
+                        <li>Vérifier la source sur plusieurs médias fiables</li>
+                        <li>Se méfier des messages urgents ou émotionnels</li>
+                        <li>
+                          Demander conseil à un proche avant toute décision
+                          financière
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
 
-                    <p>
-                      - Victimes : environ <strong>6 000 personnes</strong
+                  <div class="tips-main-content-row">
+                    <div class="tips-icon-column"></div>
+                    <div class="tips-text-column">
+                      <h3 style="color: #000">Pour approfondir le sujet</h3>
+                      <a
+                        href="https://op.europa.eu/fr/publication-detail/-/publication/06099c52-dc33-11ee-b9d9-01aa75ed71a1/language-en"
+                        target="_blank"
+                        style="color: #0b65f4; font-size: 0.8em"
+                        >Rapport Europol – Facing reality? Deepfakes et
+                        application de la loi</a
                       ><br />
-                      - Pertes financières :
-                      <strong>≈ 35 millions de dollars</strong><br />
-                      - Victimes dans plusieurs pays (Royaume-Uni, Canada,
-                      Europe)
-                    </p>
-
-                    <p class="source">
-                      🔗 Source officielle :
                       <a
-                        href="https://www.theguardian.com/money/2025/mar/05/revealed-the-scammers-who-conned-savers-out-of-35m-using-fake-celebrity-ads?"
+                        href="https://cyber.gouv.fr/senscyber-la-e-sensibilisation-accessible-tous"
                         target="_blank"
-                        style="color: #0b65f4"
-                      >
-                        The Guardian — Escroquerie aux célébrités
-                      </a>
-                    </p>
-                  </div>
-                  <div class="card-text-content">
-                    <h3>3 - Romance & deepfakes — Hong Kong</h3>
-                    <p>
-                      Des profils et appels vidéo deepfake ont été utilisés dans
-                      des arnaques sentimentales et financières, causant plus de
-                      <strong>46 millions de dollars</strong> de pertes.
-                    </p>
+                        style="color: #0b65f4; font-size: 0.8em"
+                        >ANSSI / Cybermalveillance.gouv.fr – Programme
+                        SensCyber</a
+                      ><br />
 
-                    <p class="source">
-                      🔗 Source officielle :
                       <a
-                        href="https://www.ndtv.com/world-news/hong-kong-busts-deepfake-scam-46-million-stolen-in-romance-fraud-6802120?utm_source=chatgpt.com"
+                        href="https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/rapport-activite-2024"
                         target="_blank"
-                        style="color: #0b65f4"
+                        style="color: #0b65f4; font-size: 0.8em"
+                        >Cybermalveillance.gouv.fr – Rapport d’activité 2024</a
                       >
-                        NDTV — Romance & deepfakes, Hong Kong
-                      </a>
-                    </p>
-                    <canvas id="scamMoneyChart"></canvas>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="single-card-column">
-              <!-- BLOC 3 : Conseils + sources -->
-              <div class="card tips">
-                <div class="tips-main-content-row">
-                  <div class="tips-icon-column">
-                    <img src="./Images/Attention.svg" alt="Attention" />
-                  </div>
-                  <div class="tips-text-column">
-                    <h2>Attention</h2>
-                    <ul>
-                      <li>
-                        Ne jamais faire confiance uniquement à une image ou une
-                        vidéo
-                      </li>
-                      <li>
-                        Observer attentivement les visages, mains et
-                        arrière-plans
-                      </li>
-                      <li>Vérifier la source sur plusieurs médias fiables</li>
-                      <li>Se méfier des messages urgents ou émotionnels</li>
-                      <li>
-                        Demander conseil à un proche avant toute décision
-                        financière
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div class="tips-main-content-row">
-                  <div class="tips-icon-column"></div>
-                  <div class="tips-text-column">
-                    <h3 style="color: #000">Pour approfondir le sujet</h3>
-                    <a
-                      href="https://op.europa.eu/fr/publication-detail/-/publication/06099c52-dc33-11ee-b9d9-01aa75ed71a1/language-en"
-                      target="_blank"
-                      style="color: #0b65f4; font-size: 0.8em"
-                      >Rapport Europol – Facing reality? Deepfakes et
-                      application de la loi</a
-                    ><br />
-                    <a
-                      href="https://cyber.gouv.fr/senscyber-la-e-sensibilisation-accessible-tous"
-                      target="_blank"
-                      style="color: #0b65f4; font-size: 0.8em"
-                      >ANSSI / Cybermalveillance.gouv.fr – Programme
-                      SensCyber</a
-                    ><br />
-
-                    <a
-                      href="https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/rapport-activite-2024"
-                      target="_blank"
-                      style="color: #0b65f4; font-size: 0.8em"
-                      >Cybermalveillance.gouv.fr – Rapport d’activité 2024</a
-                    >
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          <div id="page-2" class="page" style="display: none">
+            <div class="main-cards-row">
+              <!-- COLONNE GAUCHE : DEUX CARTES -->
+              <div class="column-of-two-cards">
+                <!-- CARTE 1 : AUDIO IA + CAMEMBERT -->
+                <div class="card">
+                  <div class="card-content-row">
+                    <div class="card-text-content">
+                      <h2>4 - Arnaques par audio IA (voix clonées)</h2>
+                        <p>
+                          <strong>FBI / Europol / McAfee (2023–2025)</strong
+                        ><br />
+                          Les arnaques par audio IA reposent sur la génération ou
+                          le clonage de voix afin d’imiter des proches, des
+                          dirigeants ou des institutions officielles.
+                        </p>
+                        <p class="highlight info">Constats clés</p>
+                        <p>
+                          Environ
+                          <strong>30 % des consommateurs</strong> déclarent avoir
+                          déjà été ciblés par un appel frauduleux utilisant une
+                          voix clonée par intelligence artificielle.
+                        </p>
+                        <p class="highlight info">Conclusion</p>
+                        <p>
+                          La voix crée un lien émotionnel immédiat. Cette
+                          proximité rend les victimes particulièrement vulnérables
+                          et réduit leur capacité de vérification.
+                        </p>
+                    </div>
+                    <div class="card-canvas-container">
+                      <canvas id="audioPieChart"></canvas>
+                    </div>
+                </div>
+                </div>
+                <!-- CARTE 2 : IMPACT + BARRES -->
+                <div class="card">
+                  <div class="card-content-row">
+                    <div class="card-text-content">
+                      <h3>5 - Impact réel des arnaques audio IA (Vishing)</h3>
+                      <p>
+                        Les attaques de type <strong>vishing</strong> (phishing vocal) connaissent une croissance très rapide, grâce à la facilité de clonage des voix.
+                      </p>
+                      <p class="highlight info">Exemples concrets</p>
+                      <ul>
+                        <li><strong>Inde :</strong> Clonage de la voix d’un proche pour extorquer des dizaines de milliers de dollars enivron (30000 $)</li>
+                        <li><strong>États-Unis :</strong> Faux conseillers / banques → pertes de plusieurs millions de $ (FBI IC3, 2023) environ (2500000 $)</li>
+                        <li><strong>Royaume-Uni :</strong> Voix clonée d’un parent décédé → pertes de plusieurs dizaines de milliers £ environ (50000 £)</li>
+                      </ul>
+                      <p class="highlight info">Impact global estimé</p>
+                      <ul>
+                        <li>Vishing (voix proches) : 40%</li>
+                        <li>Vishing (fausses institutions) : 35%</li>
+                        <li>Vishing émotionnel / autres : 25%</li>
+                      </ul>
+                      <p class="source">
+                        Sources : <a href="https://www.ic3.gov/Media/PDF/AnnualReport/2023_IC3Report.pdf" target="_blank">FBI IC3 2023</a> · 
+                        <a href="https://www.europol.europa.eu/" target="_blank">Europol</a> · 
+                        <a href="https://www.bbc.com/news/technology-64050154" target="_blank">BBC News</a>
+                      </p>
+                    </div>
+                    <div class="card-canvas-container">
+                      <canvas id="audioPieChart1"></canvas>
+                    </div>
+                  </div>
+                </div>               
+              </div>
+              <!-- COLONNE DROITE : CONSEILS -->
+              <div class="single-card-column">
+                <div class="card tips">
+                  <div class="tips-main-content-row">
+                    <div class="tips-icon-column">
+                      <img src="./Images/Attention.svg" alt="Attention" />
+                    </div>
+                    <div class="tips-text-column">
+                      <h2>Attention</h2>
+                      <ul>
+                        <li>
+                          Ne jamais agir uniquement sur la base d’un appel vocal
+                        </li>
+                        <li>
+                          Se méfier des demandes urgentes ou émotionnelles
+                        </li>
+                        <li>Raccrocher et rappeler via un numéro officiel</li>
+                        <li>
+                          Ne jamais communiquer d’informations sensibles par
+                          téléphone
+                        </li>
+                        <li>Parler à un proche en cas de doute</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="tips-main-content-row">
+                    <div class="tips-icon-column"></div>
+                    <div class="tips-text-column">
+                      <h3 style="color: #000">Pour approfondir le sujet</h3>
+                      <a
+                        href="https://www.ic3.gov/Media/PDF/AnnualReport/2023_IC3Report.pdf"
+                        target="_blank"
+                        style="color: #0b65f4; font-size: 0.8em"
+                      >
+                        FBI — Internet Crime Report (IC3) </a
+                      ><br />
+                      <a
+                        href="https://op.europa.eu/fr/publication-detail/-/publication/06099c52-dc33-11ee-b9d9-01aa75ed71a1"
+                        target="_blank"
+                        style="color: #0b65f4; font-size: 0.8em"
+                      >
+                        Europol — Deepfakes et criminalité </a
+                      ><br />
+                      <a
+                        href="https://www.mcafee.com/blogs/privacy-identity-protection/artificial-impostor-scam/"
+                        target="_blank"
+                        style="color: #0b65f4; font-size: 0.8em"
+                      >
+                        McAfee — The Artificial Impostor
+                      </a>
+                      <a
+                        href="https://www.cybermalveillance.gouv.fr"
+                        target="_blank"
+                        style="color: #0b65f4; font-size: 0.8em"
+                      >
+                        Cybermalveillance.gouv.fr </a
+                      ><br />
+                      <a
+                        href="https://cyber.gouv.fr/"
+                        target="_blank"
+                        style="color: #0b65f4; font-size: 0.8em"
+                      >
+                          ANSSI - cyber.gouv.fr
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="page-3" class="page" style="display: none">
+            <div class="main-cards-row">
+              <div class="column-of-two-cards">
+                <!-- CARTE 1 : Phishing & Smishing (camembert) -->
+                <div class="card">
+                  <div class="card-content-row">
+                    <div class="card-text-content">
+                      <h2>6 - Fraude bancaire : Phishing & Smishing</h2>
+                      <p>
+                        <strong>Banque de France / OSMP / 2023–2025</strong><br />
+                        Les attaques par phishing (emails) et smishing (SMS) visent
+                        à voler des informations sensibles.
+                      </p>
+                      <p class="highlight info">Constats clés</p>
+                      <p>
+                        <p>
+                          - Plus de <strong>52 %</strong> des fraudes sont dues au phishing & smishing<br>
+                          - Environ <strong>32 %</strong> des fraudes concernent la manipulation
+                          via faux conseillers / ingénierie sociale<br>
+                          - Autres fraudes en ligne (achats frauduleux, e-commerce) : <strong>16 %</strong>
+                        </p>
+                      </p>
+                    </div>
+                    <div class="card-canvas-container">
+                      <canvas id="fraudTypePieChart"></canvas>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- CARTE 2 : Faux conseillers / Fraudes avancées (bar chart) -->
+               <div class="card">
+                <div class="card-content-row">
+                  <div class="card-text-content">
+                    <h2>7 - Fraude bancaire et crypto : Faux conseillers & arnaques Bitcoin</h2>
+                    <p>
+                      Des fraudeurs se font passer pour des conseillers bancaires ou des experts en crypto,
+                      et manipulent les victimes pour obtenir de l'argent ou des informations.
+                    </p>
+
+                    <p class="highlight info">Impact financier</p>
+                    <p>
+                      • Faux conseillers / manipulation : <strong>≈ 1,2 milliard €</strong><br>
+                      • Arnaques Bitcoin / crypto : <strong>≈ 2 milliards €</strong><br>
+                      • Autres fraudes financières en ligne : <strong>≈ 0,8 milliard €</strong>
+                    </p>
+
+                    <p class="source">
+                      Sources fiables : Banque de France · AMF · Europol · Cybermalveillance.gouv.fr
+                    </p>
+                  </div>
+                  <div class="card-canvas-container">
+                    <canvas id="fakeAdvisorBarChart"></canvas>
+                  </div>
+                </div>
+              </div>
+              </div>
+              <!-- COLONNE DROITE : Conseils -->
+              <div class="single-card-column">
+                <div class="card tips">
+                  <div class="tips-main-content-row">
+                    <div class="tips-icon-column">
+                      <img src="./Images/Attention.svg" alt="Attention" />
+                    </div>
+                    <div class="tips-text-column">
+                      <h2>Attention</h2>
+                      <ul>
+                        <li>Vérifier l'expéditeur des e-mails et SMS suspects</li>
+                        <li>Ne jamais cliquer sur des liens douteux</li>
+                        <li>Vérifier toujours l’adresse du site avant toute opération</li>
+                        <li>Ne jamais fournir des informations personnelles sur des sites non sécurisés</li>
+                        <li>Utiliser des mots de passe uniques et sécurisés</li>
+                        <li>Activer l'authentification à deux facteurs (2FA)</li>
+                        <li>Contacter directement votre banque en cas de doute</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="tips-main-content-row">
+                    <div class="tips-icon-column"></div>
+                    <div class="tips-text-column">
+                      <h3 style="color: #000">Pour approfondir le sujet</h3>
+                      <a href="https://www.fbf.fr/espace-presse/chiffres-cles/la-cybersecurite-en-chiffres/"
+                        target="_blank" style="color: #0b65f4; font-size: 0.8em">
+                        FBF — La cybersécurité en chiffres
+                      </a><br>
+                      <a href="https://www.europol.europa.eu/media-press/newsroom/news/online-payment-fraud-cost-eu-consumers-eu187-billion-2023"
+                        target="_blank" style="color: #0b65f4; font-size: 0.8em">
+                        Europol — Online payment fraud
+                      </a><br>
+                      <a href="https://www.cybermalveillance.gouv.fr/"
+                        target="_blank" style="color: #0b65f4; font-size: 0.8em">
+                        Cybermalveillance.gouv.fr
+                      </a><br>
+                      <a href="https://www.amf-france.org/fr/espace-epargnants/proteger-son-epargne/fraudes/fraudes-financieres-les-mecanismes-et-les-moyens-de-prevention"
+                        target="_blank" style="color: #0b65f4; font-size: 0.8em">
+                        AMF — Fraudes financières
+                      </a>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
         </div>
       </div>
     </div>
-    <script src="./Js/informationStat.js"></script>
-    <script>
-      // Camembert — Images IA vs réelles
-      new Chart(document.getElementById("aiImageChart"), {
-        type: "pie",
-        data: {
-          labels: ["Détection correcte (62 %)", "Erreur / confusion (38 %)"],
-          datasets: [
-            {
-              data: [62, 38],
-              color: "#000",
-              backgroundColor: ["#DB3913", "#3465CB"],
-            },
-          ],
-        },
-        options: {
-          plugins: {
-            legend: {
-              position: "bottom",
-              labels: { color: "#000" },
-            },
-          },
-        },
-      });
 
-      // Bar chart — Pertes financières
-      new Chart(document.getElementById("scamMoneyChart"), {
-        type: "bar",
-        data: {
-          labels: ["Célébrités (35 M$)", "Romance (46 M$)"],
-          datasets: [
-            {
-              label: "Pertes financières (en millions $)",
-              data: [35, 46], // Ajout d'une troisième valeur pour l'exemple
-              backgroundColor: ["#FF9903", "#139618"], // Ajout d'une troisième couleur
-            },
-          ],
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true,
-              ticks: { color: "#000" },
-            },
-            x: {
-              ticks: { color: "#000" },
-            },
-          },
-          plugins: {
-            legend: { display: false },
-          },
-        },
-      });
-    </script>
+    
+    <script src="./Js/informationStat.js"></script>
+    
   </body>
 </html>
