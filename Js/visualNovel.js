@@ -698,7 +698,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function startSlideshow() {
-  console.log("startSlideshow appelée.");
+
   const slideshowContainer = document.querySelector(".slideshow-container");
   const image1 = document.getElementById("image1");
   const image2 = document.getElementById("image2");
@@ -708,17 +708,10 @@ function startSlideshow() {
 
   // Masquer le conteneur principal du visual novel
   document.getElementById("novel-container").style.display = "none";
-  console.log(
-    "novel-container display style set to:",
-    document.getElementById("novel-container").style.display
-  );
+
 
   if (slideshowContainer) {
     slideshowContainer.style.display = "flex";
-    console.log(
-      "slideshowContainer display style set to:",
-      slideshowContainer.style.display
-    );
   }
 
   // Afficher directement la première image
@@ -768,21 +761,15 @@ function startSlideshow() {
 }
 
 function handleEndOfScenario() {
-  console.log("handleEndOfScenario appelée.");
   const dialogueBox = document.getElementById("dialogue-box");
   if (dialogueBox) dialogueBox.classList.remove("hidden");
 
   const onEndScenarioAction = currentScenario?.onEndScenario;
 
   if (onEndScenarioAction) {
-    console.log(
-      "handleEndOfScenario: Action de fin de scénario détectée:",
-      onEndScenarioAction.action
-    );
     switch (onEndScenarioAction.action) {
       case "activateMamanLaylaChat":
         if (window.ChatAppAPI) {
-          console.log("ici c'est conatct MamanLayla");
           window.ChatAppAPI.selectContact("MamanLayla");
           window.ChatAppAPI.showChatApp();
           isVisualNovelPaused = true;
@@ -810,16 +797,25 @@ function handleEndOfScenario() {
         }
         break;
       case "openSlideshow":
-        console.log(
-          "handleEndOfScenario: Exécution de l'action openSlideshow."
-        );
         startSlideshow();
         break;
-      default:
-        console.warn(
-          "Unknown onEndScenario action:",
-          onEndScenarioAction.action
+      case "showInformationStat":
+        console.log(
+          "handleEndOfScenario: Exécution de l'action showInformationStat."
         );
+        const informationStatWindow = document.getElementById(
+          "information-stat-window"
+        );
+        if (informationStatWindow) {
+          informationStatWindow.style.display = "block";
+          informationStatWindow.classList.remove("hidden");
+        }
+        break;
+      default:
+        console.log(
+          "handleEndOfScenario: Aucune action spécifique pour la fin du scénario."
+        );
+        break;
     }
   }
 
@@ -874,17 +870,12 @@ if (
   !currentScenario.next // S'assurer qu'il n'y a pas de next qui aurait déjà été géré
 ) {
   if (window.ChatAppAPI) {
-    console.log("ici c'est conatct MamanLayla");
     window.ChatAppAPI.selectContact("MamanLayla");
     window.ChatAppAPI.showChatApp();
   }
 }
 
 function displayScenarioDialogue() {
-  console.log(
-    "displayScenarioDialogue appelée. currentScenario:",
-    currentScenario
-  );
   const dialogueBox = document.getElementById("dialogue-box");
   const dialogueTextEl = document.getElementById("dialogue-text");
   const characterNameEl = document.getElementById("character-name");

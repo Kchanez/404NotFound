@@ -472,6 +472,13 @@
       />
     </div>
 
+    <!-- Écran de fin de jeu déplacé hors de novel-container pour éviter le masquage -->
+    <div id="end-game-screen" style="display: none; text-align: center; padding: 50px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999; background-color: white; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.5);">
+      <img src="./Images/cadenasO.svg" alt="Cadenas ouvert" style="width: 150px; margin-bottom: 20px;">
+      <p style="font-size: 1.5em; margin-bottom: 30px;">La vigilance est notre meilleure défense.</p>
+      <button id="restart-game-btn" style="padding: 15px 30px; font-size: 1.2em; cursor: pointer;">Recommencer le jeu</button>
+    </div>
+
 
     <div class="information-window" id="information-stat-window" style="display: none;">
       <div class="title-bar-info">
@@ -543,8 +550,7 @@
                       </p>
 
                       <p>
-                        - Victimes : environ <strong>6 000 personnes</strong
-                        ><br />
+                        - Victimes : environ <strong>6 000 personnes</strong><br />
                         - Pertes financières :
                         <strong>≈ 35 millions de dollars</strong><br />
                         - Victimes dans plusieurs pays (Royaume-Uni, Canada,
@@ -654,7 +660,7 @@
                 <div class="card">
                   <div class="card-content-row">
                     <div class="card-text-content">
-                      <h2>4 - Arnaques par audio IA (voix clonées)</h2>
+                      <h2>1 - Arnaques par audio IA (voix clonées)</h2>
                         <p>
                           <strong>FBI / Europol / McAfee (2023–2025)</strong
                         ><br />
@@ -685,7 +691,7 @@
                 <div class="card">
                   <div class="card-content-row">
                     <div class="card-text-content">
-                      <h3>5 - Impact réel des arnaques audio IA (Vishing)</h3>
+                      <h3>2 - Impact réel des arnaques audio IA (Vishing)</h3>
                       <p>
                         Les attaques de type <strong>vishing</strong> (phishing vocal) connaissent une croissance très rapide, grâce à la facilité de clonage des voix.
                       </p>
@@ -790,7 +796,7 @@
                 <div class="card">
                   <div class="card-content-row">
                     <div class="card-text-content">
-                      <h2>6 - Fraude bancaire : Phishing & Smishing</h2>
+                      <h2>1 - Fraude bancaire : Phishing & Smishing</h2>
                       <p>
                         <strong>Banque de France / OSMP / 2023–2025</strong><br />
                         Les attaques par phishing (emails) et smishing (SMS) visent
@@ -816,7 +822,7 @@
                <div class="card">
                 <div class="card-content-row">
                   <div class="card-text-content">
-                    <h2>7 - Fraude bancaire et crypto : Faux conseillers & arnaques Bitcoin</h2>
+                    <h2>2 - Fraude bancaire et crypto : Faux conseillers & arnaques Bitcoin</h2>
                     <p>
                       Des fraudeurs se font passer pour des conseillers bancaires ou des experts en crypto,
                       et manipulent les victimes pour obtenir de l'argent ou des informations.
@@ -892,8 +898,18 @@
 
 
 
+    <div id="end-game-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 9998;"></div>
+    <div id="end-game-screen" style="display: none; text-align: center; padding: 50px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999; background-color: white; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.5);">
+      <img src="./Images/cadenasO.svg" alt="Cadenas ouvert" style="width: 150px; margin-bottom: 20px;">
+      <p style="font-size: 1.5em; margin-bottom: 30px;">La vigilance est notre meilleure défense.</p>
+      <button id="restart-game-btn" style="padding: 15px 30px; font-size: 1.2em; cursor: pointer;">Recommencer le jeu</button>
+    </div>
 
-    <script src="./Js/informationStat.js"></script>
+
+
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="./Js/informationStat.js"></script>
     <script src="./Js/visualNovel.js"></script>
@@ -906,7 +922,7 @@
     <script src="./Js/bank.js"></script>
     <script src="./Js/internet.js"></script>
     <script src="./Js/informationPage.js"></script>
-  </body>  <!-- Audio elements -->
+  </body>  
     <audio id="typing-sound" src="Audios/typing.mp3" preload="auto"></audio>
     <audio
       id="notification-sound"

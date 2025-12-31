@@ -18,6 +18,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const pages = document.querySelectorAll(".page-info");
   const prevBtn = document.getElementById("prev-btn");
   const nextBtn = document.getElementById("next-btn");
+  const endGameOverlay = document.getElementById("end-game-overlay");
+  const endGameScreen = document.getElementById("end-game-screen");
+  const restartGameBtn = document.getElementById("restart-game-btn");
   const pageTitle = document.getElementById("page-title");
 
   let currentPageIndex = 0;
@@ -38,7 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function updateNavigationButtons() {
     prevBtn.disabled = currentPageIndex === 0;
-    nextBtn.disabled = currentPageIndex === pages.length - 1;
+    // Garde nextBtn activé sur la dernière page pour déclencher l'écran de fin
+    nextBtn.disabled = false;
   }
 
   if (prevBtn) {
@@ -53,11 +57,31 @@ document.addEventListener("DOMContentLoaded", () => {
     nextBtn.addEventListener("click", () => {
       if (currentPageIndex < pages.length - 1) {
         showPage(currentPageIndex + 1);
+      } else {
+        // Cacher la fenêtre des statistiques et afficher l'écran de fin de jeu
+        if (informationStatWindow) {
+          informationStatWindow.style.display = "none";
+        }
+        if (endGameScreen) {
+          endGameScreen.style.display = "block";
+          endGameScreen.classList.add("active");
+          if (endGameOverlay) {
+            endGameOverlay.style.display = "block";
+          }
+        }
+        nextBtn.disabled = true; // Désactive le bouton après le clic sur la dernière page
       }
     });
   }
 
-  // Initialize first page and navigation buttons
+  if (restartGameBtn) {
+    restartGameBtn.addEventListener("click", () => {
+      if (endGameOverlay) {
+        endGameOverlay.style.display = "none";
+      }
+      location.reload();
+    });
+  }
   showPage(0);
 
   // Camembert — Images IA vs réelles
@@ -262,5 +286,4 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // Pour l'instant, afficher la fenêtre au chargement pour le test
-
 });
