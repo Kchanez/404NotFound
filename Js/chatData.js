@@ -43,7 +43,7 @@ const CHAT_THREADS = {
       type: "text",
       text: "coucou, je vais te faire un audio attends pour mieux t'expliquer",
     },
-    { who: "friend", type: "audio", src: "Audios/creepy-whispering-6690.mp3" },
+    { who: "friend", type: "audio", src: "Audios/audioLayla.mp4" },
   ],
 };
 

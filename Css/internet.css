@@ -356,6 +356,16 @@ body {
   margin-right: 15px;
   flex-shrink: 0;
 }
+.SamLeGrand {
+  background-image: url('../Galerie/photo1.jpg');
+  background-size: cover;
+}
+.ElodieRAKOTO {
+  background-image: url('../Galerie/photo2.jpg');
+  background-size: cover;
+}
+
+
 
 .person-details h3 {
   margin-top: 0;
