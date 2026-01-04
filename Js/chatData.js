@@ -22,7 +22,7 @@ const CHAT_CONTACTS = [
     avatar: "Images/profil.svg",
     inContacts: true,
   },
-  { id: "layla", name: "Laïla", avatar: "Images/profil.svg", inContacts: true },
+  { id: "layla", name: "Layla", avatar: "Images/profil.svg", inContacts: true },
 ];
 
 const CHAT_THREADS = {

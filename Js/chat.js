@@ -85,20 +85,28 @@ document.addEventListener("DOMContentLoaded", function () {
           // Réinitialiser les classes pour tous les contacts
           item.classList.remove("active-contact");
           item.classList.remove("inactive-contact");
+          item.classList.remove("unlocked-contact"); // Supprimer la nouvelle classe
 
           if (contactId === id) {
             // Le contact actuellement sélectionné est actif
             item.classList.add("active-contact");
-          } else if (
-            contactId === "MamanLayla" ||
-            contactId === "inconnu" ||
-            contactId === "layla"
-          ) {
-            // MamanLayla, inconnu et layla doivent toujours être actifs et cliquables
-            item.classList.add("active-contact");
           } else {
-            // Tous les autres contacts sont inactifs
-            item.classList.add("inactive-contact");
+            // Si ce n'est pas le contact sélectionné :
+            const isLaylaUnlocked = window.VisualNovelAPI.getIsLaylaUnlocked();
+            const isMamanLaylaUnlocked =
+              window.VisualNovelAPI.getIsMamanLaylaUnlocked();
+
+            if (contactId === "layla" && isLaylaUnlocked) {
+              item.classList.add("unlocked-contact");
+            } else if (contactId === "MamanLayla" && isMamanLaylaUnlocked) {
+              item.classList.add("unlocked-contact");
+            } else if (contactId === "inconnu") {
+              // Ajouter cette condition pour "inconnu"
+              item.classList.add("unlocked-contact");
+            } else {
+              // Tous les autres contacts non sélectionnés sont inactifs
+              item.classList.add("inactive-contact");
+            }
           }
         });
         renderThread();

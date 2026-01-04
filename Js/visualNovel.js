@@ -23,9 +23,54 @@ let galleryViewCount = 0;
 let hasImageBeenClicked = false;
 let hasAudioBeenClicked = false;
 let hasInternetBeenClicked = false;
+let isLaylaUnlocked = false; // Nouvelle variable d'état pour Layla
+let isMamanLaylaUnlocked = false; // Nouvelle variable d'état pour MamanLayla
 let unknownImageFilename = null;
 let currentTypewriterEffect = null; // Variable pour suivre l'effet de machine à écrire en cours
 let isChoicesActive = false; // Drapeau pour bloquer la progression quand des choix sont affichés
+
+// Variables d'état pour l'affichage des pensées
+let currentThoughtsSequence = [];
+let currentThoughtSequenceIndex = 0;
+let isDisplayingThoughtsSequence = false;
+
+// Fonction pour afficher une séquence de pensées
+function showThoughtsSequence(thoughtsArray, index) {
+  if (index >= thoughtsArray.length) {
+    // Fin de la séquence de pensées
+    isDisplayingThoughtsSequence = false;
+    currentThoughtsSequence = [];
+    currentThoughtSequenceIndex = 0;
+    // Réactiver le dialogue normal si nécessaire
+    const dialogueHint = document.getElementById("dialogue-hint");
+    if (dialogueHint) {
+      dialogueHint.style.display = "block"; // Ou le cacher si le dialogue normal est terminé
+    }
+    return;
+  }
+
+  isDisplayingThoughtsSequence = true;
+  currentThoughtsSequence = thoughtsArray;
+  currentThoughtSequenceIndex = index;
+
+  const dialogueTextEl = document.getElementById("dialogue-text");
+  const characterNameEl = document.getElementById("character-name");
+  const dialogueHint = document.getElementById("dialogue-hint");
+
+  if (characterNameEl) characterNameEl.style.display = "none"; // Cacher le nom du personnage pour les pensées
+  if (dialogueHint) dialogueHint.style.display = "block"; // Afficher l'indicateur de dialogue
+
+  dialogueTextEl.textContent = ""; // Effacer le texte précédent
+  typewriterEffect(
+    dialogueTextEl,
+    thoughtsArray[index],
+    () => {
+      // Callback après la fin de l'effet machine à écrire
+    },
+    30, // Vitesse de frappe
+    false // Pas de son de frappe pour les pensées
+  );
+}
 
 // Charger l'histoire depuis le fichier JSON
 function loadStory() {
@@ -204,6 +249,20 @@ function showDialogue(dialogues, index, choices, scenarioChoices = null) {
       // Si des choix sont actifs, ignorer le clic sur la boîte de dialogue
       return;
     }
+
+    if (isDisplayingThoughtsSequence) {
+      // Si une séquence de pensées est en cours, avancer à la pensée suivante
+      if (currentTypewriterEffect && currentTypewriterEffect.cancel) {
+        currentTypewriterEffect.cancel(); // Terminer l'effet machine à écrire actuel
+      }
+      currentThoughtSequenceIndex++;
+      showThoughtsSequence(
+        currentThoughtsSequence,
+        currentThoughtSequenceIndex
+      );
+      return;
+    }
+
     if (isTyping) {
       // First click: complete typing
       if (dialogueText.__typewriterCancel) {
@@ -383,6 +442,7 @@ function handleChoice(choice) {
       laylaContact.classList.add("active-contact");
       laylaContact.classList.remove("inactive-contact");
     }
+    isLaylaUnlocked = true; // Définir Layla comme débloquée
   }
 
   // Ajout de la logique pour activer et désactiver le calendrier
@@ -397,6 +457,8 @@ function handleChoice(choice) {
       internetIcon.classList.remove("disabled");
       internetIcon.classList.add("active");
     }
+    // Afficher directement le navigateur internet
+    window.VisualNovelAPI.showInternet();
   }
   isChoicesActive = false; // Désactiver le drapeau après qu'un choix ait été fait
 
@@ -521,6 +583,11 @@ window.VisualNovelAPI = {
       blockedIndex = -1;
       blockedChoices = null;
     }
+  },
+  getIsLaylaUnlocked: () => isLaylaUnlocked,
+  getIsMamanLaylaUnlocked: () => isMamanLaylaUnlocked,
+  displayThoughts: (thoughtsArray) => {
+    showThoughtsSequence(thoughtsArray, 0);
   },
   startScenario: (scenarioName) => {
     // hideHackedScreen(); // Ensure hacked screen is hidden
@@ -698,7 +765,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function startSlideshow() {
-
   const slideshowContainer = document.querySelector(".slideshow-container");
   const image1 = document.getElementById("image1");
   const image2 = document.getElementById("image2");
@@ -708,7 +774,6 @@ function startSlideshow() {
 
   // Masquer le conteneur principal du visual novel
   document.getElementById("novel-container").style.display = "none";
-
 
   if (slideshowContainer) {
     slideshowContainer.style.display = "flex";
@@ -772,6 +837,7 @@ function handleEndOfScenario() {
         if (window.ChatAppAPI) {
           window.ChatAppAPI.selectContact("MamanLayla");
           window.ChatAppAPI.showChatApp();
+          isMamanLaylaUnlocked = true; // Définir MamanLayla comme débloquée
           isVisualNovelPaused = true;
           if (currentScenario && currentScenario.next) {
             pendingVisualNovelAction = {
@@ -797,6 +863,11 @@ function handleEndOfScenario() {
         }
         break;
       case "openSlideshow":
+        const internetIcon = document.getElementById("internet-icon");
+        if (internetIcon) {
+          internetIcon.classList.remove("disabled");
+          internetIcon.classList.add("active");
+        }
         startSlideshow();
         break;
       case "showInformationStat":

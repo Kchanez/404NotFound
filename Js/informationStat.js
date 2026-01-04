@@ -67,6 +67,18 @@ document.addEventListener("DOMContentLoaded", () => {
           endGameScreen.classList.add("active");
           if (endGameOverlay) {
             endGameOverlay.style.display = "block";
+            const internetIcon = document.getElementById("internet-icon");
+            if (internetIcon) {
+              internetIcon.classList.remove("disabled");
+              internetIcon.classList.add("active");
+            }
+            // Activer toutes les icônes d'application
+            const appIcons = document.querySelectorAll(".app-icon");
+            appIcons.forEach((icon) => {
+              icon.classList.remove("disabled");
+              icon.classList.add("active");
+              icon.removeAttribute("aria-disabled");
+            });
           }
         }
         nextBtn.disabled = true; // Désactive le bouton après le clic sur la dernière page
@@ -79,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (endGameOverlay) {
         endGameOverlay.style.display = "none";
       }
-      location.reload();
+      window.location.href = "http://127.0.0.1:5505/";
     });
   }
   showPage(0);

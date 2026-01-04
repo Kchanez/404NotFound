@@ -549,12 +549,6 @@
         "Bon tant pis pour le virement... Le train va bientôt passer.",
         "Rendez-vous à 21h, 2 rue Saint-Denis. Et ne le dis à personne... Ça m’embêterait que tes parents ou les miens soient au courant"
       ],
-      "thoughts": [
-        "Sam Legrand disparu ?",
-        "Mais c’est quoi ce bordel",
-        "De l’ia ?",
-        "SkinWalker numérique ?"
-      ],
       "onEndScenario": {
         "action": "activateMamanLaylaChat"
       },

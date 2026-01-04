@@ -39,6 +39,7 @@ html {
   color: #fff;
   cursor: pointer;
   font-size: 20px;
+  border-radius: 4px;
 }
 
 .window-body {
@@ -213,6 +214,10 @@ html {
 .contact-item.inactive-contact {
   opacity: 0.6;
   pointer-events: none;
+}
+
+.contact-item.unlocked-contact {
+  background-color: #e0e0e0; /* Fond gris */
 }
 .hidden {
   display: none;
