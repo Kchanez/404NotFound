@@ -577,8 +577,7 @@
       "who2": "protagonist",
       "textsProtagonist": [
         "Layla a été retrouvée. Qui es-tu réellement ?",
-        "Réponds maintenant ",
-        "Le message n’a pas été transmis. Nous avons été bloqué."
+        "Réponds maintenant "
       ],
       "next": "fin"
     },
@@ -604,8 +603,7 @@
       "who2": "protagonist",
       "textsProtagonist": [
         "Layla a été retrouvée. Qui es-tu réellement ?",
-        "Réponds maintenant ",
-        "Le message n’a pas été transmis. Nous avons été bloqué."
+        "Réponds maintenant "
       ],
       "next": "fin"
     },

@@ -161,6 +161,17 @@ function showDialogue(dialogues, index, choices, scenarioChoices = null) {
   }
 
   const dialogue = dialogues[index];
+
+  // Vérifier si le dialogue est le message bloqué
+  if (
+    typeof dialogue === "string" &&
+    dialogue.trim() === "Le message n’a pas été transmis. Nous avons été bloqué."
+  ) {
+    // Si c'est le message bloqué, afficher l'overlay et terminer la scène
+    showBlockedMessageOverlay("fin"); // "fin" est la scène suivante après ce message
+    return; // Arrêter l'exécution de showDialogue
+  }
+
   const characterName = document.getElementById("character-name");
   const dialogueText = document.getElementById("dialogue-text");
   const dialogueHint = document.getElementById("dialogue-hint");
@@ -567,6 +578,30 @@ function updateGalleryViewCount() {
   }
   galleryViewCount = count;
   console.log("galleryViewCount mis à jour à:", galleryViewCount);
+}
+
+// Fonction pour afficher l'overlay de message bloqué
+function showBlockedMessageOverlay(nextSceneId) {
+  const overlay = document.getElementById("blocked-message-overlay");
+  const okButton = document.getElementById("blocked-message-ok-button");
+
+  if (overlay && okButton) {
+    overlay.classList.remove("hidden"); // Afficher l'overlay
+    // Masquer le dialogue-hint
+    const dialogueHint = document.getElementById("dialogue-hint");
+    if (dialogueHint) {
+      dialogueHint.style.display = "none";
+    }
+
+    const handleOkClick = () => {
+      overlay.classList.add("hidden"); // Cacher l'overlay
+      okButton.removeEventListener("click", handleOkClick); // Nettoyer l'écouteur
+      if (nextSceneId) {
+        displayScene(nextSceneId); // Passer à la scène suivante
+      }
+    };
+    okButton.addEventListener("click", handleOkClick);
+  }
 }
 
 window.VisualNovelAPI = {
