@@ -450,6 +450,15 @@ function handleChoice(choice) {
     window.CalendarAPI.enableCalendar(true);
   }
 
+  // Logique pour le choix "Payer"
+  if (
+    choice.text === "Payer" &&
+    window.BankAPI &&
+    window.BankAPI.simulateTransfer
+  ) {
+    window.BankAPI.simulateTransfer();
+  }
+
   // Logique pour activer l'icône internet si le choix est "Enqueter"
   if (choice.text === "Enqueter") {
     const internetIcon = document.getElementById("internet-icon");
@@ -1115,10 +1124,10 @@ function displayScenarioDialogue() {
       currentCharacter === "inconnu"
         ? ""
         : currentCharacter === "protagonist"
-        ? ""
-        : storyData.characters[currentCharacter]
-        ? storyData.characters[currentCharacter].name
-        : currentCharacter;
+          ? ""
+          : storyData.characters[currentCharacter]
+            ? storyData.characters[currentCharacter].name
+            : currentCharacter;
     characterNameEl.style.display = "block";
   } else {
     characterNameEl.style.display = "none";

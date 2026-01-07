@@ -8,20 +8,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  const sendButton = document.querySelector(".send-button");
-  if (sendButton) {
-    sendButton.addEventListener("click", () => {
+  // Définir l'API bancaire globale
+  window.BankAPI = {
+    simulateTransfer: () => {
+      const windowContainer = document.querySelector(".window-container");
       const windowContent = windowContainer.querySelector(".window-content");
       if (windowContent) {
         windowContent.innerHTML = ""; // Efface le contenu actuel
         const img = document.createElement("img");
         img.src = "./Images/VirementEnvoyer.svg";
         img.alt = "Virement envoyé";
-        img.style.display = "block"; 
-        img.style.margin = "40px auto 0px"; 
-        img.style.maxWidth = "80%"; 
-        img.style.height = "auto"; 
-        
+        img.style.display = "block";
+        img.style.margin = "40px auto 0px";
+        img.style.maxWidth = "80%";
+        img.style.height = "auto";
+
         windowContent.appendChild(img);
         const message = document.createElement("p");
         message.textContent = "Votre virement a bien été envoyé à Sam LEGRAND";
@@ -30,6 +31,13 @@ document.addEventListener("DOMContentLoaded", () => {
         message.style.fontSize = "1.2em";
         windowContent.appendChild(message);
       }
+    },
+  };
+
+  const sendButton = document.querySelector(".send-button");
+  if (sendButton) {
+    sendButton.addEventListener("click", () => {
+      window.BankAPI.simulateTransfer(); // Appelle la fonction via l'API
     });
   }
 });
