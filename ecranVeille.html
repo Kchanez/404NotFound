@@ -1,74 +1,34 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>404 — Screen</title>
-    <link rel="stylesheet" href="./Css/ecranVeille.css" />
-  </head>
-  <body>
-    <div class="screen">
-      <!-- Barre du haut -->
-      <div class="top-bar">
-        <span class="play-text">Play ▸</span>
-        <span class="sp-text">SP</span>
-      </div>
-      <!-- Timestamp dynamique -->
-      <div class="timestamp">
-        <span class="date"></span>
-        <span class="time"></span>
-      </div>
-    </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vérification de sécurité</title>
+    <link rel="stylesheet" href="./Css/index.css">
+</head>
 
-    <div id="disparition-screen" class="hidden">
-      <div class="card">
-        <h1>Layla M⍰r⍰g⍰⍰nz</h1>
-        <h2>Alerte nouvelle disparition - Dossier : #D-087</h2>
-        <div class="content-row">
-          <img src="/Images/photoLaila.svg" alt="Photo de Laila" class="photo" />
-          <div class="text-block">
-            <p><strong>Âgée de 21 ans</strong></p>
-
-            <p>
-              Dernière apparition le 11 décembre 202⍰ à 16:17, quittant sa
-              résidence. Aucune trace physique retrouvée sur les lieux.
-            </p>
-
-            <p>
-              Si vous disposez d'informations, vous êtes prié(e) de contacter le
-              Bureau Central des Disparitions - Ligne 07-9⍰-0⍰-⍰⍰-8⍰.
-            </p>
-          </div>
+    <div class="window-container">
+        <div class="window-frame">
+                <div class="title-bar">
+                    <div class="title-bar-text">localhost:404/friend_notfound</div>
+                    <div class="title-bar-controls">
+                        <button aria-label="Close"> x </button>
+                    </div>
+                </div>
+                <div class="window-content">
+                    <p>Security check:</p>
+                    <div class="captcha-image-container">
+                        <img src="./Images/4O4Found.svg" alt="404:FRIEND NOT FOUND" class="Not404-image">
+                    </div>
+                    <p>Type the 404:</p>
+                    <div class="input-container">
+                        <input id="enter" type="text" class="captcha-input">
+                        <img src="./Images/Captcha.svg" alt="404:FRIEND NOT FOUND" class="captcha-image">
+                    </div>
+                    <p id="error-message" style="display: none;"> Code incorrect!</p>
+                </div>
         </div>
-      </div>
     </div>
-
-    <div id="message-gouv" class="hidden">
-      <div class="card message-card">
-        <h1>Attention</h1>
-        <h2>Rappel des règles de sécurité</h2>
-
-        <p>Ceci est un message du gouvernement.</p>
-
-        <p>
-          Depuis plusieurs semaines, des disparitions inexpliquées se
-          multiplient à travers la ville. Les autorités compétentes poursuivent
-          actuellement l'enquête.
-        </p>
-
-        <p>
-          Gardez vos portes et fenêtres fermées. Et restez attentif à la moindre
-          ouverture de l'une d'elles.
-        </p>
-
-        <p>
-          Ne répondez pas aux appels et messages après minuit. Et ne sortez pas
-          seul.
-        </p>
-      </div>
-    </div>
-
-    <script src="./Js/ecranVeille.js"></script>
-    <audio id="crtSound" src="./Audios/Tv_Effect.mp3"></audio>
-  </body>
+    <script src="./Js/FonctionEnter404.js"></script>
+</body>
 </html>

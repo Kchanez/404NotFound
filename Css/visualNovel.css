@@ -377,3 +377,23 @@ html {
   animation: blink 2s linear infinite;
 }
 
+.click-indicator {
+  position: absolute;
+  bottom: 42%;
+  left: 25%;
+  transform: translateX(-50%);
+  width: 25px;  
+  height: auto;
+  animation: bounce 1s infinite alternate; /* Animation pour attirer l'attention */
+  cursor: pointer;
+}
+
+@keyframes bounce {
+  from {
+    transform: translateX(-50%) translateY(0px);
+  }
+  to {
+    transform: translateX(-50%) translateY(-10px);
+  }
+}
+

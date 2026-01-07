@@ -181,7 +181,7 @@
         {
           "text": "Accepter",
           "reply": [
-            "Laila !???? Ou étais-tu passer meuf.",
+            "Layla !???? Ou étais-tu passer meuf.",
             "Oh mon dieu, tu vas bien ????",
             "On t’a cherchée partout, on pensait que t’étais morte.",
             "Tes parents sont au courant? et la police elle te cherchent tjrs?",
@@ -576,7 +576,7 @@
     "Enqueter2": {
       "who2": "protagonist",
       "textsProtagonist": [
-        "Laïla a été retrouvée. Qui es-tu réellement ?",
+        "Layla a été retrouvée. Qui es-tu réellement ?",
         "Réponds maintenant ",
         "Le message n’a pas été transmis. Nous avons été bloqué."
       ],
@@ -603,7 +603,7 @@
     "Non_Enqueter3": {
       "who2": "protagonist",
       "textsProtagonist": [
-        "Laïla a été retrouvée. Qui es-tu réellement ?",
+        "Layla a été retrouvée. Qui es-tu réellement ?",
         "Réponds maintenant ",
         "Le message n’a pas été transmis. Nous avons été bloqué."
       ],

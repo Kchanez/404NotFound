@@ -19,7 +19,7 @@ function updateTimestamp() {
 }
 
 function goToIndex() {
-  window.location.href = "index.html";
+  window.location.href = "ecranVeille.html";
 }
 
 // Mise à jour chaque seconde
