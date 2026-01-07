@@ -564,12 +564,12 @@
       "thoughts": [
         "Je devrais quand même lui acheter un cadeau",
         "Tout est fermée à cette heure.",
-        "Je lui trouverai un truc plus tard, je vais passer à la superette",
-        "Ils doivent surement avoir des fleurs"
+        "je vais passer à la superette, Ils doivent surement avoir des fleurs"
       ],
       "who2": "protagonist",
       "textsProtagonist": [
-        "Je vais devoir juste avant passer quelque part j’ai un cadeau à t’acheter eheh."
+        "Je vais devoir juste avant passer quelque part",
+        "j’ai un cadeau à t’acheter eheh."
       ],
       "next": "Non_Enqueter1"
     },
@@ -584,7 +584,8 @@
     "Non_Enqueter1": {
       "who": "inconnu",
       "texts": [
-        "Mais je t’ai dit que c’était déjà chaud pour moi de sortir, soit pas en retard."
+        "Mais je t’ai dit que c’était déjà chaud pour moi de sortir", 
+        "soit pas en retard."
       ],
       "next": "Non_Enqueter2"
     },
@@ -592,7 +593,8 @@
       "who2": "protagonist",
       "textsProtagonist": [
         "Mais je veux juste te faire plaisir.",
-        "Aussi pourquoi la demande virement est de 1000 euros ? J’ai accepté sans regarder"
+        "Aussi pourquoi la demande virement est de 1000 euros ?",  
+        "J’ai accepté sans regarder"
       ],
       "onEndScenario": {
         "action": "activateMamanLaylaChat"
