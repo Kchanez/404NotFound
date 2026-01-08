@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (endGameOverlay) {
         endGameOverlay.style.display = "none";
       }
-      window.location.href = "http://127.0.0.1:5505/";
+      window.location.href = "index.html";
     });
   }
   showPage(0);
