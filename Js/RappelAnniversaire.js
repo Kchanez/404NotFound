@@ -7,7 +7,9 @@
 
   function showIcon() {
     const icon = document.getElementById("notification-icon");
-    if (!icon) return null;
+    if (!icon) {
+      return null;
+    }
     icon.classList.remove("hidden");
     // Jouer le son de notification à l'apparition de l'icône
     const notifAudio = document.getElementById("notification-sound");
@@ -68,7 +70,7 @@
       }
       // Masquer l'icône de notification à un message spécifique
       const hideNotificationTrigger =
-        "Joyeux anniversaire ma veille, tu me manques.";
+        "Joyeux anniversaire ma vieille, tu me manques.";
       if (typeof text === "string" && text.trim() === hideNotificationTrigger) {
         hideNotificationIcon();
       }

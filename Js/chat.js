@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   // Chat fonctionnel, séparé, basé sur CHAT_CONTACTS / CHAT_THREADS
 
-  (function () {
+  ( function () {
     const contactsEl = document.getElementById("contact-list");
     const messagesEl = document.getElementById("messages");
     const nameEl = document.getElementById("current-name");
@@ -548,4 +548,4 @@ document.addEventListener("DOMContentLoaded", function () {
       messageDisplayDelay: messageDisplayDelay, // Exposer le délai d'affichage des messages
     };
   })();
-})();
+});

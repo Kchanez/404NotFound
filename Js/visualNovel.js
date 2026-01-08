@@ -200,7 +200,7 @@ function showDialogue(dialogues, index, choices, scenarioChoices = null) {
   if (
     typeof dialogue.text === "string" &&
     dialogue.text.trim() ===
-      "Ah tiens un nouveau message. Surement une erreur ce numéro n’est pas dans mes contacts"
+      "Ah tiens un nouveau message. Sûrement une erreur ce numéro n'est pas dans mes contacts"
   ) {
     if (window.ChatAppAPI) {
       window.ChatAppAPI.showChatApp();
