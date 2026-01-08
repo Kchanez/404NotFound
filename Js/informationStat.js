@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (endGameOverlay) {
         endGameOverlay.style.display = "none";
       }
-      window.location.href = "index.html"; // Redirige vers la page principale pour redémarrer le jeu
+      window.location.href = "index.html"; 
     });
   }
   showPage(0);
