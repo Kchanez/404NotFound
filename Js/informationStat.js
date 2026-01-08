@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (endGameOverlay) {
         endGameOverlay.style.display = "none";
       }
-      window.location.href = "index.html"; 
+      window.location.href = "index.html";
     });
   }
   showPage(0);
