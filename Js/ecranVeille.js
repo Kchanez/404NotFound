@@ -46,7 +46,7 @@ setTimeout(() => {
       .play()
       .catch((e) => console.log("Son bloqué par le navigateur :", e));
   }
-}, 5000);
+}, 10000);
 
 // Après 15 secondes, afficher le message du gouvernement
 setTimeout(() => {
@@ -63,7 +63,7 @@ setTimeout(() => {
     crtSound.currentTime = 0;
     crtSound.play().catch(() => {});
   }
-}, 15000);
+}, 20000);
 
 // Après 15 secondes, afficher la page de début du jeu
 setTimeout(() => {
@@ -75,4 +75,4 @@ setTimeout(() => {
 
   // afficher la page de début du jeu
   goToIndex();
-}, 27000);
+}, 32000);

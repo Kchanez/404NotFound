@@ -55,15 +55,15 @@
         },
         {
           "character": "protagonist",
-          "text": "Oh, ça aussi j’ai faillit l’oublier. Je me souviens, de cet anniversaire. Déjà 1 an que tu m’as abandonée. J’espère au moins que tu vas bien... "
+          "text": "Oh, ça aussi j'ai failli l'oublier. Je me souviens, de cet anniversaire. Déjà 1 an que tu m'as abandonné. J'espère au moins que tu vas bien... "
         },
         {
           "character": "protagonist",
-          "text": "Toute la monde invente ces folles rumeurs sur toi. Mais je sais qu’ils disent n’importe quoi comme d’habitude. Et ça justifie bien ton départ."
+          "text": "Tout le monde invente ces folles rumeurs sur toi. Mais je sais qu'ils disent n'importe quoi comme d'habitude. Et ça justifie bien ton départ."
         },
         {
           "character": "protagonist",
-          "text": "Je sais qu'ils se trompent. Ces histoires de kidnapping, je sais que tu n’as rien à faire avec! Tu n'as pas disparue ou été kidnappée ! Tu as juste fuis pour réaliser tes rêves..."
+          "text": "Je sais qu'ils se trompent. Ces histoires de kidnapping, je sais que tu n'as rien à faire avec! Tu n'as pas disparue ou été kidnappée ! Tu as juste fui pour réaliser tes rêves..."
         },
         {
           "character": "protagonist",
@@ -71,11 +71,11 @@
         },
         {
           "character": "protagonist",
-          "text": "J’espère au moins que tu t’es fait de nouveaux amis à Paris, avec qui fêter ton anniversaire."
+          "text": "J'espère au moins que tu t'es fait de nouveaux amis à Paris, avec qui fêter ton anniversaire."
         },
         {
           "character": "protagonist",
-          "text": "Joyeux anniversaire ma veille, tu me manques."
+          "text": "Joyeux anniversaire ma vieille, tu me manques."
         },
         {
           "character": "protagonist",
@@ -87,7 +87,7 @@
         },
         {
           "character": "protagonist",
-          "text": "Ah tiens un nouveau message. Surement une erreur ce numéro n’est pas dans mes contacts"
+          "text": "Ah tiens un nouveau message. Sûrement une erreur ce numéro n'est pas dans mes contacts"
         },
         {
           "character": "protagonist",
@@ -95,7 +95,7 @@
         },
         {
           "character": "protagonist",
-          "text": "Surement une erreur ce numéro n’est pas dans mes contacts",
+          "text": "Sûrement une erreur ce numéro n'est pas dans mes contacts",
           "nextScenario": "start"
         }
       ]
@@ -105,7 +105,7 @@
     "start": {
       "who": "inconnu",
       "texts": ["Hey"],
-      "thoughts": ["surement une erreur ce numéro n’est pas dans mes contacts"],
+      "thoughts": ["sûrement une erreur ce numéro n'est pas dans mes contacts"],
       "choices": [
         { "text": "Répondre", "reply": "?", "next": "reply_1" },
         { "text": "Ignorer", "next": "ignore_1" }
@@ -128,7 +128,7 @@
       "who": "inconnu",
       "texts": [
         "C'est Layla",
-        "J'aimerais si tu l’acceptes qu’on s’explique. Je comprendrais totalement si tu ne veux pas. Bonne soirée"
+        "J'aimerais si tu l'acceptes qu'on s'explique. Je comprendrais totalement si tu ne veux pas. Bonne soirée"
       ],
       "thoughts": ["Hein", "Layla ?"],
       "choices": [
@@ -137,9 +137,9 @@
           "reply": [
             "Layla !???? Ou étais-tu passé meuf.",
             "Oh mon dieu, tu vas bien ????",
-            "On t’a cherchée partout, on pensait que t’étais morte.",
-            "Tes parents sont au courant? et la police elle te cherchent tjrs?",
-            "J’ai inconsciemment commencer à y croire..."
+            "On t'a cherchée partout, on pensait que t'étais morte.",
+            "Tes parents sont au courant? et la police elle te cherche tjrs?",
+            "J'ai inconsciemment commencé à y croire..."
           ],
           "next": "Gentiment_2"
         },
@@ -147,11 +147,11 @@
           "text": "S'énerver",
           "reply": [
             "Sérieusement Layla ?",
-            "On t’a cherchée partout, les gens pensaient que tu étais disparue comme les autres, ou morte...",
-            "J’ai inconsciemment commencer à y croire!",
+            "On t'a cherchée partout, les gens pensaient que tu étais disparue comme les autres, ou morte...",
+            "J'ai inconsciemment commencé à y croire!",
             "Tes parents sont-ils au courant? Et la police Layla, elle te cherchent toujours tu sais !!",
-            "T’es vraiment égoïste de n’avoir prévenue personne Layla... On se faisait du soucis pour toi. J’espère au moins que tu vas bien.",
-            "Tu as raison... Je m’attendais un peu à cette réaction"
+            "T'es vraiment égoïste de n'avoir prévenue personne Layla... On se faisait du soucis pour toi. J'espère au moins que tu vas bien.",
+            "Tu as raison... Je m'attendais un peu à cette réaction"
           ],
           "next": "Mechament_2"
         }
@@ -160,7 +160,7 @@
     "ignore_1": {
       "who": "inconnu",
       "texts": ["Hey", "On peut parler ?"],
-      "thoughts": ["c'est quoi ça encore !"],
+      "thoughts": ["C'est quoi ça encore !"],
       "choices": [
         {
           "text": "Répondre",
@@ -174,18 +174,18 @@
       "who": "inconnu",
       "texts": [
         "C'est Layla",
-        "J'aimerais si tu l’acceptes qu’on s’explique. Je comprendrais totalement si tu ne veux pas. Bonne soirée"
+        "J'aimerais si tu l'acceptes qu'on s'explique. Je comprendrais totalement si tu ne veux pas. Bonne soirée"
       ],
       "thoughts": ["hein", "Layla ?"],
       "choices": [
         {
           "text": "Accepter",
           "reply": [
-            "Layla !???? Ou étais-tu passer meuf.",
+            "Layla !???? Ou étais-tu passée meuf.",
             "Oh mon dieu, tu vas bien ????",
-            "On t’a cherchée partout, on pensait que t’étais morte.",
-            "Tes parents sont au courant? et la police elle te cherchent tjrs?",
-            "J’ai inconsciemment commencer à y croire..."
+            "On t'a cherchée partout, on pensait que t'étais morte.",
+            "Tes parents sont au courant? et la police elle te cherche tjrs?",
+            "J'ai inconsciemment commencé à y croire..."
           ],
           "next": "Gentiment_1"
         },
@@ -193,11 +193,11 @@
           "text": "S'énerver",
           "reply": [
             "Sérieusement Layla ?",
-            "On t’a cherchée partout, les gens pensaient que tu étais disparue comme les autres, ou morte...",
-            "J’ai inconsciemment commencer à y croire!",
-            "Tes parents sont-ils au courant? Et la police Layla, elle te cherchent toujours tu sais !!",
-            "T’es vraiment égoïste de n’avoir prévenue personne Layla... On se faisait du soucis pour toi. J’espère au moins que tu vas bien.",
-            "Tu as raison... Je m’attendais un peu à cette réaction"
+            "On t'a cherchée partout, les gens pensaient que tu étais disparue comme les autres, ou morte...",
+            "J'ai inconsciemment commencé à y croire!",
+            "Tes parents sont-ils au courant? Et la police Layla, elle te cherche toujours tu sais !!",
+            "T'es vraiment égoïste de n'avoir prévenue personne Layla... On se faisait du soucis pour toi. J'espère au moins que tu vas bien.",
+            "Tu as raison... Je m'attendais un peu à cette réaction"
           ],
           "next": "Mechament_1"
         }
@@ -205,54 +205,54 @@
     },
     "Gentiment_1": {
       "who": "inconnu",
-      "texts": ["Tu m’as tellement manqué"],
+      "texts": ["Tu m'as tellement manqué"],
       "thoughts": [
-        "Et si je m’étais emporté trop vite par les émotions ?",
-        "Et si au final ce n’était qu’un mauvais canular ?"
+        "Et si je m'étais emporté trop vite par les émotions ?",
+        "Et si au final ce n'était qu'un mauvais canular ?"
       ],
       "who2": "protagonist",
       "textsProtagonist": [
-        "J’espère juste sincèrement que ce n’est pas une blague",
-        "Rire d’une disparition n’est vraiment pas drôle!"
+        "J'espère juste sincèrement que ce n'est pas une blague",
+        "Rire d'une disparition n'est vraiment pas drôle!"
       ],
       "next": "galerie"
     },
     "Mechament_1": {
       "who": "inconnu",
-      "texts": ["Tu as raison...Je m’attendais un peu à cette réaction"],
+      "texts": ["Tu as raison...Je m'attendais un peu à cette réaction"],
       "thoughts": [
-        "Et si je m’étais emporté trop vite par les émotions ? Et si au final ce n’était qu’un mauvais canular ?"
+        "Et si je m'étais emporté trop vite par les émotions ? Et si au final ce n'était qu'un mauvais canular ?"
       ],
       "who2": "protagonist",
       "textsProtagonist": [
-        "J’espère juste sincèrement que ce n’est pas une blague",
-        "Rire d’une disparition n’est vraiment pas drôle!"
+        "J'espère juste sincèrement que ce n'est pas une blague",
+        "Rire d'une disparition n'est vraiment pas drôle!"
       ],
       "next": "galerie"
     },
     "Gentiment_2": {
       "who": "inconnu",
-      "texts": ["Tu m’as tellement manqué"],
+      "texts": ["Tu m'as tellement manqué"],
       "thoughts": [
-        "Et si je m’étais emporté trop vite par les émotions ? Et si au final ce n’était qu’un mauvais canular ?"
+        "Et si je m'étais emporté trop vite par les émotions ? Et si au final ce n'était qu'un mauvais canular ?"
       ],
       "who2": "protagonist",
       "textsProtagonist": [
-        "J’espère juste sincèrement que ce n’est pas une blague",
-        "Rire d’une disparition n’est vraiment pas drôle!"
+        "J'espère juste sincèrement que ce n'est pas une blague",
+        "Rire d'une disparition n'est vraiment pas drôle!"
       ],
       "next": "galerie"
     },
     "Mechament_2": {
       "who": "inconnu",
-      "texts": ["Tu as raison...Je m’attendais un peu à cette réaction"],
+      "texts": ["Tu as raison...Je m'attendais un peu à cette réaction"],
       "thoughts": [
-        "Et si je m’étais emporté trop vite par les émotions ? Et si au final ce n’était qu’un mauvais canular ?"
+        "Et si je m'étais emporté trop vite par les émotions ? Et si au final ce n'était qu'un mauvais canular ?"
       ],
       "who2": "protagonist",
       "textsProtagonist": [
-        "J’espère juste sincèrement que ce n’est pas une blague",
-        "Rire d’une disparition n’est vraiment pas drôle!"
+        "J'espère juste sincèrement que ce n'est pas une blague",
+        "Rire d'une disparition n'est vraiment pas drôle!"
       ],
       "next": "galerie"
     },
@@ -260,7 +260,7 @@
     "galerie": {
       "who": "inconnu",
       "texts": [
-        "Désolée de revenir comme une fleur... C’est bien moi. J’ai perdu mon ancien tel, voilà mon nouveau compte."
+        "Désolée de revenir comme une fleur... C'est bien moi. J'ai perdu mon ancien tel, voilà mon nouveau compte."
       ],
       "galleryPhotos": [
         "./Galerie/photo.jpg"
@@ -269,14 +269,14 @@
         {
           "text": "Vérifier",
           "reply": [
-            "Tu n’as pas changé. j’avais presque oublié sur quel bras été ton tatouage",
-            "je pensais qu’il etait sur ton épaule gauche et non droite"
+            "Tu n'as pas changé. J'avais presque oublié sur quel bras était ton tatouage",
+            "Je pensais qu'il était sur ton épaule gauche et non droite"
           ],
           "next": "galerie_explore"
         },
         {
           "text": "Y croire",
-          "reply": ["Tu n’as pas changé.", "Toujours aussi belle"],
+          "reply": ["Tu n'as pas changée.", "Toujours aussi belle"],
           "next": "galerie_non_explore"
         }
       ],
@@ -285,20 +285,20 @@
     "galerie_explore": {
       "who": "inconnu",
       "texts": [
-        "haha ça fait longtemps qu’on ne s’est pas vu tu as du oublier"
+        "haha ça fait longtemps qu'on ne s'est pas vu tu as dû oublier"
       ],
       "who2": "protagonist",
-      "textsProtagonist": ["Mais Layla j’ai une question"],
+      "textsProtagonist": ["Mais Layla j'ai une question"],
       "next": "galerie_explore1"
     },
     "galerie_non_explore": {
       "who": "inconnu",
       "texts": [
         "Oui haha tada",
-        "Toi aussi tu n’as pas changée, tjrs aussi gentille."
+        "Toi aussi tu n'as pas changée, tjrs aussi gentille."
       ],
       "who2": "protagonist",
-      "textsProtagonist": ["Mais Layla j’ai une question"],
+      "textsProtagonist": ["Mais Layla j'ai une question"],
       "next": "galerie_non_explore1"
     },
 
@@ -308,7 +308,7 @@
       "who2": "protagonist",
       "textsProtagonist": [
         "Je suis contente de ton retour.",
-        "Mais où étais-tu bon sang ? Avec ces histoires de disparition... On s’est vraiment fait du soucis pour toi"
+        "Mais où étais-tu bon sang ? Avec ces histoires de disparition... On s'est vraiment fait du soucis pour toi"
       ],
       "next": "galerie_explore2"
     },
@@ -318,33 +318,33 @@
       "who2": "protagonist",
       "textsProtagonist": [
         "Je suis contente de ton retour.",
-        "Mais où étais-tu bon sang ? Avec ces histoires de disparition... On s’est vraiment fait du soucis pour toi"
+        "Mais où étais-tu bon sang ? Avec ces histoires de disparition... On s'est vraiment fait du soucis pour toi"
       ],
       "next": "galerie_non_explore2"
     },
     "galerie_explore2": {
       "who": "inconnu",
       "texts": [
-        "J’avais besoin de prendre l’air je t’avoue",
-        "Je suis parti à la campagne car ça n’allait pas bien."
+        "J'avais besoin de prendre l'air je t'avoue",
+        "Je suis parti à la campagne car ça n'allait pas bien."
       ],
       "who2": "protagonist",
       "textsProtagonist": [
-        "Je pensais qu’on était de bonnes amies, pourquoi ne m’avoir rien dit",
-        "Je suis désolé de ne pas m’en être rendu compte"
+        "Je pensais qu'on était de bonnes amies, pourquoi ne m'avoir rien dit",
+        "Je suis désolé de ne pas m'en être rendu compte"
       ],
       "next": "galerie_explore3"
     },
     "galerie_non_explore2": {
       "who": "inconnu",
       "texts": [
-        "J’avais besoin de prendre l’air je t’avoue",
-        "Je suis parti à la campagne car ça n’allait pas bien."
+        "J'avais besoin de prendre l'air je t'avoue",
+        "Je suis parti à la campagne car ça n'allait pas bien."
       ],
       "who2": "protagonist",
       "textsProtagonist": [
-        "Je pensais qu’on était de bonnes amies, pourquoi ne m’avoir rien dit",
-        "Je suis désolé de ne pas m’en être rendu compte"
+        "Je pensais qu'on était de bonnes amies, pourquoi ne m'avoir rien dit",
+        "Je suis désolé de ne pas m'en être rendu compte"
       ],
       "next": "galerie_non_explore3"
     },
@@ -352,9 +352,9 @@
       "who": "inconnu",
       "texts": [
         "Il y a une autre raison...",
-        "Tout à commencer un jour où je rentrais du travail",
-        "Une énorme dispute a éclaté avec ma mère. C’est devenu violent",
-        "Ça s’est répété à plusieurs reprises, j’ai du prendre des précautions et m’éloigner"
+        "Tout a commencé un jour où je rentrais du travail",
+        "Une énorme dispute a éclaté avec ma mère. C'est devenu violent",
+        "Ça s'est répété à plusieurs reprises, j'ai dû prendre des précautions et m'éloigner"
       ],
       "who2": "protagonist",
       "textsProtagonist": ["Oui tu peux me faire confiance."],
@@ -364,9 +364,9 @@
       "who": "inconnu",
       "texts": [
         "Il y a une autre raison...",
-        "Tout à commencer un jour où je rentrais du travail",
-        "Une énorme dispute a éclaté avec ma mère. C’est devenu violent",
-        "Ça s’est répété à plusieurs reprises, j’ai du prendre des précautions et m’éloigner"
+        "Tout a commencé un jour où je rentrais du travail",
+        "Une énorme dispute a éclaté avec ma mère. C'est devenu violent",
+        "Ça s'est répété à plusieurs reprises, j'ai du prendre des précautions et m'éloigner"
       ],
       "who2": "protagonist",
       "textsProtagonist": ["Oui tu peux me faire confiance."],
@@ -383,8 +383,8 @@
           "text": "Ecouter",
           "reply": [
             "Wow quelle histoire de fou!!",
-            "Même si je t’avoue ne pas avoir tout compris.",
-            "La qualité de l’audio est grave mauvaise.",
+            "Même si je t'avoue ne pas avoir tout compris.",
+            "La qualité de l'audio est grave mauvaise.",
             "Même ton rire est différent. On dirait un robot"
           ],
           "next": "Ecouter_Voicemail1"
@@ -393,8 +393,8 @@
           "text": "Y croire",
           "reply": [
             "Wow quelle histoire de fou!!",
-            "Je comprend mieux mtn pourquoi tu as du fuir",
-            "T’as du avoir sacrément peur. Ça fait froid dans le dos"
+            "Je comprends mieux mtn pourquoi tu as dû fuir",
+            "T'as dû avoir sacrément peur. Ça fait froid dans le dos"
           ],
           "next": "Non_Ecouter_Voicemail1"
         }
@@ -412,8 +412,8 @@
           "text": "Ecouter",
           "reply": [
             "Wow quelle histoire de fou!!",
-            "Même si je t’avoue ne pas avoir tout compris.",
-            "La qualité de l’audio est grave mauvaise.",
+            "Même si je t'avoue ne pas avoir tout compris.",
+            "La qualité de l'audio est grave mauvaise.",
             "Même ton rire est différent. On dirait un robot"
           ],
           "next": "Ecouter_Voicemail1"
@@ -422,8 +422,8 @@
           "text": "Y croire",
           "reply": [
             "Wow quelle histoire de fou!!",
-            "Je comprend mieux mtn pourquoi tu as du fuir",
-            "T’as du avoir sacrément peur. Ça fait froid dans le dos"
+            "Je comprends mieux mtn pourquoi tu as dû fuir",
+            "T'as dû avoir sacrément peur. Ça fait froid dans le dos"
           ],
           "next": "Non_Ecouter_Voicemail1"
         }
@@ -433,42 +433,42 @@
     "Ecouter_Voicemail1": {
       "who": "inconnu",
       "texts": [
-        "Écoutes on fait avec les moyens du bord haha",
-        "J’ai pris le premier téléphone trouvé chez mes grands parents"
+        "Écoute on fait avec les moyens du bord haha",
+        "J'ai pris le premier téléphone trouvé chez mes grands parents"
       ],
       "who2": "protagonist",
       "textsProtagonist": [
-        "D’accord je vois.",
-        "Excuse moi encore pour tout à l’heure, je n’aurais jamais pensé que tu traversais ça"
+        "D'accord je vois.",
+        "Excuse moi encore pour tout à l'heure, je n'aurais jamais pensé que tu traversais ça"
       ],
       "next": "Ecouter_Voicemail2"
     },
     "Non_Ecouter_Voicemail1": {
       "who": "inconnu",
       "texts": [
-        "Écoutes on fait avec les moyens du bord haha",
-        "J’ai pris le premier téléphone trouvé chez mes grands parents"
+        "Écoute on fait avec les moyens du bord haha",
+        "J'ai pris le premier téléphone trouvé chez mes grands parents"
       ],
       "who2": "protagonist",
       "textsProtagonist": [
-        "D’accord je vois.",
-        "Excuse moi encore pour tout à l’heure, je n’aurais jamais pensé que tu traversais ça"
+        "D'accord je vois.",
+        "Excuse moi encore pour tout à l'heure, je n'aurais jamais pensé que tu traversais ça"
       ],
       "next": "Non_Ecouter_Voicemail2"
     },
     "Ecouter_Voicemail2": {
       "who": "inconnu",
       "texts": [
-        "Mais moi qui suit désolé j’aurai du savoir que tu étais de confiance",
-        "Mais j’aurais un service à te demander"
+        "C'est moi qui suis désolé j'aurais dû savoir que tu étais de confiance",
+        "Mais j'aurais un service à te demander"
       ],
       "next": "Ecouter_Voicemail3"
     },
     "Non_Ecouter_Voicemail2": {
       "who": "inconnu",
       "texts": [
-        "Mais moi qui suit désolé j’aurai du savoir que tu étais de confiance",
-        "Mais j’aurais un service à te demander"
+        "C'est moi qui suis désolé j'aurais dû savoir que tu étais de confiance",
+        "Mais j'aurais un service à te demander"
       ],
       "next": "Non_Ecouter_Voicemail3"
     },
@@ -485,32 +485,32 @@
     "Ecouter_Voicemail4": {
       "who": "inconnu",
       "texts": [
-        "Peut-tu me faire un virement , Je vais t’envoyer une demande",
-        "Je vais venir, mais si je prend un ticket de bus ou de train, mes parents seront au courant.",
+        "Peux-tu me faire un virement, je vais t'envoyer une demande",
+        "Je vais venir, mais si je prends un ticket de bus ou de train, mes parents seront au courant.",
         "Ils traquent mes moindres gestes et mouvements"
       ],
       "who2": "protagonist",
-      "textsProtagonist": ["C’est pour ta sécurité je les comprends."],
+      "textsProtagonist": ["C'est pour ta sécurité je les comprends."],
       "next": "Ecouter_Voicemail5"
     },
     "Non_Ecouter_Voicemail4": {
       "who": "inconnu",
       "texts": [
-        "Peut-tu me faire un virement , Je vais t’envoyer une demande",
-        "Je vais venir, mais si je prend un ticket de bus ou de train, mes parents seront au courant.",
+        "Peux-tu me faire un virement, je vais t'envoyer une demande",
+        "Je vais venir, mais si je prends un ticket de bus ou de train, mes parents seront au courant.",
         "Ils traquent mes moindres gestes et mouvements"
       ],
       "who2": "protagonist",
-      "textsProtagonist": ["C’est pour ta sécurité je les comprends."],
+      "textsProtagonist": ["C'est pour ta sécurité je les comprends."],
       "next": "Non_Ecouter_Voicemail5"
     },
     "Ecouter_Voicemail5": {
       "who": "inconnu",
-      "texts": ["Ça marche super, je t’envoie l’adresse :"],
+      "texts": ["Ça marche super, je t'envoie l'adresse :"],
       "lien": "https://paylib.com/fr/transaction/virement/Sam_LEGRAND",
       "preChoiceNotificationImage": "./Images/infoVirment.svg",
       "thoughts": [
-        "C’est quand même bizarre, le nom ne correspond pas à celui de Layla, je vais vérifier sur internet?"
+        "C'est quand même bizarre, le nom ne correspond pas à celui de Layla, je vais vérifier sur internet?"
       ],
       "choices": [
         {
@@ -525,11 +525,11 @@
     },
     "Non_Ecouter_Voicemail5": {
       "who": "inconnu",
-      "texts": ["Ça marche super, je t’envoie l’adresse :"],
+      "texts": ["Ça marche super, je t'envoie l'adresse :"],
       "lien": "https://paylib.com/fr/transaction/virement/Sam_LEGRAND",
       "preChoiceNotificationImage": "./Images/infoVirment.svg",
       "thoughts": [
-        "C’est quand même bizarre, le nom ne correspond pas à celui de Layla, je vais vérifier sur internet?"
+        "C'est quand même bizarre, le nom ne correspond pas à celui de Layla, je vais vérifier sur internet?"
       ],
       "choices": [
         {
@@ -545,9 +545,9 @@
     "Enqueter": {
       "who": "inconnu",
       "texts": [
-        "J’ai pas reçu le virement, tu l’as bien accepté ?",
+        "J'ai pas reçu le virement, tu l'as bien accepté ?",
         "Bon tant pis pour le virement... Le train va bientôt passer.",
-        "Rendez-vous à 21h, 2 rue Saint-Denis. Et ne le dis à personne... Ça m’embêterait que tes parents ou les miens soient au courant"
+        "Rendez-vous à 21h, 2 rue Saint-Denis. Et ne le dis à personne... Ça m'embêterait que tes parents ou les miens soient au courant"
       ],
       "onEndScenario": {
         "action": "activateMamanLaylaChat"
@@ -557,9 +557,9 @@
     "Non_Enqueter": {
       "who": "inconnu",
       "texts": [
-        "J’ai pas reçu le virement, tu l’as bien accepté ?",
+        "J'ai pas reçu le virement, tu l'as bien accepté ?",
         "Bon tant pis pour le virement... Le train va bientôt passer.",
-        "Rendez-vous à 21h, 2 rue Saint-Denis. Et ne le dis à personne... Ça m’embêterait que tes parents ou les miens soient au courant"
+        "Rendez-vous à 21h, 2 rue Saint-Denis. Et ne le dis à personne... Ça m'embêterait que tes parents ou les miens soient au courant"
       ],
       "thoughts": [
         "Je devrais quand même lui acheter un cadeau",
@@ -569,7 +569,7 @@
       "who2": "protagonist",
       "textsProtagonist": [
         "Je vais devoir juste avant passer quelque part",
-        "j’ai un cadeau à t’acheter eheh."
+        "j'ai un cadeau à t'acheter eheh."
       ],
       "next": "Non_Enqueter1"
     },
@@ -584,8 +584,8 @@
     "Non_Enqueter1": {
       "who": "inconnu",
       "texts": [
-        "Mais je t’ai dit que c’était déjà chaud pour moi de sortir", 
-        "soit pas en retard."
+        "Mais je t'ai dit que c'était déjà chaud pour moi de sortir", 
+        "sois pas en retard."
       ],
       "next": "Non_Enqueter2"
     },
@@ -594,7 +594,7 @@
       "textsProtagonist": [
         "Mais je veux juste te faire plaisir.",
         "Aussi pourquoi la demande virement est de 1000 euros ?",  
-        "J’ai accepté sans regarder"
+        "J'ai accepté sans regarder"
       ],
       "onEndScenario": {
         "action": "activateMamanLaylaChat"
